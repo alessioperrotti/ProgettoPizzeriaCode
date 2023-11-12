@@ -57,6 +57,10 @@ class VistaGestioneRicevute(QWidget):
     def __init__(self):
         super().__init__()
         self.initUi()
+        self.pulsante_mostrainfo = Pulsante("Mostra Info\nRicevuta")
+        self.pulsante_inserisci = Pulsante("Inserisci\nRicevuta")
+        self.pulsante_elimina = Pulsante("Elimina\nRicevuta")
+
 
     def initUi(self):
         # definizione oggetti
@@ -65,12 +69,10 @@ class VistaGestioneRicevute(QWidget):
         tabella = Tabella(3, 480, 400)
         tabella.setHorizontalHeaderLabels(["Acquirente", "Numero", "Data"])
         tabella.setFont(label_font_piccolo)
-        pulsante1 = Pulsante("Mostra Info\nRicevuta")
-        pulsante2 = Pulsante("Inserisci\nRicevuta")
-        pulsante3 = Pulsante("Elimina\nRicevuta")
-        pulsante1.setFont(label_font_piccolo)
-        pulsante2.setFont(label_font_piccolo)
-        pulsante3.setFont(label_font_piccolo)
+
+        self.pulsante_mostrainfo.setFont(label_font_piccolo)
+        self.pulsante_inserisci.setFont(label_font_piccolo)
+        self.pulsante_elimina.setFont(label_font_piccolo)
         png_back = QLabel()
         pixmap = QPixmap("png/back.png")
         scaled_pixmap = pixmap.scaled(35, 35, aspectRatioMode=Qt.AspectRatioMode.KeepAspectRatio)
@@ -83,9 +85,9 @@ class VistaGestioneRicevute(QWidget):
 
         # inserimento oggetti nel layout
         layout_pulsanti.addSpacerItem(QSpacerItem(1, 130))
-        layout_pulsanti.addWidget(pulsante1)
-        layout_pulsanti.addWidget(pulsante2)
-        layout_pulsanti.addWidget(pulsante3)
+        layout_pulsanti.addWidget(pulsante_mostrainfo)
+        layout_pulsanti.addWidget(pulsante_inserisci)
+        layout_pulsanti.addWidget(pulsante_elimina)
         layout_pulsanti.addSpacerItem(QSpacerItem(1, 130))
 
         layout_tabella_pulsanti.addSpacerItem(QSpacerItem(30, 30))
