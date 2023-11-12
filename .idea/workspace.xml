@@ -1,11 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="40a8365b-d5df-4f9d-b05e-380be3c5aca9" name="Changes" comment="" />
+    <list default="true" id="40a8365b-d5df-4f9d-b05e-380be3c5aca9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Code/Gestione Magazzino/Controller/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/Gestione Magazzino/Controller/modifica_materiaprima_cont.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/Gestione Magazzino/Model/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/Gestione Magazzino/Model/gestore_magazzino.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/Gestione Magazzino/Model/materia_prima.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/Gestione Magazzino/View/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/Gestione Magazzino/View/modifica_materiaprima_view.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/Gestione Magazzino/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/Gestione Magazzino/Controller/inserisci_materiaprima_cont.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Gestione Magazzino/Controller/inserisci_materiaprima_cont.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/Gestione Magazzino/View/inserisci_materiaprima_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Gestione Magazzino/View/inserisci_materiaprima_view.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -14,6 +37,9 @@
   &quot;associatedIndex&quot;: 4
 }</component>
   <component name="ProjectId" id="2Y518y0rZ7mk2nSpam3DRjnZszv" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -24,6 +50,10 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "CodeAlessio",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
@@ -38,10 +68,15 @@
       <updated>1699800470963</updated>
       <workItem from="1699800472041" duration="80000" />
       <workItem from="1699800589901" duration="39000" />
+      <workItem from="1699800914343" duration="5031000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/ProgettoPizzeriaCode$inserisci_materiaprima_view.coverage" NAME="inserisci_materiaprima_view Coverage Results" MODIFIED="1699801072951" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Code/Gestione Magazzino/View" />
+    <SUITE FILE_PATH="coverage/ProgettoPizzeriaCode$modifica_materiaprima_view.coverage" NAME="modifica_materiaprima_view Coverage Results" MODIFIED="1699801296694" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Code/Gestione Magazzino/View" />
   </component>
 </project>
