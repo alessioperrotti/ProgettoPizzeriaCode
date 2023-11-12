@@ -4,24 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40a8365b-d5df-4f9d-b05e-380be3c5aca9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Code/Gestione Magazzino/Data/lista_materieprime.pickle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/Gestione Magazzino/View/gestione_magazzino_view.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/Gestione Magazzino/Model/gestore_magazzino.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Gestione Magazzino/Model/gestore_magazzino.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/Gestione Magazzino/View/modifica_materiaprima_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Gestione Magazzino/View/modifica_materiaprima_view.py" afterDir="false" />
-    </list>
+    <list default="true" id="11faf7b9-b30a-4221-aa08-da76346b7515" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Python Script" />
-      </list>
-    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -29,7 +16,7 @@
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
-  <component name="ProjectId" id="2Y518y0rZ7mk2nSpam3DRjnZszv" />
+  <component name="ProjectId" id="2Y5RDQDPkoXXdPP2MOO1qeetvbP" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
@@ -37,31 +24,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;CodeAlessio&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "CodeAlessio",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="40a8365b-d5df-4f9d-b05e-380be3c5aca9" name="Changes" comment="" />
-      <created>1699800470963</created>
+      <changelist id="11faf7b9-b30a-4221-aa08-da76346b7515" name="Changes" comment="" />
+      <created>1699813334279</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1699800470963</updated>
-      <workItem from="1699800472041" duration="80000" />
-      <workItem from="1699800589901" duration="39000" />
-      <workItem from="1699800914343" duration="5031000" />
+      <updated>1699813334279</updated>
+      <workItem from="1699813335381" duration="23000" />
+      <workItem from="1699813526055" duration="37000" />
     </task>
     <servers />
   </component>
@@ -69,6 +51,7 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/ProgettoPizzeriaCode$Viste_Ricevuta.coverage" NAME="Viste_Ricevuta Coverage Results" MODIFIED="1699812441600" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Code/Gestione Ricevuta/View" />
     <SUITE FILE_PATH="coverage/ProgettoPizzeriaCode$inserisci_materiaprima_view.coverage" NAME="inserisci_materiaprima_view Coverage Results" MODIFIED="1699801072951" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Code/Gestione Magazzino/View" />
     <SUITE FILE_PATH="coverage/ProgettoPizzeriaCode$gestione_magazzino_view.coverage" NAME="gestione_magazzino_view Coverage Results" MODIFIED="1699812238945" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Code/Gestione Magazzino/View" />
     <SUITE FILE_PATH="coverage/ProgettoPizzeriaCode$modifica_materiaprima_view.coverage" NAME="modifica_materiaprima_view Coverage Results" MODIFIED="1699807477009" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Code/Gestione Magazzino/View" />
