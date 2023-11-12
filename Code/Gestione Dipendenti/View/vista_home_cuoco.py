@@ -21,8 +21,8 @@ def crea_pulsante(nome, directory):
     pulsante.setLayout(layout)
     pulsante.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
     pulsante.setStyleSheet(
-        ".QPushButton {background-color: #ff776d; border: 2px solid black; border-radius: 10px; padding: 10px}")
-    pulsante.setFixedSize(250, 150)
+        "color:white;background-color: #ff776d; border: 2px; border-radius: 6px") #testo bianco senza bordo,png nero
+    pulsante.setFixedSize(250, 200)
     return pulsante
 def crea_immagine(directory, dimensione):
     label_foto = QLabel()
@@ -34,12 +34,11 @@ class VistaHomeCuoco(QWidget):
     def __init__(self):
         super().__init__()
         self.initUi()
-
     def initUi(self):
         #definizione oggetti
         label = QLabel("ACCESSO: Cuoco")
         label.setFont(label_font_tit)
-        pulsante1 = crea_pulsante("Visualizza Comande","png/menu.png") #cambiare icona
+        pulsante1 = crea_pulsante("Lista Comande","png/menu.png") #cambiare icona
         pulsante2 = crea_pulsante("Visualizza Turni","png/turni.png")
         back = crea_immagine("png/back.png", 35)
 
@@ -60,8 +59,10 @@ class VistaHomeCuoco(QWidget):
         layout.addSpacing(10)
         layout.addWidget(label)
         layout.addStretch()
+
         layout.addLayout(layout_centrale)
-        layout.addSpacing(160)
+        layout.addSpacing(170)
+
         layout.addWidget(back)
         layout.addSpacing(10)
 
