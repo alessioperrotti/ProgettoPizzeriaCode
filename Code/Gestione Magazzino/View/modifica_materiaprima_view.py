@@ -32,7 +32,7 @@ class VistaModificaMateriaPrima(QWidget):
         linea = QFrame()
         linea.setFrameShape(QFrame.Shape.HLine)
 
-        label_codice = QLabel("Codice:")
+        label_codice = QLabel("<b>Codice:</b>")
         label_codice.setFont(font_label)
         campo_codice = QLineEdit()
         campo_codice.setFixedSize(287,30)

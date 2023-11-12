@@ -5,18 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40a8365b-d5df-4f9d-b05e-380be3c5aca9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Code/Gestione Magazzino/Controller/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/Gestione Magazzino/Controller/modifica_materiaprima_cont.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/Gestione Magazzino/Model/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/Gestione Magazzino/Model/gestore_magazzino.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/Gestione Magazzino/Model/materia_prima.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/Gestione Magazzino/View/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/Gestione Magazzino/View/modifica_materiaprima_view.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/Gestione Magazzino/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/Gestione Magazzino/Data/lista_materieprime.pickle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/Gestione Magazzino/View/gestione_magazzino_view.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/Gestione Magazzino/Controller/inserisci_materiaprima_cont.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Gestione Magazzino/Controller/inserisci_materiaprima_cont.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/Gestione Magazzino/View/inserisci_materiaprima_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Gestione Magazzino/View/inserisci_materiaprima_view.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/Gestione Magazzino/Model/gestore_magazzino.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Gestione Magazzino/Model/gestore_magazzino.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/Gestione Magazzino/View/modifica_materiaprima_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Gestione Magazzino/View/modifica_materiaprima_view.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,20 +37,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "CodeAlessio",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;CodeAlessio&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -77,6 +70,8 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ProgettoPizzeriaCode$inserisci_materiaprima_view.coverage" NAME="inserisci_materiaprima_view Coverage Results" MODIFIED="1699801072951" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Code/Gestione Magazzino/View" />
-    <SUITE FILE_PATH="coverage/ProgettoPizzeriaCode$modifica_materiaprima_view.coverage" NAME="modifica_materiaprima_view Coverage Results" MODIFIED="1699801296694" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Code/Gestione Magazzino/View" />
+    <SUITE FILE_PATH="coverage/ProgettoPizzeriaCode$gestione_magazzino_view.coverage" NAME="gestione_magazzino_view Coverage Results" MODIFIED="1699812238945" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Code/Gestione Magazzino/View" />
+    <SUITE FILE_PATH="coverage/ProgettoPizzeriaCode$modifica_materiaprima_view.coverage" NAME="modifica_materiaprima_view Coverage Results" MODIFIED="1699807477009" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Code/Gestione Magazzino/View" />
+    <SUITE FILE_PATH="coverage/ProgettoPizzeriaCode$VistaHomeAdmin.coverage" NAME="VistaHomeAdmin Coverage Results" MODIFIED="1699806580268" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Code/Gestione Sistema/View" />
   </component>
 </project>
