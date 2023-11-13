@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="11faf7b9-b30a-4221-aa08-da76346b7515" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Code/Gestione Dipendenti/View/VistaMsgEliminaAssegnamento.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/Gestione Dipendenti/View/VistaMsgEliminaDipendente.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/Gestione Dipendenti/View/vista_home_cameriere.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Gestione Dipendenti/View/vista_home_cameriere.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/Gestione Dipendenti/View/vista_home_cuoco.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Gestione Dipendenti/View/vista_home_cuoco.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2Y5RDQDPkoXXdPP2MOO1qeetvbP" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/LENOVO/Documents/GitHub/ProgettoPizzeriaCode/Code/Gestione Dipendenti/View&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\LENOVO\Documents\GitHub\ProgettoPizzeriaCode\Code\Gestione Dipendenti\View" />
+      <recent name="C:\Users\LENOVO\Documents\GitHub\ProgettoPizzeriaCode\Code\Gestione Magazzino\View" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="11faf7b9-b30a-4221-aa08-da76346b7515" name="Changes" comment="" />
+      <created>1699813334279</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1699813334279</updated>
+      <workItem from="1699813335381" duration="23000" />
+      <workItem from="1699813526055" duration="37000" />
+      <workItem from="1699815655629" duration="3540000" />
+      <workItem from="1699825015691" duration="4966000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/__init___py$vista_home_cuoco.coverage" NAME="vista_home_cuoco Coverage Results" MODIFIED="1699827202004" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Code/Gestione Dipendenti/View" />
+    <SUITE FILE_PATH="coverage/__init___py$VistaMessaggioErroreLogin.coverage" NAME="VistaMessaggioErroreLogin Coverage Results" MODIFIED="1699828460103" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Code/Gestione Sistema/View" />
+    <SUITE FILE_PATH="coverage/__init___py$gestione_magazzino_view.coverage" NAME="gestione_magazzino_view Coverage Results" MODIFIED="1699815711430" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Code/Gestione Magazzino/View" />
+    <SUITE FILE_PATH="coverage/ProgettoPizzeriaCode$inserisci_materiaprima_view.coverage" NAME="inserisci_materiaprima_view Coverage Results" MODIFIED="1699801072951" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Code/Gestione Magazzino/View" />
+    <SUITE FILE_PATH="coverage/__init___py$VistaHomeAdmin.coverage" NAME="VistaHomeAdmin Coverage Results" MODIFIED="1699819234410" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Code/Gestione Sistema/View" />
+    <SUITE FILE_PATH="coverage/__init___py$VistaMsgEliminaDipendente.coverage" NAME="VistaMsgEliminaDipendente Coverage Results" MODIFIED="1699829932181" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Code/Gestione Dipendenti/View" />
+    <SUITE FILE_PATH="coverage/ProgettoPizzeriaCode$Viste_Ricevuta.coverage" NAME="Viste_Ricevuta Coverage Results" MODIFIED="1699812441600" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Code/Gestione Ricevuta/View" />
+    <SUITE FILE_PATH="coverage/ProgettoPizzeriaCode$modifica_materiaprima_view.coverage" NAME="modifica_materiaprima_view Coverage Results" MODIFIED="1699807477009" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Code/Gestione Magazzino/View" />
+    <SUITE FILE_PATH="coverage/ProgettoPizzeriaCode$VistaHomeAdmin.coverage" NAME="VistaHomeAdmin Coverage Results" MODIFIED="1699806580268" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Code/Gestione Sistema/View" />
+    <SUITE FILE_PATH="coverage/__init___py$vista_home_cameriere.coverage" NAME="vista_home_cameriere Coverage Results" MODIFIED="1699828231979" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Code/Gestione Dipendenti/View" />
+    <SUITE FILE_PATH="coverage/__init___py$VistaInserisciRicevuta.coverage" NAME="VistaInserisciRicevuta Coverage Results" MODIFIED="1699815701404" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Code/GestioneRicevuta/View" />
+    <SUITE FILE_PATH="coverage/__init___py$VistaMsgEliminaAssegnamento.coverage" NAME="VistaMsgEliminaAssegnamento Coverage Results" MODIFIED="1699829959904" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Code/Gestione Dipendenti/View" />
+    <SUITE FILE_PATH="coverage/ProgettoPizzeriaCode$gestione_magazzino_view.coverage" NAME="gestione_magazzino_view Coverage Results" MODIFIED="1699812238945" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Code/Gestione Magazzino/View" />
+  </component>
+</project>
