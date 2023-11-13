@@ -1,23 +1,29 @@
 import PyQt6
+from PyQt5.QtWidgets import QStackedWidget
+
 from ..View.VistaGestioneRicevute import VistaGestioneRicevute
 from ..Model.Ricevuta import Ricevuta
 from PyQt6.QtCore import pyqtSignal
 class ControllerVistaGestioneRicevute():
 
-    def __init__(self, ):
+    def __init__(self, gestore, stacked_widget):
         self.view = VistaGestioneRicevute()
-        self.model = Ricevuta
+        self.gestore = gestore
+        self.stacked_widget = stacked_widget
         self.view.pulsante_mostrainfo.clicked.connect(self.mostra_info_ricevuta())
         self.view.pulsante_inserisci.clicked.connect(self.inserisci_ricevuta())
         self.view.pulsante_elimina.clicked.connect(self.elimina_ricevuta())
 
 
     def mostra_info_ricevuta(self):
-
+        pass
 
     def inserisci_ricevuta(self):
 
+        pass
 
     def elimina_ricevuta(self):
+        pass
+
 
 

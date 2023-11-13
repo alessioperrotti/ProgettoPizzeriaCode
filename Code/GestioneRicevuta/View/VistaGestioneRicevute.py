@@ -85,9 +85,9 @@ class VistaGestioneRicevute(QWidget):
 
         # inserimento oggetti nel layout
         layout_pulsanti.addSpacerItem(QSpacerItem(1, 130))
-        layout_pulsanti.addWidget(pulsante_mostrainfo)
-        layout_pulsanti.addWidget(pulsante_inserisci)
-        layout_pulsanti.addWidget(pulsante_elimina)
+        layout_pulsanti.addWidget(self.pulsante_mostrainfo)
+        layout_pulsanti.addWidget(self.pulsante_inserisci)
+        layout_pulsanti.addWidget(self.pulsante_elimina)
         layout_pulsanti.addSpacerItem(QSpacerItem(1, 130))
 
         layout_tabella_pulsanti.addSpacerItem(QSpacerItem(30, 30))

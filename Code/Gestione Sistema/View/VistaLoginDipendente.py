@@ -89,7 +89,7 @@ class VistaLoginDipendente(QWidget):
 
 def main():
     app = QApplication(sys.argv)
-    VistaLoginDipendente()
+    ex = VistaLoginDipendente()
     sys.exit(app.exec())
 
 
