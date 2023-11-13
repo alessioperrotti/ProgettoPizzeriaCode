@@ -20,7 +20,10 @@ class ContInserisciMateriaPrima(object):
         qta_limite = self.view.campo_qtaLimite.text()
         qta_ordine_STD = self.view.campo_qtaOrdineSTD.text()
 
-        
+        self.model.aggiungi_materiaprima(codice, nome, costo_al_kg, qta_disponibile, qta_limite,
+                              qta_ordine_STD, data_scadenza)
+
+
 
 
     def data_cambiata(self, data_scadenza):

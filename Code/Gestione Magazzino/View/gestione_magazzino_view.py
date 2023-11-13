@@ -32,8 +32,6 @@ def Tabella(n_colonne, larghezza, altezza):
     header = tabella.horizontalHeader()
     header.setFont(font_piccolo)
     header.setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
-    for i in range(1, n_colonne):
-        header.setSectionResizeMode(1, QHeaderView.ResizeMode.ResizeToContents)
     tabella.setFixedWidth(larghezza)
     tabella.setFixedHeight(altezza)
 
@@ -80,11 +78,13 @@ class VistaGestioneMagazzino(QWidget):
 
         vbox_pulsanti.addSpacerItem(QSpacerItem(217, 217))
 
-        data_grid = Tabella(3, 481, 404)
-        data_grid.setHorizontalHeaderLabels(["MATERIA PRIMA", "CODICE", "DISPONIBILITA"])
-        data_grid.setFont(font_piccolo)
-        vbox_tabella.addWidget(data_grid, alignment=Qt.AlignmentFlag.AlignLeft)
-        #vbox_tabella.addSpacerItem(QSpacerItem(200,200))
+        self.data_grid = Tabella(3, 481, 404)
+        self.data_grid.setColumnWidth(0, 211)
+        self.data_grid.setColumnWidth(1, 124)
+        self.data_grid.setColumnWidth(2, 145)
+        self.data_grid.setHorizontalHeaderLabels(["MATERIA PRIMA", "CODICE", "DISPONIBILITA"])
+        self.data_grid.setFont(font_piccolo)
+        vbox_tabella.addWidget(self.data_grid, alignment=Qt.AlignmentFlag.AlignLeft)
 
         main_layout.addWidget(label_titolo, alignment=Qt.AlignmentFlag.AlignTop)
         hbox.addLayout(vbox_tabella)
@@ -92,6 +92,16 @@ class VistaGestioneMagazzino(QWidget):
         main_layout.addLayout(hbox)
         self.setFixedSize(756,637)
         self.setLayout(main_layout)
+
+
+    def update_tabella(self, codice, nome, qta_disponibile):
+
+        row_position = self.data_grid.rowCount()
+        self.data_grid.insertRow(row_position)
+        self.data_grid.setItem(row_position, 0, QTableWidgetItem(str(codice)))
+        self.data_grid.setItem(row_position, 1, QTableWidgetItem(nome))
+        self.data_grid.setItem(row_position, 2, QTableWidgetItem(str(qta_disponibile)))
+
 
 
 
