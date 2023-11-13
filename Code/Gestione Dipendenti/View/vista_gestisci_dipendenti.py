@@ -33,7 +33,9 @@ def crea_immagine(directory, dimensione):
 from PyQt6.QtWidgets import QTableWidget, QHeaderView
 from PyQt6.QtGui import QFont
 
+
 def crea_tabella(n_colonne, larghezza, altezza, parent=None):
+
     tabella = QTableWidget(parent)
     tabella.setStyleSheet("""
         QTableWidget {
@@ -51,46 +53,39 @@ def crea_tabella(n_colonne, larghezza, altezza, parent=None):
             background-color: lightgray;
         }
     """)
+
+    # Imposta il numero di colonne
     tabella.setColumnCount(n_colonne)
 
+    # Crea l'intestazione
     header = tabella.horizontalHeader()
     header.setFont(label_font_piccolo)
-    #bold
     font = header.font()
     font.setBold(True)
     header.setFont(font)
+    header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
 
-    header.setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
-
-    # Aggiungi il contenuto delle colonne
-    for i in range(1, n_colonne):
-        header.setSectionResizeMode(i, QHeaderView.ResizeMode.ResizeToContents)
-
+    # Imposta le dimensioni della tabella
     tabella.setFixedWidth(larghezza)
     tabella.setFixedHeight(altezza)
 
     return tabella
 
-class VistaPrenotazioniAdmin(QWidget):
+class VistaGestisciDipendenti(QWidget):
     def __init__(self):
         super().__init__()
         self.init_ui()
 
     def init_ui(self):
         # Layout principale
-        label= QLabel("Gestione Prenotazioni")
+        label= QLabel("Gestione Dipendenti")
         label.setFont(label_font_tit)
 
-        # Campo di ricerca
-        search_label = QLabel('Cerca:')
-        search_label.setFont(label_font_piccolo)
-        search_edit = QLineEdit()
-        search_edit.setFixedWidth(400)
-
         # Creazione dei bottoni
-        pulsante_modifica = crea_pulsante("Modifica\nprenotazione")
-        pulsante_aggiungi = crea_pulsante("Aggiungi\nprenotazione")
-        pulsante_elimina = crea_pulsante("Elimina\nprenotazione")
+        pulsante_mostra = crea_pulsante("Mostra info\ndipendente")
+        pulsante_modifica = crea_pulsante("Modifica\ndipendente")
+        pulsante_inserisci = crea_pulsante("Inserisci nuovo\ndipendente")
+        pulsante_elimina = crea_pulsante("Elimina\ndipendente")
         back = crea_immagine("png/back.png", 35)
 
         #Layout
@@ -99,28 +94,27 @@ class VistaPrenotazioniAdmin(QWidget):
         griglia = QGridLayout()
         layout_tabella = QHBoxLayout()
 
-        tabella = crea_tabella(6, 540, 430)
-        tabella.setHorizontalHeaderLabels(["NOME CLIENTE","TAVOLO","ORARIO","GIORNO","POSTI","CODICE"])
-        tabella.setFont(label_font_piccolo)
+        tabella = crea_tabella(2, 500, 430)
+        tabella.setHorizontalHeaderLabels(["NOME", "RUOLO"])
 
+        # Crea l'area di scorrimento e incorpora la tabella al suo interno
         scroll_area = QScrollArea()
         scroll_area.setWidgetResizable(True)
         scroll_area.setWidget(tabella)
         layout_tabella.addWidget(scroll_area, alignment=Qt.AlignmentFlag.AlignLeft)
-        scroll_area.setFixedSize(560, 400)
+        scroll_area.setFixedSize(520, 400)
 
         #Posiziono oggetti
         layout.setContentsMargins(20,0,10,0)
         layout.addWidget(label)
         layout.addStretch()
-        layout.addWidget(search_label)
-        layout.addWidget(search_edit)
 
         #layout_tabella.addWidget(tabella,alignment=Qt.AlignmentFlag.AlignLeft)
 
-        griglia.addWidget(pulsante_modifica,1,1)
-        griglia.addWidget(pulsante_aggiungi ,2,1)
-        griglia.addWidget(pulsante_elimina,3,1)
+        griglia.addWidget(pulsante_mostra,1,1)
+        griglia.addWidget(pulsante_modifica ,2,1)
+        griglia.addWidget(pulsante_inserisci,3,1)
+        griglia.addWidget(pulsante_elimina,4,1)
 
         layout.addLayout(layout_tabella)
         layout.addStretch()
@@ -136,5 +130,5 @@ class VistaPrenotazioniAdmin(QWidget):
 
 if __name__ == '__main__':
     app = QApplication([])
-    window = VistaPrenotazioniAdmin()
+    window = VistaGestisciDipendenti()
     app.exec()
