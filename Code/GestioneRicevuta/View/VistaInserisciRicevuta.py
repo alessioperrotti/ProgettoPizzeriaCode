@@ -56,6 +56,9 @@ def Tabella(n_colonne, larghezza, altezza):
 class VistaInserisciRicevuta(QWidget):
     def __init__(self):
         super().__init__()
+        self.ricerca = None
+        self.tabella = None
+        self.pulsante1 = None
         self.initUi()
 
     def initUi(self):
@@ -68,19 +71,19 @@ class VistaInserisciRicevuta(QWidget):
         frame1 = QFrame()
         frame1.setFrameShape(QFrame.Shape.HLine)
 
-        ricerca = QLineEdit()
-        ricerca.setPlaceholderText("Cerca numero tavolo")
-        ricerca.setFont(label_font_piccolo)
-        ricerca.setFixedWidth(340)
-        ricerca.setStyleSheet("border: 1px solid black; padding: 3px")
+        self.ricerca = QLineEdit()
+        self.ricerca.setPlaceholderText("Cerca numero tavolo")
+        self.ricerca.setFont(label_font_piccolo)
+        self.ricerca.setFixedWidth(340)
+        self.ricerca.setStyleSheet("border: 1px solid black; padding: 3px")
 
-        tabella = Tabella(2, 340, 115)
-        tabella.setHorizontalHeaderLabels(["TAVOLO", "NUMERO ORDINI"])
-        tabella.setFont(label_font_piccolo)
+        self.tabella = Tabella(2, 340, 115)
+        self.tabella.setHorizontalHeaderLabels(["TAVOLO", "NUMERO ORDINI"])
+        self.tabella.setFont(label_font_piccolo)
 
-        pulsante1 = Pulsante("Mostra Tavolo selezionato")
-        pulsante1.setFont(label_font_piccolo)
-        pulsante1.setFixedHeight(70)
+        self.pulsante1 = Pulsante("Mostra Tavolo selezionato")
+        self.pulsante1.setFont(label_font_piccolo)
+        self.pulsante1.setFixedHeight(70)
 
         label_nome = QLabel("Nome acquirente")
         label_nome.setFont(label_font_piccolo)
@@ -104,9 +107,9 @@ class VistaInserisciRicevuta(QWidget):
 
         # Inserimento oggetti nei layout
 
-        layout_tabella_e_tavolo.addWidget(tabella)
+        layout_tabella_e_tavolo.addWidget(self.tabella)
         layout_tabella_e_tavolo.addSpacerItem(QSpacerItem(30, 30))
-        layout_tabella_e_tavolo.addWidget(pulsante1)
+        layout_tabella_e_tavolo.addWidget(self.pulsante1)
         layout_tabella_e_tavolo.addSpacerItem(QSpacerItem(30, 30))
 
         layout_tasti.addSpacerItem(QSpacerItem(140, 1))
@@ -116,7 +119,7 @@ class VistaInserisciRicevuta(QWidget):
 
         layout.addWidget(label_titolo, alignment=Qt.AlignmentFlag.AlignTop)
         layout.addWidget(frame1, alignment=Qt.AlignmentFlag.AlignTop)
-        layout.addWidget(ricerca, alignment=Qt.AlignmentFlag.AlignTop)
+        layout.addWidget(self.ricerca, alignment=Qt.AlignmentFlag.AlignTop)
         layout.addSpacing(10)
         layout.addLayout(layout_tabella_e_tavolo)
         layout.addSpacerItem(QSpacerItem(1, 1, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding))
