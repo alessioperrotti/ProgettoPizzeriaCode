@@ -1,16 +1,23 @@
 
 from materia_prima import MateriaPrima
+from PyQt6.QtCore import QObject, pyqtSignal
+from datetime import date
 class GestoreMagazzino(object):
+
+    elemento_inserito = pyqtSignal(int, str, float, float, float, float, date)
 
     def __init__(self):
 
         self.lista_materieprime = []
 
 
-    def aggiungi_materiaprima(self, codice, nome, costo_al_kg, qta_disponibile, qta_limite, qta_ordine_STD, data_scadenza):
+    def aggiungi_materiaprima(self, codice, nome, costo_al_kg, qta_disponibile, qta_limite,
+                              qta_ordine_STD, data_scadenza):
 
         nuova_materiaprima = MateriaPrima(codice, nome, costo_al_kg, qta_disponibile, qta_limite, qta_ordine_STD, data_scadenza)
         self.lista_materieprime.append(nuova_materiaprima)
+
+        self.elemento_inserito.emit(codice, nome, qta_disponibile)
 
 
     def modifica_materiaprima(self, codice, new_nome, new_costo_al_kg, new_qta_disponibile,
