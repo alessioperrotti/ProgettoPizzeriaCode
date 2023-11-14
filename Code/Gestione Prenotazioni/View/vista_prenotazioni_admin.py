@@ -8,7 +8,8 @@ from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplica
 
 label_font = QFont("Roboto", 24)
 label_font_tit = QFont("Roboto", 32, weight=50)
-label_font_piccolo = QFont("Roboto", 12)
+label_font_piccolo = QFont("Roboto", 10)
+header_font = QFont("Roboto",10)
 
 def crea_pulsante(nome):
     pulsante = QPushButton()
@@ -20,9 +21,13 @@ def crea_pulsante(nome):
     layout.addStretch()
     pulsante.setLayout(layout)
     pulsante.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
-    pulsante.setStyleSheet(
-        "color:white; background-color: #ff776d ;text-align: center; border-radius: 6px")  # testo bianco senza bordo
-    pulsante.setFixedSize(150, 75)
+    pulsante.setStyleSheet("""
+        color: "white";
+        background-color: "#ff776d";
+        text-align: center;
+        border-radius: 6px;
+         """)  # testo bianco senza bordo
+    pulsante.setFixedSize(147, 49)
     return pulsante
 def crea_immagine(directory, dimensione):
     label_foto = QLabel()
@@ -54,7 +59,7 @@ def crea_tabella(n_colonne, larghezza, altezza, parent=None):
     tabella.setColumnCount(n_colonne)
 
     header = tabella.horizontalHeader()
-    header.setFont(label_font_piccolo)
+    header.setFont(header_font)
     #bold
     font = header.font()
     font.setBold(True)
@@ -85,7 +90,7 @@ class VistaPrenotazioniAdmin(QWidget):
         search_label = QLabel('Cerca:')
         search_label.setFont(label_font_piccolo)
         search_edit = QLineEdit()
-        search_edit.setFixedWidth(400)
+        search_edit.setFixedWidth(336)
 
         # Creazione dei bottoni
         pulsante_modifica = crea_pulsante("Modifica\nprenotazione")
@@ -99,7 +104,7 @@ class VistaPrenotazioniAdmin(QWidget):
         griglia = QGridLayout()
         layout_tabella = QHBoxLayout()
 
-        tabella = crea_tabella(6, 540, 430)
+        tabella = crea_tabella(6,481,404)
         tabella.setHorizontalHeaderLabels(["NOME CLIENTE","TAVOLO","ORARIO","GIORNO","POSTI","CODICE"])
         tabella.setFont(label_font_piccolo)
 
@@ -107,10 +112,10 @@ class VistaPrenotazioniAdmin(QWidget):
         scroll_area.setWidgetResizable(True)
         scroll_area.setWidget(tabella)
         layout_tabella.addWidget(scroll_area, alignment=Qt.AlignmentFlag.AlignLeft)
-        scroll_area.setFixedSize(560, 400)
+        scroll_area.setFixedSize(501, 380)
 
         #Posiziono oggetti
-        layout.setContentsMargins(20,0,10,0)
+        layout.setContentsMargins(20,20,10,0)
         layout.addWidget(label)
         layout.addStretch()
         layout.addWidget(search_label)

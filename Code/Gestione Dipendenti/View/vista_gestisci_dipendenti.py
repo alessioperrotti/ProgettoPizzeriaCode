@@ -1,5 +1,7 @@
 import sys
-
+# tab: 481,404
+# button: 147,49
+# search_label: 336
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont, QPixmap
 from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplication, QSizePolicy, QHBoxLayout,
@@ -8,7 +10,9 @@ from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplica
 
 label_font = QFont("Roboto", 24)
 label_font_tit = QFont("Roboto", 32, weight=50)
-label_font_piccolo = QFont("Roboto", 12)
+label_font_piccolo = QFont("Roboto", 10)
+header_font = QFont("Roboto",10)
+
 
 def crea_pulsante(nome):
     pulsante = QPushButton()
@@ -22,7 +26,7 @@ def crea_pulsante(nome):
     pulsante.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
     pulsante.setStyleSheet(
         "color:white; background-color: #ff776d ;text-align: center; border-radius: 6px")  # testo bianco senza bordo
-    pulsante.setFixedSize(150, 75)
+    pulsante.setFixedSize(147, 49)
     return pulsante
 def crea_immagine(directory, dimensione):
     label_foto = QLabel()
@@ -59,7 +63,7 @@ def crea_tabella(n_colonne, larghezza, altezza, parent=None):
 
     # Crea l'intestazione
     header = tabella.horizontalHeader()
-    header.setFont(label_font_piccolo)
+    header.setFont(header_font)
     font = header.font()
     font.setBold(True)
     header.setFont(font)
@@ -94,7 +98,7 @@ class VistaGestisciDipendenti(QWidget):
         griglia = QGridLayout()
         layout_tabella = QHBoxLayout()
 
-        tabella = crea_tabella(2, 500, 430)
+        tabella = crea_tabella(2, 481,404)
         tabella.setHorizontalHeaderLabels(["NOME", "RUOLO"])
 
         # Crea l'area di scorrimento e incorpora la tabella al suo interno
@@ -102,7 +106,7 @@ class VistaGestisciDipendenti(QWidget):
         scroll_area.setWidgetResizable(True)
         scroll_area.setWidget(tabella)
         layout_tabella.addWidget(scroll_area, alignment=Qt.AlignmentFlag.AlignLeft)
-        scroll_area.setFixedSize(520, 400)
+        scroll_area.setFixedSize(501, 380)
 
         #Posiziono oggetti
         layout.setContentsMargins(20,0,10,0)
