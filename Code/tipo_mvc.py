@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLabel, QStackedWidget
+from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLabel, QStackedWidget
 
 
 class Model:
@@ -84,4 +84,4 @@ class MainApp(QApplication):
 
 if __name__ == '__main__':
     app = MainApp(sys.argv)
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
