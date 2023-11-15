@@ -7,34 +7,13 @@ font_tit = QFont("Roboto", 32, weight=400)
 font_label = QFont("Roboto", 13, weight=350)
 font_piccolo = QFont("Roboto", 14)
 
-def Tabella(n_colonne, larghezza, altezza):
+def crea_tabella(righe, colonne, larghezza, altezza):
     tabella = QTableWidget()
-    tabella.setStyleSheet("""
-               QTableWidget {
-                   background-color: white;
-                   alternate-background-color: white;
-                   selection-background-color: darkcyan;
-                   border: 2px solid black;
-                   border-radius: 5px;
-               }
-
-               QTableWidget::item {
-                   padding: 5px;
-                   border: 1px solid black;
-               } 
-               QHeaderView::section {
-                   background-color: lightgray;
-               }
-           """)
-
-    tabella.setColumnCount(n_colonne)
-
+    tabella.setRowCount(righe)
+    tabella.setColumnCount(colonne)
     header = tabella.horizontalHeader()
-    header.setFont(font_piccolo)
-    header.setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
-    tabella.setFixedWidth(larghezza)
-    tabella.setFixedHeight(altezza)
-
+    header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+    tabella.setFixedSize(larghezza, altezza)
     return tabella
 
 class VistaGestioneMagazzino(QWidget):
@@ -43,7 +22,6 @@ class VistaGestioneMagazzino(QWidget):
 
         super().__init__()
         self.initUI()
-        #self.show()
 
 
     def initUI(self):
@@ -77,8 +55,7 @@ class VistaGestioneMagazzino(QWidget):
 
         vbox_pulsanti.addSpacerItem(QSpacerItem(217, 217))
 
-        self.data_grid = Tabella(3, 481, 404)
-        self.data_grid.setRowCount(10)
+        self.data_grid = crea_tabella(15, 3, 481, 404)
         self.data_grid.setColumnWidth(0, 211)
         self.data_grid.setColumnWidth(1, 124)
         self.data_grid.setColumnWidth(2, 145)
@@ -145,6 +122,7 @@ app.setStyleSheet("""
         border: 2px solid grey;
     }
 """)
+
 window = VistaGestioneMagazzino()
 window.show()
 sys.exit(app.exec())
