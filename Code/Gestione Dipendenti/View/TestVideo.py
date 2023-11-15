@@ -21,6 +21,7 @@ def crea_tabella(righe, colonne, larghezza, altezza):
     header = tabella.horizontalHeader()
     # header.setFont(header_font)
     header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+    tabella.verticalHeader().setVisible(False)
     tabella.setFixedSize(larghezza, altezza)
     return tabella
 
@@ -120,6 +121,12 @@ app.setStyleSheet("""
         alternate-background-color: white;
         selection-background-color: darkcyan;
         border: 2px solid grey;
+    }
+    QHeaderView:section {
+        background-color: lightgray;
+    }
+    QHeaderView:active {
+        background-color: gray;
     }
 """)
 window = TestVideo()
