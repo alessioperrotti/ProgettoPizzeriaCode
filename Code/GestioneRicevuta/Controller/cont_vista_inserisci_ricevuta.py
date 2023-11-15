@@ -1,6 +1,6 @@
 import PyQt6
-from ..View.VistaInserisciRicevuta import VistaInserisciRicevuta
-from ..Model.Ricevuta import Ricevuta
+from ..View.vista_inserisci_ricevuta import VistaInserisciRicevuta
+from ..Model.ricevuta import Ricevuta
 from PyQt6.QtCore import pyqtSignal
 class ControllerVistaInserisciRicevuta():
 

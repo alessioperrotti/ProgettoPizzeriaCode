@@ -1,7 +1,7 @@
 import PyQt6
 from PyQt5.QtWidgets import QStackedWidget
 
-from ..View.VistaGestioneRicevute import VistaGestioneRicevute
+from ..View.vista_gestione_ricevute import VistaGestioneRicevute
 from ..Model.Ricevuta import Ricevuta
 from PyQt6.QtCore import pyqtSignal
 class ControllerVistaGestioneRicevute():
