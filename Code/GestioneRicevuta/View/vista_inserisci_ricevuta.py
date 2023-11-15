@@ -5,52 +5,36 @@ import sys
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplication, QSpacerItem,
-                             QSizePolicy, QHBoxLayout, QFrame, QLineEdit, QTableWidget, QHeaderView)
+                             QSizePolicy, QHBoxLayout, QFrame, QLineEdit, QTableWidget, QHeaderView, QAbstractItemView)
 
 label_font = QFont("Roboto", 24)
-label_font_tit = QFont("Roboto", 40, weight=50)
-label_font_piccolo = QFont("Roboto", 14)
+label_font_tit = QFont("Roboto", 32, weight=50)
+label_font_piccolo = QFont("Roboto", 10)
+header_font = QFont("Roboto", 10)
+header_font.setBold(True)
 
 
 def Pulsante(nome):
     pulsante = QPushButton(nome)
     pulsante.setFont(label_font)
     pulsante.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
-    pulsante.setStyleSheet("background-color: #ff776d; border: 2px solid black; border-radius: 10px; padding: 10px")
+   # pulsante.setStyleSheet("background-color: #ff776d; border: 2px solid black; border-radius: 10px; padding: 10px")
     return pulsante
 
-
-def Tabella(n_colonne, larghezza, altezza):
+def crea_tabella(righe, colonne, larghezza, altezza):
     tabella = QTableWidget()
-    tabella.setStyleSheet("""
-               QTableWidget {
-                   background-color: white;
-                   alternate-background-color: white;
-                   selection-background-color: darkcyan;
-                   border: 2px solid black;
-                   border-radius: 5px;
-               }
-
-               QTableWidget::item {
-                   padding: 5px;
-                   border: 1px solid black;
-               } 
-               QHeaderView::section {
-                   background-color: lightgray;
-               }
-           """)
-
-    tabella.setColumnCount(n_colonne)
-
+    tabella.setRowCount(righe)
+    tabella.setColumnCount(colonne)
     header = tabella.horizontalHeader()
-    header.setFont(label_font_piccolo)
-    header.setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
-    for i in range(1, n_colonne):
-        header.setSectionResizeMode(1, QHeaderView.ResizeMode.ResizeToContents)
-    tabella.setFixedWidth(larghezza)
-    tabella.setFixedHeight(altezza)
+    # header.setFont(header_font)
+    header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+    tabella.verticalHeader().setVisible(False)
+    tabella.setFixedSize(larghezza, altezza)
+    tabella.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+    tabella.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
 
     return tabella
+
 
 
 class VistaInserisciRicevuta(QWidget):
@@ -77,8 +61,9 @@ class VistaInserisciRicevuta(QWidget):
         self.ricerca.setFixedWidth(340)
         self.ricerca.setStyleSheet("border: 1px solid black; padding: 3px")
 
-        self.tabella = Tabella(2, 340, 115)
+        self.tabella = crea_tabella(8,2, 340, 115)
         self.tabella.setHorizontalHeaderLabels(["TAVOLO", "NUMERO ORDINI"])
+
         self.tabella.setFont(label_font_piccolo)
 
         self.pulsante1 = Pulsante("Mostra Tavolo selezionato")
@@ -93,11 +78,11 @@ class VistaInserisciRicevuta(QWidget):
         ins_nome.setFixedWidth(340)
         ins_nome.setStyleSheet("border: 1px solid black; padding: 3px")
 
-        pulsante2 = Pulsante("Conferma inserimento")
+        self.pulsante2 = Pulsante("Conferma inserimento")
         pulsante3 = Pulsante("Stampa Ricevuta")
-        pulsante2.setFont(label_font_piccolo)
+        self.pulsante2.setFont(label_font_piccolo)
         pulsante3.setFont(label_font_piccolo)
-        pulsante2.setFixedHeight(70)
+        self.pulsante2.setFixedHeight(70)
         pulsante3.setFixedHeight(70)
 
         # Definizione layout
@@ -113,7 +98,7 @@ class VistaInserisciRicevuta(QWidget):
         layout_tabella_e_tavolo.addSpacerItem(QSpacerItem(30, 30))
 
         layout_tasti.addSpacerItem(QSpacerItem(140, 1))
-        layout_tasti.addWidget(pulsante2)
+        layout_tasti.addWidget(self.pulsante2)
         layout_tasti.addWidget(pulsante3)
         layout_tasti.addSpacerItem(QSpacerItem(140, 1))
 
@@ -130,6 +115,31 @@ class VistaInserisciRicevuta(QWidget):
         layout.addLayout(layout_tasti)
         layout.addSpacing(20)
 
+        self.setStyleSheet("""
+            QPushButton{
+                background-color: "#ff776d";
+                color: "white";
+                text-align: center;
+                border-radius: 6px;
+            }
+            QPushButton:hover{
+                background-color: "red";
+                font-size: 13px;
+            }
+            QTableWidget {
+                background-color: white;
+                alternate-background-color: white;
+                selection-background-color: darkcyan;
+                border: 2px solid grey;
+            }
+            QHeaderView:section {
+                    font-weight: bold;
+                background-color: lightgray;
+            }
+            QHeaderView:active {
+                background-color: gray;
+            }
+        """)
         self.setFixedSize(690, 474)
         self.setLayout(layout)
         self.show()

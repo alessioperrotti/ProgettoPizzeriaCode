@@ -19,7 +19,7 @@ def crea_tabella(righe, colonne, larghezza, altezza):
     tabella.setRowCount(righe)
     tabella.setColumnCount(colonne)
     header = tabella.horizontalHeader()
-    # header.setFont(header_font)
+    header.setFont(header_font)
     header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
     tabella.verticalHeader().setVisible(False)
     tabella.setFixedSize(larghezza, altezza)
@@ -45,7 +45,7 @@ def crea_pulsante_back(dimensioni, directory):
     return pulsante_back
 
 
-class TestVideo(QWidget):
+class VistaGestioneRicevute(QWidget):
 
     def __init__(self):
         super().__init__()
@@ -61,12 +61,13 @@ class TestVideo(QWidget):
         layout_orizzontale = QHBoxLayout()
         layout_pulsanti = QVBoxLayout()
 
-        pulsante_mostra = QPushButton("Mostra info\nricevute")
-        pulsante_mostra.setFixedSize(147, 49)
-        pulsante_inserisci = QPushButton("Inserisci\nricevuta")
-        pulsante_inserisci.setFixedSize(147, 49)
-        pulsante_elimina = QPushButton("Elimina\nricevuta")
-        pulsante_elimina.setFixedSize(147, 49)
+
+        self.pulsante_mostra = QPushButton("Mostra info\nricevute")
+        self.pulsante_mostra.setFixedSize(147, 49)
+        self.pulsante_inserisci = QPushButton("Inserisci\nricevuta")
+        self.pulsante_inserisci.setFixedSize(147, 49)
+        self.pulsante_elimina = QPushButton("Elimina\nricevuta")
+        self.pulsante_elimina.setFixedSize(147, 49)
 
         # Pulsante Back
         pulsante_back = crea_pulsante_back(35,"png/back.png")
@@ -84,11 +85,11 @@ class TestVideo(QWidget):
 
         # Sistemo i Pulsanti
         layout_pulsanti.addStretch()
-        layout_pulsanti.addWidget(pulsante_mostra, alignment=Qt.AlignmentFlag.AlignCenter)
+        layout_pulsanti.addWidget(self.pulsante_mostra, alignment=Qt.AlignmentFlag.AlignCenter)
         layout_pulsanti.addSpacing(10)
-        layout_pulsanti.addWidget(pulsante_inserisci, alignment=Qt.AlignmentFlag.AlignCenter)
+        layout_pulsanti.addWidget(self.pulsante_inserisci, alignment=Qt.AlignmentFlag.AlignCenter)
         layout_pulsanti.addSpacing(10)
-        layout_pulsanti.addWidget(pulsante_elimina, alignment=Qt.AlignmentFlag.AlignCenter)
+        layout_pulsanti.addWidget(self.pulsante_elimina, alignment=Qt.AlignmentFlag.AlignCenter)
         layout_pulsanti.addStretch()
 
         layout.addLayout(layout_orizzontale)
@@ -119,12 +120,13 @@ app.setStyleSheet("""
         border: 2px solid grey;
     }
     QHeaderView:section {
+        font-weight: bold;
         background-color: lightgray;
     }
     QHeaderView:active {
         background-color: gray;
     }
 """)
-window = TestVideo()
+window = VistaGestioneRicevute()
 window.show()
 sys.exit(app.exec())
