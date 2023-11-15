@@ -56,11 +56,11 @@ def Tabella(n_colonne, larghezza, altezza):
 class VistaGestioneRicevute(QWidget):
     def __init__(self):
         super().__init__()
-        self.initUi()
+
         self.pulsante_mostrainfo = Pulsante("Mostra Info\nRicevuta")
         self.pulsante_inserisci = Pulsante("Inserisci\nRicevuta")
         self.pulsante_elimina = Pulsante("Elimina\nRicevuta")
-
+        self.initUi()
 
     def initUi(self):
         # definizione oggetti
