@@ -86,6 +86,7 @@ class VistaGestioneMagazzino(QWidget):
         self.data_grid.setColumnWidth(2, 145)
         self.data_grid.setHorizontalHeaderLabels(["MATERIA PRIMA", "CODICE", "DISPONIBILITA"])
         self.data_grid.setFont(font_piccolo)
+        self.data_grid.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
         self.search_bar = QLineEdit()
         self.search_bar.setPlaceholderText("Cerca per nome")
