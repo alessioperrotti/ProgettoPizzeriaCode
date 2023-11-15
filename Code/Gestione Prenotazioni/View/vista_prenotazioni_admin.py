@@ -1,90 +1,76 @@
 import sys
 
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QFont, QPixmap
+from PyQt6.QtGui import QFont, QPixmap, QIcon
 from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplication, QSizePolicy, QHBoxLayout,
                              QGridLayout, QTableWidget, QHeaderView, QSpacerItem, QLineEdit, QTableWidgetItem,
-                             QScrollBar, QScrollArea)
+                             QScrollBar, QScrollArea, QAbstractItemView)
 
+# Font
 label_font = QFont("Roboto", 24)
 label_font_tit = QFont("Roboto", 32, weight=50)
 label_font_piccolo = QFont("Roboto", 10)
-header_font = QFont("Roboto",10)
+header_font = QFont("Roboto", 10)
+header_font.setBold(True)
 
-def crea_pulsante(nome):
-    pulsante = QPushButton()
-    label = QLabel(nome)
-    label.setFont(label_font_piccolo)
-    layout = QHBoxLayout()
-    layout.addStretch()
-    layout.addWidget(label)
-    layout.addStretch()
-    pulsante.setLayout(layout)
-    pulsante.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
-    pulsante.setStyleSheet("""
-        color: "white";
-        background-color: "#ff776d";
-        text-align: center;
-        border-radius: 6px;
-         """)  # testo bianco senza bordo
-    pulsante.setFixedSize(147, 49)
-    return pulsante
-def crea_immagine(directory, dimensione):
-    label_foto = QLabel()
-    pixmap = QPixmap(directory)
-    scaled_pixmap = pixmap.scaled(dimensione, dimensione, aspectRatioMode=Qt.AspectRatioMode.KeepAspectRatio)
-    label_foto.setPixmap(scaled_pixmap)
-    return label_foto
-from PyQt6.QtWidgets import QTableWidget, QHeaderView
-from PyQt6.QtGui import QFont
 
-def crea_tabella(n_colonne, larghezza, altezza, parent=None):
-    tabella = QTableWidget(parent)
-    tabella.setStyleSheet("""
-        QTableWidget {
-            background-color: white;
-            alternate-background-color: white;
-            selection-background-color: darkcyan;
-            border: 2px solid black;
-        }
-
-        QTableWidget::item {
-            border: 1px solid black;
-        } 
-
-        QHeaderView::section {
-            background-color: lightgray;
-        }
-    """)
-    tabella.setColumnCount(n_colonne)
-
+def crea_tabella(righe, colonne, larghezza, altezza):
+    tabella = QTableWidget()
+    tabella.setRowCount(righe)
+    tabella.setColumnCount(colonne)
     header = tabella.horizontalHeader()
-    header.setFont(header_font)
-    #bold
-    font = header.font()
-    font.setBold(True)
-    header.setFont(font)
-
-    header.setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
-
-    # Aggiungi il contenuto delle colonne
-    for i in range(1, n_colonne):
-        header.setSectionResizeMode(i, QHeaderView.ResizeMode.ResizeToContents)
-
-    tabella.setFixedWidth(larghezza)
-    tabella.setFixedHeight(altezza)
-
+    # header.setFont(header_font)
+    header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+    header.setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
+    tabella.verticalHeader().setVisible(False)
+    tabella.setFixedSize(larghezza, altezza)
     return tabella
 
-class VistaPrenotazioniAdmin(QWidget):
+
+def crea_pulsante_back(dimensioni, directory):
+    pulsante_back = QPushButton()
+    img = QPixmap(directory)
+    icon = img.scaledToWidth(dimensioni)
+    icon = QIcon(icon)
+    pulsante_back.setIcon(icon)
+    pulsante_back.setIconSize(img.size())
+    pulsante_back.setFixedSize(dimensioni, dimensioni)
+    pulsante_back.setStyleSheet("""
+            QPushButton{
+                background-color: rgba(0, 0, 0, 0);
+            }
+            QPushButton:hover{
+                background-color: "lightgray";
+            }
+            """)
+    return pulsante_back
+
+
+class TestVideo(QWidget):
+
     def __init__(self):
         super().__init__()
         self.init_ui()
+        self.show()
 
     def init_ui(self):
-        # Layout principale
-        label= QLabel("Gestione Prenotazioni")
-        label.setFont(label_font_tit)
+        self.setWindowTitle("Gestionale Pizzeria")
+        title = QLabel("Gestione Prenotazioni")
+        title.setFont(label_font_tit)
+
+        layout = QVBoxLayout()
+        layout_orizzontale = QHBoxLayout()
+        layout_pulsanti = QVBoxLayout()
+
+        pulsante_modifica = QPushButton("Modifica\nprenotazione")
+        pulsante_modifica.setFixedSize(147, 49)
+        pulsante_aggiungi = QPushButton("Aggiungi\nprenotazione")
+        pulsante_aggiungi.setFixedSize(147, 49)
+        pulsante_elimina = QPushButton("Elimina\nprenotazione")
+        pulsante_elimina.setFixedSize(147, 49)
+
+        # Pulsante Back
+        pulsante_back = crea_pulsante_back(35,"png/back.png")
 
         # Campo di ricerca
         search_label = QLabel('Cerca:')
@@ -92,54 +78,67 @@ class VistaPrenotazioniAdmin(QWidget):
         search_edit = QLineEdit()
         search_edit.setFixedWidth(336)
 
-        # Creazione dei bottoni
-        pulsante_modifica = crea_pulsante("Modifica\nprenotazione")
-        pulsante_aggiungi = crea_pulsante("Aggiungi\nprenotazione")
-        pulsante_elimina = crea_pulsante("Elimina\nprenotazione")
-        back = crea_immagine("png/back.png", 35)
+        # Tabella
+        tab = crea_tabella(18, 6, 481, 404)
+        tab.setHorizontalHeaderLabels(["NOME CLIENTE","TAVOLO","ORARIO","GIORNO","POSTI","CODICE"])
+        tab.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+        tab.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
 
-        #Layout
-        layout = QVBoxLayout()
-        layout_pulsanti = QVBoxLayout()
-        griglia = QGridLayout()
-        layout_tabella = QHBoxLayout()
-
-        tabella = crea_tabella(6,481,404)
-        tabella.setHorizontalHeaderLabels(["NOME CLIENTE","TAVOLO","ORARIO","GIORNO","POSTI","CODICE"])
-        tabella.setFont(label_font_piccolo)
-
-        scroll_area = QScrollArea()
-        scroll_area.setWidgetResizable(True)
-        scroll_area.setWidget(tabella)
-        layout_tabella.addWidget(scroll_area, alignment=Qt.AlignmentFlag.AlignLeft)
-        scroll_area.setFixedSize(501, 380)
-
-        #Posiziono oggetti
-        layout.setContentsMargins(20,20,10,0)
-        layout.addWidget(label)
-        layout.addStretch()
+        layout.addWidget(title, alignment=Qt.AlignmentFlag.AlignTop)
+        layout.addSpacing(20)
         layout.addWidget(search_label)
         layout.addWidget(search_edit)
 
-        #layout_tabella.addWidget(tabella,alignment=Qt.AlignmentFlag.AlignLeft)
+        layout_orizzontale.addWidget(tab, alignment=Qt.AlignmentFlag.AlignLeft)
+        layout_orizzontale.addLayout(layout_pulsanti)
 
-        griglia.addWidget(pulsante_modifica,1,1)
-        griglia.addWidget(pulsante_aggiungi ,2,1)
-        griglia.addWidget(pulsante_elimina,3,1)
+        # Sistemo i Pulsanti
+        layout_pulsanti.addStretch()
+        layout_pulsanti.addWidget(pulsante_modifica, alignment=Qt.AlignmentFlag.AlignCenter)
+        layout_pulsanti.addSpacing(10)
+        layout_pulsanti.addWidget(pulsante_aggiungi, alignment=Qt.AlignmentFlag.AlignCenter)
+        layout_pulsanti.addSpacing(10)
+        layout_pulsanti.addWidget(pulsante_elimina, alignment=Qt.AlignmentFlag.AlignCenter)
+        layout_pulsanti.addStretch()
 
-        layout.addLayout(layout_tabella)
-        layout.addStretch()
-        layout_tabella.addLayout(layout_pulsanti)
-        layout_pulsanti.addLayout(griglia)
-        layout_pulsanti.setAlignment(Qt.AlignmentFlag.AlignHCenter)
-        layout.addWidget(back)
-        layout.addSpacing(10)
+        layout.addLayout(layout_orizzontale)
+        layout.addWidget(pulsante_back)
 
+        layout.setContentsMargins(30, 20, 10, 20)
+        self.setFixedSize(756, 637)
         self.setLayout(layout)
-        self.setFixedSize(756,637)
-        self.show()
 
-if __name__ == '__main__':
-    app = QApplication([])
-    window = VistaPrenotazioniAdmin()
-    app.exec()
+
+app = QApplication(sys.argv)
+
+app.setStyleSheet("""
+    QPushButton{
+        background-color: "#ff776d";
+        color: "white";
+        text-align: center;
+        border-radius: 6px;
+    }
+    QPushButton:hover{
+        background-color: "red";
+        font-size: 13px;
+    }
+    QTableWidget {
+        background-color: white;
+        alternate-background-color: white;
+        selection-background-color: darkcyan;
+        border: 2px solid grey;
+    }
+    QHeaderView:section {
+        background-color: lightgray;
+    }
+    QHeaderView:active {
+        background-color: gray;
+    }
+""")
+window = TestVideo()
+window.show()
+sys.exit(app.exec())
+
+
+
+
