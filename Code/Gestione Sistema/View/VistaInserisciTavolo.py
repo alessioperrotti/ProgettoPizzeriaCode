@@ -86,12 +86,28 @@ class VistaInserisciTavolo(QWidget):
         self.setFixedSize(994, 637)
         self.setLayout(layout_princ)
 
-        self.show()
-
 
 def main():
     app = QApplication(sys.argv)
     ex = VistaInserisciTavolo()
+    app.setStyleSheet("""
+            QPushButton{
+                background-color: "#ff776d";
+                color: "white";
+                text-align: center;
+                border-radius: 6px;
+            }
+            QPushButton:hover{
+                background-color: "red";
+                font-size: 13px;
+            }
+            QTableWidget {
+                background-color: white;
+                alternate-background-color: white;
+                selection-background-color: darkcyan;
+                border: 2px solid grey;
+            }
+        """)
     sys.exit(app.exec())
 
 

@@ -43,7 +43,7 @@ class VistaGestioneMagazzino(QWidget):
 
         super().__init__()
         self.initUI()
-        self.show()
+        #self.show()
 
 
     def initUI(self):
@@ -74,8 +74,6 @@ class VistaGestioneMagazzino(QWidget):
             x.setFont(font_label)
             x.setFixedSize(147,49)
             vbox_pulsanti.addWidget(x, alignment=Qt.AlignmentFlag.AlignHCenter)
-            x.setStyleSheet("color: white; background-color: #ff776d; border: 0px solid black; border-radius: 6px; padding: 10px")
-            x.enterEvent = self.enter_event(x)
 
         vbox_pulsanti.addSpacerItem(QSpacerItem(217, 217))
 
@@ -127,29 +125,26 @@ class VistaGestioneMagazzino(QWidget):
 
 
 
-def main():
-    app = QApplication(sys.argv)
-    app.setStyleSheet("""
-        QPushButton{
-            background-color: "#ff776d";
-            color: "white";
-            text-align: center;
-            border-radius: 6px;
-        }
-        QPushButton:hover{
-            background-color: "red";
-        }
-        QTableWidget {
-            background-color: white;
-            alternate-background-color: white;
-            selection-background-color: darkcyan;
-            border: 2px solid grey;
-        }
-    """)
-    window = VistaGestioneMagazzino()
-    window.show()
-    sys.exit(app.exec())
 
-
-if __name__ == '__main__':
-    main()
+app = QApplication(sys.argv)
+app.setStyleSheet("""
+    QPushButton{
+        background-color: "#ff776d";
+        color: "white";
+        text-align: center;
+        border-radius: 6px;
+    }
+    QPushButton:hover{
+        background-color: "red";
+        font-size: 13px;
+    }
+    QTableWidget {
+        background-color: white;
+        alternate-background-color: white;
+        selection-background-color: darkcyan;
+        border: 2px solid grey;
+    }
+""")
+window = VistaGestioneMagazzino()
+window.show()
+sys.exit(app.exec())
