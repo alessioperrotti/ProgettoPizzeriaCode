@@ -57,9 +57,7 @@ class VistaGestioneRicevute(QWidget):
     def __init__(self):
         super().__init__()
         self.initUi()
-        self.pulsante_mostrainfo = Pulsante("Mostra Info\nRicevuta")
-        self.pulsante_inserisci = Pulsante("Inserisci\nRicevuta")
-        self.pulsante_elimina = Pulsante("Elimina\nRicevuta")
+
 
 
     def initUi(self):
@@ -70,6 +68,9 @@ class VistaGestioneRicevute(QWidget):
         tabella.setHorizontalHeaderLabels(["Acquirente", "Numero", "Data"])
         tabella.setFont(label_font_piccolo)
 
+        self.pulsante_mostrainfo = Pulsante("Mostra Info\nRicevuta")
+        self.pulsante_inserisci = Pulsante("Inserisci\nRicevuta")
+        self.pulsante_elimina = Pulsante("Elimina\nRicevuta")
         self.pulsante_mostrainfo.setFont(label_font_piccolo)
         self.pulsante_inserisci.setFont(label_font_piccolo)
         self.pulsante_elimina.setFont(label_font_piccolo)
