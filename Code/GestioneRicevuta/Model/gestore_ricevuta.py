@@ -1,4 +1,4 @@
-from Ricevuta import Ricevuta
+from ricevuta import Ricevuta
 
 class GestoreRicevuta():
 
