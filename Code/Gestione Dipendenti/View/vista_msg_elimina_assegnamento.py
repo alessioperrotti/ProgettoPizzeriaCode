@@ -8,14 +8,23 @@ from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplica
 
 label_font = QFont("Roboto", 24)
 label_font_tit = QFont("Roboto", 40, weight=50)
-label_font_piccolo = QFont("Roboto", 14)
+label_font_piccolo = QFont("Roboto", 13)
 
 
 def crea_pulsante(nome):
     pulsante = QPushButton(nome)
     pulsante.setFont(label_font_piccolo)
     pulsante.setSizePolicy(QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Minimum)
-    pulsante.setStyleSheet("color: white;background-color: #ff776d;border-radius: 6px")
+    pulsante.setStyleSheet("""
+        QPushButton{
+            color: white;
+            background-color: #ff776d;
+            border-radius: 6px;
+        }
+        QPushButton:hover{
+            background-color: "red"
+        }
+    """)
     return pulsante
 
 

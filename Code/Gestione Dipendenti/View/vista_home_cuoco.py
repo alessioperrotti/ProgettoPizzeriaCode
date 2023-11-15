@@ -1,7 +1,7 @@
 import sys
 
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QFont, QPixmap
+from PyQt6.QtGui import QFont, QPixmap, QIcon
 from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplication, QSizePolicy, QHBoxLayout,
                              QGridLayout, QTableWidget, QHeaderView)
 
@@ -30,6 +30,27 @@ def crea_immagine(directory, dimensione):
     scaled_pixmap = pixmap.scaled(dimensione, dimensione, aspectRatioMode=Qt.AspectRatioMode.KeepAspectRatio)
     label_foto.setPixmap(scaled_pixmap)
     return label_foto
+
+def crea_pulsante_back(dimensioni, directory):
+    pulsante_back = QPushButton()
+    img = QPixmap(directory)
+    icon = img.scaledToWidth(dimensioni)
+    icon = QIcon(icon)
+    pulsante_back.setIcon(icon)
+    pulsante_back.setIconSize(img.size())
+    pulsante_back.setFixedSize(dimensioni, dimensioni)
+    pulsante_back.setStyleSheet("""
+            QPushButton{
+                background-color: rgba(0, 0, 0, 0);
+                color: "white";
+                text-align: center;
+                border-radius: 6px;
+            }
+            QPushButton:hover{
+                background-color: "lightgray";
+            }
+            """)
+    return pulsante_back
 class VistaHomeCuoco(QWidget):
     def __init__(self):
         super().__init__()
@@ -40,7 +61,7 @@ class VistaHomeCuoco(QWidget):
         label.setFont(label_font_tit)
         pulsante1 = crea_pulsante("Lista Comande","png/menu.png") #cambiare icona
         pulsante2 = crea_pulsante("Visualizza Turni","png/turni.png")
-        back = crea_immagine("png/back.png", 35)
+        back = crea_pulsante_back(35,"png/back.png")
 
         #definizione layout
         layout = QVBoxLayout()

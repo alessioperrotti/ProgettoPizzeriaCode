@@ -1,7 +1,7 @@
 import sys
 
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QFont, QPixmap
+from PyQt6.QtGui import QFont, QPixmap, QIcon
 from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplication, QSizePolicy, QHBoxLayout,
                              QGridLayout, QTableWidget, QHeaderView, QSpacerItem)
 
@@ -21,7 +21,7 @@ def crea_pulsante(nome, directory):
     layout.addWidget(crea_immagine(directory, 50))
     layout.addWidget(label)
     layout.addStretch()
-    #layout.setAlignment(crea_immagine(directory, 50), Qt.AlignmentFlag.AlignLeft)
+    # layout.setAlignment(crea_immagine(directory, 50), Qt.AlignmentFlag.AlignLeft)
     pulsante.setLayout(layout)
     pulsante.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
     pulsante.setStyleSheet(
@@ -38,6 +38,28 @@ def crea_immagine(directory, dimensione):
     return label_foto
 
 
+def crea_pulsante_back(dimensioni, directory):
+    pulsante_back = QPushButton()
+    img = QPixmap(directory)
+    icon = img.scaledToWidth(dimensioni)
+    icon = QIcon(icon)
+    pulsante_back.setIcon(icon)
+    pulsante_back.setIconSize(img.size())
+    pulsante_back.setFixedSize(dimensioni, dimensioni)
+    pulsante_back.setStyleSheet("""
+            QPushButton{
+                background-color: rgba(0, 0, 0, 0);
+                color: "white";
+                text-align: center;
+                border-radius: 6px;
+            }
+            QPushButton:hover{
+                background-color: "lightgray";
+            }
+            """)
+    return pulsante_back
+
+
 class VistaHomeCuoco(QWidget):
     def __init__(self):
         super().__init__()
@@ -49,8 +71,8 @@ class VistaHomeCuoco(QWidget):
         label.setFont(label_font_tit)
         pulsante1 = crea_pulsante("Piantina", "png/piantinaTavoli.png")
         pulsante2 = crea_pulsante("Visualizza Turni", "png/turni.png")
-        pulsante3 = crea_pulsante("Prenotazioni", "png/turni.png") #cambiare png
-        back = crea_immagine("png/back.png", 35)
+        pulsante3 = crea_pulsante("Prenotazioni", "png/turni.png")  # cambiare png
+        back = crea_pulsante_back(35, "png/back.png")
 
         # definizione layout
         layout = QVBoxLayout()
@@ -66,7 +88,6 @@ class VistaHomeCuoco(QWidget):
         griglia.addWidget(pulsante1, 1, 1)
         griglia.addWidget(pulsante2, 1, 2)
         griglia.addWidget(pulsante3, 1, 3)
-
 
         layout.addSpacing(10)
         layout.addWidget(label)

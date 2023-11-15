@@ -4,7 +4,8 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont, QPixmap, QIcon
 from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplication, QSizePolicy, QHBoxLayout,
                              QGridLayout, QTableWidget, QHeaderView, QSpacerItem, QLineEdit, QTableWidgetItem,
-                             QScrollBar, QScrollArea, QAbstractItemView)
+                             QScrollBar, QScrollArea, QAbstractItemView, QCheckBox, QSpinBox, QComboBox,
+                             QCalendarWidget)
 
 # Font
 label_font = QFont("Roboto", 24)
@@ -21,7 +22,6 @@ def crea_tabella(righe, colonne, larghezza, altezza):
     header = tabella.horizontalHeader()
     # header.setFont(header_font)
     header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
-    header.setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
     tabella.verticalHeader().setVisible(False)
     tabella.setFixedSize(larghezza, altezza)
     tabella.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
@@ -48,8 +48,7 @@ def crea_pulsante_back(dimensioni, directory):
     return pulsante_back
 
 
-class TestVideo(QWidget):
-
+class VistaInserisciPrenotazione(QWidget):
     def __init__(self):
         super().__init__()
         self.init_ui()
@@ -57,57 +56,64 @@ class TestVideo(QWidget):
 
     def init_ui(self):
         self.setWindowTitle("Gestionale Pizzeria")
-        title = QLabel("Gestione Prenotazioni")
-        title.setFont(label_font_tit)
+        #label
+        title = QLabel("Inserimento nuova prenotazione")
+        title.setFont(label_font)
+        label_ricerca = QLabel("Nome cliente:")
+        label_tavolo = QLabel("Tavolo:")
+        label_persone = QLabel("Persone:")
+        label_orario = QLabel("Orario:")
+        label_calendario = QLabel("Giorno:")
+        label_tabella = QLabel("Orari liberi:")
 
+        #layout
         layout = QVBoxLayout()
-        layout_orizzontale = QHBoxLayout()
-        layout_pulsanti = QVBoxLayout()
+        layout.addStretch()
+        layout.addWidget(title)
 
-        pulsante_modifica = QPushButton("Modifica\nprenotazione")
-        pulsante_modifica.setFixedSize(147, 49)
-        pulsante_aggiungi = QPushButton("Aggiungi\nprenotazione")
-        pulsante_aggiungi.setFixedSize(147, 49)
-        pulsante_elimina = QPushButton("Elimina\nprenotazione")
-        pulsante_elimina.setFixedSize(147, 49)
+        griglia = QGridLayout()
+        griglia.addWidget(label_ricerca,0,0)
+        griglia.addWidget(label_tavolo,0,1)
+        griglia.addWidget(label_persone,0,2)
+        griglia.addWidget(label_orario,0,3)
 
-        # Pulsante Back
-        pulsante_back = crea_pulsante_back(35,"png/back.png")
+        barra_ricerca = QLineEdit()
+        barra_ricerca.setFixedWidth(257)
+        combobox_tavolo = QComboBox()
+        combobox_tavolo.setFixedWidth(75)
+        combobox_orario = QComboBox()
+        combobox_orario.setFixedWidth(85)
+        spinbox_persone = QSpinBox()
+        spinbox_persone.setFixedWidth(40)
 
-        # Campo di ricerca
-        search_label = QLabel('Cerca:')
-        search_label.setFont(label_font_piccolo)
-        search_edit = QLineEdit()
-        search_edit.setFixedWidth(336)
+        griglia.addWidget(barra_ricerca,1,0,alignment=Qt.AlignmentFlag.AlignLeft)
+        griglia.addWidget(combobox_tavolo,1,1)
+        griglia.addWidget(spinbox_persone,1,2)
+        griglia.addWidget(combobox_orario,1,3)
 
-        # Tabella
-        tab = crea_tabella(18, 6, 481, 404)
-        tab.setHorizontalHeaderLabels(["NOME CLIENTE","TAVOLO","ORARIO","GIORNO","POSTI","CODICE"])
+        tabella = crea_tabella(15,3,308,332)
+        griglia.addWidget(tabella,3,1,1,3,alignment=Qt.AlignmentFlag.AlignCenter)
+        tabella.setHorizontalHeaderLabels(["ORARIO","NUMERO\nPRENOTAZIONI","POSTI\nLIBERI"])
 
+        calendario = QCalendarWidget()
+        calendario.setMaximumSize(257, 332)
+        griglia.addWidget(calendario,3,0,alignment=Qt.AlignmentFlag.AlignLeft)
 
-        layout.addWidget(title, alignment=Qt.AlignmentFlag.AlignTop)
-        layout.addSpacing(20)
-        layout.addWidget(search_label)
-        layout.addWidget(search_edit)
+        griglia.addWidget(label_calendario,2,0,1,2)
+        griglia.addWidget(label_tabella,2,1,1,2)
 
-        layout_orizzontale.addWidget(tab, alignment=Qt.AlignmentFlag.AlignLeft)
-        layout_orizzontale.addLayout(layout_pulsanti)
+        pulsante_conferma = QPushButton("Conferma\nprenotazione")
+        pulsante_conferma.setFixedSize(205, 74)
 
-        # Sistemo i Pulsanti
-        layout_pulsanti.addStretch()
-        layout_pulsanti.addWidget(pulsante_modifica, alignment=Qt.AlignmentFlag.AlignCenter)
-        layout_pulsanti.addSpacing(10)
-        layout_pulsanti.addWidget(pulsante_aggiungi, alignment=Qt.AlignmentFlag.AlignCenter)
-        layout_pulsanti.addSpacing(10)
-        layout_pulsanti.addWidget(pulsante_elimina, alignment=Qt.AlignmentFlag.AlignCenter)
-        layout_pulsanti.addStretch()
+        layout.setSpacing(20)
+        layout.addLayout(griglia)
+        layout.addWidget(pulsante_conferma,alignment=Qt.AlignmentFlag.AlignCenter)
 
-        layout.addLayout(layout_orizzontale)
-        layout.addWidget(pulsante_back)
-
-        layout.setContentsMargins(30, 20, 10, 20)
-        self.setFixedSize(756, 637)
+        self.setContentsMargins(20,10,20,20)
+        layout.addLayout(griglia)
+        layout.addStretch()
         self.setLayout(layout)
+        self.setFixedSize(756, 662)
 
 
 app = QApplication(sys.argv)
@@ -119,10 +125,11 @@ app.setStyleSheet("""
         text-align: center;
         border-radius: 6px;
         font-family:Roboto;
+        font-size: 15px;
     }
     QPushButton:hover{
         background-color: "red";
-        font-size: 13px;
+        font-size: 17px;
     }
     QTableWidget {
         background-color: white;
@@ -138,10 +145,6 @@ app.setStyleSheet("""
         background-color: gray;
     }
 """)
-window = TestVideo()
+window = VistaInserisciPrenotazione()
 window.show()
 sys.exit(app.exec())
-
-
-
-

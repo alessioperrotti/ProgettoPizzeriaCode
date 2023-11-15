@@ -111,6 +111,7 @@ app.setStyleSheet("""
         color: "white";
         text-align: center;
         border-radius: 6px;
+        font-family:Roboto;
     }
     QPushButton:hover{
         background-color: "red";
@@ -124,6 +125,7 @@ app.setStyleSheet("""
     }
     QHeaderView:section {
         background-color: lightgray;
+        font-weight: bold;
     }
     QHeaderView:active {
         background-color: gray;
