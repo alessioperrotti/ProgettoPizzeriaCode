@@ -15,4 +15,3 @@ class VistaInserisciProdotto(QWidget):
     def initUI(self):
 
         main_layout = QVBoxLayout(self)
-        
