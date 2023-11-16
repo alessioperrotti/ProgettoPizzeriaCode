@@ -17,13 +17,14 @@ class VistaMateriaPrima(QWidget):
 
     def initUI(self):
 
-        main_layout = QHBoxLayout()
+        main_layout = QVBoxLayout()
+        hbox = QHBoxLayout()
         vbox_nomecampo = QVBoxLayout()
         vbox_valorecampo = QVBoxLayout()
 
         label_titolo = QLabel("<b>Scheda Dati Materia Prima</b>")
         label_titolo.setFont(font_titolo)
-        #label_titolo.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
+        label_titolo.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
 
         linea = QFrame(self)
         linea.setFrameShape(QFrame.Shape.HLine)
@@ -40,8 +41,9 @@ class VistaMateriaPrima(QWidget):
                    label_qtaDisp1, label_qtaLimite1, label_qtaOrdineSTD1]
 
         for x in labels1:
-            x.setFixedSize(175, 40)
+            x.setFixedSize(175, 45)
             vbox_nomecampo.addWidget(x)
+            vbox_nomecampo.addSpacerItem(QSpacerItem(175, 20))
             x.setFont(font_label)
 
         self.label_codice2 = QLabel("valore codice")
@@ -56,16 +58,23 @@ class VistaMateriaPrima(QWidget):
                    self.label_dataScadenza2, self.label_qtaDisp2, self.label_qtaLimite2, self.label_qtaOrdineSTD2]
 
         for x in labels2:
-            x.setFixedSize(175, 40)
+            x.setFixedSize(180, 45)
             vbox_valorecampo.addWidget(x)
+            vbox_valorecampo.addSpacerItem(QSpacerItem(175, 20))
             x.setFont(font_valore)
 
+        vbox_nomecampo.addStretch()
+        vbox_valorecampo.addStretch()
 
-        
+        #title_layout = QVBoxLayout()
         main_layout.addWidget(label_titolo, alignment=Qt.AlignmentFlag.AlignTop)
-        main_layout.addWidget(linea)
-        main_layout.addLayout(vbox_nomecampo)
-        main_layout.addLayout(vbox_valorecampo)
+        main_layout.addWidget(linea, alignment=Qt.AlignmentFlag.AlignTop)
+        #main_layout.addLayout(title_layout)
+        hbox.addLayout(vbox_nomecampo)
+        hbox.addLayout(vbox_valorecampo)
+        main_layout.addSpacerItem(QSpacerItem(514, 20))
+        main_layout.addLayout(hbox)
+        main_layout.addStretch()
         self.setFixedSize(514, 626)
         self.setLayout(main_layout)
 
