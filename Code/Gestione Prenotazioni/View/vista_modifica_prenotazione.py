@@ -9,7 +9,7 @@ from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplica
 
 # Font
 label_font = QFont("Roboto", 24)
-label_font_tit = QFont("Roboto", 24, weight=50)
+label_font_tit = QFont("Roboto", 24,weight=50)
 label_font_piccolo = QFont("Roboto", 10)
 header_font = QFont("Roboto", 10)
 header_font.setBold(True)
@@ -57,7 +57,7 @@ class VistaInserisciPrenotazione(QWidget):
     def init_ui(self):
         self.setWindowTitle("Gestionale Pizzeria")
         #label
-        title = QLabel("Inserimento nuova prenotazione")
+        title = QLabel("Modifica dati prenotazione")
         title.setFont(label_font_tit)
         label_ricerca = QLabel("Nome cliente:")
         label_tavolo = QLabel("Tavolo:")
@@ -107,7 +107,7 @@ class VistaInserisciPrenotazione(QWidget):
         griglia.addWidget(label_calendario,2,0,1,2)
         griglia.addWidget(label_tabella,2,1,1,2)
 
-        pulsante_conferma = QPushButton("Conferma\nprenotazione")
+        pulsante_conferma = QPushButton("Conferma\nmodifica")
         pulsante_conferma.setFixedSize(205, 74)
 
         layout.setSpacing(20)
