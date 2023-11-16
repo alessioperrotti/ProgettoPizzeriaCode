@@ -1,4 +1,4 @@
-from ricevuta import Ricevuta
+from Code.GestioneRicevuta.Model.ricevuta import Ricevuta
 
 class GestoreRicevuta():
 

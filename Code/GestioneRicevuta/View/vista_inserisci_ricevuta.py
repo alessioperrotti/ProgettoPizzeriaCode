@@ -73,10 +73,10 @@ class VistaInserisciRicevuta(QWidget):
         label_nome = QLabel("Nome acquirente")
         label_nome.setFont(label_font_piccolo)
 
-        ins_nome = QLineEdit()
-        ins_nome.setFont(label_font_piccolo)
-        ins_nome.setFixedWidth(340)
-        ins_nome.setStyleSheet("border: 1px solid black; padding: 3px")
+        self.ins_nome = QLineEdit()
+        self.ins_nome.setFont(label_font_piccolo)
+        self.ins_nome.setFixedWidth(340)
+        self.ins_nome.setStyleSheet("border: 1px solid black; padding: 3px")
 
         self.pulsante2 = Pulsante("Conferma inserimento")
         pulsante3 = Pulsante("Stampa Ricevuta")
@@ -110,7 +110,7 @@ class VistaInserisciRicevuta(QWidget):
         layout.addSpacerItem(QSpacerItem(1, 1, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding))
         layout.addWidget(label_nome)
         layout.addSpacing(10)
-        layout.addWidget(ins_nome)
+        layout.addWidget(self.ins_nome)
         layout.addSpacing(20)
         layout.addLayout(layout_tasti)
         layout.addSpacing(20)
