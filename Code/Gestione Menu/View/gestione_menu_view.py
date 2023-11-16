@@ -47,20 +47,18 @@ class VistaGestioneMagazzino(QWidget):
         main_layout = QVBoxLayout(self)
         hbox = QHBoxLayout()
 
-        label_titolo = QLabel("Gestione Magazzino")
+        label_titolo = QLabel("Gestione Menu")
         label_titolo.setFont(font_tit)
         label_titolo.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
 
         vbox_pulsanti = QVBoxLayout()
         vbox_tabella = QVBoxLayout()
 
-        pulsante_mostrainfo = QPushButton("Mostra Info\nMateria Prima")
         pulsante_modifica = QPushButton("Modifica\nMateria Prima")
         pulsante_inserisci = QPushButton("Inserisci\nMateria Prima")
         pulsante_elimina = QPushButton("Elimina\nMateria Prima")
 
-        pulsanti = [pulsante_mostrainfo,
-                    pulsante_inserisci,
+        pulsanti = [pulsante_inserisci,
                     pulsante_modifica,
                     pulsante_elimina]
 
@@ -77,13 +75,13 @@ class VistaGestioneMagazzino(QWidget):
         self.data_grid.setColumnWidth(0, 211)
         self.data_grid.setColumnWidth(1, 124)
         self.data_grid.setColumnWidth(2, 145)
-        self.data_grid.setHorizontalHeaderLabels(["MATERIA PRIMA", "CODICE", "DISPONIBILITA"])
+        self.data_grid.setHorizontalHeaderLabels(["NOME PRODOTTO", "PREZZO (€)", "TIPOLOGIA"])
         self.data_grid.setFont(font_piccolo)
         self.data_grid.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
         self.search_bar = QLineEdit()
         self.search_bar.setPlaceholderText("Cerca per nome")
-        self.search_bar.setFixedSize(336,29)
+        self.search_bar.setFixedSize(336, 29)
         self.search_bar.setStyleSheet("QLineEdit { border: 2px solid black; }")
         self.search_bar.textChanged.connect(self.filtra_elementi)
         vbox_tabella.addSpacerItem(QSpacerItem(20, 20))
@@ -91,7 +89,7 @@ class VistaGestioneMagazzino(QWidget):
         vbox_tabella.addWidget(self.data_grid, alignment=Qt.AlignmentFlag.AlignLeft)
         vbox_tabella.addSpacerItem(QSpacerItem(60,60))
 
-        pulsante_back = crea_pulsante_back(35, "back2.png")
+        pulsante_back = crea_pulsante_back(35, "back3.png")
 
         main_layout.addWidget(label_titolo, alignment=Qt.AlignmentFlag.AlignTop)
         hbox.addLayout(vbox_tabella)

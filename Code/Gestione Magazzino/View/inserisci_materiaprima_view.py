@@ -6,13 +6,13 @@ from PyQt6.QtCore import Qt
 font_tit = QFont("Roboto", 24, weight=50)
 font_label = QFont("Roboto", 18, weight=350)
 
+
 class VistaInserisciMateriaPrima(QWidget):
 
     def __init__(self):
 
         super().__init__()
         self.initUI()
-        self.show()
 
 
     def initUI(self):
@@ -115,7 +115,6 @@ class VistaInserisciMateriaPrima(QWidget):
         grid2.addWidget(label_qtaLimite, 1, 1)
         grid2.addWidget(self.campo_qtaLimite, 2, 1)
 
-
         label_qtaOrdineSTD = QLabel("Quantità standard dell'ordine:")
         label_qtaOrdineSTD.setFont(font_label)
         self.campo_qtaOrdineSTD = QLineEdit()
@@ -125,7 +124,6 @@ class VistaInserisciMateriaPrima(QWidget):
 
         self.pulsante_conferma = QPushButton("Conferma Inserimento")
         self.pulsante_conferma.setFixedSize(206,89)
-        self.pulsante_conferma.setStyleSheet("background-color: #ff776d; border: 2px solid black; border-radius: 10px; padding: 10px")
         self.pulsante_conferma.setFont(font_label)
         hbox_conferma.addWidget(self.pulsante_conferma)
 
@@ -144,12 +142,27 @@ class VistaInserisciMateriaPrima(QWidget):
         self.setLayout(main_layout)
 
 
-def main():
-    app = QApplication(sys.argv)
-    ex = VistaInserisciMateriaPrima()
-    sys.exit(app.exec())
+app = QApplication(sys.argv)
+app.setStyleSheet("""
+    QPushButton{
+        background-color: "#ff776d";
+        color: "white";
+        text-align: center;
+        border-radius: 6px;
+    }
+    QPushButton:hover{
+        background-color: "red";
+        font-size: 18px;
+    }
+    QTableWidget {
+        background-color: white;
+        alternate-background-color: white;
+        selection-background-color: darkcyan;
+        border: 2px solid grey;
+    }
+""")
 
-
-if __name__ == '__main__':
-    main()
+window = VistaInserisciMateriaPrima()
+window.show()
+sys.exit(app.exec())
 
