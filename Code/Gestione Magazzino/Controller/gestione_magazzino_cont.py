@@ -1,4 +1,5 @@
-from  ..View.gestione_magazzino_view import VistaGestioneMagazzino
+from ..View.gestione_magazzino_view import VistaGestioneMagazzino
+
 
 class ContGestioneMagazzino(object):
 

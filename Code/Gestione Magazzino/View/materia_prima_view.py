@@ -66,10 +66,8 @@ class VistaMateriaPrima(QWidget):
         vbox_nomecampo.addStretch()
         vbox_valorecampo.addStretch()
 
-        #title_layout = QVBoxLayout()
         main_layout.addWidget(label_titolo, alignment=Qt.AlignmentFlag.AlignTop)
         main_layout.addWidget(linea, alignment=Qt.AlignmentFlag.AlignTop)
-        #main_layout.addLayout(title_layout)
         hbox.addLayout(vbox_nomecampo)
         hbox.addLayout(vbox_valorecampo)
         main_layout.addSpacerItem(QSpacerItem(514, 20))

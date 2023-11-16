@@ -19,7 +19,6 @@ def crea_tabella(righe, colonne, larghezza, altezza):
     tabella.setRowCount(righe)
     tabella.setColumnCount(colonne)
     header = tabella.horizontalHeader()
-    # header.setFont(header_font)
     header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
     tabella.verticalHeader().setVisible(False)
     tabella.setFixedSize(larghezza, altezza)
