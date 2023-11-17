@@ -57,7 +57,7 @@ class VistaInserisciPrenotazione(QWidget):
     def init_ui(self):
         self.setWindowTitle("Gestionale Pizzeria")
         #label
-        title = QLabel("Modifica dati prenotazione")
+        title = QLabel("Modifica Dati Prenotazione")
         title.setFont(label_font_tit)
         label_ricerca = QLabel("Nome cliente:")
         label_tavolo = QLabel("Tavolo:")
