@@ -21,7 +21,7 @@ class VistaInserisciDipendente(QWidget):
         self.show()
 
     def init_ui(self):
-        title = QLabel("<b>Inserimento Nuovo Dipendente<\b>")
+        title = QLabel("<b>Modifica Dati Dipendente<\b>")
         title.setFont(label_font_tit)
         nome = QLabel("Nome:")
         nome.setFont(label_font_piccolo)
@@ -55,7 +55,7 @@ class VistaInserisciDipendente(QWidget):
         edit_password = QLineEdit()
         edit_password.setFixedSize(287,30)
 
-        pulsante = QPushButton("Conferma Inserimento")
+        pulsante = QPushButton("Conferma Modifica")
         pulsante.setFixedSize(205, 74)
         calendario = QCalendarWidget()
         calendario.setMaximumSize(287,207)
