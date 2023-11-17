@@ -1,7 +1,8 @@
 import sys
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import QFont, QPixmap, QIcon
-from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtCore import Qt
+from Code.GestioneMagazzino.Controller.gestione_magazzino_cont import ContGestioneMagazzino
 
 font_tit = QFont("Roboto", 32, weight=400)
 font_label = QFont("Roboto", 13, weight=350)
@@ -39,6 +40,7 @@ class VistaGestioneMagazzino(QWidget):
     def __init__(self):
 
         super().__init__()
+        self.controller = ContGestioneMagazzino()
         self.initUI()
 
 
@@ -57,6 +59,7 @@ class VistaGestioneMagazzino(QWidget):
         pulsante_mostrainfo = QPushButton("Mostra Info\nMateria Prima")
         pulsante_modifica = QPushButton("Modifica\nMateria Prima")
         pulsante_inserisci = QPushButton("Inserisci\nMateria Prima")
+        pulsante_inserisci.clicked.connect(self.controller.open_inserimento())
         pulsante_elimina = QPushButton("Elimina\nMateria Prima")
 
         pulsanti = [pulsante_mostrainfo,
