@@ -63,11 +63,12 @@ class VistaInserisciProdotto(QWidget):
         upper_grid.addWidget(self.campo_nome, 2, 1)
         upper_grid.addWidget(label_codice, 1, 2)
         upper_grid.addWidget(self.campo_codice, 2, 2)
-        upper_grid.addWidget(label_prezzo, 3, 1)
-        upper_grid.addWidget(self.campo_prezzo, 4, 1)
-        upper_grid.addWidget(label_tipologia, 3, 2)
-        upper_grid.addWidget(self.combo_tipologia, 4, 2)
-
+        upper_grid.addWidget(label_prezzo, 4, 1)
+        upper_grid.addWidget(self.campo_prezzo, 5, 1)
+        upper_grid.addWidget(label_tipologia, 4, 2)
+        upper_grid.addWidget(self.combo_tipologia, 5, 2)
+        upper_grid.addItem(QSpacerItem(216, 40), 3, 1)
+        upper_grid.addItem(QSpacerItem(216, 40), 3, 2)
 
         spacer_item = QSpacerItem(10, 10, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         upper_grid.addItem(spacer_item, 0, 1)
@@ -104,6 +105,7 @@ class VistaInserisciProdotto(QWidget):
 
         self.data_grid = crea_tabella(6, 2, 461, 191)
         self.data_grid.setHorizontalHeaderLabels(["INGREDIENTE", "QUANTITÀ(Kg)"])
+        self.data_grid.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         hbox_datagrid.addWidget(self.data_grid)
 
         self.pulsante_rimuovi = QPushButton("Rimuovi Ingrediente\nSelezionato")
