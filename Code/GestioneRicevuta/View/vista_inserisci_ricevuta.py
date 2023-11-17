@@ -5,7 +5,8 @@ import sys
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplication, QSpacerItem,
-                             QSizePolicy, QHBoxLayout, QFrame, QLineEdit, QTableWidget, QHeaderView, QAbstractItemView)
+                             QSizePolicy, QHBoxLayout, QFrame, QLineEdit, QTableWidget, QHeaderView, QAbstractItemView,
+                             QDialog)
 
 label_font = QFont("Roboto", 24)
 label_font_tit = QFont("Roboto", 32, weight=50)
@@ -37,7 +38,7 @@ def crea_tabella(righe, colonne, larghezza, altezza):
 
 
 
-class VistaInserisciRicevuta(QWidget):
+class VistaInserisciRicevuta(QDialog):
     def __init__(self):
         super().__init__()
         self.ricerca = None
@@ -78,11 +79,11 @@ class VistaInserisciRicevuta(QWidget):
         self.ins_nome.setFixedWidth(340)
         self.ins_nome.setStyleSheet("border: 1px solid black; padding: 3px")
 
-        self.pulsante2 = Pulsante("Conferma inserimento")
+        self.pulsante_conferma = Pulsante("Conferma inserimento")
         pulsante3 = Pulsante("Stampa Ricevuta")
-        self.pulsante2.setFont(label_font_piccolo)
+        self.pulsante_conferma.setFont(label_font_piccolo)
         pulsante3.setFont(label_font_piccolo)
-        self.pulsante2.setFixedHeight(70)
+        self.pulsante_conferma.setFixedHeight(70)
         pulsante3.setFixedHeight(70)
 
         # Definizione layout
@@ -98,7 +99,7 @@ class VistaInserisciRicevuta(QWidget):
         layout_tabella_e_tavolo.addSpacerItem(QSpacerItem(30, 30))
 
         layout_tasti.addSpacerItem(QSpacerItem(140, 1))
-        layout_tasti.addWidget(self.pulsante2)
+        layout_tasti.addWidget(self.pulsante_conferma)
         layout_tasti.addWidget(pulsante3)
         layout_tasti.addSpacerItem(QSpacerItem(140, 1))
 
@@ -142,7 +143,7 @@ class VistaInserisciRicevuta(QWidget):
         """)
         self.setFixedSize(690, 474)
         self.setLayout(layout)
-        self.show()
+
 
 
 def main():
