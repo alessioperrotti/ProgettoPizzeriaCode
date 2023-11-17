@@ -17,7 +17,7 @@ def crea_tabella(righe, colonne, larghezza, altezza):
     return tabella
 
 
-class VistaInserisciProdotto(QWidget):
+class VistaModificaProdotto(QWidget):
 
     def __init__(self):
 
@@ -33,7 +33,7 @@ class VistaInserisciProdotto(QWidget):
         hbox_conferma = QHBoxLayout()
         upper_grid = QGridLayout()
 
-        label_titolo = QLabel("<b>Inserimento Nuovo Prodotto</b>")
+        label_titolo = QLabel("<b>Modifica Dati Prodotto</b>")
         label_titolo.setFont(font_tit)
 
         linea1 = QFrame()
@@ -42,9 +42,9 @@ class VistaInserisciProdotto(QWidget):
         linea2.setFrameShape(QFrame.Shape.HLine)
 
         label_nome = QLabel("Nome prodotto:")
-        self.campo_nome = QLineEdit()
+        label_nome_val = QLabel("nome prodotto")
         label_codice = QLabel("Codice:")
-        self.campo_codice = QLineEdit()
+        label_codice_val = QLabel("codice prodotto")
         label_prezzo = QLabel("Prezzo al pubblico:")
         self.campo_prezzo = QLineEdit()
         label_tipologia = QLabel("Tipologia:")
@@ -52,7 +52,7 @@ class VistaInserisciProdotto(QWidget):
         self.combo_tipologia.addItem("Piatto")
         self.combo_tipologia.addItem("Bevanda")
 
-        widgets1 = [label_nome, self.campo_nome, label_codice, self.campo_codice,
+        widgets1 = [label_nome, label_nome_val, label_codice, label_codice_val,
                     label_prezzo, self.campo_prezzo, label_tipologia, self.combo_tipologia]
 
         for x in widgets1:
@@ -60,9 +60,9 @@ class VistaInserisciProdotto(QWidget):
             x.setFixedSize(216, 33)
 
         upper_grid.addWidget(label_nome, 1, 1)
-        upper_grid.addWidget(self.campo_nome, 2, 1)
+        upper_grid.addWidget(label_nome_val, 2, 1)
         upper_grid.addWidget(label_codice, 1, 2)
-        upper_grid.addWidget(self.campo_codice, 2, 2)
+        upper_grid.addWidget(label_codice_val, 2, 2)
         upper_grid.addWidget(label_prezzo, 4, 1)
         upper_grid.addWidget(self.campo_prezzo, 5, 1)
         upper_grid.addWidget(label_tipologia, 4, 2)
@@ -114,7 +114,7 @@ class VistaInserisciProdotto(QWidget):
         self.pulsante_rimuovi.setFont(QFont("Roboto", 15, weight=350))
         hbox_datagrid.addWidget(self.pulsante_rimuovi)
 
-        self.pulsante_conferma = QPushButton("Conferma Inserimento")
+        self.pulsante_conferma = QPushButton("Conferma Modifica")
         self.pulsante_conferma.setFixedSize(205, 74)
         self.pulsante_conferma.setFont(QFont("Roboto", 15, weight=350))
         hbox_conferma.addWidget(self.pulsante_conferma)
@@ -151,7 +151,7 @@ app.setStyleSheet("""
     }
 """)
 
-window = VistaInserisciProdotto()
+window = VistaModificaProdotto()
 window.show()
 sys.exit(app.exec())
 
