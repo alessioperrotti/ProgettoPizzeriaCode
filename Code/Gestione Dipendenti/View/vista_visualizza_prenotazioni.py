@@ -21,7 +21,7 @@ def crea_tabella(righe, colonne, larghezza, altezza):
     header = tabella.horizontalHeader()
     # header.setFont(header_font)
     header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
-    header.setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
+    header.setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
     tabella.verticalHeader().setVisible(False)
     tabella.setFixedSize(larghezza, altezza)
     tabella.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
@@ -48,7 +48,7 @@ def crea_pulsante_back(dimensioni, directory):
     return pulsante_back
 
 
-class VistaPrenotazioniAdmin(QWidget):
+class VistaVisualizzaPrenotazioni(QWidget):
 
     def __init__(self):
         super().__init__()
@@ -57,19 +57,13 @@ class VistaPrenotazioniAdmin(QWidget):
 
     def init_ui(self):
         self.setWindowTitle("Gestionale Pizzeria")
-        title = QLabel("Gestione Prenotazioni")
+        title = QLabel("Prenotazioni")
         title.setFont(label_font_tit)
 
         layout = QVBoxLayout()
         layout_orizzontale = QHBoxLayout()
         layout_pulsanti = QVBoxLayout()
 
-        pulsante_modifica = QPushButton("Modifica\nprenotazione")
-        pulsante_modifica.setFixedSize(147, 49)
-        pulsante_aggiungi = QPushButton("Aggiungi\nprenotazione")
-        pulsante_aggiungi.setFixedSize(147, 49)
-        pulsante_elimina = QPushButton("Elimina\nprenotazione")
-        pulsante_elimina.setFixedSize(147, 49)
 
         # Pulsante Back
         pulsante_back = crea_pulsante_back(35,"png/back.png")
@@ -81,7 +75,7 @@ class VistaPrenotazioniAdmin(QWidget):
         search_edit.setFixedWidth(336)
 
         # Tabella
-        tab = crea_tabella(18, 6, 481, 404)
+        tab = crea_tabella(18, 6, 685, 402)
         tab.setHorizontalHeaderLabels(["NOME CLIENTE","TAVOLO","ORARIO","GIORNO","POSTI","CODICE"])
 
 
@@ -93,16 +87,8 @@ class VistaPrenotazioniAdmin(QWidget):
         layout_orizzontale.addWidget(tab, alignment=Qt.AlignmentFlag.AlignLeft)
         layout_orizzontale.addLayout(layout_pulsanti)
 
-        # Sistemo i Pulsanti
-        layout_pulsanti.addStretch()
-        layout_pulsanti.addWidget(pulsante_modifica, alignment=Qt.AlignmentFlag.AlignCenter)
-        layout_pulsanti.addSpacing(10)
-        layout_pulsanti.addWidget(pulsante_aggiungi, alignment=Qt.AlignmentFlag.AlignCenter)
-        layout_pulsanti.addSpacing(10)
-        layout_pulsanti.addWidget(pulsante_elimina, alignment=Qt.AlignmentFlag.AlignCenter)
-        layout_pulsanti.addStretch()
-
         layout.addLayout(layout_orizzontale)
+        layout.addStretch()
         layout.addWidget(pulsante_back)
 
         layout.setContentsMargins(30, 20, 10, 20)
@@ -138,7 +124,7 @@ app.setStyleSheet("""
         background-color: gray;
     }
 """)
-window = VistaPrenotazioniAdmin()
+window = VistaVisualizzaPrenotazioni()
 window.show()
 sys.exit(app.exec())
 
