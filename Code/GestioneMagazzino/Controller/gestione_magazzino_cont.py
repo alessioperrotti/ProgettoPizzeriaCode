@@ -1,19 +1,19 @@
-from ..View.gestione_magazzino_view import VistaGestioneMagazzino
 from ..View.inserisci_materiaprima_view import VistaInserisciMateriaPrima
 
 
 class ContGestioneMagazzino(object):
 
-    def __init__(self, model):
+    def __init__(self, model, view):
 
-        self.view = VistaGestioneMagazzino()
+        self.view = view
         self.model = model
-
+        print("Connessione del segnale inizializzata")
+        self.view.pulsante_inserisci.clicked.connect(self.open_inserimento)
 
     def open_inserimento(self):
-
+        print("Funzione open_inserimento chiamata")
         dialog_inserimento = VistaInserisciMateriaPrima()
-        dialog_inserimento.exec_()
+        dialog_inserimento.show()
 
     def update_tabella(self, codice, nome, qta_disponibile):
 

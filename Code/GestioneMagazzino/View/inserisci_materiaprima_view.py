@@ -162,7 +162,7 @@ app.setStyleSheet("""
     }
 """)
 
-window = VistaInserisciMateriaPrima()
-window.show()
+#window = VistaInserisciMateriaPrima()
+#window.show()
 sys.exit(app.exec())
 
