@@ -1,9 +1,10 @@
 from ..View.inserisci_materiaprima_view import VistaInserisciMateriaPrima
-
+from Code.GestioneMagazzino.View.gestione_magazzino_view import VistaGestioneMagazzino
+from Code.GestioneMagazzino.Controller.inserisci_materiaprima_cont import ContInserisciMateriaPrima
 
 class ContGestioneMagazzino(object):
 
-    def __init__(self, model, view):
+    def __init__(self, model, view: VistaGestioneMagazzino):
 
         self.view = view
         self.model = model
@@ -13,7 +14,8 @@ class ContGestioneMagazzino(object):
     def open_inserimento(self):
         print("Funzione open_inserimento chiamata")
         dialog_inserimento = VistaInserisciMateriaPrima()
-        dialog_inserimento.show()
+        controller_inserimento = ContInserisciMateriaPrima(self.model, dialog_inserimento)
+        controller_inserimento.view.exec()
 
     def update_tabella(self, codice, nome, qta_disponibile):
 

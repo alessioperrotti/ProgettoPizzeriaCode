@@ -2,9 +2,9 @@ import PyQt6
 from  ..View.inserisci_materiaprima_view import VistaInserisciMateriaPrima
 class ContInserisciMateriaPrima(object):
 
-    def __init__(self, model):
+    def __init__(self, model, view: VistaInserisciMateriaPrima):
 
-        self.view = VistaInserisciMateriaPrima()
+        self.view = view
         self.model = model
 
         self.view.pulsante_conferma.clicked.connect(self.conferma_inserimento)
