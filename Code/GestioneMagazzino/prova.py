@@ -23,11 +23,10 @@ class MainWindow(QWidget):
         layout.addWidget(self.stacked)
 
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    mainWindow = MainWindow()
+app = QApplication(sys.argv)
+mainWindow = MainWindow()
 
-    sys.exit(app.exec())
+sys.exit(app.exec())
 
 
 

@@ -1,5 +1,5 @@
 
-from materia_prima import MateriaPrima
+from Code.GestioneMagazzino.Model.materia_prima import MateriaPrima
 from PyQt6.QtCore import pyqtSignal
 from datetime import date
 class GestoreMagazzino(object):

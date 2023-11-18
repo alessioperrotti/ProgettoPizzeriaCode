@@ -7,12 +7,30 @@ font_tit = QFont("Roboto", 24, weight=50)
 font_label = QFont("Roboto", 18, weight=350)
 
 
-class VistaInserisciMateriaPrima(QWidget):
+class VistaInserisciMateriaPrima(QDialog):
 
     def __init__(self):
 
         super().__init__()
         self.initUI()
+        self.setStyleSheet("""
+        QPushButton{
+            background-color: "#ff776d";
+            color: "white";
+            text-align: center;
+            border-radius: 6px;
+        }
+        QPushButton:hover{
+            background-color: "red";
+            font-size: 18px;
+        }
+        QTableWidget {
+            background-color: white;
+            alternate-background-color: white;
+            selection-background-color: darkcyan;
+            border: 2px solid grey;
+        }
+    """)
 
 
     def initUI(self):
@@ -142,27 +160,10 @@ class VistaInserisciMateriaPrima(QWidget):
         self.setLayout(main_layout)
 
 
-app = QApplication(sys.argv)
-app.setStyleSheet("""
-    QPushButton{
-        background-color: "#ff776d";
-        color: "white";
-        text-align: center;
-        border-radius: 6px;
-    }
-    QPushButton:hover{
-        background-color: "red";
-        font-size: 18px;
-    }
-    QTableWidget {
-        background-color: white;
-        alternate-background-color: white;
-        selection-background-color: darkcyan;
-        border: 2px solid grey;
-    }
-""")
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
 
-#window = VistaInserisciMateriaPrima()
-#window.show()
-sys.exit(app.exec())
+    #window = VistaInserisciMateriaPrima()
+    #window.show()
+    sys.exit(app.exec())
 

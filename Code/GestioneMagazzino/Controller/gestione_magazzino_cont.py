@@ -1,4 +1,4 @@
-from ..View.inserisci_materiaprima_view import VistaInserisciMateriaPrima
+from Code.GestioneMagazzino.View.inserisci_materiaprima_view import VistaInserisciMateriaPrima
 from Code.GestioneMagazzino.View.gestione_magazzino_view import VistaGestioneMagazzino
 from Code.GestioneMagazzino.Controller.inserisci_materiaprima_cont import ContInserisciMateriaPrima
 
