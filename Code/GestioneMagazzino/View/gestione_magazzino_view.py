@@ -29,6 +29,7 @@ def crea_tabella(righe, colonne, larghezza, altezza):
     tabella = QTableWidget()
     tabella.setRowCount(righe)
     tabella.setColumnCount(colonne)
+    tabella.verticalHeader().setVisible(False)
     header = tabella.horizontalHeader()
     header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
     tabella.setFixedSize(larghezza, altezza)
@@ -96,7 +97,7 @@ class VistaGestioneMagazzino(QWidget):
         self.data_grid.setColumnWidth(0, 211)
         self.data_grid.setColumnWidth(1, 124)
         self.data_grid.setColumnWidth(2, 145)
-        self.data_grid.setHorizontalHeaderLabels(["MATERIA PRIMA", "CODICE", "DISPONIBILITA"])
+        self.data_grid.setHorizontalHeaderLabels(["MATERIA PRIMA", "CODICE", "DISPONIBILITÀ(Kg)"])
         self.data_grid.setFont(font_piccolo)
         self.data_grid.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 

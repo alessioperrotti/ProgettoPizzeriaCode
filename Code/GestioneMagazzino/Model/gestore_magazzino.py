@@ -11,13 +11,10 @@ class GestoreMagazzino(object):
         self.lista_materieprime = []
 
 
-    def aggiungi_materiaprima(self, codice, nome, costo_al_kg, qta_disponibile, qta_limite,
-                              qta_ordine_STD, data_scadenza):
+    def aggiungi_materiaprima(self, materiaprima):
 
-        nuova_materiaprima = MateriaPrima(codice, nome, costo_al_kg, qta_disponibile, qta_limite, qta_ordine_STD, data_scadenza)
-        self.lista_materieprime.append(nuova_materiaprima)
+        self.lista_materieprime.append(materiaprima)
 
-        #self.elemento_inserito.emit(codice, nome, qta_disponibile)
 
 
     def modifica_materiaprima(self, codice, new_nome, new_costo_al_kg, new_qta_disponibile,
