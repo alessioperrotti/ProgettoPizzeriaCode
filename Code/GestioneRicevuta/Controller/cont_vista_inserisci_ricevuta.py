@@ -4,7 +4,6 @@ from os.path import dirname, abspath
 import PyQt6
 from PyQt6.QtWidgets import QApplication
 
-sys.path.append(dirname(dirname(abspath(__file__))))
 
 from Code.GestioneRicevuta.View.vista_inserisci_ricevuta import VistaInserisciRicevuta
 

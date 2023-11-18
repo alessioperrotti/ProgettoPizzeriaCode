@@ -4,7 +4,7 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont, QPixmap, QIcon
 from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplication, QSizePolicy, QHBoxLayout,
                              QGridLayout, QTableWidget, QHeaderView, QSpacerItem, QLineEdit, QTableWidgetItem,
-                             QScrollBar, QScrollArea, QAbstractItemView)
+                             QScrollBar, QScrollArea, QAbstractItemView, QFrame, QDialog)
 
 # Font
 label_font = QFont("Roboto", 24)
@@ -22,12 +22,13 @@ def crea_tabella(righe, colonne, larghezza, altezza):
     header.setFont(header_font)
     header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
     tabella.verticalHeader().setVisible(False)
+    tabella.horizontalHeader().setVisible(False)
     tabella.setFixedSize(larghezza, altezza)
     return tabella
 
 
 
-class VistaGestioneRicevute(QWidget):
+class VistaMostraTavoloSelezionato(QDialog):
 
     def __init__(self):
         super().__init__()
@@ -60,52 +61,32 @@ class VistaGestioneRicevute(QWidget):
 
     def init_ui(self):
         self.setWindowTitle("Gestionale Pizzeria")
-        title = QLabel("Conto Tavolo n.")
-        title.setFont(label_font_tit)
+
+        self.title = QLabel("Conto Tavolo n.")
+        self.title.setFont(label_font_piccolo)
+        frame1 = QFrame()
+        frame1.setFrameShape(QFrame.Shape.HLine)
+        self.scroll_area = QScrollArea()
+        self.pulsante_aggiungi = QPushButton("Aggiungi Alla\nricevuta")
+        self.pulsante_aggiungi.setFixedSize(150, 50)
 
         layout = QVBoxLayout()
-        layout_orizzontale = QHBoxLayout()
-        layout_pulsanti = QVBoxLayout()
+        self.layoutOrdini = QVBoxLayout()
+
+        self.scroll_area.setFrameShape(QFrame.Shape.NoFrame)
+        self.scroll_area.setLayout(self.layoutOrdini)
+
+        layout.addWidget(self.title)
+        layout.addWidget(frame1)
+        layout.addWidget(self.scroll_area)
+        layout.addWidget(self.pulsante_aggiungi, alignment=Qt.AlignmentFlag.AlignCenter)
 
 
-        self.pulsante_mostra = QPushButton("Mostra info\nricevute")
-        self.pulsante_mostra.setFixedSize(147, 49)
-        self.pulsante_inserisci = QPushButton("Inserisci\nricevuta")
-        self.pulsante_inserisci.setFixedSize(147, 49)
-        self.pulsante_elimina = QPushButton("Elimina\nricevuta")
-        self.pulsante_elimina.setFixedSize(147, 49)
-
-        #self.pulsante_inserisci.clicked.connect(lambda : self.pulsante_inserisci.setText("O"))
-        # Pulsante Back
 
 
-        # Tabella
-        self.tab = crea_tabella(18, 3, 481, 404)
-        self.tab.setHorizontalHeaderLabels(["ACQUIRENTE", "NUMERO", "DATA"])
-        self.tab.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
-        self.tab.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
-
-        layout.addWidget(title, alignment=Qt.AlignmentFlag.AlignTop)
-
-        layout_orizzontale.addWidget(self.tab, alignment=Qt.AlignmentFlag.AlignLeft)
-        layout_orizzontale.addLayout(layout_pulsanti)
-
-        # Sistemo i Pulsanti
-        layout_pulsanti.addStretch()
-        layout_pulsanti.addWidget(self.pulsante_mostra, alignment=Qt.AlignmentFlag.AlignCenter)
-        layout_pulsanti.addSpacing(10)
-        layout_pulsanti.addWidget(self.pulsante_inserisci, alignment=Qt.AlignmentFlag.AlignCenter)
-        layout_pulsanti.addSpacing(10)
-        layout_pulsanti.addWidget(self.pulsante_elimina, alignment=Qt.AlignmentFlag.AlignCenter)
-        layout_pulsanti.addStretch()
-
-        layout.addLayout(layout_orizzontale)
-
-
-        layout.setContentsMargins(30, 20, 10, 20)
-        self.setFixedSize(756, 637)
+        layout.setContentsMargins(20, 20, 20, 20)
+        self.setFixedSize(462, 516)
         self.setLayout(layout)
-        self.pulsante_inserisci.setFocus()
 
 
 
@@ -114,6 +95,6 @@ class VistaGestioneRicevute(QWidget):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    window = VistaGestioneRicevute()
+    window = VistaMostraTavoloSelezionato()
     window.show()
     sys.exit(app.exec())
