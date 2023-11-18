@@ -26,24 +26,6 @@ def crea_tabella(righe, colonne, larghezza, altezza):
     return tabella
 
 
-def crea_pulsante_back(dimensioni, directory):
-    pulsante_back = QPushButton()
-    img = QPixmap(directory)
-    icon = img.scaledToWidth(dimensioni)
-    icon = QIcon(icon)
-    pulsante_back.setIcon(icon)
-    pulsante_back.setIconSize(img.size())
-    pulsante_back.setFixedSize(dimensioni, dimensioni)
-    pulsante_back.setStyleSheet("""
-            QPushButton{
-                background-color: rgba(0, 0, 0, 0);
-            }
-            QPushButton:hover{
-                background-color: "lightgray";
-            }
-            """)
-    return pulsante_back
-
 
 class VistaGestioneRicevute(QWidget):
 
@@ -78,7 +60,7 @@ class VistaGestioneRicevute(QWidget):
 
     def init_ui(self):
         self.setWindowTitle("Gestionale Pizzeria")
-        title = QLabel("Gestione Ricevute")
+        title = QLabel("Conto Tavolo n.")
         title.setFont(label_font_tit)
 
         layout = QVBoxLayout()
@@ -95,7 +77,7 @@ class VistaGestioneRicevute(QWidget):
 
         #self.pulsante_inserisci.clicked.connect(lambda : self.pulsante_inserisci.setText("O"))
         # Pulsante Back
-        pulsante_back = crea_pulsante_back(35,"png/back.png")
+
 
         # Tabella
         self.tab = crea_tabella(18, 3, 481, 404)
@@ -118,7 +100,7 @@ class VistaGestioneRicevute(QWidget):
         layout_pulsanti.addStretch()
 
         layout.addLayout(layout_orizzontale)
-        layout.addWidget(pulsante_back)
+
 
         layout.setContentsMargins(30, 20, 10, 20)
         self.setFixedSize(756, 637)

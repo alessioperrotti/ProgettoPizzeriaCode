@@ -22,6 +22,7 @@ class ContVistaInserisciRicevuta():
 
     def conferma_ricevuta(self):
         nome_acquirente = self.view.ins_nome.text()
+
         self.view.close()
 
         pass

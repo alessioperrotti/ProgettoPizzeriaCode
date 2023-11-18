@@ -149,6 +149,7 @@ class VistaInserisciRicevuta(QDialog):
 def main():
     app = QApplication(sys.argv)
     ex = VistaInserisciRicevuta()
+    ex.show()
     sys.exit(app.exec())
 
 
