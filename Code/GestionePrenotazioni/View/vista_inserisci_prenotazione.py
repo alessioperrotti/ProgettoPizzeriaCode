@@ -9,7 +9,7 @@ from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplica
 
 # Font
 label_font = QFont("Roboto", 24)
-label_font_tit = QFont("Roboto", 24,weight=50)
+label_font_tit = QFont("Roboto", 24, weight=50)
 label_font_piccolo = QFont("Roboto", 10)
 header_font = QFont("Roboto", 10)
 header_font.setBold(True)
@@ -57,7 +57,7 @@ class VistaInserisciPrenotazione(QWidget):
     def init_ui(self):
         self.setWindowTitle("Gestionale Pizzeria")
         #label
-        title = QLabel("Modifica dati prenotazione")
+        title = QLabel("<b>Inserimento Nuova Prenotazione<\b>")
         title.setFont(label_font_tit)
         label_ricerca = QLabel("Nome cliente:")
         label_tavolo = QLabel("Tavolo:")
@@ -72,11 +72,11 @@ class VistaInserisciPrenotazione(QWidget):
         #layout
         layout = QVBoxLayout()
         layout.addStretch()
-        layout.addWidget(title)
-        layout.addWidget(linea)
+        layout.addWidget(title,alignment=Qt.AlignmentFlag.AlignTop)
+        layout.addWidget(linea,alignment=Qt.AlignmentFlag.AlignTop)
 
         griglia = QGridLayout()
-        griglia.setContentsMargins(50,0,50,0)
+        griglia.setContentsMargins(40,30,40,20)
         griglia.addWidget(label_ricerca,0,0)
         griglia.addWidget(label_tavolo,0,1)
         griglia.addWidget(label_persone,0,2)
@@ -107,16 +107,16 @@ class VistaInserisciPrenotazione(QWidget):
         griglia.addWidget(label_calendario,2,0,1,2)
         griglia.addWidget(label_tabella,2,1,1,2)
 
-        pulsante_conferma = QPushButton("Conferma\nmodifica")
+        pulsante_conferma = QPushButton("Conferma\nprenotazione")
         pulsante_conferma.setFixedSize(205, 74)
 
-        layout.setSpacing(20)
+        #layout.setSpacing(20)
         layout.addLayout(griglia)
+        layout.addSpacing(20)
         layout.addWidget(pulsante_conferma,alignment=Qt.AlignmentFlag.AlignCenter)
 
-        self.setContentsMargins(10,0,10,0)
-        layout.addLayout(griglia)
-        layout.addStretch()
+        self.setContentsMargins(10,0,10,45)
+        #layout.addStretch()
         self.setLayout(layout)
         self.setFixedSize(756, 662)
 

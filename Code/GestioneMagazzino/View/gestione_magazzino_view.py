@@ -1,7 +1,7 @@
 import sys
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import QFont, QPixmap, QIcon
-from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtCore import Qt
 
 font_tit = QFont("Roboto", 32, weight=400)
 font_label = QFont("Roboto", 13, weight=350)
@@ -56,11 +56,12 @@ class VistaGestioneMagazzino(QWidget):
 
         pulsante_mostrainfo = QPushButton("Mostra Info\nMateria Prima")
         pulsante_modifica = QPushButton("Modifica\nMateria Prima")
-        pulsante_inserisci = QPushButton("Inserisci\nMateria Prima")
+        self.pulsante_inserisci = QPushButton("Inserisci\nMateria Prima")
+        #pulsante_inserisci.clicked.connect(self.controller.open_inserimento())
         pulsante_elimina = QPushButton("Elimina\nMateria Prima")
 
         pulsanti = [pulsante_mostrainfo,
-                    pulsante_inserisci,
+                    self.pulsante_inserisci,
                     pulsante_modifica,
                     pulsante_elimina]
 
@@ -85,19 +86,19 @@ class VistaGestioneMagazzino(QWidget):
         self.search_bar.setPlaceholderText("Cerca per nome")
         self.search_bar.setFixedSize(336,29)
         self.search_bar.setStyleSheet("QLineEdit { border: 2px solid black; }")
-        self.search_bar.textChanged.connect(self.filtra_elementi)
+        #self.search_bar.textChanged.connect(self.filtra_elementi)
         vbox_tabella.addSpacerItem(QSpacerItem(20, 20))
         vbox_tabella.addWidget(self.search_bar, alignment=Qt.AlignmentFlag.AlignLeft)
         vbox_tabella.addWidget(self.data_grid, alignment=Qt.AlignmentFlag.AlignLeft)
         vbox_tabella.addSpacerItem(QSpacerItem(60,60))
 
-        pulsante_back = crea_pulsante_back(35, "back2.png")
+        #pulsante_back = crea_pulsante_back(35, "png/back.png")
 
         main_layout.addWidget(label_titolo, alignment=Qt.AlignmentFlag.AlignTop)
         hbox.addLayout(vbox_tabella)
         hbox.addLayout(vbox_pulsanti)
         main_layout.addLayout(hbox)
-        main_layout.addWidget(pulsante_back, alignment=Qt.AlignmentFlag.AlignLeft)
+        #main_layout.addWidget(pulsante_back, alignment=Qt.AlignmentFlag.AlignLeft)
         self.setFixedSize(756,637)
         self.setLayout(main_layout)
 
