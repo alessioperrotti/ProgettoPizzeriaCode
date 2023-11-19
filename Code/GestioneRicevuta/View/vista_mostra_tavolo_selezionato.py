@@ -59,6 +59,7 @@ class VistaMostraTavoloSelezionato(QDialog):
            }
        """)
 
+
     def init_ui(self):
         self.setWindowTitle("Gestionale Pizzeria")
 

@@ -43,7 +43,7 @@ class VistaInserisciRicevuta(QDialog):
         super().__init__()
         self.ricerca = None
         self.tabella = None
-        self.pulsante1 = None
+        self.pulsante_mostra = None
         self.initUi()
 
     def initUi(self):
@@ -67,9 +67,9 @@ class VistaInserisciRicevuta(QDialog):
 
         self.tabella.setFont(label_font_piccolo)
 
-        self.pulsante1 = Pulsante("Mostra Tavolo selezionato")
-        self.pulsante1.setFont(label_font_piccolo)
-        self.pulsante1.setFixedHeight(70)
+        self.pulsante_mostra = Pulsante("Mostra Tavolo selezionato")
+        self.pulsante_mostra.setFont(label_font_piccolo)
+        self.pulsante_mostra.setFixedHeight(70)
 
         label_nome = QLabel("Nome acquirente")
         label_nome.setFont(label_font_piccolo)
@@ -95,7 +95,7 @@ class VistaInserisciRicevuta(QDialog):
 
         layout_tabella_e_tavolo.addWidget(self.tabella)
         layout_tabella_e_tavolo.addSpacerItem(QSpacerItem(30, 30))
-        layout_tabella_e_tavolo.addWidget(self.pulsante1)
+        layout_tabella_e_tavolo.addWidget(self.pulsante_mostra)
         layout_tabella_e_tavolo.addSpacerItem(QSpacerItem(30, 30))
 
         layout_tasti.addSpacerItem(QSpacerItem(140, 1))
