@@ -26,11 +26,22 @@ class ContVistaGestioneRicevute():
 
         # self.view.setDisabled(True)
 
+    def imposta_linea_selezionata(self):
+        item_selezionati = self.view.tab.selectedItems()
+        for item in item_selezionati:
+            if item.column() == 1:  # cioe prendo l'elemento della seconda colonna
+                self.numero_selezionato = int(item.text())
+                break
 
+
+        self.view.pulsante_elimina.setEnabled(True)
     def elimina_ricevuta(self):
-        pass
+        self.gestore_ric.elimina_ricevuta(self.numero_selezionato)
+        print("c")
+        self.aggiorna_tabella()
 
     def __init__(self, gestore_ric:GestoreRicevuta, gestore_ord:GestoreOrdiniTavolo,lista_tav:list[Tavolo], stacked_widget:QStackedWidget):
+        self.numero_selezionato = None
         self.ricevuta_temp = Ricevuta()
         self.gestore_ord = gestore_ord
         self.lista_tav = lista_tav
@@ -40,13 +51,9 @@ class ContVistaGestioneRicevute():
         self.aggiorna_tabella()
         self.cont_inserisci = ContVistaInserisciRicevuta(self.gestore_ric, self.gestore_ord, self.lista_tav)
 
-
-
-
-
-
+        self.view.tab.itemSelectionChanged.connect(self.imposta_linea_selezionata)
         self.view.pulsante_inserisci.clicked.connect(self.inserisci_ricevuta)
-
+        self.view.pulsante_elimina.clicked.connect(self.elimina_ricevuta)
 
 
 
@@ -57,13 +64,17 @@ class ContVistaGestioneRicevute():
 
 
     def aggiorna_tabella(self):
+
         lista_ric = self.gestore_ric.lista_ricevute
+        self.view.tab.setRowCount(len(lista_ric))
         i=0
         for ricevuta in lista_ric:
             self.view.tab.setItem(i,0, QTableWidgetItem(ricevuta.nomeAcquirente)) #acquirente
             self.view.tab.setItem(i, 1, QTableWidgetItem(str(ricevuta.numero)))
             self.view.tab.setItem(i, 2, QTableWidgetItem(str(ricevuta.data)))
             i += 1
+
+
 
 if __name__ == '__main__':
 

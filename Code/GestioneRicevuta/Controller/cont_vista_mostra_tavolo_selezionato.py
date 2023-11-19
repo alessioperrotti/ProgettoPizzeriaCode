@@ -26,7 +26,6 @@ class ContVistaMostraTavoloSelezionato():
         self.view = VistaMostraTavoloSelezionato()
         self.ordini:list[OrdineTavolo] = []
         self.gestore_ric = gestore_ric
-        self.view.pulsante_aggiungi.clicked.connect(lambda : print("oi"))
 
 
     def aggiungi_tavolo_alla_ricevuta(self):

@@ -1,5 +1,5 @@
 import sys
-from PyQt6.QtWidgets import QApplication, QTableWidgetItem, QVBoxLayout
+from PyQt6.QtWidgets import QApplication, QTableWidgetItem, QVBoxLayout, QMessageBox
 
 from Code.GestioneMenu.Model.prodotto import Prodotto
 from Code.GestioneOrdiniTavolo.Model.gestore_ordini_tavolo import GestoreOrdiniTavolo
@@ -16,7 +16,7 @@ from PyQt6.QtCore import pyqtSignal
 class ContVistaInserisciRicevuta():
 
     def __init__(self, gestore_ric:GestoreRicevuta, gestore_ord:GestoreOrdiniTavolo, lista_tav:list[Tavolo]):
-        self.lista_ordini_da_pagare = None
+
         self.lista_tavoli = lista_tav
         self.view = VistaInserisciRicevuta()
         self.ricevuta_temp = Ricevuta()
@@ -43,15 +43,31 @@ class ContVistaInserisciRicevuta():
 
         nome_acquirente = self.view.ins_nome.text()
         self.ricevuta_temp.nomeAcquirente = nome_acquirente
-        print(self.ricevuta_temp.data)
-        self.gestore_ric.aggiungi_ricevuta(self.ricevuta_temp.ammontareLordo, self.ricevuta_temp.data, self.ricevuta_temp.listaProdotti, self.ricevuta_temp.nomeAcquirente, self.ricevuta_temp.numero, self.ricevuta_temp.ora)
+        if self.ricevuta_temp.nomeAcquirente == "":
+            self.ricevuta_temp.nomeAcquirente = "Anonimo"
 
-        #imposta che gli ordini sono stati pagati
-        for ordine in self.controller_mostra.ordini:
-            ordine.pagato = True
+        if self.controller_mostra.ordini == []:
+            error_box = QMessageBox()
+            error_box.setIcon(QMessageBox.Icon.Critical)
+            error_box.setWindowTitle("Errore")
+            error_box.setText("Selezionare almeno un ordine per poter confermare la ricevuta")
+            error_box.exec()
 
-        self.view.close()
-        self.ricevuta_temp = Ricevuta()
+
+        else:
+
+            self.gestore_ric.aggiungi_ricevuta(self.ricevuta_temp.ammontareLordo, self.ricevuta_temp.data, self.ricevuta_temp.listaProdotti, self.ricevuta_temp.nomeAcquirente, self.ricevuta_temp.numero, self.ricevuta_temp.ora)
+
+            #imposta che gli ordini sono stati pagati
+            for ordine in self.controller_mostra.ordini:
+                ordine.pagato = True
+
+            self.view.close()
+            self.view.ins_nome.clear()
+            self.view.ricerca.clear()
+            self.ricevuta_temp = Ricevuta()
+            self.controller_mostra.ordini = []
+
 
     def mostra_tavolo_selezionato(self):
 
@@ -84,8 +100,6 @@ class ContVistaInserisciRicevuta():
 
     def filtra_tabella(self):
         testo_ricerca = self.view.ricerca.text().lower()
-        print(range(self.view.tabella.rowCount()))
-
 
         for riga in range(self.view.tabella.rowCount()):
             n_tavolo = self.view.tabella.item(riga, 0).text().lower()
