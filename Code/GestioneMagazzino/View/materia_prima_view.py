@@ -7,7 +7,7 @@ font_label = QFont("Roboto", 20, weight=350)
 font_valore = QFont("Roboto", 20, weight=50)
 font_titolo = QFont("Roboto", 24, weight=450)
 
-class VistaMateriaPrima(QWidget):
+class VistaMateriaPrima(QDialog):
 
     def __init__(self):
 
@@ -46,13 +46,13 @@ class VistaMateriaPrima(QWidget):
             vbox_nomecampo.addSpacerItem(QSpacerItem(175, 20))
             x.setFont(font_label)
 
-        self.label_codice2 = QLabel("valore codice")
-        self.label_nome2 = QLabel("valore nome")
-        self.label_costoAlKg2 = QLabel("valore costoalkg")
-        self.label_dataScadenza2 = QLabel("valore datascadenza:")
-        self.label_qtaDisp2 = QLabel("valore qtadisp")
-        self.label_qtaLimite2 = QLabel("valore qtalimite")
-        self.label_qtaOrdineSTD2 = QLabel("valore qtaordinestd")
+        self.label_codice2 = QLabel()
+        self.label_nome2 = QLabel()
+        self.label_costoAlKg2 = QLabel()
+        self.label_dataScadenza2 = QLabel()
+        self.label_qtaDisp2 = QLabel()
+        self.label_qtaLimite2 = QLabel()
+        self.label_qtaOrdineSTD2 = QLabel()
 
         labels2 = [self.label_codice2, self.label_nome2, self.label_costoAlKg2,
                    self.label_dataScadenza2, self.label_qtaDisp2, self.label_qtaLimite2, self.label_qtaOrdineSTD2]
@@ -77,28 +77,30 @@ class VistaMateriaPrima(QWidget):
         self.setLayout(main_layout)
 
 
-app = QApplication(sys.argv)
-app.setStyleSheet("""
-    QPushButton{
-        background-color: "#ff776d";
-        color: "white";
-        text-align: center;
-        border-radius: 6px;
-    }
-    QPushButton:hover{
-        background-color: "red";
-        font-size: 13px;
-    }
-    QTableWidget {
-        background-color: white;
-        alternate-background-color: white;
-        selection-background-color: darkcyan;
-        border: 2px solid grey;
-    }
-""")
+if __name__ == '__main__':
 
-window = VistaMateriaPrima()
-window.show()
-sys.exit(app.exec())
+    app = QApplication(sys.argv)
+    app.setStyleSheet("""
+        QPushButton{
+            background-color: "#ff776d";
+            color: "white";
+            text-align: center;
+            border-radius: 6px;
+        }
+        QPushButton:hover{
+            background-color: "red";
+            font-size: 13px;
+        }
+        QTableWidget {
+            background-color: white;
+            alternate-background-color: white;
+            selection-background-color: darkcyan;
+            border: 2px solid grey;
+        }
+    """)
+
+    window = VistaMateriaPrima()
+    window.show()
+    sys.exit(app.exec())
 
 

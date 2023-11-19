@@ -35,6 +35,13 @@ class GestoreMagazzino(object):
         if not found:
             pass
 
+
+    def estrai_per_codice(self, codice):
+
+        for x in self.lista_materieprime:
+            if x.codice == codice:
+                return x
+
     def decrementa_disponibilita(self, codice, decremento):
 
         for x in self.lista_materieprime:
