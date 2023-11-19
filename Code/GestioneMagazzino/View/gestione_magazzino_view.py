@@ -73,16 +73,15 @@ class VistaGestioneMagazzino(QWidget):
         vbox_pulsanti = QVBoxLayout()
         vbox_tabella = QVBoxLayout()
 
-        pulsante_mostrainfo = QPushButton("Mostra Info\nMateria Prima")
-        pulsante_modifica = QPushButton("Modifica\nMateria Prima")
+        self.pulsante_mostrainfo = QPushButton("Mostra Info\nMateria Prima")
+        self.pulsante_modifica = QPushButton("Modifica\nMateria Prima")
         self.pulsante_inserisci = QPushButton("Inserisci\nMateria Prima")
-        #pulsante_inserisci.clicked.connect(self.controller.open_inserimento())
-        pulsante_elimina = QPushButton("Elimina\nMateria Prima")
+        self.pulsante_elimina = QPushButton("Elimina\nMateria Prima")
 
-        pulsanti = [pulsante_mostrainfo,
+        pulsanti = [self.pulsante_mostrainfo,
                     self.pulsante_inserisci,
-                    pulsante_modifica,
-                    pulsante_elimina]
+                    self.pulsante_modifica,
+                    self.pulsante_elimina]
 
         vbox_pulsanti.addSpacerItem(QSpacerItem(217, 217))
 

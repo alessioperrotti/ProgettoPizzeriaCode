@@ -6,7 +6,7 @@ from PyQt6.QtCore import Qt
 font_tit = QFont("Roboto", 24, weight=50)
 font_label = QFont("Roboto", 18, weight=350)
 
-class VistaModificaMateriaPrima(QWidget):
+class VistaModificaMateriaPrima(QDialog):
 
     def __init__(self):
 
