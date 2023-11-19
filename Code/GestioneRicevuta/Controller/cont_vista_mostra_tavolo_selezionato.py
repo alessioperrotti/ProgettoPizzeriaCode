@@ -26,10 +26,11 @@ class ContVistaMostraTavoloSelezionato():
         self.view = VistaMostraTavoloSelezionato()
         self.ordini:list[OrdineTavolo] = []
         self.gestore_ric = gestore_ric
-      #  self.view.pulsante_aggiungi.clicked.connect(self.aggiungi_tavolo_alla_ricevuta)
+        self.view.pulsante_aggiungi.clicked.connect(lambda : print("oi"))
 
 
     def aggiungi_tavolo_alla_ricevuta(self):
+
         totale = 0
         listaProdotti = []
         for ordine in self.ordini:
@@ -40,15 +41,20 @@ class ContVistaMostraTavoloSelezionato():
         numero = 1
         ora_corrente = datetime.now().time()
         ora = ora_corrente.strftime("%H:%M:%S")
-
         self.ric = Ricevuta(totale, data, listaProdotti, nomeAcquirente, numero, ora)
+
+        self.view.close()
+
 
 
 
     def aggiorna_lista(self):
 
-        self.view = VistaMostraTavoloSelezionato()
 
+        self.view = VistaMostraTavoloSelezionato()
+        self.view.pulsante_aggiungi.clicked.connect(self.aggiungi_tavolo_alla_ricevuta)
+        num_tav = self.ordini[0].tavolo.numero
+        self.view.title.setText("Conto Tavolo n. "+str(num_tav))
         i=1
         for ordine in self.ordini:
 

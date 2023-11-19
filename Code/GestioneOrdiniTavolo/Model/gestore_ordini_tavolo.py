@@ -16,11 +16,11 @@ class GestoreOrdiniTavolo(object):
         pass
 
 
-    def cerca_ordini_per_tavolo(self, numero_tavolo):
+    def cerca_ordini_per_tavolo_da_pagare(self, numero_tavolo):
 
         lista_ordini_cercata = []
         for x in self.lista_ordini:
-            if x.tavolo.numero == numero_tavolo:
+            if x.tavolo.numero == numero_tavolo and x.pagato == False:
                 lista_ordini_cercata.append(x)
 
         return lista_ordini_cercata

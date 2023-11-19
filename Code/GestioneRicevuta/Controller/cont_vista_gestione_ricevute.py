@@ -38,7 +38,7 @@ class ContVistaGestioneRicevute():
         self.gestore_ric = gestore_ric
         self.stacked_widget = stacked_widget
         self.aggiorna_tabella()
-        self.cont_inserisci = ContVistaInserisciRicevuta(self.gestore_ric, self.gestore_ord,self.ricevuta_temp, self.lista_tav)
+        self.cont_inserisci = ContVistaInserisciRicevuta(self.gestore_ric, self.gestore_ord, self.lista_tav)
 
 
 

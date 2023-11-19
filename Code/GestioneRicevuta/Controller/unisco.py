@@ -31,8 +31,8 @@ class MainWindow(QWidget):
 
         tavolo1 = Tavolo(1, 10, None)
         tavolo2 = Tavolo(2, 10, None)
-        tavolo3 = Tavolo(2, 10, None)
-        tavolo4 = Tavolo(2, 10, None)
+        tavolo3 = Tavolo(3, 10, None)
+        tavolo4 = Tavolo(4, 10, None)
         tavolo5 = Tavolo(5, 10, None)
 
         lista_tav = []

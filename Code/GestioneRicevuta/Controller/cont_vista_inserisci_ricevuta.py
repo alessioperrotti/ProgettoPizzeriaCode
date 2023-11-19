@@ -15,15 +15,17 @@ from Code.GestioneRicevuta.Model.gestore_ricevuta import GestoreRicevuta
 from PyQt6.QtCore import pyqtSignal
 class ContVistaInserisciRicevuta():
 
-    def __init__(self, gestore_ric:GestoreRicevuta, gestore_ord:GestoreOrdiniTavolo, ricevuta_temp:Ricevuta, lista_tav:list[Tavolo]):
+    def __init__(self, gestore_ric:GestoreRicevuta, gestore_ord:GestoreOrdiniTavolo, lista_tav:list[Tavolo]):
+        self.lista_ordini_da_pagare = None
         self.lista_tavoli = lista_tav
         self.view = VistaInserisciRicevuta()
+        self.ricevuta_temp = Ricevuta()
         self.gestore_ric = gestore_ric
         self.gestore_ord = gestore_ord
         self.view.pulsante_conferma.clicked.connect(self.conferma_ricevuta)
         self.tavolo_selezionato = None
         lista = []
-        self.controller_mostra = ContVistaMostraTavoloSelezionato(self.gestore_ric, ricevuta_temp)
+        self.controller_mostra = ContVistaMostraTavoloSelezionato(self.gestore_ric, self.ricevuta_temp)
         self.view.pulsante_mostra.clicked.connect(self.mostra_tavolo_selezionato)
         self.view.tabella.itemSelectionChanged.connect(self.imposta_linea_selezionata)
         self.view.pulsante_mostra.setEnabled(self.tavolo_selezionato is not None)
@@ -38,22 +40,30 @@ class ContVistaInserisciRicevuta():
 
 
     def conferma_ricevuta(self):
+
         nome_acquirente = self.view.ins_nome.text()
+        self.ricevuta_temp.nomeAcquirente = nome_acquirente
+        print(self.ricevuta_temp.data)
+        self.gestore_ric.aggiungi_ricevuta(self.ricevuta_temp.ammontareLordo, self.ricevuta_temp.data, self.ricevuta_temp.listaProdotti, self.ricevuta_temp.nomeAcquirente, self.ricevuta_temp.numero, self.ricevuta_temp.ora)
+
+        #imposta che gli ordini sono stati pagati
+        for ordine in self.controller_mostra.ordini:
+            ordine.pagato = True
 
         self.view.close()
+        self.ricevuta_temp = Ricevuta()
 
-        pass
     def mostra_tavolo_selezionato(self):
 
-
-        list = self.gestore_ord.cerca_ordini_per_tavolo(self.tavolo_selezionato)
-
+        list = self.gestore_ord.cerca_ordini_per_tavolo_da_pagare(self.tavolo_selezionato)
+        self.controller_mostra.ric = self.ricevuta_temp
         self.controller_mostra.ordini = list
         self.controller_mostra.aggiorna_lista()
         self.controller_mostra.view.exec()
         self.view.tabella.clearSelection()
         self.tavolo_selezionato = None
         self.view.pulsante_mostra.setEnabled(self.tavolo_selezionato is not None)
+        self.ricevuta_temp = self.controller_mostra.ric
 
 
 
@@ -63,7 +73,7 @@ class ContVistaInserisciRicevuta():
         i=0
         for tavolo in self.lista_tavoli:
 
-            num_ord = len(self.gestore_ord.cerca_ordini_per_tavolo(tavolo.numero))
+            num_ord = len(self.gestore_ord.cerca_ordini_per_tavolo_da_pagare(tavolo.numero))
 
             if num_ord!=0:
                 self.view.tabella.setItem(i, 0, QTableWidgetItem(str(tavolo.numero)))
