@@ -39,10 +39,12 @@ class VistaMostraTavoloSelezionato(QDialog):
                color: "white";
                text-align: center;
                border-radius: 6px;
+               font-size: 12px;
+
            }
            QPushButton:hover{
                background-color: "red";
-               font-size: 13px;
+               font-size: 12px;
            }
            QTableWidget {
                background-color: white;

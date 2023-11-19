@@ -26,14 +26,15 @@ class ContVistaInserisciRicevuta():
         self.controller_mostra = ContVistaMostraTavoloSelezionato(self.gestore_ric, ricevuta_temp)
         self.view.pulsante_mostra.clicked.connect(self.mostra_tavolo_selezionato)
         self.view.tabella.itemSelectionChanged.connect(self.imposta_linea_selezionata)
-
-
+        self.view.pulsante_mostra.setEnabled(self.tavolo_selezionato is not None)
+        self.view.ricerca.textChanged.connect(self.filtra_tabella)
     def imposta_linea_selezionata(self):
         item_selezionati = self.view.tabella.selectedItems()
         for item in item_selezionati:
             if item.column() == 0:
                 self.tavolo_selezionato = int(item.text())
                 break
+        self.view.pulsante_mostra.setEnabled(self.tavolo_selezionato is not None)
 
 
     def conferma_ricevuta(self):
@@ -50,9 +51,15 @@ class ContVistaInserisciRicevuta():
         self.controller_mostra.ordini = list
         self.controller_mostra.aggiorna_lista()
         self.controller_mostra.view.exec()
+        self.view.tabella.clearSelection()
+        self.tavolo_selezionato = None
+        self.view.pulsante_mostra.setEnabled(self.tavolo_selezionato is not None)
+
+
 
 
     def aggiorna_tabella(self):
+
         i=0
         for tavolo in self.lista_tavoli:
 
@@ -63,6 +70,16 @@ class ContVistaInserisciRicevuta():
                 self.view.tabella.setItem(i, 1, QTableWidgetItem(str(num_ord)))
                 i+=1
 
+        self.view.tabella.setRowCount(i)
+
+    def filtra_tabella(self):
+        testo_ricerca = self.view.ricerca.text().lower()
+        print(range(self.view.tabella.rowCount()))
+
+
+        for riga in range(self.view.tabella.rowCount()):
+            n_tavolo = self.view.tabella.item(riga, 0).text().lower()
+            self.view.tabella.setRowHidden(riga, testo_ricerca not in n_tavolo)
 
 
 if __name__ == '__main__':

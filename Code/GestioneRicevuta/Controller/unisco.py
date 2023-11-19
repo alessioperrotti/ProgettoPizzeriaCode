@@ -31,9 +31,17 @@ class MainWindow(QWidget):
 
         tavolo1 = Tavolo(1, 10, None)
         tavolo2 = Tavolo(2, 10, None)
+        tavolo3 = Tavolo(2, 10, None)
+        tavolo4 = Tavolo(2, 10, None)
+        tavolo5 = Tavolo(5, 10, None)
+
         lista_tav = []
         lista_tav.append(tavolo1)
         lista_tav.append(tavolo2)
+        lista_tav.append(tavolo3)
+        lista_tav.append(tavolo4)
+        lista_tav.append(tavolo5)
+
 
         prod1 = Prodotto("pizzamarghe", 2, 15)
         prod2 = Prodotto("pizzasals", 3, 20)
