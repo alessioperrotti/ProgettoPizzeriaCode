@@ -3,7 +3,7 @@ from datetime import datetime
 from os.path import dirname, abspath
 
 import PyQt6
-from PyQt6.QtWidgets import QApplication, QLabel, QHBoxLayout, QVBoxLayout, QScrollArea, QFrame
+from PyQt6.QtWidgets import QApplication, QLabel, QHBoxLayout, QVBoxLayout, QScrollArea, QFrame, QSizePolicy
 
 from Code.GestioneMenu.Model.prodotto import Prodotto
 from Code.GestioneOrdiniTavolo.Model.ordine_tavolo import OrdineTavolo
@@ -47,9 +47,7 @@ class ContVistaMostraTavoloSelezionato():
 
     def aggiorna_lista(self):
 
-        nuovaView = VistaMostraTavoloSelezionato()
         self.view = VistaMostraTavoloSelezionato()
-
 
         i=1
         for ordine in self.ordini:
@@ -64,6 +62,8 @@ class ContVistaMostraTavoloSelezionato():
 
             for prodotto in ordine.lista_prodotti:
                 label = QLabel(f'<font color="black">&#8226;</font> ' + prodotto.nome)
+                label.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
+
                 layoutprodotti.addWidget(label)
                 layoutprodotti.addSpacing(2)
                 self.view.layoutOrdini.addLayout(layout)

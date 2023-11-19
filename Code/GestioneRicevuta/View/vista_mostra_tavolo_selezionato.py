@@ -68,14 +68,17 @@ class VistaMostraTavoloSelezionato(QDialog):
         frame1 = QFrame()
         frame1.setFrameShape(QFrame.Shape.HLine)
         self.scroll_area = QScrollArea()
+        self.scroll_area.setWidgetResizable(True)  # Per consentire la ridimensionamento automatico del widget interno
+
         self.pulsante_aggiungi = QPushButton("Aggiungi Alla\nricevuta")
         self.pulsante_aggiungi.setFixedSize(150, 50)
+        self.contenitore = QWidget()
 
         layout = QVBoxLayout()
         self.layoutOrdini = QVBoxLayout()
-
+        self.contenitore.setLayout(self.layoutOrdini)
         self.scroll_area.setFrameShape(QFrame.Shape.NoFrame)
-        self.scroll_area.setLayout(self.layoutOrdini)
+        self.scroll_area.setWidget(self.contenitore)
 
         layout.addWidget(self.title)
         layout.addWidget(frame1)
