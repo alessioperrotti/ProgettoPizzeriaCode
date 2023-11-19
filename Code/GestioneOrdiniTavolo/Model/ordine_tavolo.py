@@ -8,3 +8,8 @@ class OrdineTavolo(object):
         self.orario = orario
         self.prezzo_totale = prezzo_totale
         self.tavolo = tavolo
+
+
+    def aggiungi_prodotto(self, prodotto):
+
+        self.lista_prodotti.append(prodotto)
