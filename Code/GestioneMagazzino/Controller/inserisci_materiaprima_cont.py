@@ -1,5 +1,6 @@
 from  Code.GestioneMagazzino.View.inserisci_materiaprima_view import VistaInserisciMateriaPrima
 from Code.GestioneMagazzino.Model.materia_prima import MateriaPrima
+from PyQt6.QtCore import QDate
 class ContInserisciMateriaPrima(object):
 
     def __init__(self, model, view: VistaInserisciMateriaPrima):

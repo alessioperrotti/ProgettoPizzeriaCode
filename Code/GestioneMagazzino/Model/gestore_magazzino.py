@@ -25,7 +25,7 @@ class GestoreMagazzino(object):
         for x in self.lista_materieprime:
             if x.codice == codice:
                 x.nome = new_nome
-                x.costo_al_kg =  new_costo_al_kg
+                x.costo_al_kg = new_costo_al_kg
                 x.qta_disponibile = new_qta_disponibile
                 x.qta_limite = new_qta_limite
                 x.qta_ordine_STD = new_qta_ordine_STD
@@ -38,9 +38,11 @@ class GestoreMagazzino(object):
 
     def estrai_per_codice(self, codice):
 
+        elemento_cercato = None
         for x in self.lista_materieprime:
-            if x.codice == codice:
-                return x
+            if int(x.codice) == int(codice):
+                elemento_cercato = x
+        return elemento_cercato
 
     def decrementa_disponibilita(self, codice, decremento):
 

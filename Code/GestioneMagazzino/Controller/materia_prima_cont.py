@@ -12,7 +12,7 @@ class ContMateriaPrima(object):
     def riempi_labels(self, materiaprima: MateriaPrima):
 
         self.view.label_codice2.setText(str(materiaprima.codice))
-        self.view.label_codice2.setText(str(materiaprima.nome))
+        self.view.label_nome2.setText(str(materiaprima.nome))
         self.view.label_costoAlKg2.setText(str(materiaprima.costo_al_kg))
         self.view.label_qtaDisp2.setText(str(materiaprima.qta_disponibile))
         self.view.label_qtaLimite2.setText(str(materiaprima.qta_limite))
