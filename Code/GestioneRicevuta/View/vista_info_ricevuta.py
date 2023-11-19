@@ -9,8 +9,8 @@ from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplica
                              QDialog, QGridLayout)
 
 label_font = QFont("Roboto", 24)
-label_font_tit = QFont("Roboto", 32, weight=50)
-label_font_piccolo = QFont("Roboto", 10)
+label_font_tit = QFont("Roboto", 20, weight=50)
+label_font_piccolo = QFont("Roboto", 12)
 header_font = QFont("Roboto", 10)
 header_font.setBold(True)
 
@@ -45,6 +45,10 @@ class VistaInserisciRicevuta(QDialog):
         self.tabella = None
         self.pulsante_mostra = None
         self.initUi()
+    def settaFont(self,font:QFont, *args):
+        for arg in args:
+            arg.setFont(font)
+
 
     def initUi(self):
         # Definizione oggetti
@@ -55,20 +59,22 @@ class VistaInserisciRicevuta(QDialog):
 
         frame1 = QFrame()
         frame1.setFrameShape(QFrame.Shape.HLine)
+        frame2 = QFrame()
+        frame2.setFrameShape(QFrame.Shape.HLine)
 
-        lab_num = QLabel("Numero:")
-        lab_nom = QLabel("Nome acquirente:")
-        lab_amm = QLabel("Ammontare lordo:")
-        lab_data = QLabel("Data di emissione:")
-        lab_ora = QLabel("Orario di emissione:")
-        lab_lis = QLabel("Lista Prodotti:")
-
+        lab_num = QLabel("<b>Numero:</b>")
+        lab_nom = QLabel("<b>Nome acquirente:</b>")
+        lab_amm = QLabel("<b>Ammontare lordo:</b>")
+        lab_data = QLabel("<b>Data di emissione:</b>")
+        lab_ora = QLabel("<b>Orario di emissione:</b>")
+        lab_lis = QLabel("<b>Lista Prodotti:</b>")
+        self.setFont(label_font_piccolo, lab_num, lab_ora, lab_lis, lab_data, lab_amm, lab_nom)
         self.lab_num_s = QLabel()
         self.lab_nom_s = QLabel()
         self.lab_amm_s = QLabel()
         self.lab_data_s = QLabel()
         self.lab_ora_s = QLabel()
-
+        self.setFont(label_font_piccolo, self.lab_num_s,self.lab_nom_s,self.lab_amm_s ,self.lab_data_s,self.lab_ora_s )
         l1 = QHBoxLayout()
         l2 = QHBoxLayout()
         l3 = QHBoxLayout()
@@ -97,25 +103,18 @@ class VistaInserisciRicevuta(QDialog):
         layout.addLayout(l3,2,0)
         layout.addLayout(l4,0,1)
         layout.addLayout(l5,1,1)
-        layout.addWidget(frame1, 3,0,2,1)
+        layout.setContentsMargins(20, 20, 20, 20)
 
 
         lay.addWidget(label_titolo)
-        #lay.addWidget(frame1)
+        lay.addWidget(frame1)
         lay.addLayout(layout)
+        lay.addWidget(frame2)
         lay.addWidget(lab_lis)
 
         self.setStyleSheet("""
-            QPushButton{
-                background-color: "#ff776d";
-                color: "white";
-                text-align: center;
-                border-radius: 6px;
-            }
-            QPushButton:hover{
-                background-color: "red";
-                font-size: 13px;
-            }
+          
+            
             QTableWidget {
                 background-color: white;
                 alternate-background-color: white;
