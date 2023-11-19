@@ -7,7 +7,7 @@ from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplica
                              QScrollBar, QScrollArea, QAbstractItemView, QFrame, QComboBox)
 
 # Font
-label_font = QFont("Roboto", 24)
+label_font = QFont("Roboto", 20)
 label_font_tit = QFont("Roboto", 32, weight=50)
 label_font_piccolo = QFont("Roboto", 12)
 header_font = QFont("Roboto", 10)
@@ -57,12 +57,9 @@ class VistaGestioneTurniPersonale(QWidget):
         title.setFont(label_font_tit)
 
         tabella = crea_tabella(2,6,870,360)
+        #tabella.setContentsMargins(0,100,0,0)
         tabella.setHorizontalHeaderLabels(["LUNEDI","MARTEDI","MERCOLEDI","VENERDI","SABATO","DOMENICA"])
         tabella.setVerticalHeaderLabels(["TURNO PRANZO\n12:30-15:30","TURNO CENA\n19:30-00.30"])
-
-        pulsante = QPushButton("Modifica Turno Selezionato")
-        pulsante.setFixedSize(278,77)
-        pulsante.setFont(label_font_piccolo)
 
         pulsante_back = crea_pulsante_img(35,"png/back.png")
 
@@ -87,13 +84,12 @@ class VistaGestioneTurniPersonale(QWidget):
         layout_title.addStretch()
         layout_title.addWidget(self.label_date,alignment=Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
         layout_title.addWidget(self.label_time,alignment=Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
-        layout_title.addWidget(clock,alignment=Qt.AlignmentFlag.AlignRight)
+        layout_title.addWidget(clock,alignment=Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
 
         layout.addLayout(layout_title)
         layout.addWidget(tabella,alignment=Qt.AlignmentFlag.AlignCenter)
-        layout.addSpacing(25)
-        layout.addWidget(pulsante,alignment=Qt.AlignmentFlag.AlignCenter)
-        layout.addWidget(pulsante_back,alignment=Qt.AlignmentFlag.AlignRight)
+        layout.addSpacing(65)
+        layout.addWidget(pulsante_back,alignment=Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignBottom)
 
         self.setLayout(layout)
         self.setFixedSize(994,637)
