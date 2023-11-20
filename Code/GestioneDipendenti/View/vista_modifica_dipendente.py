@@ -14,7 +14,7 @@ label_font_piccolo = QFont("Roboto", 12)
 header_font = QFont("Roboto", 10)
 
 
-class VistaInserisciDipendente(QWidget):
+class VistaModificaDipendente(QWidget):
     def __init__(self):
         super().__init__()
         self.init_ui()
@@ -120,6 +120,6 @@ app.setStyleSheet("""
         background-color:"#ff776d" ; /* Colore di sfondo della barra di navigazione */
     }
 """)
-window = VistaInserisciDipendente()
+window = VistaModificaDipendente()
 window.show()
 sys.exit(app.exec())

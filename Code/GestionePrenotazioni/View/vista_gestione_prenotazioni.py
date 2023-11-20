@@ -53,7 +53,33 @@ class VistaGestionePrenotazioni(QWidget):
     def __init__(self):
         super().__init__()
         self.init_ui()
-        self.show()
+        self.setStyleSheet("""
+            QPushButton{
+                background-color: "#ff776d";
+                color: "white";
+                text-align: center;
+                border-radius: 6px;
+                font-family:Roboto;
+            }
+            QPushButton:hover{
+                background-color: "red";
+                font-size: 13px;
+            }
+            QTableWidget {
+                background-color: white;
+                alternate-background-color: white;
+                selection-background-color: darkcyan;
+                border: 2px solid grey;
+            }
+            QHeaderView:section {
+                background-color: lightgray;
+                font-weight: bold;
+            }
+            QHeaderView:active {
+                background-color: gray;
+            }
+        """)
+        #self.show()
 
     def init_ui(self):
         self.setWindowTitle("Gestionale Pizzeria")
@@ -109,38 +135,11 @@ class VistaGestionePrenotazioni(QWidget):
         self.setFixedSize(756, 637)
         self.setLayout(layout)
 
-
-app = QApplication(sys.argv)
-
-app.setStyleSheet("""
-    QPushButton{
-        background-color: "#ff776d";
-        color: "white";
-        text-align: center;
-        border-radius: 6px;
-        font-family:Roboto;
-    }
-    QPushButton:hover{
-        background-color: "red";
-        font-size: 13px;
-    }
-    QTableWidget {
-        background-color: white;
-        alternate-background-color: white;
-        selection-background-color: darkcyan;
-        border: 2px solid grey;
-    }
-    QHeaderView:section {
-        background-color: lightgray;
-        font-weight: bold;
-    }
-    QHeaderView:active {
-        background-color: gray;
-    }
-""")
-window = VistaGestionePrenotazioni()
-window.show()
-sys.exit(app.exec())
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    vista = VistaGestionePrenotazioni()
+    vista.show()
+    sys.exit(app.exec())
 
 
 

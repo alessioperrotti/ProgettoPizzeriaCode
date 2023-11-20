@@ -52,7 +52,34 @@ class VistaModificaPrenotazione(QWidget):
     def __init__(self):
         super().__init__()
         self.init_ui()
-        self.show()
+        self.setStyleSheet("""
+            QPushButton{
+                background-color: "#ff776d";
+                color: "white";
+                text-align: center;
+                border-radius: 6px;
+                font-family:Roboto;
+                font-size: 15px;
+            }
+            QPushButton:hover{
+                background-color: "red";
+                font-size: 17px;
+            }
+            QTableWidget {
+                background-color: white;
+                alternate-background-color: white;
+                selection-background-color: darkcyan;
+                border: 2px solid grey;
+            }
+            QHeaderView:section {
+                background-color: lightgray;
+                font-weight: bold;
+            }
+            QHeaderView:active {
+                background-color: gray;
+            }
+        """)
+        #self.show()
 
     def init_ui(self):
         self.setWindowTitle("Gestionale Pizzeria")
@@ -120,36 +147,8 @@ class VistaModificaPrenotazione(QWidget):
         self.setLayout(layout)
         self.setFixedSize(756, 662)
 
-
-app = QApplication(sys.argv)
-
-app.setStyleSheet("""
-    QPushButton{
-        background-color: "#ff776d";
-        color: "white";
-        text-align: center;
-        border-radius: 6px;
-        font-family:Roboto;
-        font-size: 15px;
-    }
-    QPushButton:hover{
-        background-color: "red";
-        font-size: 17px;
-    }
-    QTableWidget {
-        background-color: white;
-        alternate-background-color: white;
-        selection-background-color: darkcyan;
-        border: 2px solid grey;
-    }
-    QHeaderView:section {
-        background-color: lightgray;
-        font-weight: bold;
-    }
-    QHeaderView:active {
-        background-color: gray;
-    }
-""")
-window = VistaModificaPrenotazione()
-window.show()
-sys.exit(app.exec())
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    vista = VistaModificaPrenotazione()
+    vista.show()
+    sys.exit(app.exec())

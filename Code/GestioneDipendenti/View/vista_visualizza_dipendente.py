@@ -13,11 +13,11 @@ label_font_piccolo = QFont("Roboto", 12)
 header_font = QFont("Roboto", 10)
 header_font.setBold(True)
 
+
 class VistaVisualizzaDipendente(QWidget):
     def __init__(self):
         super().__init__()
         self.init_ui()
-        self.show()
 
     def init_ui(self):
         title = QLabel("<b>Scheda Dati Dipendente<\b>")
@@ -71,9 +71,9 @@ class VistaVisualizzaDipendente(QWidget):
         griglia_top.setSpacing(50)
         griglia_top.setContentsMargins(20, 20, 20, 20)
         griglia_bottom = QGridLayout()
-        griglia_bottom.setContentsMargins(20,20,20,0)
+        griglia_bottom.setContentsMargins(20, 20, 20, 0)
 
-        griglia_top.addWidget(nome,0,0)
+        griglia_top.addWidget(nome, 0, 0)
         griglia_top.addWidget(campo_nome, 0, 1)
         griglia_top.addWidget(email, 0, 2)
         griglia_top.addWidget(campo_email, 0, 3)
@@ -82,7 +82,7 @@ class VistaVisualizzaDipendente(QWidget):
         griglia_top.addWidget(data_ingaggio, 1, 2)
         griglia_top.addWidget(campo_data_ingaggio, 1, 3)
         griglia_top.addWidget(ruolo, 2, 0)
-        griglia_top.addWidget(campo_ruolo,2, 1)
+        griglia_top.addWidget(campo_ruolo, 2, 1)
         griglia_top.addWidget(stipendio, 2, 2)
         griglia_top.addWidget(campo_stipendio, 2, 3)
         griglia_top.addWidget(data_nascita, 3, 0)
@@ -102,11 +102,12 @@ class VistaVisualizzaDipendente(QWidget):
         layout.addLayout(griglia_bottom)
 
         self.setLayout(layout)
-        self.setFixedSize(904,425)
-        self.setContentsMargins(10,0,10,20)
+        self.setFixedSize(904, 425)
+        self.setContentsMargins(10, 0, 10, 20)
 
 
-app = QApplication(sys.argv)
-window = VistaVisualizzaDipendente()
-window.show()
-sys.exit(app.exec())
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    window = VistaVisualizzaDipendente()
+    window.show()
+    sys.exit(app.exec())

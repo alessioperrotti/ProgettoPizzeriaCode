@@ -12,26 +12,9 @@ class ContGestionePrenotazioni(object):
 
         self.view = view
         self.model = model
-        self.update_tabella()
-        self.prenotazione_selezionata = None
         self.view.pulsante_aggiungi.clicked.connect(self.open_vista_inserimento)
 
     def open_vista_inserimento(self):
-        vista_inserimento = VistaInserisciPrenotazione()
-        vista_inserimento.show()
-        controller_inserimento = ContInserisciPrenotazione(self.model, vista_inserimento)
-        controller_inserimento.view.exec()
-        self.update_tabella()
+        self.vista = VistaInserisciPrenotazione()
+        self.vista.show()
 
-    def update_tabella(self):
-        elementi = self.model.lista_prenotazioni
-
-        i = 0
-        for x in elementi:
-            self.view.tab.setItem(i, 0, QTableWidgetItem(str(x.nome)))
-            self.view.tab.setItem(i, 1, QTableWidgetItem(str(x.tavolo)))
-            self.view.tab.setItem(i, 1, QTableWidgetItem(str(x.orario)))
-            self.view.tab.setItem(i, 1, QTableWidgetItem(str(x.giorno)))
-            self.view.tab.setItem(i, 1, QTableWidgetItem(str(x.posti)))
-            self.view.tab.setItem(i, 1, QTableWidgetItem(str(x.codice)))
-            i += 1

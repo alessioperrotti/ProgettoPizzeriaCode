@@ -6,6 +6,9 @@ from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplica
                              QGridLayout, QTableWidget, QHeaderView, QSpacerItem, QLineEdit, QTableWidgetItem,
                              QScrollBar, QScrollArea, QAbstractItemView)
 
+from Code.GestioneDipendenti.View.vista_inserisci_dipendente import VistaInserisciDipendente
+from Code.GestioneDipendenti.View.vista_visualizza_dipendente import VistaVisualizzaDipendente
+
 # Font
 label_font = QFont("Roboto", 24)
 label_font_tit = QFont("Roboto", 32, weight=50)
@@ -44,12 +47,38 @@ def crea_pulsante_back(dimensioni, directory):
     return pulsante_back
 
 
-class TestVideo(QWidget):
+class VistaGestioneDipendenti(QWidget):
 
     def __init__(self):
         super().__init__()
         self.init_ui()
-        self.show()
+        self.setStyleSheet("""
+            QPushButton{
+                background-color: "#ff776d";
+                color: "white";
+                text-align: center;
+                border-radius: 6px;
+                font-family:Roboto;
+            }
+            QPushButton:hover{
+                background-color: "red";
+                font-size: 13px;
+            }
+            QTableWidget {
+                background-color: white;
+                alternate-background-color: white;
+                selection-background-color: darkcyan;
+                border: 2px solid grey;
+            }
+            QHeaderView:section {
+                background-color: lightgray;
+                font-weight: bold;
+            }
+            QHeaderView:active {
+                background-color: gray;
+            }
+        """)
+        # self.show()
 
     def init_ui(self):
         self.setWindowTitle("Gestionale Pizzeria")
@@ -60,17 +89,17 @@ class TestVideo(QWidget):
         layout_orizzontale = QHBoxLayout()
         layout_pulsanti = QVBoxLayout()
 
-        pulsante_mostra = QPushButton("Mostra info\ndipendente")
-        pulsante_mostra.setFixedSize(147, 49)
-        pulsante_modifica = QPushButton("Modifica\ndipendente")
-        pulsante_modifica.setFixedSize(147, 49)
-        pulsante_aggiungi = QPushButton("Aggiungi\nnuovo dipendente")
-        pulsante_aggiungi.setFixedSize(147, 49)
-        pulsante_elimina = QPushButton("Elimina\ndipendente")
-        pulsante_elimina.setFixedSize(147, 49)
+        self.pulsante_mostra = QPushButton("Mostra info\ndipendente")
+        self.pulsante_mostra.setFixedSize(147, 49)
+        self.pulsante_modifica = QPushButton("Modifica\ndipendente")
+        self.pulsante_modifica.setFixedSize(147, 49)
+        self.pulsante_aggiungi = QPushButton("Aggiungi\nnuovo dipendente")
+        self.pulsante_aggiungi.setFixedSize(147, 49)
+        self.pulsante_elimina = QPushButton("Elimina\ndipendente")
+        self.pulsante_elimina.setFixedSize(147, 49)
 
         # Pulsante Back
-        pulsante_back = crea_pulsante_back(35,"png/back.png")
+        self.pulsante_back = crea_pulsante_back(35, "png/back.png")
 
         # Tabella
         tab = crea_tabella(18, 2, 481, 404)
@@ -85,51 +114,36 @@ class TestVideo(QWidget):
 
         # Sistemo i Pulsanti
         layout_pulsanti.addStretch()
-        layout_pulsanti.addWidget(pulsante_mostra, alignment=Qt.AlignmentFlag.AlignCenter)
+        layout_pulsanti.addWidget(self.pulsante_mostra, alignment=Qt.AlignmentFlag.AlignCenter)
         layout_pulsanti.addSpacing(10)
-        layout_pulsanti.addWidget(pulsante_modifica, alignment=Qt.AlignmentFlag.AlignCenter)
+        layout_pulsanti.addWidget(self.pulsante_modifica, alignment=Qt.AlignmentFlag.AlignCenter)
         layout_pulsanti.addSpacing(10)
-        layout_pulsanti.addWidget(pulsante_aggiungi, alignment=Qt.AlignmentFlag.AlignCenter)
+        layout_pulsanti.addWidget(self.pulsante_aggiungi, alignment=Qt.AlignmentFlag.AlignCenter)
         layout_pulsanti.addSpacing(10)
-        layout_pulsanti.addWidget(pulsante_elimina, alignment=Qt.AlignmentFlag.AlignCenter)
+        layout_pulsanti.addWidget(self.pulsante_elimina, alignment=Qt.AlignmentFlag.AlignCenter)
         layout_pulsanti.addStretch()
 
         layout.addLayout(layout_orizzontale)
-        layout.addWidget(pulsante_back)
+        layout.addWidget(self.pulsante_back)
 
         layout.setContentsMargins(30, 20, 10, 20)
         self.setFixedSize(756, 637)
         self.setLayout(layout)
 
+    #     self.pulsante_aggiungi.clicked.connect(self.open_aggiungi_dipendente)
+    #     self.pulsante_mostra.clicked.connect(self.open_mostra_dipendente)
+    #
+    # def open_aggiungi_dipendente(self):
+    #     self.vista_aggiungi = VistaInserisciDipendente()
+    #     self.vista_aggiungi.show()
+    #
+    # def open_mostra_dipendente(self):
+    #     self.vista_mostra = VistaVisualizzaDipendente()
+    #     self.vista_mostra.show()
 
-app = QApplication(sys.argv)
 
-app.setStyleSheet("""
-    QPushButton{
-        background-color: "#ff776d";
-        color: "white";
-        text-align: center;
-        border-radius: 6px;
-        font-family:Roboto;
-    }
-    QPushButton:hover{
-        background-color: "red";
-        font-size: 13px;
-    }
-    QTableWidget {
-        background-color: white;
-        alternate-background-color: white;
-        selection-background-color: darkcyan;
-        border: 2px solid grey;
-    }
-    QHeaderView:section {
-        background-color: lightgray;
-        font-weight: bold;
-    }
-    QHeaderView:active {
-        background-color: gray;
-    }
-""")
-window = TestVideo()
-window.show()
-sys.exit(app.exec())
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    window = VistaGestioneDipendenti()
+    window.show()
+    sys.exit(app.exec())
