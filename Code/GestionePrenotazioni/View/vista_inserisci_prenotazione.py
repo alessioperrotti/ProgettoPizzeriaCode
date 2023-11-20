@@ -107,13 +107,13 @@ class VistaInserisciPrenotazione(QWidget):
         griglia.addWidget(label_calendario,2,0,1,2)
         griglia.addWidget(label_tabella,2,1,1,2)
 
-        pulsante_conferma = QPushButton("Conferma\nprenotazione")
-        pulsante_conferma.setFixedSize(205, 74)
+        self.pulsante_conferma = QPushButton("Conferma\nprenotazione")
+        self.pulsante_conferma.setFixedSize(205, 74)
 
         #layout.setSpacing(20)
         layout.addLayout(griglia)
         layout.addSpacing(20)
-        layout.addWidget(pulsante_conferma,alignment=Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(self.pulsante_conferma,alignment=Qt.AlignmentFlag.AlignCenter)
 
         self.setContentsMargins(10,0,10,45)
         #layout.addStretch()

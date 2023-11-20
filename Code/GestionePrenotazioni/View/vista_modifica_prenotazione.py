@@ -48,7 +48,7 @@ def crea_pulsante_back(dimensioni, directory):
     return pulsante_back
 
 
-class VistaInserisciPrenotazione(QWidget):
+class VistaModificaPrenotazione(QWidget):
     def __init__(self):
         super().__init__()
         self.init_ui()
@@ -150,6 +150,6 @@ app.setStyleSheet("""
         background-color: gray;
     }
 """)
-window = VistaInserisciPrenotazione()
+window = VistaModificaPrenotazione()
 window.show()
 sys.exit(app.exec())
