@@ -66,7 +66,7 @@ class VistaInserisciMateriaPrima(QDialog):
 
         hbox_v1.addSpacerItem(QSpacerItem(130, 130))
 
-        label_costoAlKg = QLabel("Costo al Kg:")
+        label_costoAlKg = QLabel("Costo al Kg(€):")
         label_costoAlKg.setFont(font_label)
         self.campo_costoAlKg = QLineEdit()
         self.campo_costoAlKg.setFixedSize(287, 30)
@@ -75,7 +75,7 @@ class VistaInserisciMateriaPrima(QDialog):
 
         hbox_v1.addSpacerItem(QSpacerItem(40, 40))
 
-        label_qtaDisp = QLabel("Quantità disponibile:")
+        label_qtaDisp = QLabel("Quantità disponibile(Kg):")
         label_qtaDisp.setFont(font_label)
         self.campo_qtaDisp = QLineEdit()
         self.campo_qtaDisp.setFixedSize(287, 30)
@@ -126,14 +126,14 @@ class VistaInserisciMateriaPrima(QDialog):
         hbox_v2.addWidget(self.campo_dataScadenza)
         hbox_v2.addSpacerItem(QSpacerItem(50,50))
 
-        label_qtaLimite = QLabel("Quantità limite:")
+        label_qtaLimite = QLabel("Quantità limite(Kg):")
         label_qtaLimite.setFont(font_label)
         self.campo_qtaLimite = QLineEdit()
         self.campo_qtaLimite.setFixedSize(287, 30)
         grid2.addWidget(label_qtaLimite, 1, 1)
         grid2.addWidget(self.campo_qtaLimite, 2, 1)
 
-        label_qtaOrdineSTD = QLabel("Quantità standard dell'ordine:")
+        label_qtaOrdineSTD = QLabel("Quantità standard dell'ordine(Kg):")
         label_qtaOrdineSTD.setFont(font_label)
         self.campo_qtaOrdineSTD = QLineEdit()
         self.campo_qtaOrdineSTD.setFixedSize(287, 30)
@@ -163,7 +163,7 @@ class VistaInserisciMateriaPrima(QDialog):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
 
-    #window = VistaInserisciMateriaPrima()
-    #window.show()
+    window = VistaInserisciMateriaPrima()
+    window.show()
     sys.exit(app.exec())
 

@@ -15,6 +15,7 @@ class ContGestioneMagazzino(object):
         self.update_tabella()
         self.matprima_selezionata = None
         self.view.pulsante_inserisci.clicked.connect(self.open_inserimento)
+        self.view.search_bar.textChanged.connect(self.filtra_elementi)
         self.view.pulsante_mostrainfo.clicked.connect(self.open_mostrainfo)
         self.view.data_grid.itemSelectionChanged.connect(self.riga_selezionata)
         self.view.pulsante_mostrainfo.clicked.connect(self.open_mostrainfo)
@@ -52,3 +53,12 @@ class ContGestioneMagazzino(object):
             self.view.data_grid.setItem(i, 1, QTableWidgetItem(str(x.codice)))
             self.view.data_grid.setItem(i, 2, QTableWidgetItem(str(x.qta_disponibile)))
             i += 1
+
+
+
+    def filtra_elementi(self):
+
+        testo_ricerca = self.view.search_bar.text().lower()
+        for row in range(self.view.data_grid.rowCount()):
+            nome_materiaprima = self.view.data_grid.item(row, 0).text().lower()
+            self.view.data_grid.setRowHidden(row, testo_ricerca not in nome_materiaprima)
