@@ -104,7 +104,6 @@ class VistaGestioneMagazzino(QWidget):
         self.search_bar.setPlaceholderText("Cerca per nome")
         self.search_bar.setFixedSize(336,29)
         self.search_bar.setStyleSheet("QLineEdit { border: 2px solid black; }")
-        #self.search_bar.textChanged.connect(self.filtra_elementi)
         vbox_tabella.addSpacerItem(QSpacerItem(20, 20))
         vbox_tabella.addWidget(self.search_bar, alignment=Qt.AlignmentFlag.AlignLeft)
         vbox_tabella.addWidget(self.data_grid, alignment=Qt.AlignmentFlag.AlignLeft)
@@ -133,12 +132,7 @@ class VistaGestioneMagazzino(QWidget):
     def enter_event(self, pulsante):
         pulsante.setStyleSheet('background color: #e3645a; ')
 
-    def filtra_elementi(self):
 
-        ricerca = self.search_bar.text().lower()
-        for row in range(self.data_grid.rowCount()):
-                row_hidden = all(ricerca not in self.data_grid.item(row, 1).text().lower())
-                self.data_grid.setRowHidden(row, row_hidden)
 
 
 
