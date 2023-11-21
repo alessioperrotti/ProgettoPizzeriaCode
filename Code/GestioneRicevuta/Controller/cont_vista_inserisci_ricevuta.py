@@ -39,6 +39,7 @@ class ContVistaInserisciRicevuta():
         self.view.pulsante_mostra.setEnabled(self.tavolo_selezionato is not None)
 
 
+
     def conferma_ricevuta(self):
 
         nome_acquirente = self.view.ins_nome.text()

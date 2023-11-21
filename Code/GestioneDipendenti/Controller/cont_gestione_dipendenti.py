@@ -18,6 +18,7 @@ class ContGestioneDipendenti(object):
         vista_inserisci = VistaInserisciDipendente()
         cont_inserisci = ContInserisciDipendente(self.model, vista_inserisci)
         cont_inserisci.view.exec()
+
         self.update_tabella()
 
     def update_tabella(self):
@@ -25,11 +26,16 @@ class ContGestioneDipendenti(object):
         cuochi = self.model.lista_cuochi
 
         i = 0
+
         for x in camerieri:
+
             self.view.tab.setItem(i, 0, QTableWidgetItem(x.nome))
             self.view.tab.setItem(i, 1, QTableWidgetItem(x.ruolo))
             i += 1
+
         for x in cuochi:
+            print(x.nome)
             self.view.tab.setItem(i, 0, QTableWidgetItem(x.nome))
             self.view.tab.setItem(i, 1, QTableWidgetItem(x.ruolo))
             i += 1
+

@@ -6,6 +6,7 @@ from PyQt6.QtWidgets import QApplication
 
 from Code.GestioneOrdiniTavolo.Model.gestore_ordini_tavolo import GestoreOrdiniTavolo
 from Code.GestioneOrdiniTavolo.Model.tavolo import Tavolo
+from Code.GestioneRicevuta.Controller.cont_vista_info_ricevuta import ContVistaInfoRicevuta
 from Code.GestioneRicevuta.Controller.cont_vista_inserisci_ricevuta import ContVistaInserisciRicevuta
 from Code.GestioneRicevuta.Model.gestore_ricevuta import GestoreRicevuta
 from Code.GestioneRicevuta.View.vista_gestione_ricevute import VistaGestioneRicevute
@@ -17,7 +18,9 @@ from PyQt6.QtCore import pyqtSignal, pyqtSlot
 class ContVistaGestioneRicevute():
     ##vista0
     def mostra_info_ricevuta(self):
+       # self.cont_info_ric = ContVistaInfoRicevuta(self.gestore_ric, self.ricevuta_selezionata)
         pass
+
 
 
     def inserisci_ricevuta(self):
@@ -54,6 +57,7 @@ class ContVistaGestioneRicevute():
         self.view.tab.itemSelectionChanged.connect(self.imposta_linea_selezionata)
         self.view.pulsante_inserisci.clicked.connect(self.inserisci_ricevuta)
         self.view.pulsante_elimina.clicked.connect(self.elimina_ricevuta)
+   #     self.view.pulsante_mostra.clicked.connect(self.mostra_info_ricevuta())
 
 
 

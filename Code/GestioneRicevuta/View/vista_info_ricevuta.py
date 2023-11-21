@@ -6,7 +6,7 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplication, QSpacerItem,
                              QSizePolicy, QHBoxLayout, QFrame, QLineEdit, QTableWidget, QHeaderView, QAbstractItemView,
-                             QDialog, QGridLayout)
+                             QDialog, QGridLayout, QScrollArea)
 
 label_font = QFont("Roboto", 24)
 label_font_tit = QFont("Roboto", 20, weight=50)
@@ -38,7 +38,7 @@ def crea_tabella(righe, colonne, larghezza, altezza):
 
 
 
-class VistaInserisciRicevuta(QDialog):
+class VistaInfoRicevuta(QDialog):
     def __init__(self):
         super().__init__()
         self.ricerca = None
@@ -70,8 +70,17 @@ class VistaInserisciRicevuta(QDialog):
 
 
         frame3 = QFrame()
-        frame3.setStyleSheet("border: 1px solid black; border-radius: 5px; padding: 10px")
+        frame3.setStyleSheet(".border: 1px solid black; border-radius: 5px; padding: 5px")
         frame3.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+
+        scroll_area = QScrollArea()
+        layout_inutile = QVBoxLayout()
+        layout_inutile.addWidget(scroll_area)
+        frame3.setLayout(layout_inutile)
+        self.layout_lista = QVBoxLayout()
+        scroll_area.setLayout(self.layout_lista)
+
+
 
         lab_num = QLabel("<b>Numero:</b>")
         lab_nom = QLabel("<b>Nome acquirente:</b>")
@@ -115,10 +124,12 @@ class VistaInserisciRicevuta(QDialog):
         layout.addLayout(l4,0,1)
         layout.addLayout(l5,1,1)
         layout.setContentsMargins(20, 20, 20, 20)
+        layout.setSpacing(20)
 
         layout2 = QVBoxLayout()
         layout2.addWidget(lab_lis)
         layout2.addWidget(frame3)
+
         layout2.setContentsMargins(20, 20, 20, 20)
 
         lay.addWidget(label_titolo)
@@ -159,7 +170,7 @@ class VistaInserisciRicevuta(QDialog):
 
 def main():
     app = QApplication(sys.argv)
-    ex = VistaInserisciRicevuta()
+    ex = VistaInfoRicevuta()
     ex.show()
     sys.exit(app.exec())
 
