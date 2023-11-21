@@ -24,7 +24,7 @@ class ContVistaInserisciRicevuta():
         self.gestore_ord = gestore_ord
         self.view.pulsante_conferma.clicked.connect(self.conferma_ricevuta)
         self.tavolo_selezionato = None
-        lista = []
+
         self.controller_mostra = ContVistaMostraTavoloSelezionato(self.gestore_ric, self.ricevuta_temp)
         self.view.pulsante_mostra.clicked.connect(self.mostra_tavolo_selezionato)
         self.view.tabella.itemSelectionChanged.connect(self.imposta_linea_selezionata)
@@ -57,7 +57,7 @@ class ContVistaInserisciRicevuta():
 
         else:
 
-            self.gestore_ric.aggiungi_ricevuta(self.ricevuta_temp.ammontareLordo, self.ricevuta_temp.data, self.ricevuta_temp.listaProdotti, self.ricevuta_temp.nomeAcquirente, self.ricevuta_temp.numero, self.ricevuta_temp.ora)
+            self.gestore_ric.aggiungi_ricevuta(self.ricevuta_temp.ammontareLordo, self.ricevuta_temp.data, self.ricevuta_temp.listaProdotti, self.ricevuta_temp.nomeAcquirente, self.ricevuta_temp.ora)
 
             #imposta che gli ordini sono stati pagati
             for ordine in self.controller_mostra.ordini:

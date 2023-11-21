@@ -14,12 +14,18 @@ from Code.GestioneRicevuta.Controller.cont_vista_mostra_tavolo_selezionato impor
 from Code.GestioneRicevuta.Model.ricevuta import Ricevuta
 from PyQt6.QtCore import pyqtSignal, pyqtSlot
 
+from Code.GestioneRicevuta.View.vista_info_ricevuta import VistaInfoRicevuta
+
 
 class ContVistaGestioneRicevute():
     ##vista0
     def mostra_info_ricevuta(self):
-       # self.cont_info_ric = ContVistaInfoRicevuta(self.gestore_ric, self.ricevuta_selezionata)
-        pass
+        self.cont_info_ric.view = VistaInfoRicevuta()
+        self.cont_info_ric.numero_selezionato = self.numero_selezionato
+        self.cont_info_ric.imposta_info()
+        self.cont_info_ric.view.exec()
+
+
 
 
 
@@ -34,14 +40,19 @@ class ContVistaGestioneRicevute():
         for item in item_selezionati:
             if item.column() == 1:  # cioe prendo l'elemento della seconda colonna
                 self.numero_selezionato = int(item.text())
+
+
                 break
 
 
-        self.view.pulsante_elimina.setEnabled(True)
+        self.view.pulsante_mostra.setEnabled(self.numero_selezionato is not None)
+        self.view.pulsante_elimina.setEnabled(self.numero_selezionato is not None)
     def elimina_ricevuta(self):
         self.gestore_ric.elimina_ricevuta(self.numero_selezionato)
         print("c")
         self.aggiorna_tabella()
+        self.numero_selezionato = None
+        self.view.tab.clearSelection()
 
     def __init__(self, gestore_ric:GestoreRicevuta, gestore_ord:GestoreOrdiniTavolo,lista_tav:list[Tavolo], stacked_widget:QStackedWidget):
         self.numero_selezionato = None
@@ -53,18 +64,20 @@ class ContVistaGestioneRicevute():
         self.stacked_widget = stacked_widget
         self.aggiorna_tabella()
         self.cont_inserisci = ContVistaInserisciRicevuta(self.gestore_ric, self.gestore_ord, self.lista_tav)
+        self.cont_info_ric = ContVistaInfoRicevuta(self.gestore_ric)
 
         self.view.tab.itemSelectionChanged.connect(self.imposta_linea_selezionata)
         self.view.pulsante_inserisci.clicked.connect(self.inserisci_ricevuta)
         self.view.pulsante_elimina.clicked.connect(self.elimina_ricevuta)
-   #     self.view.pulsante_mostra.clicked.connect(self.mostra_info_ricevuta())
-
-
+        self.view.pulsante_mostra.clicked.connect(self.mostra_info_ricevuta)
+        self.view.pulsante_mostra.setEnabled(self.numero_selezionato is not None)
+        self.view.pulsante_elimina.setEnabled(self.numero_selezionato is not None)
 
     def inserisci_ricevuta(self):
         self.cont_inserisci.aggiorna_tabella()
         self.cont_inserisci.view.exec()
         self.aggiorna_tabella()
+
 
 
     def aggiorna_tabella(self):

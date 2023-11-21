@@ -1,29 +1,47 @@
 from PyQt6.QtWidgets import QLabel
 
+from Code.GestioneMenu.Model.prodotto import Prodotto
 from Code.GestioneRicevuta.Model.gestore_ricevuta import GestoreRicevuta
 from Code.GestioneRicevuta.Model.ricevuta import Ricevuta
 from Code.GestioneRicevuta.View.vista_info_ricevuta import VistaInfoRicevuta
 
 
 class ContVistaInfoRicevuta():
-    def __init__(self, gestore_ric:GestoreRicevuta, ricevuta_selezionata:Ricevuta):
+
+    def __init__(self, gestore_ric:GestoreRicevuta):
+
         super().__init__()
+        self.ricevuta_selezionata = None
         self.view = VistaInfoRicevuta()
         self.gestore_ric = gestore_ric
-        self.ricevuta_selezionata = ricevuta_selezionata
+        self.numero_selezionato = None
 
     def imposta_info(self):
-        self.view.lab_num_s = self.ricevuta_selezionata.numero
-        self.view.lab_amm_s = self.ricevuta_selezionata.ammontareLordo
-        self.view.lab_nom_s = self.ricevuta_selezionata.nomeAcquirente
-        self.view.lab_ora_s = self.ricevuta_selezionata.ora
-        self.view.lab_data_s = self.ricevuta_selezionata.data
+
+        self.ricevuta_selezionata = self.gestore_ric.ricerca_ricevuta_numero(self.numero_selezionato)
+
+        self.view.lab_num_s.setText(str(self.ricevuta_selezionata.numero))
+
+
+        self.view.lab_amm_s.setText(str(self.ricevuta_selezionata.ammontareLordo))
+
+        self.view.lab_nom_s.setText(self.ricevuta_selezionata.nomeAcquirente)
+
+        self.view.lab_ora_s.setText(self.ricevuta_selezionata.ora)
+
+        self.view.lab_data_s.setText(self.ricevuta_selezionata.data)
+
         self.imposta_lista()
+        print("c")
 
     def imposta_lista(self):
+
+        list = self.ricevuta_selezionata.listaProdotti
+        print(list)
+        print(list[0].nome)
         self.ricevuta_selezionata.listaProdotti.sort(key=lambda x: x.nome)
         for prodotto in self.ricevuta_selezionata.listaProdotti:
-            self.view.layout_lista.addWidget(QLabel(f'<font color="black">&#8226;</font> '+ prodotto.nome + " " + str(prodotto.prezzo)))
+            self.view.layout_lista.addWidget(QLabel(f'<font color="black">&#8226;</font> '+ prodotto.nome + " " + str(prodotto.prezzo_al_pubblico)))
         pass
 
 

@@ -21,11 +21,11 @@ class MainWindow(QWidget):
 
     def init_ui(self):
         gestore_ric = GestoreRicevuta()
-        ric1 = Ricevuta(1,3,None,"Andrea",3,"esempio1")
-        ric2 = Ricevuta(1,3,None,"Alessio",3,"esempio1")
+        ric1 = Ricevuta(1,"c",None,"Andrea",3,"esempio1")
+        ric2 = Ricevuta(1,"c",None,"Alessio",3,"esempio1")
 
-        gestore_ric.aggiungi_ricevuta(1,3,None,"Andrea",15,"esempio1")
-        gestore_ric.aggiungi_ricevuta(1,3,None,"Ale",12,"esempio1")
+        gestore_ric.aggiungi_ricevuta(1,"c",None,"Andrea","esempio1")
+        gestore_ric.aggiungi_ricevuta(1,"c",None,"Ale","esempio1")
 
         gestore_ord = GestoreOrdiniTavolo()
 
