@@ -1,5 +1,5 @@
 from Code.GestioneRicevuta.Model.ricevuta import Ricevuta
-from Code.Interfaccie.oggetto_con_id import OggettoConID
+from Code.Interfacce.oggetto_con_id import OggettoConID
 
 
 class GestoreRicevuta(OggettoConID):
