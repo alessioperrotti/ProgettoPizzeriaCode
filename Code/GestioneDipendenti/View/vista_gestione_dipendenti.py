@@ -4,7 +4,7 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont, QPixmap, QIcon
 from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplication, QSizePolicy, QHBoxLayout,
                              QGridLayout, QTableWidget, QHeaderView, QSpacerItem, QLineEdit, QTableWidgetItem,
-                             QScrollBar, QScrollArea, QAbstractItemView)
+                             QScrollBar, QScrollArea, QAbstractItemView, QDialog)
 
 from Code.GestioneDipendenti.View.vista_inserisci_dipendente import VistaInserisciDipendente
 from Code.GestioneDipendenti.View.vista_visualizza_dipendente import VistaVisualizzaDipendente
@@ -47,7 +47,7 @@ def crea_pulsante_back(dimensioni, directory):
     return pulsante_back
 
 
-class VistaGestioneDipendenti(QWidget):
+class VistaGestioneDipendenti(QDialog):
 
     def __init__(self):
         super().__init__()
@@ -102,14 +102,14 @@ class VistaGestioneDipendenti(QWidget):
         self.pulsante_back = crea_pulsante_back(35, "png/back.png")
 
         # Tabella
-        tab = crea_tabella(18, 2, 481, 404)
-        tab.setHorizontalHeaderLabels(["NOME", "RUOLO"])
-        tab.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
-        tab.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+        self.tab = crea_tabella(18, 2, 481, 404)
+        self.tab.setHorizontalHeaderLabels(["NOME", "RUOLO"])
+        self.tab.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+        self.tab.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
 
         layout.addWidget(title, alignment=Qt.AlignmentFlag.AlignTop)
 
-        layout_orizzontale.addWidget(tab, alignment=Qt.AlignmentFlag.AlignLeft)
+        layout_orizzontale.addWidget(self.tab, alignment=Qt.AlignmentFlag.AlignLeft)
         layout_orizzontale.addLayout(layout_pulsanti)
 
         # Sistemo i Pulsanti

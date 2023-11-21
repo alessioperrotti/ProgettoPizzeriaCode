@@ -16,6 +16,7 @@ class ContInserisciDipendente(object):
         self.view.pulsante.clicked.connect(self.confirm_close)
 
     def confirm_close(self):
+
         nome = self.view.edit_nome.text()
         cognome = self.view.edit_cognome.text()
         ruolo = self.view.edit_ruolo.currentText()
@@ -28,13 +29,14 @@ class ContInserisciDipendente(object):
         current_date = datetime.now().date()
 
         if ruolo == "Cuoco":
-            new_cuoco = Cuoco(nome,cognome,email,stipendio,username,password)
+            new_cuoco = Cuoco(nome,cognome,email,username,password,stipendio)
             new_cuoco.data_nascita = data_nascita
             new_cuoco.data_ingaggio = current_date
-            self.model.aggiungi_cuoco(nome,cognome,email,stipendio,username,password)
-        if ruolo == "Cameriere":
+            self.model.aggiungi_cuoco(new_cuoco)
+        else:
             new_cameriere = Cameriere(nome,cognome,email,stipendio,username,password)
             new_cameriere.data_nascita = data_nascita
             new_cameriere.data_ingaggio = current_date
+            self.model.aggiungi_cameriere(new_cameriere)
 
         self.view.close()
