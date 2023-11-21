@@ -50,17 +50,28 @@ class VistaInserisciRicevuta(QDialog):
             arg.setFont(font)
 
 
+
     def initUi(self):
         # Definizione oggetti
 
         label_titolo = QLabel("<b>Scheda dati ricevuta</b>")
         label_titolo.setFont(label_font)
-        label_titolo.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
+
 
         frame1 = QFrame()
         frame1.setFrameShape(QFrame.Shape.HLine)
+
+
         frame2 = QFrame()
         frame2.setFrameShape(QFrame.Shape.HLine)
+        frame2.setFrameShadow(QFrame.Shadow.Plain)
+
+
+
+
+        frame3 = QFrame()
+        frame3.setStyleSheet("border: 1px solid black; border-radius: 5px; padding: 10px")
+        frame3.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
 
         lab_num = QLabel("<b>Numero:</b>")
         lab_nom = QLabel("<b>Nome acquirente:</b>")
@@ -68,13 +79,13 @@ class VistaInserisciRicevuta(QDialog):
         lab_data = QLabel("<b>Data di emissione:</b>")
         lab_ora = QLabel("<b>Orario di emissione:</b>")
         lab_lis = QLabel("<b>Lista Prodotti:</b>")
-        self.setFont(label_font_piccolo, lab_num, lab_ora, lab_lis, lab_data, lab_amm, lab_nom)
+        self.settaFont(label_font_piccolo, lab_num, lab_ora, lab_lis, lab_data, lab_amm, lab_nom)
         self.lab_num_s = QLabel()
         self.lab_nom_s = QLabel()
         self.lab_amm_s = QLabel()
         self.lab_data_s = QLabel()
         self.lab_ora_s = QLabel()
-        self.setFont(label_font_piccolo, self.lab_num_s,self.lab_nom_s,self.lab_amm_s ,self.lab_data_s,self.lab_ora_s )
+        self.settaFont(label_font_piccolo, self.lab_num_s,self.lab_nom_s,self.lab_amm_s ,self.lab_data_s,self.lab_ora_s )
         l1 = QHBoxLayout()
         l2 = QHBoxLayout()
         l3 = QHBoxLayout()
@@ -105,12 +116,22 @@ class VistaInserisciRicevuta(QDialog):
         layout.addLayout(l5,1,1)
         layout.setContentsMargins(20, 20, 20, 20)
 
+        layout2 = QVBoxLayout()
+        layout2.addWidget(lab_lis)
+        layout2.addWidget(frame3)
+        layout2.setContentsMargins(20, 20, 20, 20)
 
         lay.addWidget(label_titolo)
         lay.addWidget(frame1)
         lay.addLayout(layout)
         lay.addWidget(frame2)
-        lay.addWidget(lab_lis)
+
+
+        lay.addLayout(layout2)
+
+
+
+
 
         self.setStyleSheet("""
           
