@@ -124,6 +124,7 @@ class VistaInserisciRicevuta(QDialog):
         lay.addWidget(label_titolo)
         lay.addWidget(frame1)
         lay.addLayout(layout)
+        lay.addSpacing(5)
         lay.addWidget(frame2)
 
 

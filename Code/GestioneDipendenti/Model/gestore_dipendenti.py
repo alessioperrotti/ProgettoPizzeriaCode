@@ -6,8 +6,8 @@ class GestoreDipendenti():
         self.lista_cuochi = []
         self.lista_camerieri = []
 
-    def aggiungi_cuoco(self,nome,cognome,email,stipendio):
-        self.lista_cuochi.append(Cuoco(nome,cognome,email,stipendio))
+    def aggiungi_cuoco(self,nome, cognome, email, stipendio,username,password):
+        self.lista_cuochi.append(Cuoco(nome, cognome, email, stipendio,username,password))
 
     def ricerca_cuoco_nome(self, nome):
         list = []
@@ -25,8 +25,8 @@ class GestoreDipendenti():
         self.lista_camerieri.remove(cuoco_da_eliminare)
 
 #########################################################################
-    def aggiungi_cameriere(self, nome, cognome, email, stipendio):
-        self.lista_camerieri.append(Cuoco(nome, cognome, email, stipendio))
+    def aggiungi_cameriere(self, nome, cognome, email, stipendio,username,password):
+        self.lista_camerieri.append(Cuoco(nome, cognome, email, stipendio,username,password))
 
     def ricerca_cameriere_nome(self, nome):
         list = []
