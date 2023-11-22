@@ -16,6 +16,7 @@ def crea_pulsante(nome, directory):
     pulsante = QPushButton()
     label = QLabel(nome)
     label.setFont(label_font_piccolo)
+    label.setStyleSheet("""QLabel{color: "white";}""")
     layout = QHBoxLayout()
     layout.addStretch()
     layout.addWidget(crea_immagine(directory, 50))
@@ -23,8 +24,13 @@ def crea_pulsante(nome, directory):
     layout.addStretch()
     pulsante.setLayout(layout)
     pulsante.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
-    pulsante.setStyleSheet(
-        ".QPushButton {background-color: #ff776d; border: 2px solid black; border-radius: 10px; padding: 10px}")
+    pulsante.setStyleSheet("""
+        QPushButton {
+            color : "white"
+            background-color: #ff776d;
+            border-radius: 6px;
+            }
+       """)
     pulsante.setFixedSize(230, 100)
     return pulsante
 
@@ -74,11 +80,30 @@ class VistaHomeAdmin(QWidget):
     def __init__(self):
         super().__init__()
         self.initUi()
+        self.setStyleSheet("""
+            QPushButton{
+                background-color: "#ff776d";
+                color: "white";
+                text-align: center;
+                border-radius: 6px;
+            }
+            QPushButton:hover{
+                background-color: "red";
+                font-size: 13px;
+            }
+            QTableWidget {
+                background-color: white;
+                alternate-background-color: white;
+                selection-background-color: darkcyan;
+                border: 2px solid grey;
+            }
+        """)
 
     def initUi(self):
         # definizione oggetti
         label = QLabel("ACCESSO: Admin")
         label.setFont(label_font_tit)
+
         self.puls_stats = crea_pulsante("Statistiche", "png/stats.png")
         self.puls_mag = crea_pulsante("Magazzino", "png/magazzino.png")
         self.puls_dip = crea_pulsante("Dipendenti", "png/dipendenti.png")
@@ -86,6 +111,7 @@ class VistaHomeAdmin(QWidget):
         self.puls_men = crea_pulsante("Modifica Menu", "png/stats.png")
         self.puls_pre = crea_pulsante("Prenotazioni", "png/stats.png")
         self.puls_ric = crea_pulsante("Ricevute", "png/stats.png")
+
 
         back = crea_immagine("png/back.png", 35)
 
@@ -100,6 +126,7 @@ class VistaHomeAdmin(QWidget):
         layout_centrale.addLayout(griglia)
         layout_centrale.addStretch()
 
+
         griglia.addWidget(self.puls_stats, 1, 1)
         griglia.addWidget(self.puls_mag, 1, 2)
         griglia.addWidget(self.puls_dip, 2, 1)
@@ -107,6 +134,7 @@ class VistaHomeAdmin(QWidget):
         griglia.addWidget(self.puls_men, 3, 1)
         griglia.addWidget(self.puls_pre, 3, 2)
         griglia.addWidget(self.puls_ric, 4, 1, 1, 2, alignment=Qt.AlignmentFlag.AlignCenter)
+
 
         layout.addSpacing(10)
         layout.addWidget(label)
@@ -124,30 +152,8 @@ class VistaHomeAdmin(QWidget):
         self.setLayout(layout_orizzontale)
 
 
-
-def main():
-    app = QApplication(sys.argv)
-    app.setStyleSheet("""
-    QPushButton{
-        background-color: "#ff776d";
-        color: "white";
-        text-align: center;
-        border-radius: 6px;
-    }
-    QPushButton:hover{
-        background-color: "red";
-        font-size: 13px;
-    }
-    QTableWidget {
-        background-color: white;
-        alternate-background-color: white;
-        selection-background-color: darkcyan;
-        border: 2px solid grey;
-    }
-""")
-    ex = VistaHomeAdmin()
-    sys.exit(app.exec())
-
-
 if __name__ == '__main__':
-    main()
+    app = QApplication(sys.argv)
+    window = VistaHomeAdmin()
+    window.show()
+    sys.exit(app.exec())
