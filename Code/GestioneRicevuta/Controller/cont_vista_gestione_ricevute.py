@@ -87,7 +87,10 @@ class ContVistaGestioneRicevute():
         i=0
         for ricevuta in lista_ric:
             self.view.tab.setItem(i,0, QTableWidgetItem(ricevuta.nomeAcquirente)) #acquirente
-            self.view.tab.setItem(i, 1, QTableWidgetItem(str(ricevuta.numero)))
+            stringa_a_4_cifre = "{:04d}".format(ricevuta.numero)
+            print(stringa_a_4_cifre)
+            self.view.tab.setItem(i, 1, QTableWidgetItem(stringa_a_4_cifre))
+
             self.view.tab.setItem(i, 2, QTableWidgetItem(str(ricevuta.data)))
             i += 1
 

@@ -74,10 +74,17 @@ class VistaInfoRicevuta(QDialog):
         frame3.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
 
         scroll_area = QScrollArea()
+        scroll_area.setWidgetResizable(True)
+
         layout_inutile = QVBoxLayout()
         layout_inutile.addWidget(scroll_area)
         frame3.setLayout(layout_inutile)
+        self.contenitore = QFrame()
+        self.contenitore.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        
+
         self.layout_lista = QVBoxLayout()
+        self.contenitore.setLayout(self.layout_lista)
         scroll_area.setLayout(self.layout_lista)
 
 

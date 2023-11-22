@@ -24,10 +24,11 @@ class MainWindow(QWidget):
         ric1 = Ricevuta(1,"c",None,"Andrea",3,"esempio1")
         ric2 = Ricevuta(1,"c",None,"Alessio",3,"esempio1")
 
-        gestore_ric.aggiungi_ricevuta(1,"c",None,"Andrea","esempio1")
-        gestore_ric.aggiungi_ricevuta(1,"c",None,"Ale","esempio1")
+        # gestore_ric.aggiungi_ricevuta(1,"c",None,"Andrea","esempio1")
+        # gestore_ric.aggiungi_ricevuta(1,"c",None,"Ale","esempio1")
 
         gestore_ord = GestoreOrdiniTavolo()
+
 
         tavolo1 = Tavolo(1, 10, None)
         tavolo2 = Tavolo(2, 10, None)
@@ -59,6 +60,10 @@ class MainWindow(QWidget):
 
         gestore_ord.conferma_ordine(ord1)
         gestore_ord.conferma_ordine(ord2)
+        gestore_ord.conferma_ordine(ord3)
+        gestore_ord.conferma_ordine(ord3)
+        gestore_ord.conferma_ordine(ord3)
+        gestore_ord.conferma_ordine(ord3)
         gestore_ord.conferma_ordine(ord3)
         gestore_ord.conferma_ordine(ord3)
         gestore_ord.conferma_ordine(ord3)

@@ -56,6 +56,10 @@ class ContGestioneMagazzino(object):
 
 
 
+
+
+
+
     def filtra_elementi(self):
 
         testo_ricerca = self.view.search_bar.text().lower()

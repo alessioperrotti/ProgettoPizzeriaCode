@@ -43,6 +43,7 @@ class ContVistaInfoRicevuta():
         for prodotto in self.ricevuta_selezionata.listaProdotti:
             self.view.layout_lista.addWidget(QLabel(f'<font color="black">&#8226;</font> '+ prodotto.nome + " " + str(prodotto.prezzo_al_pubblico)))
         pass
+        self.view.layout_lista.addStretch()
 
 
 
