@@ -16,12 +16,12 @@ class GestoreDipendenti():
     def estrai_cuoco_nome(self, nome):
         for cuoco in self.lista_cuochi:
             if nome == cuoco.nome:
-                print("x")
+                print("trovato")
                 return cuoco
 
-    def elimina_cuoco(self, cognome):
-        cuoco_da_eliminare = self.estrai_cuoco_nome(cognome)
-        self.lista_camerieri.remove(cuoco_da_eliminare)
+    def elimina_cuoco(self, nome):
+        cuoco_da_eliminare = self.estrai_cuoco_nome(nome)
+        self.lista_cuochi.remove(cuoco_da_eliminare)
 
     #########################################################################
     def aggiungi_cameriere(self, cameriere):
@@ -38,6 +38,8 @@ class GestoreDipendenti():
             if nome == cameriere.nome:
                 return cameriere
 
-    def elimina_cameriere(self, cognome):
-        cameriere_da_eliminare = self.estrai_cameriere_nome(cognome)
+    def elimina_cameriere(self, nome):
+        cameriere_da_eliminare = self.estrai_cameriere_nome(nome)
         self.lista_camerieri.remove(cameriere_da_eliminare)
+
+

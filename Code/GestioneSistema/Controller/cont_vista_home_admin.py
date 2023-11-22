@@ -4,7 +4,8 @@ from Code.GestioneSistema.View.vista_home_admin import VistaHomeAdmin
 
 
 class ContVistaHomeAdmin():
-    def __init__(self,stacked:QStackedWidget):
+    def __init__(self,stacked: QStackedWidget):
         self.view = VistaHomeAdmin()
         stacked.addWidget(self.view)
+        self.view.clicked.connect(self.login)
 

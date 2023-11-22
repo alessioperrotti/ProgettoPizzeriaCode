@@ -23,8 +23,13 @@ def crea_pulsante(nome, directory):
     layout.addStretch()
     pulsante.setLayout(layout)
     pulsante.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
-    pulsante.setStyleSheet(
-        ".QPushButton {background-color: #ff776d; border: 2px solid black; border-radius: 10px; padding: 10px}")
+    pulsante.setStyleSheet("""
+        QPushButton {
+            color : "white"
+            background-color: #ff776d;
+            border-radius: 6px;
+            }
+       """)
     pulsante.setFixedSize(230, 100)
     return pulsante
 
@@ -74,6 +79,24 @@ class VistaHomeAdmin(QWidget):
     def __init__(self):
         super().__init__()
         self.initUi()
+        self.setStyleSheet("""
+            QPushButton{
+                background-color: "#ff776d";
+                color: "white";
+                text-align: center;
+                border-radius: 6px;
+            }
+            QPushButton:hover{
+                background-color: "red";
+                font-size: 13px;
+            }
+            QTableWidget {
+                background-color: white;
+                alternate-background-color: white;
+                selection-background-color: darkcyan;
+                border: 2px solid grey;
+            }
+        """)
 
     def initUi(self):
         # definizione oggetti
@@ -124,30 +147,8 @@ class VistaHomeAdmin(QWidget):
         self.setLayout(layout_orizzontale)
 
 
-
-def main():
-    app = QApplication(sys.argv)
-    app.setStyleSheet("""
-    QPushButton{
-        background-color: "#ff776d";
-        color: "white";
-        text-align: center;
-        border-radius: 6px;
-    }
-    QPushButton:hover{
-        background-color: "red";
-        font-size: 13px;
-    }
-    QTableWidget {
-        background-color: white;
-        alternate-background-color: white;
-        selection-background-color: darkcyan;
-        border: 2px solid grey;
-    }
-""")
-    ex = VistaHomeAdmin()
-    sys.exit(app.exec())
-
-
 if __name__ == '__main__':
-    main()
+    app = QApplication(sys.argv)
+    window = VistaHomeAdmin()
+    window.show()
+    sys.exit(app.exec())
