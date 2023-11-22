@@ -15,13 +15,13 @@ class GestoreDipendenti():
             if nome == cuoco.nome:
                 list.append(cuoco)
 
-    def ricerca_cuoco_cognome(self, cognome):
+    def estrai_cuoco_nome(self, nome):
         for cuoco in self.lista_cuochi:
-            if cognome == cuoco.cognome:
+            if nome == cuoco.nome:
                 return cuoco
 
     def elimina_cuoco(self, cognome):
-        cuoco_da_eliminare = self.ricerca_cuoco_cognome(cognome)
+        cuoco_da_eliminare = self.estrai_cuoco_nome(cognome)
         self.lista_camerieri.remove(cuoco_da_eliminare)
 
 #########################################################################
@@ -34,11 +34,11 @@ class GestoreDipendenti():
             if nome == cameriere.nome:
                 list.append(cameriere)
 
-    def ricerca_cameriere_cognome(self, cognome):
+    def estrai_cameriere_nome(self, nome):
         for cameriere in self.lista_camerieri:
-            if cognome == cameriere.cognome:
+            if nome == cameriere.nome:
                 return cameriere
 
     def elimina_cameriere(self, cognome):
-        cameriere_da_eliminare = self.ricerca_cameriere_cognome(cognome)
+        cameriere_da_eliminare = self.estrai_cameriere_nome(cognome)
         self.lista_camerieri.remove(cameriere_da_eliminare)

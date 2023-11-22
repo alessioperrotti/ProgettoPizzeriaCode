@@ -25,6 +25,7 @@ def crea_tabella(righe, colonne, larghezza, altezza):
     header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
     tabella.verticalHeader().setVisible(False)
     tabella.setFixedSize(larghezza, altezza)
+    tabella.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
     return tabella
 
 
@@ -102,7 +103,7 @@ class VistaGestioneDipendenti(QDialog):
         self.pulsante_back = crea_pulsante_back(35, "png/back.png")
 
         # Tabella
-        self.tab = crea_tabella(18, 2, 481, 404)
+        self.tab = crea_tabella(0, 2, 481, 404)
         self.tab.setHorizontalHeaderLabels(["NOME", "RUOLO"])
         self.tab.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.tab.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)

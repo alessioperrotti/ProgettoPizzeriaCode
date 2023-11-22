@@ -5,12 +5,6 @@ from Code.GestioneDipendenti.Controller.cont_gestione_dipendenti import ContGest
 from Code.GestioneDipendenti.Model.gestore_dipendenti import GestoreDipendenti
 from Code.GestioneDipendenti.View.vista_gestione_dipendenti import VistaGestioneDipendenti
 
-
-# if __name__ == '__main__':
-#     app = QApplication(sys.argv)
-#     vista_home = VistaGestioneDipendenti()
-#     vista_home.show()
-#     sys.exit(app.exec())
 class MainWindow(QWidget):
     def __init__(self):
         super(MainWindow, self).__init__()
