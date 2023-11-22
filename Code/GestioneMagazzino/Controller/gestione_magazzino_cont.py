@@ -21,6 +21,7 @@ class ContGestioneMagazzino(object):
         self.view.pulsante_mostrainfo.clicked.connect(self.open_mostrainfo)
         self.view.data_grid.itemSelectionChanged.connect(self.riga_selezionata)
         self.view.pulsante_elimina.clicked.connect(self.elimina_elemento)
+        self.view.pulsante_modifica.clicked.connect(self.open_modifica)
 
     def open_inserimento(self):
 
@@ -68,9 +69,8 @@ class ContGestioneMagazzino(object):
 
     def open_modifica(self):
         dialog_modifica = VistaModificaMateriaPrima()
-        controller_modifica = ContModificaMateriaPrima(dialog_modifica, self.model)
         matprima_temp = self.model.estrai_per_codice(self.matprima_selezionata)
-        controller_modifica.riempi_labels(matprima_temp)
+        controller_modifica = ContModificaMateriaPrima(dialog_modifica, self.model, matprima_temp)
         controller_modifica.view.exec()
         self.update_tabella()
 

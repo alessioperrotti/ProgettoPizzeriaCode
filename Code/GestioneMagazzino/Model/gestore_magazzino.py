@@ -17,24 +17,17 @@ class GestoreMagazzino(object):
 
 
 
-    def modifica_materiaprima(self, codice, new_nome, new_costo_al_kg, new_qta_disponibile,
+    def modifica_materiaprima(self, codice_ricerca, new_costo_al_kg, new_qta_disponibile,
                               new_qta_limite, new_qta_ordine_STD, new_data_scadenza):
 
-        found = False
-
+        matprima_da_modificare: MateriaPrima = self.estrai_per_codice(codice_ricerca)
         for x in self.lista_materieprime:
-            if x.codice == codice:
-                x.nome = new_nome
+            if int(matprima_da_modificare.codice) == x.codice:
                 x.costo_al_kg = new_costo_al_kg
                 x.qta_disponibile = new_qta_disponibile
                 x.qta_limite = new_qta_limite
                 x.qta_ordine_STD = new_qta_ordine_STD
                 x.data_scadenza = new_data_scadenza
-                found = True
-
-        if not found:
-            pass
-
 
     def estrai_per_codice(self, codice):
 
