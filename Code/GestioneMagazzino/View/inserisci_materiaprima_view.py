@@ -50,7 +50,7 @@ class VistaInserisciMateriaPrima(QDialog):
         linea = QFrame()
         linea.setFrameShape(QFrame.Shape.HLine)
 
-        label_codice = QLabel("Codice:")
+        label_codice = QLabel("Codice (4 cifre):")
         label_codice.setFont(font_label)
         self.campo_codice = QLineEdit()
         self.campo_codice.setFixedSize(287,30)

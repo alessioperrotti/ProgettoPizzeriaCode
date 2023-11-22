@@ -1,7 +1,7 @@
 
 class MateriaPrima(object):
 
-    def __init__(self, codice, nome, costo_al_kg, qta_disponibile, qta_limite, qta_ordine_STD):
+    def __init__(self, codice, nome, costo_al_kg, qta_disponibile, qta_limite, qta_ordine_STD, data_scadenza):
 
         self.codice = codice
         self.nome = nome
@@ -9,4 +9,4 @@ class MateriaPrima(object):
         self.qta_disponibile = qta_disponibile
         self.qta_limite = qta_limite
         self.qta_ordine_STD = qta_ordine_STD
-        self.data_scadenza = None
+        self.data_scadenza = data_scadenza

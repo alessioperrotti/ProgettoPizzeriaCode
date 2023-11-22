@@ -2,7 +2,9 @@ from Code.GestioneMagazzino.View.inserisci_materiaprima_view import VistaInseris
 from Code.GestioneMagazzino.View.gestione_magazzino_view import VistaGestioneMagazzino
 from Code.GestioneMagazzino.View.materia_prima_view import VistaMateriaPrima
 from Code.GestioneMagazzino.Controller.inserisci_materiaprima_cont import ContInserisciMateriaPrima
+from Code.GestioneMagazzino.Controller.modifica_materiaprima_cont import ContModificaMateriaPrima
 from Code.GestioneMagazzino.Model.gestore_magazzino import GestoreMagazzino
+from Code.GestioneMagazzino.View.modifica_materiaprima_view import VistaModificaMateriaPrima
 from PyQt6.QtWidgets import QTableWidgetItem
 from Code.GestioneMagazzino.Controller.materia_prima_cont import ContMateriaPrima
 
@@ -45,12 +47,11 @@ class ContGestioneMagazzino(object):
         dialog_mostrainfo.exec()
 
     def update_tabella(self):
-        elementi = self.model.lista_materieprime
 
+        elementi = self.model.lista_materieprime
+        self.view.data_grid.setRowCount(len(elementi))
         i = 0
         for x in elementi:
-
-            self.view.data_grid.setRowCount(i + 1)
             self.view.data_grid.setItem(i, 0, QTableWidgetItem(str(x.nome)))
             self.view.data_grid.setItem(i, 1, QTableWidgetItem(str(x.codice)))
             self.view.data_grid.setItem(i, 2, QTableWidgetItem(str(x.qta_disponibile)))
@@ -61,12 +62,13 @@ class ContGestioneMagazzino(object):
 
         self.model.elimina_materiaprima(self.matprima_selezionata)
         self.update_tabella()
+        self.matprima_selezionata = None
         self.view.data_grid.clearSelection()
         pass
 
-
-
-
+    def open_modifica(self):
+        dialog_modifica = VistaModificaMateriaPrima()
+        #controller_modifica = C
 
 
     def filtra_elementi(self):
