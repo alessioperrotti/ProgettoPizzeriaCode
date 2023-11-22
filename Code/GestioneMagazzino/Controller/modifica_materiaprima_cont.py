@@ -3,11 +3,13 @@ from Code.GestioneMagazzino.Model.gestore_magazzino import GestoreMagazzino
 from Code.GestioneMagazzino.Model.materia_prima import MateriaPrima
 class ContModificaMateriaPrima(object):
 
-    def __init__(self, view: VistaModificaMateriaPrima, model: GestoreMagazzino):
+    def __init__(self, view: VistaModificaMateriaPrima, model: GestoreMagazzino, matprima_da_modificare: MateriaPrima):
 
         self.view = view
         self.model = model
+        self.matprima_da_modificare = matprima_da_modificare
         self.view.pulsante_conferma.clicked.connect(self.conferma_modifica)
+        self.riempi_labels(matprima_da_modificare)
 
     def riempi_labels(self, materiaprima: MateriaPrima):
 
@@ -22,7 +24,7 @@ class ContModificaMateriaPrima(object):
         new_qta_limite = self.view.campo_qtaLimite.text()
         new_qta_ordine_STD = self.view.campo_qtaOrdineSTD.text()
 
-        self.model.modifica_materiaprima(new_costo_al_kg, new_qta_disponibile, new_qta_limite,
+        self.model.modifica_materiaprima(self.matprima_da_modificare.codice, new_costo_al_kg, new_qta_disponibile, new_qta_limite,
                                          new_qta_ordine_STD, new_data_scadenza)
 
         self.view.close()
