@@ -122,7 +122,7 @@ class VistaHomeAdmin(QWidget):
 
         self.setFixedSize(994, 637)
         self.setLayout(layout_orizzontale)
-        self.show()
+
 
 
 def main():

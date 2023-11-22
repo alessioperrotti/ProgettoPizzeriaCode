@@ -1,16 +1,22 @@
+from PyQt6.QtWidgets import QMessageBox, QStackedWidget
+
 from Code.GestioneDipendenti.Model.gestore_dipendenti import GestoreDipendenti
+from Code.GestioneSistema.Controller.cont_vista_home_admin import ContVistaHomeAdmin
 from Code.GestioneSistema.View.vista_login_dipendente import VistaLoginDipendente
 
 
 class ContVistaLoginDipendente():
 
-    #credenziali admin
-    self.user_admin = "admin"
-    self.pass_admin = "admin"
-    def __init__(self, gestore_dip:GestoreDipendenti)
+    def __init__(self, gestore_dip:GestoreDipendenti, stacked:QStackedWidget):
         self.gestore_dip = gestore_dip
         self.view = VistaLoginDipendente()
         self.view.pulsante.clicked.connect(self.login)
+        self.cont_admin = ContVistaHomeAdmin(stacked)
+        self.stacked = stacked
+        stacked.addWidget(self.view)
+        # credenziali admin
+        self.user_admin = "admin"
+        self.pass_admin = "admin"
 
     def login(self):
         #prendo i dati inseriti dall'utente
@@ -24,14 +30,40 @@ class ContVistaLoginDipendente():
         lista_utilizzatori.extend(self.gestore_dip.lista_camerieri)
 
         if (self.username == self.user_admin and self.password == self.pass_admin):
-            self.apri_finestra_admin
+            self.apri_finestra_admin()
         else:
-            for utilizzatore in lista_utilizzatori:
-                if (self.username == utilizzatore.username and self.password == utilizzatore.password):
-                    self.apri_finestra_dipendente(utilizzatore)
+            for cameriere in self.gestore_dip.lista_camerieri:
+                if (self.username == cameriere.username and self.password == cameriere.password):
+                    self.apri_finestra_cameriere()
                     break
-            else:
-                self.mostra_errore()    
+            for cuoco in self.gestore_dip.lista_cuochi:
+                if (self.username == cuoco.username and self.password == cuoco.password):
+                    self.apri_finestra_cuoco()
+                    break
+            self.mostra_errore()
+
+
+    def apri_finestra_admin(self):
+        self.stacked.setCurrentWidget(self.cont_admin.view)
+        pass
+
+    def apri_finestra_cameriere(self):
+        pass
+
+    def apri_finestra_cuoco(self):
+        pass
+
+    def mostra_errore(self):
+        error_box = QMessageBox()
+        error_box.setIcon(QMessageBox.Icon.Critical)
+        error_box.setWindowTitle("Errore")
+        error_box.setText("Credenziali errate!")
+        error_box.exec()
+
+
+
+
+
 
 
 

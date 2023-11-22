@@ -72,7 +72,7 @@ class ContVistaInserisciRicevuta():
 
             num = self.gestore_ric.aggiungi_ricevuta(self.ricevuta_temp.ammontareLordo, self.ricevuta_temp.data, self.ricevuta_temp.listaProdotti, self.ricevuta_temp.nomeAcquirente, self.ricevuta_temp.ora)
             self.gestore_ric.ricerca_ricevuta_numero(num)
-            print(os.path.join(self.cartella_data, 'ricevute.pickle'))
+           # da rivedere    print(os.path.join(self.cartella_data, 'ricevute.pickle'))
             self.salva_su_file(self.gestore_ric.ricerca_ricevuta_numero(num), os.path.join(self.cartella_data, 'ricevute.pickle'))
             #imposta che gli ordini sono stati pagati
             for ordine in self.controller_mostra.ordini:
