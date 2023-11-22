@@ -9,17 +9,20 @@ class ContModificaMateriaPrima(object):
         self.model = model
         self.view.pulsante_conferma.clicked.connect(self.conferma_modifica)
 
+    def riempi_labels(self, materiaprima: MateriaPrima):
+
+        self.view.label_codice2.setText(str(materiaprima.codice))
+        self.view.label_nome2.setText(str(materiaprima.nome))
+
     def conferma_modifica(self):
 
-        costo_al_kg = self.view.campo_costoAlKg.text()
-        qta_disponibile = self.view.campo_qtaDisp.text()
-        data_scadenza = self.view.campo_dataScadenza.selectedDate()
-        qta_limite = self.view.campo_qtaLimite.text()
-        qta_ordine_STD = self.view.campo_qtaOrdineSTD.text()
+        new_costo_al_kg = self.view.campo_costoAlKg.text()
+        new_qta_disponibile = self.view.campo_qtaDisp.text()
+        new_data_scadenza = self.view.campo_dataScadenza.selectedDate()
+        new_qta_limite = self.view.campo_qtaLimite.text()
+        new_qta_ordine_STD = self.view.campo_qtaOrdineSTD.text()
 
-        nuova_materia_prima = MateriaPrima(costo_al_kg, qta_disponibile,
-                                           qta_limite, qta_ordine_STD, data_scadenza)
-
-        self.model.modifica_materiaprima(nuova_materia_prima)
+        self.model.modifica_materiaprima(new_costo_al_kg, new_qta_disponibile, new_qta_limite,
+                                         new_qta_ordine_STD, new_data_scadenza)
 
         self.view.close()

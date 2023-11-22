@@ -38,6 +38,7 @@ class ContGestioneMagazzino(object):
             if item.column() == 1:
                 self.matprima_selezionata = int(item.text())
         self.view.pulsante_mostrainfo.setEnabled(abilita_pulsante)
+        self.view.pulsante_modifica.setEnabled(abilita_pulsante)
 
     def open_mostrainfo(self):
         dialog_mostrainfo = VistaMateriaPrima()
@@ -64,11 +65,14 @@ class ContGestioneMagazzino(object):
         self.update_tabella()
         self.matprima_selezionata = None
         self.view.data_grid.clearSelection()
-        pass
 
     def open_modifica(self):
         dialog_modifica = VistaModificaMateriaPrima()
-        #controller_modifica = C
+        controller_modifica = ContModificaMateriaPrima(dialog_modifica, self.model)
+        matprima_temp = self.model.estrai_per_codice(self.matprima_selezionata)
+        controller_modifica.riempi_labels(matprima_temp)
+        controller_modifica.view.exec()
+        self.update_tabella()
 
 
     def filtra_elementi(self):
