@@ -19,15 +19,7 @@ class ContGestioneDipendenti(object):
         self.view.pulsante_aggiungi.clicked.connect(self.go_to_inserimento)
         self.view.pulsante_mostra.clicked.connect(self.go_to_mostrainfo)
         self.view.tab.itemSelectionChanged.connect(self.riga_selezionata)
-
-    # def riga_selezionata(self):
-    #     selected_items = self.view.tab.selectedItems()
-    #     abilita_pulsante = len(selected_items) > 0
-    #     for item in selected_items:
-    #         if item.column() == 0:
-    #             self.nome_selezionato = str(item.text())
-    #             #print(self.nome_selezionato)
-    #     self.view.pulsante_mostra.setEnabled(abilita_pulsante)
+        self.view.pulsante_elimina.clicked.connect(self.delete_dipendente)
 
     def riga_selezionata(self):
         selected_items = self.view.tab.selectedItems()
@@ -39,6 +31,8 @@ class ContGestioneDipendenti(object):
                 self.ruolo_selezionato = str(item.text())
 
         self.view.pulsante_mostra.setEnabled(abilita_pulsante)
+        self.view.pulsante_elimina.setEnabled(abilita_pulsante)
+        self.view.pulsante_modifica.setEnabled(abilita_pulsante)
 
     def go_to_mostrainfo(self):
         dialog_mostrainfo = VistaVisualizzaDipendente()
@@ -57,20 +51,29 @@ class ContGestioneDipendenti(object):
         cont_inserisci.view.exec()
         self.update_tabella()
 
+    def delete_dipendente(self):
+        if self.ruolo_selezionato == "Cuoco":
+            self.model.elimina_cuoco(self.nome_selezionato)
+            self.update_tabella()
+            self.nome_selezionato = None
+        if self.ruolo_selezionato == "Cameriere":
+            self.model.elimina_cameriere(self.nome_selezionato)
+            self.update_tabella()
+            self.nome_selezionato = None
+        self.view.tab.clearSelection()
+
     def update_tabella(self):
         camerieri = self.model.lista_camerieri
         cuochi = self.model.lista_cuochi
+        self.view.tab.setRowCount(len(camerieri+cuochi))
 
         i = 0
-
         for x in camerieri:
-            self.view.tab.setRowCount(i + 1)
             self.view.tab.setItem(i, 0, QTableWidgetItem(x.nome))
             self.view.tab.setItem(i, 1, QTableWidgetItem(x.ruolo))
             i += 1
 
         for x in cuochi:
-            self.view.tab.setRowCount(i + 1)
             self.view.tab.setItem(i, 0, QTableWidgetItem(x.nome))
             self.view.tab.setItem(i, 1, QTableWidgetItem(x.ruolo))
             i += 1
