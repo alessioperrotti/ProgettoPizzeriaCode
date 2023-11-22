@@ -1,5 +1,5 @@
 import sys
-from PyQt6.QtWidgets import QApplication, QTableWidgetItem, QVBoxLayout, QMessageBox
+from PyQt6.QtWidgets import QApplication, QTableWidgetItem, QVBoxLayout, QMessageBox, QStackedWidget
 
 from Code.GestioneDipendenti.Controller.cont_inserisci_dipendente import ContInserisciDipendente
 from Code.GestioneDipendenti.Controller.cont_mostra_dipendente import ContMostraDipendente
@@ -10,8 +10,10 @@ from Code.GestioneDipendenti.View.vista_visualizza_dipendente import VistaVisual
 
 
 class ContGestioneDipendenti(object):
-    def __init__(self, model: GestoreDipendenti, view: VistaGestioneDipendenti):
-        self.view = view
+    def __init__(self, model: GestoreDipendenti, stacked: QStackedWidget):
+        self.stacked = stacked
+        self.view = VistaGestioneDipendenti()
+        stacked.addWidget(self.view)
         self.model = model
         self.update_tabella()
         self.nome_selezionato = None
