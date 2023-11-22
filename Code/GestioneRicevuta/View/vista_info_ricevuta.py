@@ -73,19 +73,23 @@ class VistaInfoRicevuta(QDialog):
         frame3.setStyleSheet(".border: 1px solid black; border-radius: 5px; padding: 5px")
         frame3.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
 
-        scroll_area = QScrollArea()
-        scroll_area.setWidgetResizable(True)
+        self.scroll_area = QScrollArea()
+        self.scroll_area.setWidgetResizable(True)
 
-        layout_inutile = QVBoxLayout()
-        layout_inutile.addWidget(scroll_area)
-        frame3.setLayout(layout_inutile)
-        self.contenitore = QFrame()
-        self.contenitore.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        self.layout_inutile = QVBoxLayout()
+        self.layout_inutile.addWidget(self.scroll_area)
+        frame3.setLayout(self.layout_inutile)
+        self.contenitore = QWidget()
+      #  self.contenitore.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         
 
         self.layout_lista = QVBoxLayout()
         self.contenitore.setLayout(self.layout_lista)
-        scroll_area.setLayout(self.layout_lista)
+
+        self.scroll_area.setFrameShape(QFrame.Shape.NoFrame)
+
+        self.scroll_area.setWidget(self.contenitore)
+
 
 
 

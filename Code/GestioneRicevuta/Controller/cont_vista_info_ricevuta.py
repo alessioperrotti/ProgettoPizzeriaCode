@@ -1,4 +1,5 @@
-from PyQt6.QtWidgets import QLabel
+from PyQt6.QtGui import QFont
+from PyQt6.QtWidgets import QLabel, QSizePolicy
 
 from Code.GestioneMenu.Model.prodotto import Prodotto
 from Code.GestioneRicevuta.Model.gestore_ricevuta import GestoreRicevuta
@@ -41,8 +42,12 @@ class ContVistaInfoRicevuta():
         print(list[0].nome)
         self.ricevuta_selezionata.listaProdotti.sort(key=lambda x: x.nome)
         for prodotto in self.ricevuta_selezionata.listaProdotti:
-            self.view.layout_lista.addWidget(QLabel(f'<font color="black">&#8226;</font> '+ prodotto.nome + " " + str(prodotto.prezzo_al_pubblico)))
-        pass
+            lab = QLabel(f'<font color="black">&#8226;</font> '+ prodotto.nome + " € " + str(prodotto.prezzo_al_pubblico))
+            lab.setFont(QFont("Roboto", 12))
+            lab.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+            self.view.layout_lista.addWidget(lab)
+            self.view.layout_lista.addSpacing(5)
+
         self.view.layout_lista.addStretch()
 
 
