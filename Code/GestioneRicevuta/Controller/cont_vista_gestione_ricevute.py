@@ -49,7 +49,6 @@ class ContVistaGestioneRicevute():
         self.view.pulsante_elimina.setEnabled(self.numero_selezionato is not None)
     def elimina_ricevuta(self):
         self.gestore_ric.elimina_ricevuta(self.numero_selezionato)
-        print("c")
         self.aggiorna_tabella()
         self.numero_selezionato = None
         self.view.tab.clearSelection()

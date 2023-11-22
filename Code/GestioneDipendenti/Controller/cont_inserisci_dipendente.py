@@ -34,7 +34,7 @@ class ContInserisciDipendente(object):
             new_cuoco.data_ingaggio = current_date
             self.model.aggiungi_cuoco(new_cuoco)
         else:
-            new_cameriere = Cameriere(nome,cognome,email,stipendio,username,password)
+            new_cameriere = Cameriere(nome,cognome,email,username,password,stipendio)
             new_cameriere.data_nascita = data_nascita
             new_cameriere.data_ingaggio = current_date
             self.model.aggiungi_cameriere(new_cameriere)

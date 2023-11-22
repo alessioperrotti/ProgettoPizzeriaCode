@@ -92,7 +92,7 @@ class VistaGestioneMagazzino(QWidget):
 
         vbox_pulsanti.addSpacerItem(QSpacerItem(217, 217))
 
-        self.data_grid = crea_tabella(15, 3, 481, 404)
+        self.data_grid = crea_tabella(0, 3, 481, 404)
         self.data_grid.setColumnWidth(0, 211)
         self.data_grid.setColumnWidth(1, 124)
         self.data_grid.setColumnWidth(2, 145)

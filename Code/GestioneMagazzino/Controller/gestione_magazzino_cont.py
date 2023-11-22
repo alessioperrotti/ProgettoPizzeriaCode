@@ -18,7 +18,7 @@ class ContGestioneMagazzino(object):
         self.view.search_bar.textChanged.connect(self.filtra_elementi)
         self.view.pulsante_mostrainfo.clicked.connect(self.open_mostrainfo)
         self.view.data_grid.itemSelectionChanged.connect(self.riga_selezionata)
-        self.view.pulsante_mostrainfo.clicked.connect(self.open_mostrainfo)
+        self.view.pulsante_elimina.clicked.connect(self.elimina_elemento)
 
     def open_inserimento(self):
 
@@ -49,11 +49,20 @@ class ContGestioneMagazzino(object):
 
         i = 0
         for x in elementi:
+
+            self.view.data_grid.setRowCount(i + 1)
             self.view.data_grid.setItem(i, 0, QTableWidgetItem(str(x.nome)))
             self.view.data_grid.setItem(i, 1, QTableWidgetItem(str(x.codice)))
             self.view.data_grid.setItem(i, 2, QTableWidgetItem(str(x.qta_disponibile)))
             i += 1
 
+
+    def elimina_elemento(self):
+
+        self.model.elimina_materiaprima(self.matprima_selezionata)
+        self.update_tabella()
+        self.view.data_grid.clearSelection()
+        pass
 
 
 
