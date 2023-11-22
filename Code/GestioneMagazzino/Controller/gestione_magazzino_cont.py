@@ -49,10 +49,14 @@ class ContGestioneMagazzino(object):
 
         i = 0
         for x in elementi:
+
+            self.view.data_grid.setRowCount(i + 1)
             self.view.data_grid.setItem(i, 0, QTableWidgetItem(str(x.nome)))
             self.view.data_grid.setItem(i, 1, QTableWidgetItem(str(x.codice)))
             self.view.data_grid.setItem(i, 2, QTableWidgetItem(str(x.qta_disponibile)))
             i += 1
+
+
 
 
 
