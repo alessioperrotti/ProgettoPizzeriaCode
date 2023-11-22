@@ -42,13 +42,13 @@ class VistaLoginDipendente(QWidget):
         pass_label = QLabel("Password: ")
         pass_label.setFont(label_font_piccolo)
 
-        user_line = QLineEdit()
-        pass_line = QLineEdit()
-        user_line.setStyleSheet("border: 2px solid black; border-radius: 4px;")
-        pass_line.setStyleSheet("border: 2px solid black; border-radius: 4px;")
+        self.user_line = QLineEdit()
+        self.pass_line = QLineEdit()
+        self.user_line.setStyleSheet("border: 2px solid black; border-radius: 4px;")
+        self.pass_line.setStyleSheet("border: 2px solid black; border-radius: 4px;")
 
-        pulsante = Pulsante("Login")
-        pulsante.setFont(label_font_piccolo)
+        self.pulsante= Pulsante("Login")
+        (self.pulsante.setFont(label_font_piccolo))
         label_foto = QLabel()
         pixmap = QPixmap("png/key.png")
         scaled_pixmap = pixmap.scaled(50, 50, aspectRatioMode=Qt.AspectRatioMode.KeepAspectRatio)
@@ -62,10 +62,10 @@ class VistaLoginDipendente(QWidget):
 
         # Inserimento Oggetti Layout
         insert_layout.addWidget(user_label, 1, 1)
-        insert_layout.addWidget(user_line, 1, 2)
+        insert_layout.addWidget(self.user_line, 1, 2)
         insert_layout.addWidget(pass_label, 2, 1)
-        insert_layout.addWidget(pass_line, 2, 2)
-        insert_layout.addWidget(pulsante, 3, 2)
+        insert_layout.addWidget(self.pass_line, 2, 2)
+        insert_layout.addWidget(self.pulsante, 3, 2)
 
         login_layout.addWidget(label1)
         login_layout.addWidget(label_foto)
@@ -84,7 +84,7 @@ class VistaLoginDipendente(QWidget):
 
         self.setFixedSize(994, 637)
         self.setLayout(layout)
-        self.show()
+
 
 
 def main():

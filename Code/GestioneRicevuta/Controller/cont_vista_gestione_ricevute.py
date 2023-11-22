@@ -1,3 +1,4 @@
+import pickle
 import sys
 
 import PyQt6
@@ -19,6 +20,10 @@ from Code.GestioneRicevuta.View.vista_info_ricevuta import VistaInfoRicevuta
 
 class ContVistaGestioneRicevute():
     ##vista0
+
+
+
+
     def mostra_info_ricevuta(self):
         self.cont_info_ric.view = VistaInfoRicevuta()
         self.cont_info_ric.numero_selezionato = self.numero_selezionato

@@ -1,3 +1,5 @@
+import os
+import pickle
 import sys
 from PyQt6.QtWidgets import QApplication, QTableWidgetItem, QVBoxLayout, QMessageBox
 
@@ -15,6 +17,12 @@ from Code.GestioneRicevuta.Model.gestore_ricevuta import GestoreRicevuta
 from PyQt6.QtCore import pyqtSignal
 class ContVistaInserisciRicevuta():
 
+
+    cartella_controller = os.path.dirname(os.path.realpath(__file__))
+    cartella_base = os.path.abspath(os.path.join(cartella_controller, os.pardir))
+    cartella_data = os.path.join(cartella_base, 'Data')
+
+
     def __init__(self, gestore_ric:GestoreRicevuta, gestore_ord:GestoreOrdiniTavolo, lista_tav:list[Tavolo]):
 
         self.lista_tavoli = lista_tav
@@ -30,6 +38,11 @@ class ContVistaInserisciRicevuta():
         self.view.tabella.itemSelectionChanged.connect(self.imposta_linea_selezionata)
         self.view.pulsante_mostra.setEnabled(self.tavolo_selezionato is not None)
         self.view.ricerca.textChanged.connect(self.filtra_tabella)
+
+    def salva_su_file(self, oggetto, nome_file):
+        with open(nome_file, "wb") as file:
+            pickle.dump(oggetto, file)
+
     def imposta_linea_selezionata(self):
         item_selezionati = self.view.tabella.selectedItems()
         for item in item_selezionati:
@@ -57,8 +70,10 @@ class ContVistaInserisciRicevuta():
 
         else:
 
-            self.gestore_ric.aggiungi_ricevuta(self.ricevuta_temp.ammontareLordo, self.ricevuta_temp.data, self.ricevuta_temp.listaProdotti, self.ricevuta_temp.nomeAcquirente, self.ricevuta_temp.ora)
-
+            num = self.gestore_ric.aggiungi_ricevuta(self.ricevuta_temp.ammontareLordo, self.ricevuta_temp.data, self.ricevuta_temp.listaProdotti, self.ricevuta_temp.nomeAcquirente, self.ricevuta_temp.ora)
+            self.gestore_ric.ricerca_ricevuta_numero(num)
+            print(os.path.join(self.cartella_data, 'ricevute.pickle'))
+            self.salva_su_file(self.gestore_ric.ricerca_ricevuta_numero(num), os.path.join(self.cartella_data, 'ricevute.pickle'))
             #imposta che gli ordini sono stati pagati
             for ordine in self.controller_mostra.ordini:
                 ordine.pagato = True

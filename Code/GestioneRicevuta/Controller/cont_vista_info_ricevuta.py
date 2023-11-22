@@ -1,3 +1,5 @@
+import pickle
+
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QLabel, QSizePolicy
 
@@ -7,7 +9,10 @@ from Code.GestioneRicevuta.Model.ricevuta import Ricevuta
 from Code.GestioneRicevuta.View.vista_info_ricevuta import VistaInfoRicevuta
 
 
+
+
 class ContVistaInfoRicevuta():
+
 
     def __init__(self, gestore_ric:GestoreRicevuta):
 
@@ -49,6 +54,4 @@ class ContVistaInfoRicevuta():
             self.view.layout_lista.addSpacing(5)
 
         self.view.layout_lista.addStretch()
-
-
 

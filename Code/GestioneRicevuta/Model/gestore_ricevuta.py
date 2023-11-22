@@ -10,6 +10,7 @@ class GestoreRicevuta(OggettoConID):
     def aggiungi_ricevuta(self,ammontareLordo, data, listaProdotti, nomeAcquirente,ora):
         numero = self.genera_id()
         self.lista_ricevute.append(Ricevuta(ammontareLordo, data, listaProdotti, nomeAcquirente, numero, ora))
+        return numero
 
     def ricerca_ricevuta_nome(self, nomeAcquirente):
         list = []

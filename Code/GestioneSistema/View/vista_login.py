@@ -50,8 +50,8 @@ class VistaLogin(QWidget):
         label.setFont(label_font_tit)
         spazio_verticale = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
         spazio_tra_pulsanti = QSpacerItem(20, 20)
-        pulsante1 = crea_pulsante("Accedi al sistema")
-        pulsante1.setFixedSize(360, 80)
+        self.pulsante_admin = crea_pulsante("Accedi al sistema")
+        self.pulsante_admin.setFixedSize(360, 80)
         pulsante2 = crea_pulsante("Accedi come cliente")
         pulsante2.setFixedSize(360, 80)
 
@@ -62,7 +62,7 @@ class VistaLogin(QWidget):
         layout.addWidget(label, alignment=Qt.AlignmentFlag.AlignCenter)
 
         layout.addSpacerItem(spazio_tra_pulsanti)
-        layout.addWidget(pulsante1, alignment=Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(self.pulsante_admin, alignment=Qt.AlignmentFlag.AlignCenter)
         layout.addSpacerItem(spazio_tra_pulsanti)
         layout.addWidget(pulsante2, alignment=Qt.AlignmentFlag.AlignCenter)
         layout.addItem(spazio_verticale)
