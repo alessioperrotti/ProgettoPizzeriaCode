@@ -44,6 +44,12 @@ class GestoreMagazzino(object):
                 elemento_cercato = x
         return elemento_cercato
 
+
+    def elimina_materiaprima(self, codice):
+
+        elemento_da_eliminare = self.estrai_per_codice(codice)
+        self.lista_materieprime.remove(elemento_da_eliminare)
+
     def decrementa_disponibilita(self, codice, decremento):
 
         for x in self.lista_materieprime:
