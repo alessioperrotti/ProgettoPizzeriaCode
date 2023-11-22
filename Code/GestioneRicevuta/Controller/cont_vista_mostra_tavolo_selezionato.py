@@ -34,6 +34,7 @@ class ContVistaMostraTavoloSelezionato():
         listaProdotti = []
         for ordine in self.ordini:
             totale += ordine.prezzo_totale
+            print()
             for prodotto in ordine.lista_prodotti:
                 listaProdotti.append(prodotto)
         data = datetime.now().date().__str__()

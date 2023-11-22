@@ -13,3 +13,4 @@ class OrdineTavolo(object):
     def aggiungi_prodotto(self, prodotto):
 
         self.lista_prodotti.append(prodotto)
+        self.prezzo_totale += prodotto.prezzo_al_pubblico
