@@ -14,30 +14,47 @@ class ContGestioneDipendenti(object):
         self.view = view
         self.model = model
         self.update_tabella()
-        self.dipendente_selezionato = None
+        self.nome_selezionato = None
+        self.ruolo_selezionato = None
         self.view.pulsante_aggiungi.clicked.connect(self.go_to_inserimento)
         self.view.pulsante_mostra.clicked.connect(self.go_to_mostrainfo)
+        self.view.tab.itemSelectionChanged.connect(self.riga_selezionata)
+
+    # def riga_selezionata(self):
+    #     selected_items = self.view.tab.selectedItems()
+    #     abilita_pulsante = len(selected_items) > 0
+    #     for item in selected_items:
+    #         if item.column() == 0:
+    #             self.nome_selezionato = str(item.text())
+    #             #print(self.nome_selezionato)
+    #     self.view.pulsante_mostra.setEnabled(abilita_pulsante)
 
     def riga_selezionata(self):
         selected_items = self.view.tab.selectedItems()
         abilita_pulsante = len(selected_items) > 0
         for item in selected_items:
-            if item.column() == 1:
-                self.dipendente_selezionato = int(item.text())
+            if item.column() == 0:
+                self.nome_selezionato = str(item.text())
+            elif item.column() == 1:
+                self.ruolo_selezionato = str(item.text())
+
         self.view.pulsante_mostra.setEnabled(abilita_pulsante)
 
     def go_to_mostrainfo(self):
         dialog_mostrainfo = VistaVisualizzaDipendente()
         controller_mostrainfo = ContMostraDipendente(dialog_mostrainfo, self.model)
-        dipendente_temp = self.model.estrai_cuoco_nome(self.dipendente_selezionato)  #estrae col nome ottenuto dalla tabella
-        controller_mostrainfo.riempi_labels(dipendente_temp)
-        dialog_mostrainfo.exec()
+        if self.ruolo_selezionato == "Cuoco":
+            dipendente_temp = self.model.estrai_cuoco_nome(self.nome_selezionato)  #estrae col nome ottenuto dalla tabella
+            controller_mostrainfo.riempi_labels_cuoco(dipendente_temp)
+        if self.ruolo_selezionato == "Cameriere":
+            dipendente_temp = self.model.estrai_cameriere_nome(self.nome_selezionato)  #estrae col nome ottenuto dalla tabella
+            controller_mostrainfo.riempi_labels_cameriere(dipendente_temp)
+        controller_mostrainfo.view.exec()
 
     def go_to_inserimento(self):
         vista_inserisci = VistaInserisciDipendente()
         cont_inserisci = ContInserisciDipendente(self.model, vista_inserisci)
         cont_inserisci.view.exec()
-
         self.update_tabella()
 
     def update_tabella(self):

@@ -8,6 +8,7 @@ from Code.GestioneDipendenti.View.vista_gestione_dipendenti import VistaGestione
 class MainWindow(QWidget):
     def __init__(self):
         super(MainWindow, self).__init__()
+        self.cont_gestione_dip = None
         self.stacked = QStackedWidget()
         self.init_ui()
         self.show()

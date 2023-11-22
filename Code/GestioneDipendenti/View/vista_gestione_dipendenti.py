@@ -89,15 +89,21 @@ class VistaGestioneDipendenti(QDialog):
         layout = QVBoxLayout()
         layout_orizzontale = QHBoxLayout()
         layout_pulsanti = QVBoxLayout()
-
+        #Pulsanti
         self.pulsante_mostra = QPushButton("Mostra info\ndipendente")
         self.pulsante_mostra.setFixedSize(147, 49)
+        self.pulsante_mostra.setEnabled(False)
+
         self.pulsante_modifica = QPushButton("Modifica\ndipendente")
         self.pulsante_modifica.setFixedSize(147, 49)
+        self.pulsante_modifica.setEnabled(False)
+
         self.pulsante_aggiungi = QPushButton("Aggiungi\nnuovo dipendente")
         self.pulsante_aggiungi.setFixedSize(147, 49)
+
         self.pulsante_elimina = QPushButton("Elimina\ndipendente")
         self.pulsante_elimina.setFixedSize(147, 49)
+        self.pulsante_elimina.setEnabled(False)
 
         # Pulsante Back
         self.pulsante_back = crea_pulsante_back(35, "png/back.png")
@@ -130,17 +136,6 @@ class VistaGestioneDipendenti(QDialog):
         layout.setContentsMargins(30, 20, 10, 20)
         self.setFixedSize(756, 637)
         self.setLayout(layout)
-
-    #     self.pulsante_aggiungi.clicked.connect(self.open_aggiungi_dipendente)
-    #     self.pulsante_mostra.clicked.connect(self.open_mostra_dipendente)
-    #
-    # def open_aggiungi_dipendente(self):
-    #     self.vista_aggiungi = VistaInserisciDipendente()
-    #     self.vista_aggiungi.show()
-    #
-    # def open_mostra_dipendente(self):
-    #     self.vista_mostra = VistaVisualizzaDipendente()
-    #     self.vista_mostra.show()
 
 
 if __name__ == '__main__':
