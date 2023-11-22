@@ -66,6 +66,7 @@ class ContVistaGestioneRicevute():
         self.view = VistaGestioneRicevute()
         self.gestore_ric = gestore_ric
         self.stacked_widget = stacked_widget
+        self.stacked_widget.addWidget(self.view)
         self.aggiorna_tabella()
         self.cont_inserisci = ContVistaInserisciRicevuta(self.gestore_ric, self.gestore_ord, self.lista_tav)
         self.cont_info_ric = ContVistaInfoRicevuta(self.gestore_ric)

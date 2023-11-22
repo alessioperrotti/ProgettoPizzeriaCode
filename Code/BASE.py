@@ -1,6 +1,8 @@
 import sys
 from PyQt6.QtWidgets import QApplication, QWidget, QStackedWidget, QPushButton, QVBoxLayout
 
+from Code.GestioneDipendenti.Model.gestore_dipendenti import GestoreDipendenti
+from Code.GestioneMagazzino.Model.gestore_magazzino import GestoreMagazzino
 from Code.GestioneMenu.Model.prodotto import Prodotto
 from Code.GestioneOrdiniTavolo.Model.gestore_ordini_tavolo import GestoreOrdiniTavolo
 from Code.GestioneOrdiniTavolo.Model.ordine_tavolo import OrdineTavolo
@@ -22,7 +24,11 @@ class MainWindow(QWidget):
 
     def init_ui(self):
         gestore_ric = GestoreRicevuta()
-        self.cont_vista_login = ContVistaLogin(self.stacked)
+        gestore_dip = GestoreDipendenti()
+        gestore_mag = GestoreMagazzino()
+        gestore_ord = GestoreOrdiniTavolo()
+
+        self.cont_vista_login = ContVistaLogin(self.stacked, gestore_ric, gestore_dip, gestore_mag, gestore_ord)
         self.stacked.addWidget(self.cont_vista_login.view)
         self.stacked.setCurrentWidget(self.cont_vista_login.view)
 
