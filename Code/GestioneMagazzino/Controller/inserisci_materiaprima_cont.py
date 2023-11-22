@@ -25,5 +25,4 @@ class ContInserisciMateriaPrima(object):
                                            qta_limite, qta_ordine_STD, data_scadenza)
 
         self.model.aggiungi_materiaprima(nuova_materia_prima)
-
         self.view.close()

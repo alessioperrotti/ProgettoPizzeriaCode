@@ -53,6 +53,7 @@ class VistaInserisciMateriaPrima(QDialog):
         label_codice = QLabel("Codice (4 cifre):")
         label_codice.setFont(font_label)
         self.campo_codice = QLineEdit()
+        self.campo_codice.setMaxLength(4)
         self.campo_codice.setFixedSize(287,30)
         grid1.addWidget(label_codice, 1, 1)
         grid1.addWidget(self.campo_codice,2, 1)

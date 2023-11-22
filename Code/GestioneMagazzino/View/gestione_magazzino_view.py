@@ -128,18 +128,12 @@ class VistaGestioneMagazzino(QWidget):
         self.data_grid.setItem(row_position, 1, QTableWidgetItem(nome))
         self.data_grid.setItem(row_position, 2, QTableWidgetItem(str(qta_disponibile)))
 
-
     def enter_event(self, pulsante):
         pulsante.setStyleSheet('background color: #e3645a; ')
 
 
-
-
-
 if __name__ == '__main__':
         app = QApplication(sys.argv)
-
-
         window = VistaGestioneMagazzino()
         window.show()
         sys.exit(app.exec())
