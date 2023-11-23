@@ -28,7 +28,7 @@ class MainWindow(QWidget):
         self.init_ui()
 
 
-        self.setFixedSize(956, 637)
+        # self.setFixedSize(956, 637)
 
 
         self.show()
