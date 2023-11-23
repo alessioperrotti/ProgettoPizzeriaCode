@@ -36,6 +36,7 @@ class GestoreDipendenti():
                 x.data_nascita = new_data_nascita
                 x.username = new_username
                 x.password = new_password
+                print(x.email)
 
     #########################################################################
     def aggiungi_cameriere(self, cameriere):

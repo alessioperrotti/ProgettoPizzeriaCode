@@ -80,7 +80,6 @@ class ContGestioneDipendenti(object):
             dipendente_temp = self.model.estrai_cameriere_nome(self.nome_selezionato)
             cont_modifica.cameriere = dipendente_temp
             cont_modifica.riempi_labels_cameriere(dipendente_temp)
-
         cont_modifica.view.exec()
         self.update_tabella()
 
