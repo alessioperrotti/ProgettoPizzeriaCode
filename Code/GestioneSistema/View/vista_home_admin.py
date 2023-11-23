@@ -1,5 +1,5 @@
 #!/usr/bin/python
-
+import os
 import sys
 
 from PyQt6.QtCore import Qt
@@ -24,56 +24,29 @@ def crea_pulsante(nome, directory):
     layout.addStretch()
     pulsante.setLayout(layout)
     pulsante.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
-    pulsante.setStyleSheet("""
-        QPushButton {
-            color : "white"
-            background-color: #ff776d;
-            border-radius: 6px;
-            }
-       """)
+    # pulsante.setStyleSheet("""
+    #     QPushButton {
+    #         color : "white"
+    #         background-color: #ff776d;
+    #         border-radius: 6px;
+    #         }
+    #    """)
     pulsante.setFixedSize(230, 100)
     return pulsante
 
 
 def crea_immagine(directory, dimensione):
     label_foto = QLabel()
-    pixmap = QPixmap(directory)
+
+    cartella_principale = os.path.dirname(os.path.realpath(__file__))
+    dir = os.path.abspath(os.path.join(cartella_principale, directory))
+    
+
+    pixmap = QPixmap(dir)
     scaled_pixmap = pixmap.scaled(dimensione, dimensione, aspectRatioMode=Qt.AspectRatioMode.KeepAspectRatio)
     label_foto.setPixmap(scaled_pixmap)
     return label_foto
 
-
-def crea_tabella(n_colonne, larghezza, altezza):
-    tabella = QTableWidget()
-    tabella.setStyleSheet("""
-               QTableWidget {
-                   background-color: white;
-                   alternate-background-color: white;
-                   selection-background-color: darkcyan;
-                   border: 2px solid black;
-                   border-radius: 5px;
-               }
-
-               QTableWidget::item {
-                   padding: 5px;
-                   border: 1px solid black;
-               } 
-               QHeaderView::section {
-                   background-color: lightgray;
-               }
-           """)
-
-    tabella.setColumnCount(n_colonne)
-
-    header = tabella.horizontalHeader()
-    header.setFont(label_font_piccolo)
-    header.setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
-    for i in range(1, n_colonne):
-        header.setSectionResizeMode(1, QHeaderView.ResizeMode.ResizeToContents)
-    tabella.setFixedWidth(larghezza)
-    tabella.setFixedHeight(altezza)
-
-    return tabella
 
 
 class VistaHomeAdmin(QWidget):
@@ -84,7 +57,6 @@ class VistaHomeAdmin(QWidget):
             QPushButton{
                 background-color: "#ff776d";
                 color: "white";
-                text-align: center;
                 border-radius: 6px;
             }
             QPushButton:hover{
@@ -148,7 +120,7 @@ class VistaHomeAdmin(QWidget):
         layout_orizzontale.addLayout(layout)
         layout_orizzontale.addSpacing(20)
 
-        self.setFixedSize(994, 637)
+        self.setFixedSize(756, 637)
         self.setLayout(layout_orizzontale)
 
 

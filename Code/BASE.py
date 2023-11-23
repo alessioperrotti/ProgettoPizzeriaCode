@@ -1,4 +1,6 @@
 import sys
+
+from PyQt6.QtCore import pyqtSignal, pyqtSlot
 from PyQt6.QtWidgets import QApplication, QWidget, QStackedWidget, QPushButton, QVBoxLayout
 
 from Code.GestioneDipendenti.Model.gestore_dipendenti import GestoreDipendenti
@@ -13,14 +15,34 @@ from Code.GestioneRicevuta.Model.gestore_ricevuta import GestoreRicevuta
 from Code.GestioneRicevuta.Model.ricevuta import Ricevuta
 from Code.GestioneSistema.Controller.cont_vista_login import ContVistaLogin
 
-
+class SegnaleRidimensiona():
+    def __init__(self):
+        self.seg = pyqtSignal()
 class MainWindow(QWidget):
+
+
     def __init__(self, app):
         super(MainWindow, self).__init__()
+
         self.stacked = QStackedWidget()
         self.init_ui()
+
+
+        # self.setFixedSize(956, 637)
+
+
         self.show()
 
+    def ridimensiona(self):
+
+        if self.stacked.currentWidget() == self.cont_vista_login.cont_vista_login_dipendente.cont_admin.view:
+            self.setFixedSize(756, 637)
+            self.layout().update()
+            self.close()
+            self.show()
+
+
+        print("ciao")
 
     def init_ui(self):
         gestore_ric = GestoreRicevuta()
@@ -34,6 +56,8 @@ class MainWindow(QWidget):
 
         layout = QVBoxLayout(self)
         layout.addWidget(self.stacked)
+
+        self.stacked.currentChanged.connect(self.ridimensiona)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
