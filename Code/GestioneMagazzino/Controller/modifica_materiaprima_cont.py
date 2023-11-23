@@ -22,19 +22,19 @@ class ContModificaMateriaPrima(object):
     def conferma_modifica(self):
 
         try:
-            new_costo_al_kg = self.view.campo_costoAlKg.text()
-            new_qta_disponibile = self.view.campo_qtaDisp.text()
+            new_costo_al_kg = round(float(self.view.campo_costoAlKg.text()), 2)
+            new_qta_disponibile = round(float(self.view.campo_qtaDisp.text()), 3)
             new_data_scadenza = self.view.campo_dataScadenza.selectedDate()
-            new_qta_limite = self.view.campo_qtaLimite.text()
-            new_qta_ordine_STD = self.view.campo_qtaOrdineSTD.text()
+            new_qta_limite = round(float(self.view.campo_qtaLimite.text()), 3)
+            new_qta_ordine_STD = round(float(self.view.campo_qtaOrdineSTD.text()), 3)
 
         except ValueError:
             if not all([
-                new_costo_al_kg,
-                new_qta_disponibile,
-                new_data_scadenza,
-                new_qta_limite,
-                new_qta_ordine_STD
+                self.view.campo_costoAlKg.text(),
+                self.view.campo_qtaDisp.text(),
+                self.view.campo_dataScadenza.selectedDate(),
+                self.view.campo_qtaLimite.text(),
+                self.view.campo_qtaOrdineSTD.text()
             ]):
                 errore_msg = "Controllare che tutti i campi siano riempiti."
             else:

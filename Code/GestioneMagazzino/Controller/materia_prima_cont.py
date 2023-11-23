@@ -11,7 +11,8 @@ class ContMateriaPrima(object):
 
     def riempi_labels(self, materiaprima: MateriaPrima):
 
-        self.view.label_codice2.setText(str(materiaprima.codice))
+        stringa_a_4_cifre = "{:04d}".format(int(materiaprima.codice))
+        self.view.label_codice2.setText(stringa_a_4_cifre)
         self.view.label_nome2.setText(str(materiaprima.nome))
         self.view.label_costoAlKg2.setText("€ " + str(materiaprima.costo_al_kg))
         self.view.label_qtaDisp2.setText(str(materiaprima.qta_disponibile) + " Kg")
