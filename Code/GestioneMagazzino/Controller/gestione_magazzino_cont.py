@@ -6,6 +6,7 @@ from Code.GestioneMagazzino.Controller.modifica_materiaprima_cont import ContMod
 from Code.GestioneMagazzino.Model.gestore_magazzino import GestoreMagazzino
 from Code.GestioneMagazzino.View.modifica_materiaprima_view import VistaModificaMateriaPrima
 from PyQt6.QtWidgets import QTableWidgetItem
+from PyQt6.QtCore import Qt
 from Code.GestioneMagazzino.Controller.materia_prima_cont import ContMateriaPrima
 
 class ContGestioneMagazzino(object):
@@ -54,9 +55,15 @@ class ContGestioneMagazzino(object):
         self.view.data_grid.setRowCount(len(elementi))
         i = 0
         for x in elementi:
-            self.view.data_grid.setItem(i, 0, QTableWidgetItem(str(x.nome)))
-            self.view.data_grid.setItem(i, 1, QTableWidgetItem(str(x.codice)))
-            self.view.data_grid.setItem(i, 2, QTableWidgetItem(str(x.qta_disponibile)))
+            item1 = QTableWidgetItem(str(x.nome))
+            self.view.data_grid.setItem(i, 0, item1)
+            item1.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+            item2 = QTableWidgetItem(str(x.codice))
+            self.view.data_grid.setItem(i, 1, item2)
+            item2.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+            item3 = QTableWidgetItem(str(x.qta_disponibile))
+            self.view.data_grid.setItem(i, 2, item3)
+            item3.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             i += 1
 
 

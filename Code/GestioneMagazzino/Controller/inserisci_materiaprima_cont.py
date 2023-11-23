@@ -14,36 +14,35 @@ class ContInserisciMateriaPrima(object):
     def conferma_inserimento(self):
 
         codice = self.view.campo_codice.text()
-        nome = self.view.campo_nome.text()
+        nome = self.view.campo_nome.text().title()
 
-        #prima c'era solo il blocco tra try e break
-        while True:
-            try:
-                costo_al_kg = round(float(self.view.campo_costoAlKg.text()), 2)
-                qta_disponibile = round(float(self.view.campo_qtaDisp.text()), 3)
-                data_scadenza = self.view.campo_dataScadenza.selectedDate()
-                qta_limite = round(float(self.view.campo_qtaLimite.text()), 3)
-                qta_ordine_STD = round(float(self.view.campo_qtaOrdineSTD.text()), 3)
-                break
-            except ValueError as e:
-                if not all([
-                    self.view.campo_costoAlKg.text(),
-                    self.view.campo_qtaDisp.text(),
-                    self.view.campo_qtaLimite.text(),
-                    self.view.campo_qtaOrdineSTD.text(),
-                ]):
-                    errore_msg = "Controllare che tutti i campi siano riempiti."
-                else:
-                    errore_msg = "Controllare che i dati siano inseriti correttamente."
+        try:
+            costo_al_kg = round(float(self.view.campo_costoAlKg.text()), 2)
+            qta_disponibile = round(float(self.view.campo_qtaDisp.text()), 3)
+            data_scadenza = self.view.campo_dataScadenza.selectedDate()
+            qta_limite = round(float(self.view.campo_qtaLimite.text()), 3)
+            qta_ordine_STD = round(float(self.view.campo_qtaOrdineSTD.text()), 3)
+            nuova_materia_prima = MateriaPrima(codice, nome, costo_al_kg, qta_disponibile,
+                                               qta_limite, qta_ordine_STD, data_scadenza)
 
-                error_box = QMessageBox()
-                error_box.setIcon(QMessageBox.Icon.Critical)
-                error_box.setWindowTitle("Errore di Inserimento")
-                error_box.setText(errore_msg)
-                error_box.exec()
+        except ValueError:
+            if not all([
+                self.view.campo_costoAlKg.text(),
+                self.view.campo_qtaDisp.text(),
+                self.view.campo_qtaLimite.text(),
+                self.view.campo_qtaOrdineSTD.text(),
+            ]):
+                errore_msg = "Controllare che tutti i campi siano riempiti."
+            else:
+                errore_msg = "Controllare che i dati siano inseriti correttamente."
 
-        nuova_materia_prima = MateriaPrima(codice, nome, costo_al_kg, qta_disponibile,
-                                           qta_limite, qta_ordine_STD, data_scadenza)
+            error_box = QMessageBox()
+            error_box.setIcon(QMessageBox.Icon.Critical)
+            error_box.setWindowTitle("Errore di Inserimento")
+            error_box.setText(errore_msg)
+            error_box.exec()
 
-        self.model.aggiungi_materiaprima(nuova_materia_prima)
-        self.view.close()
+        else:
+            self.model.aggiungi_materiaprima(nuova_materia_prima)
+            self.view.close()
+

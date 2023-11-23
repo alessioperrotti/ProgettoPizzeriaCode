@@ -47,6 +47,7 @@ class VistaGestioneMagazzino(QWidget):
                 color: "white";
                 text-align: center;
                 border-radius: 6px;
+                font-family:Roboto;
             }
             QPushButton:hover{
                 background-color: "red";
@@ -57,6 +58,13 @@ class VistaGestioneMagazzino(QWidget):
                 alternate-background-color: white;
                 selection-background-color: darkcyan;
                 border: 2px solid grey;
+            }
+            QHeaderView:section {
+                background-color: lightgray;
+                font-weight: bold;
+            }
+            QHeaderView:active {
+                background-color: gray;
             }
         """)
 
@@ -99,6 +107,7 @@ class VistaGestioneMagazzino(QWidget):
         self.data_grid.setHorizontalHeaderLabels(["MATERIA PRIMA", "CODICE", "DISPONIBILITÀ(Kg)"])
         self.data_grid.setFont(font_piccolo)
         self.data_grid.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+
 
         self.search_bar = QLineEdit()
         self.search_bar.setPlaceholderText("Cerca per nome")
