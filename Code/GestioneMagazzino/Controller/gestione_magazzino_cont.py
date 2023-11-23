@@ -3,9 +3,11 @@ from Code.GestioneMagazzino.View.gestione_magazzino_view import VistaGestioneMag
 from Code.GestioneMagazzino.View.materia_prima_view import VistaMateriaPrima
 from Code.GestioneMagazzino.Controller.inserisci_materiaprima_cont import ContInserisciMateriaPrima
 from Code.GestioneMagazzino.Controller.modifica_materiaprima_cont import ContModificaMateriaPrima
+from Code.GestioneMagazzino.Controller.msg_elimina_materiaprima_cont import ContMsgEliminaMateriaPrima
 from Code.GestioneMagazzino.Model.gestore_magazzino import GestoreMagazzino
 from Code.GestioneMagazzino.View.modifica_materiaprima_view import VistaModificaMateriaPrima
-from PyQt6.QtWidgets import QTableWidgetItem
+from Code.GestioneMagazzino.View.msg_elimina_materiaprima_view import VistaMsgEliminaMateriaPrima
+from PyQt6.QtWidgets import QTableWidgetItem, QMessageBox
 from PyQt6.QtCore import Qt
 from Code.GestioneMagazzino.Controller.materia_prima_cont import ContMateriaPrima
 
@@ -67,13 +69,16 @@ class ContGestioneMagazzino(object):
             item3.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             i += 1
 
-
     def elimina_elemento(self):
 
-        self.model.elimina_materiaprima(self.matprima_selezionata)
-        self.update_tabella()
-        self.matprima_selezionata = None
-        self.view.data_grid.clearSelection()
+        dialog_conferma_elimina = VistaMsgEliminaMateriaPrima()
+        controller_conferma = ContMsgEliminaMateriaPrima(dialog_conferma_elimina)
+        controller_conferma.view.exec()
+        if controller_conferma.confermato():
+            self.model.elimina_materiaprima(self.matprima_selezionata)
+            self.update_tabella()
+            self.matprima_selezionata = None
+            self.view.data_grid.clearSelection()
 
     def open_modifica(self):
         dialog_modifica = VistaModificaMateriaPrima()
