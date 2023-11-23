@@ -28,10 +28,6 @@ class MainWindow(QWidget):
         self.stacked = QStackedWidget()
         self.init_ui()
 
-
-
-
-
         self.show()
 
     def cambio_view(self):

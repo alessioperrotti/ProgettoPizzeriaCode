@@ -10,7 +10,7 @@ class ContMostraDipendente(object):
         self.model = model
 
     def riempi_labels_cuoco(self, cuoco: Cuoco):
-        cuoco.get_info_cuoco()
+        #cuoco.get_info_cuoco()
         self.view.campo_nome.setText(cuoco.nome)
         self.view.campo_cognome.setText(cuoco.cognome)
         self.view.campo_ruolo.setText(cuoco.ruolo)
@@ -22,7 +22,7 @@ class ContMostraDipendente(object):
         self.view.campo_password.setText(cuoco.password)
 
     def riempi_labels_cameriere(self, cameriere: Cameriere):
-        cameriere.get_info_cameriere()
+        #cameriere.get_info_cameriere()
         self.view.campo_nome.setText(cameriere.nome)
         self.view.campo_cognome.setText(cameriere.cognome)
         self.view.campo_ruolo.setText(cameriere.ruolo)
