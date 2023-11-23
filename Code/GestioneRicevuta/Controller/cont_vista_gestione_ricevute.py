@@ -34,11 +34,7 @@ class ContVistaGestioneRicevute():
 
 
 
-    def inserisci_ricevuta(self):
-        self.view.pulsante_inserisci.setText("O")
-        self.cont_inserisci.view.show()
 
-        # self.view.setDisabled(True)
 
     def imposta_linea_selezionata(self):
         item_selezionati = self.view.tab.selectedItems()
@@ -57,6 +53,7 @@ class ContVistaGestioneRicevute():
         self.aggiorna_tabella()
         self.numero_selezionato = None
         self.view.tab.clearSelection()
+        self.sovrascrivi_pickle()
 
     def __init__(self, gestore_ric:GestoreRicevuta, gestore_ord:GestoreOrdiniTavolo,lista_tav:list[Tavolo], stacked_widget:QStackedWidget):
         self.numero_selezionato = None
@@ -67,7 +64,6 @@ class ContVistaGestioneRicevute():
         self.gestore_ric = gestore_ric
         self.stacked_widget = stacked_widget
         self.stacked_widget.addWidget(self.view)
-        self.aggiorna_tabella()
         self.cont_inserisci = ContVistaInserisciRicevuta(self.gestore_ric, self.gestore_ord, self.lista_tav)
         self.cont_info_ric = ContVistaInfoRicevuta(self.gestore_ric)
 
@@ -78,11 +74,20 @@ class ContVistaGestioneRicevute():
         self.view.pulsante_mostra.setEnabled(self.numero_selezionato is not None)
         self.view.pulsante_elimina.setEnabled(self.numero_selezionato is not None)
 
+        self.aggiorna_tabella()
+
     def inserisci_ricevuta(self):
         self.cont_inserisci.aggiorna_tabella()
         self.cont_inserisci.view.exec()
+        self.sovrascrivi_pickle()
         self.aggiorna_tabella()
 
+
+    def sovrascrivi_pickle(self):
+        with open('lista_ricevute_salvate.pickle', 'wb') as f:
+            pickle.dump(self.gestore_ric.lista_ricevute, f)
+        f.close()
+        self.gestore_ric.salva_su_file('codici.pickle')
 
 
     def aggiorna_tabella(self):
@@ -93,7 +98,7 @@ class ContVistaGestioneRicevute():
         for ricevuta in lista_ric:
             self.view.tab.setItem(i,0, QTableWidgetItem(ricevuta.nomeAcquirente)) #acquirente
             stringa_a_4_cifre = "{:04d}".format(ricevuta.numero)
-            print(stringa_a_4_cifre)
+
             self.view.tab.setItem(i, 1, QTableWidgetItem(stringa_a_4_cifre))
 
             self.view.tab.setItem(i, 2, QTableWidgetItem(str(ricevuta.data)))

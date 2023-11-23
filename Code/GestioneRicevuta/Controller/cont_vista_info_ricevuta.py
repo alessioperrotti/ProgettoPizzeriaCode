@@ -38,13 +38,12 @@ class ContVistaInfoRicevuta():
         self.view.lab_data_s.setText(self.ricevuta_selezionata.data)
 
         self.imposta_lista()
-        print("c")
+       
 
     def imposta_lista(self):
 
         list = self.ricevuta_selezionata.listaProdotti
-        print(list)
-        print(list[0].nome)
+
         self.ricevuta_selezionata.listaProdotti.sort(key=lambda x: x.nome)
         for prodotto in self.ricevuta_selezionata.listaProdotti:
             lab = QLabel(f'<font color="black">&#8226;</font> '+ prodotto.nome + " € " + str(prodotto.prezzo_al_pubblico))

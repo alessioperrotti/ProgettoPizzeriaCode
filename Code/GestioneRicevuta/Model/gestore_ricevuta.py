@@ -8,7 +8,7 @@ class GestoreRicevuta(OggettoConID):
         self.lista_ricevute = []
 
     def aggiungi_ricevuta(self,ammontareLordo, data, listaProdotti, nomeAcquirente,ora):
-        numero = self.genera_id()
+        numero = self.genera_id("ricevuta")
         self.lista_ricevute.append(Ricevuta(ammontareLordo, data, listaProdotti, nomeAcquirente, numero, ora))
         return numero
 

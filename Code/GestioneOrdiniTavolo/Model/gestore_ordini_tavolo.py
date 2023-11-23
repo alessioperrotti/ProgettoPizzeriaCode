@@ -1,15 +1,12 @@
 from Code.GestioneOrdiniTavolo.Model.ordine_tavolo import OrdineTavolo
+from Code.GestioneOrdiniTavolo.Model.tavolo import Tavolo
+
 
 class GestoreOrdiniTavolo(object):
 
     def __init__(self):
 
         self.lista_tavoli = []
-        # self.numero = numero
-        # self.posti_disponibili = posti_disponibili
-        # self.stato = stato
-        # #aggiungo dei tavoli
-        #self.lista_tavoli.append(Tavolo(1, 4, "libero"))
 
         self.lista_ordini = []
 

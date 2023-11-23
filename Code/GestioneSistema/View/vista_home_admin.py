@@ -40,7 +40,7 @@ def crea_immagine(directory, dimensione):
 
     cartella_principale = os.path.dirname(os.path.realpath(__file__))
     dir = os.path.abspath(os.path.join(cartella_principale, directory))
-    
+
 
     pixmap = QPixmap(dir)
     scaled_pixmap = pixmap.scaled(dimensione, dimensione, aspectRatioMode=Qt.AspectRatioMode.KeepAspectRatio)
@@ -85,7 +85,7 @@ class VistaHomeAdmin(QWidget):
         self.puls_ric = crea_pulsante("Ricevute", "png/stats.png")
 
 
-        back = crea_immagine("png/back.png", 35)
+       # back = crea_immagine("png/back.png", 35)
 
         # definizione layout
         layout = QVBoxLayout()
@@ -113,7 +113,7 @@ class VistaHomeAdmin(QWidget):
         layout.addStretch()
         layout.addLayout(layout_centrale)
         layout.addSpacing(10)
-        layout.addWidget(back)
+   
         layout.addSpacing(10)
 
         layout_orizzontale.addSpacing(20)
