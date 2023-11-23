@@ -1,6 +1,9 @@
 from Code.GestioneMagazzino.View.modifica_materiaprima_view import VistaModificaMateriaPrima
 from Code.GestioneMagazzino.Model.gestore_magazzino import GestoreMagazzino
 from Code.GestioneMagazzino.Model.materia_prima import MateriaPrima
+from PyQt6.QtWidgets import QMessageBox
+
+
 class ContModificaMateriaPrima(object):
 
     def __init__(self, view: VistaModificaMateriaPrima, model: GestoreMagazzino, matprima_da_modificare: MateriaPrima):
@@ -18,13 +21,34 @@ class ContModificaMateriaPrima(object):
 
     def conferma_modifica(self):
 
-        new_costo_al_kg = self.view.campo_costoAlKg.text()
-        new_qta_disponibile = self.view.campo_qtaDisp.text()
-        new_data_scadenza = self.view.campo_dataScadenza.selectedDate()
-        new_qta_limite = self.view.campo_qtaLimite.text()
-        new_qta_ordine_STD = self.view.campo_qtaOrdineSTD.text()
+        try:
+            new_costo_al_kg = self.view.campo_costoAlKg.text()
+            new_qta_disponibile = self.view.campo_qtaDisp.text()
+            new_data_scadenza = self.view.campo_dataScadenza.selectedDate()
+            new_qta_limite = self.view.campo_qtaLimite.text()
+            new_qta_ordine_STD = self.view.campo_qtaOrdineSTD.text()
 
-        self.model.modifica_materiaprima(self.matprima_da_modificare.codice, new_costo_al_kg, new_qta_disponibile, new_qta_limite,
+        except ValueError:
+            if not all([
+                new_costo_al_kg,
+                new_qta_disponibile,
+                new_data_scadenza,
+                new_qta_limite,
+                new_qta_ordine_STD
+            ]):
+                errore_msg = "Controllare che tutti i campi siano riempiti."
+            else:
+                errore_msg = "Controllare che i dati siano inseriti correttamente."
+
+            error_box = QMessageBox()
+            error_box.setIcon(QMessageBox.Icon.Critical)
+            error_box.setWindowTitle("Errore di Inserimento")
+            error_box.setText(errore_msg)
+            error_box.exec()
+
+        else:
+            self.model.modifica_materiaprima(self.matprima_da_modificare.codice, new_costo_al_kg,
+                                             new_qta_disponibile, new_qta_limite,
                                          new_qta_ordine_STD, new_data_scadenza)
+            self.view.close()
 
-        self.view.close()
