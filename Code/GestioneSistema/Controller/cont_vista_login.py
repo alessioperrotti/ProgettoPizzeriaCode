@@ -18,3 +18,6 @@ class ContVistaLogin():
 
     def apri_login_dipendente(self):
         self.stacked.setCurrentWidget(self.cont_vista_login_dipendente.view)
+
+
+

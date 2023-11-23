@@ -148,7 +148,7 @@ class VistaHomeAdmin(QWidget):
         layout_orizzontale.addLayout(layout)
         layout_orizzontale.addSpacing(20)
 
-        self.setFixedSize(994, 637)
+        self.setFixedSize(756, 637)
         self.setLayout(layout_orizzontale)
 
 
