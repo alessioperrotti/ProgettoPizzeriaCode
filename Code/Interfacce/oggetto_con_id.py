@@ -39,7 +39,7 @@ class OggettoConID(ABC):
         # Carica gli attributi di classe da un file utilizzando pickle
         with open(nome_file, 'rb') as file:
             dati = pickle.load(file)
-            print("porco" + str(dati['cod_ric']))
+            
         file.close()
 
         # Aggiorna gli attributi di classe con i dati caricati

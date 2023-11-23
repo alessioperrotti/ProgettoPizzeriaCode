@@ -38,7 +38,7 @@ class ContVistaInfoRicevuta():
         self.view.lab_data_s.setText(self.ricevuta_selezionata.data)
 
         self.imposta_lista()
-       
+
 
     def imposta_lista(self):
 
