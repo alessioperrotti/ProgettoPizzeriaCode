@@ -16,13 +16,42 @@ def Pulsante(nome):
     pulsante = QPushButton(nome)
     pulsante.setFont(label_font)
     pulsante.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
-    pulsante.setStyleSheet("background-color: #ff776d; border: 2px solid black; border-radius: 10px; padding: 10px")
+    #pulsante.setStyleSheet("background-color: #ff776d; border: 2px solid black; border-radius: 10px; padding: 10px")
     return pulsante
 
 
 class VistaLoginDipendente(QWidget):
     def __init__(self):
         super().__init__()
+
+        self.setStyleSheet("""
+            QPushButton{
+                background-color: "#ff776d";
+                color: "white";
+                text-align: center;
+                border-radius: 6px;
+                font-size: 24px;
+                padding: 10px;
+            }
+            QPushButton:hover{
+                background-color: "red";
+                font-size: 24px;
+            }
+            QTableWidget {
+                background-color: white;
+                alternate-background-color: white;
+                selection-background-color: darkcyan;
+                border: 2px solid grey;
+            }
+            QHeaderView:section {
+                font-weight: bold;
+                background-color: lightgray;
+            }
+            QHeaderView:active {
+                background-color: gray;
+            }
+        """)
+
         self.initUI()
 
     def initUI(self):
