@@ -6,9 +6,6 @@ from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplica
                              QGridLayout, QTableWidget, QHeaderView, QSpacerItem, QLineEdit, QTableWidgetItem,
                              QScrollBar, QScrollArea, QAbstractItemView, QDialog)
 
-from Code.GestioneDipendenti.View.vista_inserisci_dipendente import VistaInserisciDipendente
-from Code.GestioneDipendenti.View.vista_visualizza_dipendente import VistaVisualizzaDipendente
-
 # Font
 label_font = QFont("Roboto", 24)
 label_font_tit = QFont("Roboto", 32, weight=50)
@@ -39,10 +36,10 @@ def crea_pulsante_back(dimensioni, directory):
     pulsante_back.setFixedSize(dimensioni, dimensioni)
     pulsante_back.setStyleSheet("""
             QPushButton{
-                background-color: rgba(0, 0, 0, 0);
+                background-color: "lightgray";
             }
             QPushButton:hover{
-                background-color: "lightgray";
+                background-color: "gray";
             }
             """)
     return pulsante_back

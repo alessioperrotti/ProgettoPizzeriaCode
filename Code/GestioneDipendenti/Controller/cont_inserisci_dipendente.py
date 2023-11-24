@@ -22,10 +22,10 @@ class UsedUsername(Exception):
         self.message = message
         super().__init__(message)
 
-class NameAlert(Exception):
-    def __init__(self, message):
-        self.message = message
-        super().__init__(message)
+# class NameAlert(Exception):
+#     def __init__(self, message):
+#         self.message = message
+#         super().__init__(message)
 
 
 class ContInserisciDipendente(object):
@@ -39,8 +39,8 @@ class ContInserisciDipendente(object):
         try:
             nome = self.view.edit_nome.text()
             cognome = self.view.edit_cognome.text()
-            if not nome.isalpha() or not cognome.isalpha():
-                raise NameAlert("Il nome e il cognome possono contenere solo lettere.")
+            # if not nome.isalpha() or not cognome.isalpha():
+            #     raise NameAlert("Il nome e il cognome possono contenere solo lettere.")
             ruolo = self.view.edit_ruolo.currentText()
             email = self.view.edit_email.text()
             stipendio = round(float(self.view.edit_stipendio.text()), 2)
@@ -66,7 +66,10 @@ class ContInserisciDipendente(object):
             ]):
                 errore_msg = "Controllare che tutti i campi siano riempiti."
             else:
-                errore_msg = "Controllare che i dati siano inseriti correttamente."
+                if not self.view.edit_nome.text().isalpha() or not self.view.edit_cognome.text().isalpha():
+                    errore_msg = "Il nome e il cognome possono contenere solo lettere."
+                else:
+                    errore_msg = "Controllare che i dati siano inseriti correttamente."
 
             error_box = QMessageBox()
             error_box.setIcon(QMessageBox.Icon.Critical)
@@ -88,12 +91,12 @@ class ContInserisciDipendente(object):
             error_box.setText(od.message)
             error_box.exec()
 
-        except NameAlert as na:
-            error_box = QMessageBox()
-            error_box.setIcon(QMessageBox.Icon.Critical)
-            error_box.setWindowTitle("Errore di Inserimento")
-            error_box.setText(na.message)
-            error_box.exec()
+        # except NameAlert as na:
+        #     error_box = QMessageBox()
+        #     error_box.setIcon(QMessageBox.Icon.Critical)
+        #     error_box.setWindowTitle("Errore di Inserimento")
+        #     error_box.setText(na.message)
+        #     error_box.exec()
 
         else:
             if ruolo == "Cuoco":

@@ -48,7 +48,7 @@ class VistaInserisciDipendente(QDialog):
         email.setFont(label_font_piccolo)
         data = QLabel("Data di Nascita:")
         data.setFont(label_font_piccolo)
-        stipendio = QLabel("Stipendio:")
+        stipendio = QLabel("Stipendio(€):")
         stipendio.setFont(label_font_piccolo)
         ruolo = QLabel("Ruolo:")
         ruolo.setFont(label_font_piccolo)
