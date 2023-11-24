@@ -73,7 +73,7 @@ class ContVistaGestioneRicevute():
         self.view.pulsante_mostra.clicked.connect(self.mostra_info_ricevuta)
         self.view.pulsante_mostra.setEnabled(self.numero_selezionato is not None)
         self.view.pulsante_elimina.setEnabled(self.numero_selezionato is not None)
-
+        self.view.pulsante_back.clicked.connect(lambda : self.stacked_widget.setCurrentWidget(self.stacked_widget.widget(0)))
         self.aggiorna_tabella()
 
     def inserisci_ricevuta(self):

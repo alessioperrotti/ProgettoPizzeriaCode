@@ -1,3 +1,4 @@
+import os
 import sys
 
 from PyQt6.QtCore import Qt
@@ -28,7 +29,10 @@ def crea_tabella(righe, colonne, larghezza, altezza):
 
 def crea_pulsante_back(dimensioni, directory):
     pulsante_back = QPushButton()
-    img = QPixmap(directory)
+    cartella_principale = os.path.dirname(os.path.realpath(__file__))
+    dir = os.path.abspath(os.path.join(cartella_principale, directory))
+
+    img = QPixmap(dir)
     icon = img.scaledToWidth(dimensioni)
     icon = QIcon(icon)
     pulsante_back.setIcon(icon)
@@ -76,6 +80,8 @@ class VistaGestioneRicevute(QWidget):
            }
        """)
 
+
+
     def init_ui(self):
         self.setWindowTitle("Gestionale Pizzeria")
         title = QLabel("Gestione Ricevute")
@@ -95,7 +101,7 @@ class VistaGestioneRicevute(QWidget):
 
         #self.pulsante_inserisci.clicked.connect(lambda : self.pulsante_inserisci.setText("O"))
         # Pulsante Back
-        pulsante_back = crea_pulsante_back(35,"png/back.png")
+        self.pulsante_back = crea_pulsante_back(35,"png/back.png")
 
         # Tabella
         self.tab = crea_tabella(18, 3, 481, 404)
@@ -118,14 +124,12 @@ class VistaGestioneRicevute(QWidget):
         layout_pulsanti.addStretch()
 
         layout.addLayout(layout_orizzontale)
-        layout.addWidget(pulsante_back)
+        layout.addWidget(self.pulsante_back)
 
         layout.setContentsMargins(30, 20, 10, 20)
         self.setFixedSize(756, 637)
         self.setLayout(layout)
         self.pulsante_inserisci.setFocus()
-
-
 
 
 

@@ -31,6 +31,8 @@ class ContVistaHomeAdmin():
         # collegamento pulsanti
         self.view.puls_dip.clicked.connect(self.go_to_dipendenti)
         self.view.puls_ric.clicked.connect(self.apri_gestione_ricevute)
+        self.cont_ric.view.pulsante_back.clicked.connect(lambda : self.stacked.setCurrentWidget(self.view))
+
 
     def go_to_dipendenti(self):
         self.stacked.setCurrentWidget(self.cont_vista_dipendenti.view)

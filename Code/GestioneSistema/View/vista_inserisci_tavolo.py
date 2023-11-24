@@ -1,5 +1,5 @@
 #!/usr/bin/python
-
+import os
 import sys
 
 from PyQt6.QtCore import Qt
@@ -29,7 +29,11 @@ def crea_pulsante(directory):
 
 def crea_immagine(directory, dimensione):
     label_foto = QLabel()
-    pixmap = QPixmap(directory)
+    cartella_principale = os.path.dirname(os.path.realpath(__file__))
+    dir = os.path.abspath(os.path.join(cartella_principale, directory))
+
+    pixmap = QPixmap(dir)
+
     scaled_pixmap = pixmap.scaled(dimensione, dimensione, aspectRatioMode=Qt.AspectRatioMode.KeepAspectRatio)
     label_foto.setPixmap(scaled_pixmap)
     return label_foto
@@ -68,13 +72,13 @@ class VistaInserisciTavolo(QWidget):
         label2 = QLabel("DEL TAVOLO")
         label2.setFont(label_font_piccolo)
 
-        campo = QLineEdit()
-        campo.setStyleSheet("Border: 1px solid black; border-radius: 2px")
-        campo.setFont(label_font)
-        campo.setFixedWidth(115)
+        self.campo = QLineEdit()
+        self.campo.setStyleSheet("Border: 1px solid black; border-radius: 2px")
+        self.campo.setFont(label_font)
+        self.campo.setFixedWidth(115)
 
 
-        pulsante = crea_pulsante("png/check.png")
+        self.pulsante = crea_pulsante("png/check.png")
 
 
 
@@ -87,8 +91,8 @@ class VistaInserisciTavolo(QWidget):
         layout_orizz= QHBoxLayout()
 
         # Inserimento Item nel Layout
-        layout_orizz.addWidget(campo)
-        layout_orizz.addWidget(pulsante)
+        layout_orizz.addWidget(self.campo)
+        layout_orizz.addWidget(self.pulsante)
 
         layout.addWidget(label1, alignment=Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(label2,alignment=Qt.AlignmentFlag.AlignCenter)

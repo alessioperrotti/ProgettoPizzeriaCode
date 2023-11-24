@@ -1,7 +1,9 @@
 import pickle
 import sys
 
+
 from PyQt6.QtCore import pyqtSignal, pyqtSlot
+from PyQt6.QtGui import QGuiApplication
 from PyQt6.QtWidgets import QApplication, QWidget, QStackedWidget, QPushButton, QVBoxLayout
 
 from Code.GestioneDipendenti.Model.gestore_dipendenti import GestoreDipendenti
@@ -28,6 +30,8 @@ class MainWindow(QWidget):
         self.stacked = QStackedWidget()
         self.init_ui()
 
+       # centro la finestra
+        self.setFixedSize(994, 637)
         self.show()
 
     def cambio_view(self):
@@ -116,6 +120,7 @@ class MainWindow(QWidget):
         self.stacked.currentChanged.connect(self.cambio_view)
 
 if __name__ == '__main__':
+
     app = QApplication(sys.argv)
     mainWindow = MainWindow(app)
 

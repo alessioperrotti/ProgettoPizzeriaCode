@@ -61,8 +61,8 @@ class VistaLogin(QWidget):
         spazio_tra_pulsanti = QSpacerItem(20, 20)
         self.pulsante_admin = crea_pulsante("Accedi al sistema")
         self.pulsante_admin.setFixedSize(360, 80)
-        pulsante2 = crea_pulsante("Accedi come cliente")
-        pulsante2.setFixedSize(360, 80)
+        self.pulsante_cliente = crea_pulsante("Accedi come cliente")
+        self.pulsante_cliente.setFixedSize(360, 80)
 
         # Definizione Layout
         layout = QVBoxLayout()
@@ -73,7 +73,7 @@ class VistaLogin(QWidget):
         layout.addSpacerItem(spazio_tra_pulsanti)
         layout.addWidget(self.pulsante_admin, alignment=Qt.AlignmentFlag.AlignCenter)
         layout.addSpacerItem(spazio_tra_pulsanti)
-        layout.addWidget(pulsante2, alignment=Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(self.pulsante_cliente, alignment=Qt.AlignmentFlag.AlignCenter)
         layout.addItem(spazio_verticale)
 
         self.setFixedSize(994, 637)
