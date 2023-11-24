@@ -36,10 +36,10 @@ def crea_pulsante_back(dimensioni, directory):
     pulsante_back.setFixedSize(dimensioni, dimensioni)
     pulsante_back.setStyleSheet("""
             QPushButton{
-                background-color: rgba(0, 0, 0, 0);
+                background-color: "lightgray";
             }
             QPushButton:hover{
-                background-color: "lightgray";
+                background-color: "gray";
             }
             """)
     return pulsante_back
