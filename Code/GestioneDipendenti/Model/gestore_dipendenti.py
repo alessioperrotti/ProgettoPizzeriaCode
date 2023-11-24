@@ -21,22 +21,27 @@ class GestoreDipendenti():
             if nome == cuoco.nome:
                 print("trovato")
                 return cuoco
+    def estrai_cuoco_username(self, username):
+        for cuoco in self.lista_cuochi:
+            if username == cuoco.username:
+                print("trovato")
+                return cuoco
 
     def elimina_cuoco(self, nome):
         cuoco_da_eliminare = self.estrai_cuoco_nome(nome)
         self.lista_cuochi.remove(cuoco_da_eliminare)
 
     def modifica_cuoco(self, nome_ricerca, new_email, new_stipendio,
-                           new_data_nascita, new_username, new_password):
+                       new_data_nascita, new_username, new_password):
         cuoco: Cuoco = self.estrai_cuoco_nome(nome_ricerca)
         for x in self.lista_cuochi:
+            print("c")
             if cuoco.nome == x.nome:
                 x.email = new_email
                 x.stipendio = new_stipendio
                 x.data_nascita = new_data_nascita
                 x.username = new_username
                 x.password = new_password
-                print(x.email)
 
     #########################################################################
     def aggiungi_cameriere(self, cameriere):
@@ -53,12 +58,18 @@ class GestoreDipendenti():
             if nome == cameriere.nome:
                 return cameriere
 
+    def estrai_cameriere_username(self, username):
+        for cameriere in self.lista_camerieri:
+            if username == cameriere.username:
+                print("trovato")
+                return cameriere
+
     def elimina_cameriere(self, nome):
         cameriere_da_eliminare = self.estrai_cameriere_nome(nome)
         self.lista_camerieri.remove(cameriere_da_eliminare)
 
-    def modifica_cameriere(self, nome,new_email, new_stipendio,
-                              new_data_nascita, new_username, new_password):
+    def modifica_cameriere(self, nome, new_email, new_stipendio,
+                           new_data_nascita, new_username, new_password):
         cameriere: Cameriere = self.estrai_cameriere_nome(nome)
         for x in self.lista_camerieri:
             if cameriere.nome == x.nome:
@@ -67,7 +78,3 @@ class GestoreDipendenti():
                 x.data_nascita = new_data_nascita
                 x.username = new_username
                 x.password = new_password
-
-
-
-
