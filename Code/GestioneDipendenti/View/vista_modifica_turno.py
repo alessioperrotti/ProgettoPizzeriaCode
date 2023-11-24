@@ -67,9 +67,17 @@ class VistaModificaTurno(QWidget):
         cuoco.setFixedSize(146,29)
         cameriere = QComboBox()
         cameriere.setFixedSize(146, 29)
+
         turno_cuoco = QComboBox()
+        turno_cuoco.addItem("Pranzo")
+        turno_cuoco.addItem("Cena")
+        turno_cuoco.addItem("Pranzo & Cena")
         turno_cuoco.setFixedSize(146, 29)
+
         turno_cameriere = QComboBox()
+        turno_cameriere.addItem("Pranzo")
+        turno_cameriere.addItem("Cena")
+        turno_cameriere.addItem("Pranzo & Cena")
         turno_cameriere.setFixedSize(146, 29)
 
         pulsante = QPushButton("Conferma")
