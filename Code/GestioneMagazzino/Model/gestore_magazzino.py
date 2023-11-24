@@ -37,6 +37,14 @@ class GestoreMagazzino(object):
                 elemento_cercato = x
         return elemento_cercato
 
+    def estrai_per_nome(self, nome):
+
+        elemento_cercato = None
+        for x in self.lista_materieprime:
+            if str(x.nome) == str(nome):
+                elemento_cercato = x
+        return elemento_cercato
+
 
     def elimina_materiaprima(self, codice):
 

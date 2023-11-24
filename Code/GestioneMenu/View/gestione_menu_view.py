@@ -35,7 +35,7 @@ def crea_tabella(righe, colonne, larghezza, altezza):
     tabella.setFixedSize(larghezza, altezza)
     return tabella
 
-class VistaGestioneMagazzino(QWidget):
+class VistaGestioneMenu(QWidget):
 
     def __init__(self):
 

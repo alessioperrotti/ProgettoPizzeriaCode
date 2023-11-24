@@ -17,7 +17,7 @@ def crea_tabella(righe, colonne, larghezza, altezza):
     return tabella
 
 
-class VistaInserisciProdotto(QWidget):
+class VistaInserisciProdotto(QDialog):
 
     def __init__(self):
 
