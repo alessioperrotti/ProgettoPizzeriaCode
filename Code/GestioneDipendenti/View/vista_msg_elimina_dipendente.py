@@ -4,7 +4,7 @@ import sys
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplication, QSpacerItem,
-                             QSizePolicy, QHBoxLayout)
+                             QSizePolicy, QHBoxLayout, QDialog)
 
 label_font = QFont("Roboto", 24)
 label_font_tit = QFont("Roboto", 40, weight=50)
@@ -28,7 +28,7 @@ def crea_pulsante(nome):
     return pulsante
 
 
-class VistaMsgEliminaDipendente(QWidget):
+class VistaMsgEliminaDipendente(QDialog):
     def __init__(self):
         super().__init__()
         self.initUI()
@@ -41,8 +41,8 @@ class VistaMsgEliminaDipendente(QWidget):
         label2.setAlignment(Qt.AlignmentFlag.AlignCenter)
         label2.setFont(label_font_piccolo)
 
-        pulsante1 = crea_pulsante("Annulla")
-        pulsante2 = crea_pulsante("Sono sicuro")
+        self.pulsante1 = crea_pulsante("Annulla")
+        self.pulsante2 = crea_pulsante("Sono sicuro")
 
 
         # Definizione Layout
@@ -55,8 +55,8 @@ class VistaMsgEliminaDipendente(QWidget):
 
         layout.addSpacing(10)
         layout.addLayout(layout_orizzontale)
-        layout_orizzontale.addWidget(pulsante1)
-        layout_orizzontale.addWidget(pulsante2)
+        layout_orizzontale.addWidget(self.pulsante1)
+        layout_orizzontale.addWidget(self.pulsante2)
 
         self.setFixedSize(323, 147)
         self.setLayout(layout)

@@ -4,11 +4,14 @@ from PyQt6.QtWidgets import QApplication, QTableWidgetItem, QVBoxLayout, QMessag
 from Code.GestioneDipendenti.Controller.cont_inserisci_dipendente import ContInserisciDipendente
 from Code.GestioneDipendenti.Controller.cont_modifica_dipendente import ContModificaDipendente
 from Code.GestioneDipendenti.Controller.cont_mostra_dipendente import ContMostraDipendente
+from Code.GestioneDipendenti.Controller.cont_msg_elimina_dip import ContMsgEliminaDip
 from Code.GestioneDipendenti.Model.gestore_dipendenti import GestoreDipendenti
 from Code.GestioneDipendenti.View.vista_gestione_dipendenti import VistaGestioneDipendenti
 from Code.GestioneDipendenti.View.vista_inserisci_dipendente import VistaInserisciDipendente
 from Code.GestioneDipendenti.View.vista_modifica_dipendente import VistaModificaDipendente
+from Code.GestioneDipendenti.View.vista_msg_elimina_dipendente import VistaMsgEliminaDipendente
 from Code.GestioneDipendenti.View.vista_visualizza_dipendente import VistaVisualizzaDipendente
+
 
 
 class ContGestioneDipendenti(object):
@@ -25,6 +28,7 @@ class ContGestioneDipendenti(object):
         self.view.tab.itemSelectionChanged.connect(self.riga_selezionata)
         self.view.pulsante_elimina.clicked.connect(self.delete_dipendente)
         self.view.pulsante_modifica.clicked.connect(self.go_to_modifica)
+        self.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.stacked.widget(0)))
 
     def riga_selezionata(self):
         selected_items = self.view.tab.selectedItems()
@@ -59,14 +63,20 @@ class ContGestioneDipendenti(object):
         self.update_tabella()
 
     def delete_dipendente(self):
+        vista_msg = VistaMsgEliminaDipendente()
+        cont_msg = ContMsgEliminaDip(self.model,vista_msg)
         if self.ruolo_selezionato == "Cuoco":
-            self.model.elimina_cuoco(self.nome_selezionato)
-            self.update_tabella()
-            self.nome_selezionato = None
+            cont_msg.view.exec()
+            if cont_msg.conferma:
+                self.model.elimina_cuoco(self.nome_selezionato)
+                self.update_tabella()
+                self.nome_selezionato = None
         if self.ruolo_selezionato == "Cameriere":
-            self.model.elimina_cameriere(self.nome_selezionato)
-            self.update_tabella()
-            self.nome_selezionato = None
+            cont_msg.view.exec()
+            if cont_msg.conferma:
+                self.model.elimina_cameriere(self.nome_selezionato)
+                self.update_tabella()
+                self.nome_selezionato = None
         self.view.tab.clearSelection()
 
     def go_to_modifica(self):
