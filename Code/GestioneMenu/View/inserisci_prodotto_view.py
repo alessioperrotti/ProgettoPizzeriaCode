@@ -23,6 +23,32 @@ class VistaInserisciProdotto(QWidget):
 
         super().__init__()
         self.initUI()
+        self.setStyleSheet("""
+            QPushButton{
+                background-color: "#ff776d";
+                color: "white";
+                text-align: center;
+                border-radius: 6px;
+                font-family:Roboto;
+            }
+            QPushButton:hover{
+                background-color: "red";
+                font-size: 13px;
+            }
+            QTableWidget {
+                background-color: white;
+                alternate-background-color: white;
+                selection-background-color: darkcyan;
+                border: 2px solid grey;
+            }
+            QHeaderView:section {
+                background-color: lightgray;
+                font-weight: bold;
+            }
+            QHeaderView:active {
+                background-color: gray;
+            }
+        """)
 
 
     def initUI(self):
@@ -84,10 +110,7 @@ class VistaInserisciProdotto(QWidget):
         label_ingrediente.setFixedSize(200, 33)
         self.combo_ingrediente = QComboBox()
         self.combo_ingrediente.setFixedSize(216, 26)
-        self.combo_ingrediente.addItem("Ingrediente 1")
-        self.combo_ingrediente.addItem("Ingrediente 2")
-        self.combo_ingrediente.addItem("Ingrediente 3")
-        label_quantita = QLabel("Quantità (Kg):")
+        label_quantita = QLabel("Quantità(Kg):")
         label_quantita.setFont(font_label)
         label_quantita.setFixedSize(200, 33)
         self.campo_quantita = QLineEdit()
@@ -104,7 +127,7 @@ class VistaInserisciProdotto(QWidget):
         middle_grid.addItem(QSpacerItem(30, 40), 1, 3)
         middle_grid.addWidget(self.pulsante_aggiungi, 2, 4)
 
-        self.data_grid = crea_tabella(6, 2, 461, 191)
+        self.data_grid = crea_tabella(0, 2, 461, 191)
         self.data_grid.setHorizontalHeaderLabels(["INGREDIENTE", "QUANTITÀ(Kg)"])
         self.data_grid.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         hbox_datagrid.addWidget(self.data_grid)
@@ -130,28 +153,9 @@ class VistaInserisciProdotto(QWidget):
         self.setFixedSize(726, 712)
         self.setLayout(main_layout)
 
-
-app = QApplication(sys.argv)
-app.setStyleSheet("""
-    QPushButton{
-        background-color: "#ff776d";
-        color: "white";
-        text-align: center;
-        border-radius: 6px;
-    }
-    QPushButton:hover{
-        background-color: "red";
-        font-size: 15px;
-    }
-    QTableWidget {
-        background-color: white;
-        alternate-background-color: white;
-        selection-background-color: darkcyan;
-        border: 2px solid grey;
-    }
-""")
-
-window = VistaInserisciProdotto()
-window.show()
-sys.exit(app.exec())
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    window = VistaInserisciProdotto()
+    window.show()
+    sys.exit(app.exec())
 

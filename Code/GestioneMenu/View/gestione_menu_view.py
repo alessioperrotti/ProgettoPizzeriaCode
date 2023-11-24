@@ -29,6 +29,7 @@ def crea_tabella(righe, colonne, larghezza, altezza):
     tabella = QTableWidget()
     tabella.setRowCount(righe)
     tabella.setColumnCount(colonne)
+    tabella.verticalHeader().setVisible(False)
     header = tabella.horizontalHeader()
     header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
     tabella.setFixedSize(larghezza, altezza)
@@ -40,6 +41,32 @@ class VistaGestioneMagazzino(QWidget):
 
         super().__init__()
         self.initUI()
+        self.setStyleSheet("""
+            QPushButton{
+                background-color: "#ff776d";
+                color: "white";
+                text-align: center;
+                border-radius: 6px;
+                font-family:Roboto;
+            }
+            QPushButton:hover{
+                background-color: "red";
+                font-size: 13px;
+            }
+            QTableWidget {
+                background-color: white;
+                alternate-background-color: white;
+                selection-background-color: darkcyan;
+                border: 2px solid grey;
+            }
+            QHeaderView:section {
+                background-color: lightgray;
+                font-weight: bold;
+            }
+            QHeaderView:active {
+                background-color: gray;
+            }
+        """)
 
 
     def initUI(self):
@@ -54,9 +81,9 @@ class VistaGestioneMagazzino(QWidget):
         vbox_pulsanti = QVBoxLayout()
         vbox_tabella = QVBoxLayout()
 
-        pulsante_modifica = QPushButton("Modifica\nMateria Prima")
-        pulsante_inserisci = QPushButton("Inserisci\nMateria Prima")
-        pulsante_elimina = QPushButton("Elimina\nMateria Prima")
+        pulsante_modifica = QPushButton("Modifica\nProdotto")
+        pulsante_inserisci = QPushButton("Inserisci\nProdotto")
+        pulsante_elimina = QPushButton("Elimina\nProdotto")
 
         pulsanti = [pulsante_inserisci,
                     pulsante_modifica,
@@ -71,11 +98,11 @@ class VistaGestioneMagazzino(QWidget):
 
         vbox_pulsanti.addSpacerItem(QSpacerItem(217, 217))
 
-        self.data_grid = crea_tabella(15, 3, 481, 404)
+        self.data_grid = crea_tabella(0, 3, 481, 404)
         self.data_grid.setColumnWidth(0, 211)
         self.data_grid.setColumnWidth(1, 124)
         self.data_grid.setColumnWidth(2, 145)
-        self.data_grid.setHorizontalHeaderLabels(["NOME PRODOTTO", "PREZZO (€)", "TIPOLOGIA"])
+        self.data_grid.setHorizontalHeaderLabels(["NOME PRODOTTO", "PREZZO(€)", "TIPOLOGIA"])
         self.data_grid.setFont(font_piccolo)
         self.data_grid.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
@@ -83,7 +110,6 @@ class VistaGestioneMagazzino(QWidget):
         self.search_bar.setPlaceholderText("Cerca per nome")
         self.search_bar.setFixedSize(336, 29)
         self.search_bar.setStyleSheet("QLineEdit { border: 2px solid black; }")
-        self.search_bar.textChanged.connect(self.filtra_elementi)
         vbox_tabella.addSpacerItem(QSpacerItem(20, 20))
         vbox_tabella.addWidget(self.search_bar, alignment=Qt.AlignmentFlag.AlignLeft)
         vbox_tabella.addWidget(self.data_grid, alignment=Qt.AlignmentFlag.AlignLeft)
@@ -112,36 +138,10 @@ class VistaGestioneMagazzino(QWidget):
     def enter_event(self, pulsante):
         pulsante.setStyleSheet('background color: #e3645a; ')
 
-    def filtra_elementi(self):
-
-        ricerca = self.search_bar.text().lower()
-        for row in range(self.data_grid.rowCount()):
-                row_hidden = all(ricerca not in self.data_grid.item(row, 1).text().lower())
-                self.data_grid.setRowHidden(row, row_hidden)
 
 
-
-
-app = QApplication(sys.argv)
-app.setStyleSheet("""
-    QPushButton{
-        background-color: "#ff776d";
-        color: "white";
-        text-align: center;
-        border-radius: 6px;
-    }
-    QPushButton:hover{
-        background-color: "red";
-        font-size: 13px;
-    }
-    QTableWidget {
-        background-color: white;
-        alternate-background-color: white;
-        selection-background-color: darkcyan;
-        border: 2px solid grey;
-    }
-""")
-
-window = VistaGestioneMagazzino()
-window.show()
-sys.exit(app.exec())
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    window = VistaGestioneMagazzino()
+    window.show()
+    sys.exit(app.exec())
