@@ -22,9 +22,13 @@ class ContGestioneMagazzino(object):
         self.view.pulsante_inserisci.clicked.connect(self.open_inserimento)
         self.view.search_bar.textChanged.connect(self.filtra_elementi)
         self.view.pulsante_mostrainfo.clicked.connect(self.open_mostrainfo)
+        self.view.pulsante_mostrainfo.setEnabled(self.matprima_selezionata is not None)
         self.view.data_grid.itemSelectionChanged.connect(self.riga_selezionata)
         self.view.pulsante_elimina.clicked.connect(self.elimina_elemento)
+        self.view.pulsante_elimina.setEnabled(self.matprima_selezionata is not None)
         self.view.pulsante_modifica.clicked.connect(self.open_modifica)
+        self.view.pulsante_modifica.setEnabled(self.matprima_selezionata is not None)
+
 
     def open_inserimento(self):
 
@@ -43,6 +47,7 @@ class ContGestioneMagazzino(object):
                 self.matprima_selezionata = int(item.text())
         self.view.pulsante_mostrainfo.setEnabled(abilita_pulsante)
         self.view.pulsante_modifica.setEnabled(abilita_pulsante)
+        self.view.pulsante_elimina.setEnabled(abilita_pulsante)
 
     def open_mostrainfo(self):
         dialog_mostrainfo = VistaMateriaPrima()
@@ -74,11 +79,13 @@ class ContGestioneMagazzino(object):
         dialog_conferma_elimina = VistaMsgEliminaMateriaPrima()
         controller_conferma = ContMsgEliminaMateriaPrima(dialog_conferma_elimina)
         controller_conferma.view.exec()
-        if controller_conferma.confermato():
+        if controller_conferma.conferma:
+            controller_conferma.view.close()
             self.model.elimina_materiaprima(self.matprima_selezionata)
             self.update_tabella()
             self.matprima_selezionata = None
             self.view.data_grid.clearSelection()
+
 
     def open_modifica(self):
         dialog_modifica = VistaModificaMateriaPrima()

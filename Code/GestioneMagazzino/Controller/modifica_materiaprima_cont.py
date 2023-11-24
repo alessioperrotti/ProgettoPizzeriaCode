@@ -18,6 +18,10 @@ class ContModificaMateriaPrima(object):
 
         self.view.label_codice2.setText(str(materiaprima.codice))
         self.view.label_nome2.setText(str(materiaprima.nome))
+        self.view.campo_costoAlKg.setPlaceholderText(str(materiaprima.costo_al_kg))
+        self.view.campo_qtaDisp.setPlaceholderText(str(materiaprima.qta_disponibile))
+        self.view.campo_qtaLimite.setPlaceholderText(str(materiaprima.qta_limite))
+        self.view.campo_qtaOrdineSTD.setPlaceholderText(str(materiaprima.qta_ordine_STD))
 
     def conferma_modifica(self):
 

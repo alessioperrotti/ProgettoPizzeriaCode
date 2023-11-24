@@ -32,7 +32,7 @@ class ContInserisciMateriaPrima(object):
             codice = self.view.campo_codice.text()
             if self.model.estrai_per_codice(codice) is not None:
                 raise UsedCode("Il codice inserito risulta già utilizzato.")
-            nome = self.view.campo_nome.text().title()
+            nome = (self.view.campo_nome.text().title())
             costo_al_kg = round(float(self.view.campo_costoAlKg.text()), 2)
             qta_disponibile = round(float(self.view.campo_qtaDisp.text()), 3)
             data_scadenza = self.view.campo_dataScadenza.selectedDate()
