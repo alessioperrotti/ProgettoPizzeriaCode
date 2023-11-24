@@ -81,13 +81,13 @@ class VistaGestioneMenu(QWidget):
         vbox_pulsanti = QVBoxLayout()
         vbox_tabella = QVBoxLayout()
 
-        pulsante_modifica = QPushButton("Modifica\nProdotto")
-        pulsante_inserisci = QPushButton("Inserisci\nProdotto")
-        pulsante_elimina = QPushButton("Elimina\nProdotto")
+        self.pulsante_modifica = QPushButton("Modifica\nProdotto")
+        self.pulsante_inserisci = QPushButton("Inserisci\nProdotto")
+        self.pulsante_elimina = QPushButton("Elimina\nProdotto")
 
-        pulsanti = [pulsante_inserisci,
-                    pulsante_modifica,
-                    pulsante_elimina]
+        pulsanti = [self.pulsante_inserisci,
+                    self.pulsante_modifica,
+                    self.pulsante_elimina]
 
         vbox_pulsanti.addSpacerItem(QSpacerItem(217, 217))
 
@@ -142,6 +142,6 @@ class VistaGestioneMenu(QWidget):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    window = VistaGestioneMagazzino()
+    window = VistaGestioneMenu()
     window.show()
     sys.exit(app.exec())

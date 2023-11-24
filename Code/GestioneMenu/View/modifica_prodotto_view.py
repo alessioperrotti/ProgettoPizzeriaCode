@@ -17,12 +17,38 @@ def crea_tabella(righe, colonne, larghezza, altezza):
     return tabella
 
 
-class VistaModificaProdotto(QWidget):
+class VistaModificaProdotto(QDialog):
 
     def __init__(self):
 
         super().__init__()
         self.initUI()
+        self.setStyleSheet("""
+                    QPushButton{
+                        background-color: "#ff776d";
+                        color: "white";
+                        text-align: center;
+                        border-radius: 6px;
+                        font-family:Roboto;
+                    }
+                    QPushButton:hover{
+                        background-color: "red";
+                        font-size: 13px;
+                    }
+                    QTableWidget {
+                        background-color: white;
+                        alternate-background-color: white;
+                        selection-background-color: darkcyan;
+                        border: 2px solid grey;
+                    }
+                    QHeaderView:section {
+                        background-color: lightgray;
+                        font-weight: bold;
+                    }
+                    QHeaderView:active {
+                        background-color: gray;
+                    }
+                """)
 
 
     def initUI(self):
@@ -130,28 +156,9 @@ class VistaModificaProdotto(QWidget):
         self.setFixedSize(726, 712)
         self.setLayout(main_layout)
 
-
-app = QApplication(sys.argv)
-app.setStyleSheet("""
-    QPushButton{
-        background-color: "#ff776d";
-        color: "white";
-        text-align: center;
-        border-radius: 6px;
-    }
-    QPushButton:hover{
-        background-color: "red";
-        font-size: 15px;
-    }
-    QTableWidget {
-        background-color: white;
-        alternate-background-color: white;
-        selection-background-color: darkcyan;
-        border: 2px solid grey;
-    }
-""")
-
-window = VistaModificaProdotto()
-window.show()
-sys.exit(app.exec())
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    window = VistaModificaProdotto()
+    window.show()
+    sys.exit(app.exec())
 
