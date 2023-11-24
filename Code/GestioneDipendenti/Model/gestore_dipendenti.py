@@ -16,9 +16,9 @@ class GestoreDipendenti():
     #         if nome == cuoco.nome:
     #             list.append(cuoco)
 
-    def estrai_cuoco_nome(self, nome):
+    def estrai_cuoco_cognome(self, cognome):
         for cuoco in self.lista_cuochi:
-            if nome == cuoco.nome:
+            if cognome == cuoco.cognome:
                 print("trovato")
                 return cuoco
     def estrai_cuoco_username(self, username):
@@ -27,16 +27,16 @@ class GestoreDipendenti():
                 print("trovato")
                 return cuoco
 
-    def elimina_cuoco(self, nome):
-        cuoco_da_eliminare = self.estrai_cuoco_nome(nome)
+    def elimina_cuoco(self, cognome):
+        cuoco_da_eliminare = self.estrai_cuoco_cognome(cognome)
         self.lista_cuochi.remove(cuoco_da_eliminare)
 
-    def modifica_cuoco(self, nome_ricerca, new_email, new_stipendio,
+    def modifica_cuoco(self, cognome_ricerca, new_email, new_stipendio,
                        new_data_nascita, new_username, new_password):
-        cuoco: Cuoco = self.estrai_cuoco_nome(nome_ricerca)
+        cuoco: Cuoco = self.estrai_cuoco_cognome(cognome_ricerca)
         for x in self.lista_cuochi:
             print("c")
-            if cuoco.nome == x.nome:
+            if cuoco.cognome == x.cognome:
                 x.email = new_email
                 x.stipendio = new_stipendio
                 x.data_nascita = new_data_nascita
@@ -53,9 +53,9 @@ class GestoreDipendenti():
     #         if nome == cameriere.nome:
     #             list.append(cameriere)
 
-    def estrai_cameriere_nome(self, nome):
+    def estrai_cameriere_cognome(self, cognome):
         for cameriere in self.lista_camerieri:
-            if nome == cameriere.nome:
+            if cognome == cameriere.cognome:
                 return cameriere
 
     def estrai_cameriere_username(self, username):
@@ -64,15 +64,15 @@ class GestoreDipendenti():
                 print("trovato")
                 return cameriere
 
-    def elimina_cameriere(self, nome):
-        cameriere_da_eliminare = self.estrai_cameriere_nome(nome)
+    def elimina_cameriere(self, cognome):
+        cameriere_da_eliminare = self.estrai_cameriere_cognome(cognome)
         self.lista_camerieri.remove(cameriere_da_eliminare)
 
-    def modifica_cameriere(self, nome, new_email, new_stipendio,
+    def modifica_cameriere(self, cognome_ricerca, new_email, new_stipendio,
                            new_data_nascita, new_username, new_password):
-        cameriere: Cameriere = self.estrai_cameriere_nome(nome)
+        cameriere: Cameriere = self.estrai_cameriere_cognome(cognome_ricerca)
         for x in self.lista_camerieri:
-            if cameriere.nome == x.nome:
+            if cameriere.cognome == x.cognome:
                 x.email = new_email
                 x.stipendio = new_stipendio
                 x.data_nascita = new_data_nascita
