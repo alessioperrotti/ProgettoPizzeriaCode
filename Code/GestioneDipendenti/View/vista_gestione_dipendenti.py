@@ -95,7 +95,7 @@ class VistaGestioneDipendenti(QDialog):
         self.pulsante_modifica.setFixedSize(147, 49)
         self.pulsante_modifica.setEnabled(False)
 
-        self.pulsante_aggiungi = QPushButton("Aggiungi\nnuovo dipendente")
+        self.pulsante_aggiungi = QPushButton("Inserisci\nnuovo dipendente")
         self.pulsante_aggiungi.setFixedSize(147, 49)
 
         self.pulsante_elimina = QPushButton("Elimina\ndipendente")

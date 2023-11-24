@@ -37,8 +37,8 @@ class ContInserisciDipendente(object):
     def confirm_close(self):
         current_date = datetime.now().date()
         try:
-            nome = self.view.edit_nome.text()
-            cognome = self.view.edit_cognome.text()
+            nome = self.view.edit_nome.text().title()
+            cognome = self.view.edit_cognome.text().title()
             # if not nome.isalpha() or not cognome.isalpha():
             #     raise NameAlert("Il nome e il cognome possono contenere solo lettere.")
             ruolo = self.view.edit_ruolo.currentText()

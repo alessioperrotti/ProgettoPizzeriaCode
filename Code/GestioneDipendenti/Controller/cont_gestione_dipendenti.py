@@ -1,4 +1,6 @@
 import sys
+
+from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QTableWidgetItem, QVBoxLayout, QMessageBox, QStackedWidget
 
 from Code.GestioneDipendenti.Controller.cont_inserisci_dipendente import ContInserisciDipendente
@@ -105,11 +107,27 @@ class ContGestioneDipendenti(object):
 
         i = 0
         for x in camerieri:
-            self.view.tab.setItem(i, 0, QTableWidgetItem(x.nome+" "+x.cognome))
-            self.view.tab.setItem(i, 1, QTableWidgetItem(x.ruolo))
-            i += 1
+            # self.view.tab.setItem(i, 0, QTableWidgetItem(x.nome+" "+x.cognome))
+            # self.view.tab.setItem(i, 1, QTableWidgetItem(x.ruolo))
+            # i += 1
+
+            item_nome = QTableWidgetItem(x.nome + " " + x.cognome)
+            item_nome.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+            self.view.tab.setItem(i, 0, item_nome)
+
+            item_ruolo = QTableWidgetItem(x.ruolo)
+            item_ruolo.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+            self.view.tab.setItem(i, 1, item_ruolo)
 
         for x in cuochi:
-            self.view.tab.setItem(i, 0, QTableWidgetItem(x.nome+" "+x.cognome))
-            self.view.tab.setItem(i, 1, QTableWidgetItem(x.ruolo))
-            i += 1
+            # self.view.tab.setItem(i, 0, QTableWidgetItem(x.nome+" "+x.cognome))
+            # self.view.tab.setItem(i, 1, QTableWidgetItem(x.ruolo))
+            # i += 1
+
+            item_nome = QTableWidgetItem(x.nome + " " + x.cognome)
+            item_nome.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+            self.view.tab.setItem(i, 0, item_nome)
+
+            item_ruolo = QTableWidgetItem(x.ruolo)
+            item_ruolo.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+            self.view.tab.setItem(i, 1, item_ruolo)
