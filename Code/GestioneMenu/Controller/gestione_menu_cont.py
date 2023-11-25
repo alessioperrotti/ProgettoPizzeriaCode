@@ -36,7 +36,7 @@ class ContGestioneMenu(object):
             item1 = QTableWidgetItem(str(x.nome))
             self.view.data_grid.setItem(i, 0, item1)
             item1.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
-            item2 = QTableWidgetItem(str(x.prezzo))
+            item2 = QTableWidgetItem(str(x.prezzo_al_pubblico))
             self.view.data_grid.setItem(i, 1, item2)
             item2.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             item3 = QTableWidgetItem(str(x.tipologia))

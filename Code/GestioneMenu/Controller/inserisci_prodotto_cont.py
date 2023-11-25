@@ -27,6 +27,7 @@ class ContInserisciProdotto(object):
         self.view.pulsante_aggiungi.clicked.connect(self.aggiungi_alla_tabella_ingredienti)
         self.view.data_grid.itemSelectionChanged.connect(self.riga_selezionata)
         self.view.pulsante_rimuovi.setEnabled(self.matprima_selezionata is not None)
+        self.view.pulsante_rimuovi.clicked.connect(self.elimina_dalla_tabella_ingredienti)
 
     def conferma_inserimento(self):
 
@@ -119,8 +120,8 @@ class ContInserisciProdotto(object):
         selected_items = self.view.data_grid.selectedItems()
         abilita_pulsante = len(selected_items) > 0
         for item in selected_items:
-            if item.column() == 1:
-                self.matprima_selezionata = int(item.text())
+            if item.column() == 0:
+                self.matprima_selezionata = item.text()
         self.view.pulsante_rimuovi.setEnabled(abilita_pulsante)
 
 
