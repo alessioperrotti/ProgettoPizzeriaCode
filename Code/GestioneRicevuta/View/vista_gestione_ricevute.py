@@ -3,9 +3,8 @@ import sys
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont, QPixmap, QIcon
-from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplication, QSizePolicy, QHBoxLayout,
-                             QGridLayout, QTableWidget, QHeaderView, QSpacerItem, QLineEdit, QTableWidgetItem,
-                             QScrollBar, QScrollArea, QAbstractItemView)
+from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplication, QHBoxLayout,
+                             QTableWidget, QHeaderView, QAbstractItemView)
 
 # Font
 label_font = QFont("Roboto", 24)
@@ -80,8 +79,6 @@ class VistaGestioneRicevute(QWidget):
            }
        """)
 
-
-
     def init_ui(self):
         self.setWindowTitle("Gestionale Pizzeria")
         title = QLabel("Gestione Ricevute")
@@ -91,7 +88,6 @@ class VistaGestioneRicevute(QWidget):
         layout_orizzontale = QHBoxLayout()
         layout_pulsanti = QVBoxLayout()
 
-
         self.pulsante_mostra = QPushButton("Mostra info\nricevute")
         self.pulsante_mostra.setFixedSize(147, 49)
         self.pulsante_inserisci = QPushButton("Inserisci\nricevuta")
@@ -99,9 +95,9 @@ class VistaGestioneRicevute(QWidget):
         self.pulsante_elimina = QPushButton("Elimina\nricevuta")
         self.pulsante_elimina.setFixedSize(147, 49)
 
-        #self.pulsante_inserisci.clicked.connect(lambda : self.pulsante_inserisci.setText("O"))
+        # self.pulsante_inserisci.clicked.connect(lambda : self.pulsante_inserisci.setText("O"))
         # Pulsante Back
-        self.pulsante_back = crea_pulsante_back(35,"png/back.png")
+        self.pulsante_back = crea_pulsante_back(35, "png/back.png")
 
         # Tabella
         self.tab = crea_tabella(18, 3, 481, 404)
@@ -130,8 +126,6 @@ class VistaGestioneRicevute(QWidget):
         self.setFixedSize(756, 637)
         self.setLayout(layout)
         self.pulsante_inserisci.setFocus()
-
-
 
 
 if __name__ == '__main__':

@@ -1,4 +1,4 @@
-class Ricevuta():
+class Ricevuta:
     def __init__(self, ammontareLordo=None, data=None, listaProdotti=None, nomeAcquirente=None, numero=None, ora=None):
         self.ora = ora
         self.numero = numero
@@ -6,5 +6,3 @@ class Ricevuta():
         self.listaProdotti = listaProdotti
         self.data = data
         self.ammontareLordo = ammontareLordo
-
-

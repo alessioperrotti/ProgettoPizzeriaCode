@@ -2,10 +2,9 @@
 
 import sys
 
-from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
-from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplication, QSpacerItem,
-                             QSizePolicy, QHBoxLayout, QFrame, QLineEdit, QTableWidget, QHeaderView, QAbstractItemView,
+from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplication, QSizePolicy, QHBoxLayout, QFrame,
+                             QTableWidget, QHeaderView, QAbstractItemView,
                              QDialog, QGridLayout, QScrollArea)
 
 label_font = QFont("Roboto", 24)
@@ -19,8 +18,9 @@ def Pulsante(nome):
     pulsante = QPushButton(nome)
     pulsante.setFont(label_font)
     pulsante.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
-   # pulsante.setStyleSheet("background-color: #ff776d; border: 2px solid black; border-radius: 10px; padding: 10px")
+    # pulsante.setStyleSheet("background-color: #ff776d; border: 2px solid black; border-radius: 10px; padding: 10px")
     return pulsante
+
 
 def crea_tabella(righe, colonne, larghezza, altezza):
     tabella = QTableWidget()
@@ -37,7 +37,6 @@ def crea_tabella(righe, colonne, larghezza, altezza):
     return tabella
 
 
-
 class VistaInfoRicevuta(QDialog):
     def __init__(self):
         super().__init__()
@@ -45,11 +44,10 @@ class VistaInfoRicevuta(QDialog):
         self.tabella = None
         self.pulsante_mostra = None
         self.initUi()
-    def settaFont(self,font:QFont, *args):
+
+    def settaFont(self, font: QFont, *args):
         for arg in args:
             arg.setFont(font)
-
-
 
     def initUi(self):
         # Definizione oggetti
@@ -57,17 +55,12 @@ class VistaInfoRicevuta(QDialog):
         label_titolo = QLabel("<b>Scheda dati ricevuta</b>")
         label_titolo.setFont(label_font)
 
-
         frame1 = QFrame()
         frame1.setFrameShape(QFrame.Shape.HLine)
-
 
         frame2 = QFrame()
         frame2.setFrameShape(QFrame.Shape.HLine)
         frame2.setFrameShadow(QFrame.Shadow.Plain)
-
-
-
 
         frame3 = QFrame()
         frame3.setStyleSheet(".border: 1px solid black; border-radius: 5px; padding: 5px")
@@ -80,8 +73,7 @@ class VistaInfoRicevuta(QDialog):
         self.layout_inutile.addWidget(self.scroll_area)
         frame3.setLayout(self.layout_inutile)
         self.contenitore = QWidget()
-      #  self.contenitore.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
-        
+        #  self.contenitore.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
 
         self.layout_lista = QVBoxLayout()
         self.contenitore.setLayout(self.layout_lista)
@@ -89,9 +81,6 @@ class VistaInfoRicevuta(QDialog):
         self.scroll_area.setFrameShape(QFrame.Shape.NoFrame)
 
         self.scroll_area.setWidget(self.contenitore)
-
-
-
 
         lab_num = QLabel("<b>Numero:</b>")
         lab_nom = QLabel("<b>Nome acquirente:</b>")
@@ -105,13 +94,13 @@ class VistaInfoRicevuta(QDialog):
         self.lab_amm_s = QLabel()
         self.lab_data_s = QLabel()
         self.lab_ora_s = QLabel()
-        self.settaFont(label_font_piccolo, self.lab_num_s,self.lab_nom_s,self.lab_amm_s ,self.lab_data_s,self.lab_ora_s )
+        self.settaFont(label_font_piccolo, self.lab_num_s, self.lab_nom_s, self.lab_amm_s, self.lab_data_s,
+                       self.lab_ora_s)
         l1 = QHBoxLayout()
         l2 = QHBoxLayout()
         l3 = QHBoxLayout()
         l4 = QHBoxLayout()
         l5 = QHBoxLayout()
-
 
         l1.addWidget(lab_num)
         l1.addWidget(self.lab_num_s)
@@ -124,16 +113,14 @@ class VistaInfoRicevuta(QDialog):
         l5.addWidget(lab_ora)
         l5.addWidget(self.lab_ora_s)
 
-
-
         lay = QVBoxLayout()
 
         layout = QGridLayout()
-        layout.addLayout(l1,0,0)
-        layout.addLayout(l2,1,0)
-        layout.addLayout(l3,2,0)
-        layout.addLayout(l4,0,1)
-        layout.addLayout(l5,1,1)
+        layout.addLayout(l1, 0, 0)
+        layout.addLayout(l2, 1, 0)
+        layout.addLayout(l3, 2, 0)
+        layout.addLayout(l4, 0, 1)
+        layout.addLayout(l5, 1, 1)
         layout.setContentsMargins(20, 20, 20, 20)
         layout.setSpacing(20)
 
@@ -149,12 +136,7 @@ class VistaInfoRicevuta(QDialog):
         lay.addSpacing(5)
         lay.addWidget(frame2)
 
-
         lay.addLayout(layout2)
-
-
-
-
 
         self.setStyleSheet("""
           
@@ -176,7 +158,6 @@ class VistaInfoRicevuta(QDialog):
         self.setFixedSize(904, 626)
         layout.setContentsMargins(30, 20, 10, 20)
         self.setLayout(lay)
-
 
 
 def main():

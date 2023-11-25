@@ -1,4 +1,5 @@
 import sys
+
 from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QTableWidget, QTableWidgetItem, QPushButton, \
     QSizePolicy, QHeaderView
 

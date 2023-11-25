@@ -4,7 +4,7 @@ import sys
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
-from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplication, QSpacerItem,
+from PyQt6.QtWidgets import (QLabel, QPushButton, QVBoxLayout, QApplication, QSpacerItem,
                              QSizePolicy, QHBoxLayout, QFrame, QLineEdit, QTableWidget, QHeaderView, QAbstractItemView,
                              QDialog)
 
@@ -19,8 +19,9 @@ def Pulsante(nome):
     pulsante = QPushButton(nome)
     pulsante.setFont(label_font)
     pulsante.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
-   # pulsante.setStyleSheet("background-color: #ff776d; border: 2px solid black; border-radius: 10px; padding: 10px")
+    # pulsante.setStyleSheet("background-color: #ff776d; border: 2px solid black; border-radius: 10px; padding: 10px")
     return pulsante
+
 
 def crea_tabella(righe, colonne, larghezza, altezza):
     tabella = QTableWidget()
@@ -35,7 +36,6 @@ def crea_tabella(righe, colonne, larghezza, altezza):
     tabella.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
 
     return tabella
-
 
 
 class VistaInserisciRicevuta(QDialog):
@@ -62,7 +62,7 @@ class VistaInserisciRicevuta(QDialog):
         self.ricerca.setFixedWidth(340)
         self.ricerca.setStyleSheet("border: 1px solid black; padding: 3px")
 
-        self.tabella = crea_tabella(8,2, 340, 115)
+        self.tabella = crea_tabella(8, 2, 340, 115)
         self.tabella.setHorizontalHeaderLabels(["TAVOLO", "NUMERO ORDINI"])
 
         self.tabella.setFont(label_font_piccolo)
@@ -143,7 +143,6 @@ class VistaInserisciRicevuta(QDialog):
         """)
         self.setFixedSize(690, 474)
         self.setLayout(layout)
-
 
 
 def main():

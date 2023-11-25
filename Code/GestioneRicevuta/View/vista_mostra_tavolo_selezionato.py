@@ -1,10 +1,9 @@
 import sys
 
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QFont, QPixmap, QIcon
-from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplication, QSizePolicy, QHBoxLayout,
-                             QGridLayout, QTableWidget, QHeaderView, QSpacerItem, QLineEdit, QTableWidgetItem,
-                             QScrollBar, QScrollArea, QAbstractItemView, QFrame, QDialog)
+from PyQt6.QtGui import QFont
+from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplication, QTableWidget, QHeaderView,
+                             QScrollArea, QFrame, QDialog)
 
 # Font
 label_font = QFont("Roboto", 24)
@@ -25,7 +24,6 @@ def crea_tabella(righe, colonne, larghezza, altezza):
     tabella.horizontalHeader().setVisible(False)
     tabella.setFixedSize(larghezza, altezza)
     return tabella
-
 
 
 class VistaMostraTavoloSelezionato(QDialog):
@@ -61,7 +59,6 @@ class VistaMostraTavoloSelezionato(QDialog):
            }
        """)
 
-
     def init_ui(self):
         self.setWindowTitle("Gestionale Pizzeria")
 
@@ -87,16 +84,9 @@ class VistaMostraTavoloSelezionato(QDialog):
         layout.addWidget(self.scroll_area)
         layout.addWidget(self.pulsante_aggiungi, alignment=Qt.AlignmentFlag.AlignCenter)
 
-
-
-
         layout.setContentsMargins(20, 20, 20, 20)
         self.setFixedSize(462, 516)
         self.setLayout(layout)
-
-
-
-
 
 
 if __name__ == '__main__':

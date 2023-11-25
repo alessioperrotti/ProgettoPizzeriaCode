@@ -1,29 +1,22 @@
 import os
-import pickle
 import sys
-from PyQt6.QtWidgets import QApplication, QTableWidgetItem, QVBoxLayout, QMessageBox
 
-from Code.GestioneMenu.Model.prodotto import Prodotto
+from PyQt6.QtWidgets import QApplication, QTableWidgetItem, QMessageBox
+
 from Code.GestioneOrdiniTavolo.Model.gestore_ordini_tavolo import GestoreOrdiniTavolo
-from Code.GestioneOrdiniTavolo.Model.ordine_tavolo import OrdineTavolo
 from Code.GestioneOrdiniTavolo.Model.tavolo import Tavolo
-from Code.GestioneRicevuta.View.vista_inserisci_ricevuta import VistaInserisciRicevuta
 from Code.GestioneRicevuta.Controller.cont_vista_mostra_tavolo_selezionato import ContVistaMostraTavoloSelezionato
-
-
-
-from Code.GestioneRicevuta.Model.ricevuta import Ricevuta
 from Code.GestioneRicevuta.Model.gestore_ricevuta import GestoreRicevuta
-from PyQt6.QtCore import pyqtSignal
-class ContVistaInserisciRicevuta():
+from Code.GestioneRicevuta.Model.ricevuta import Ricevuta
+from Code.GestioneRicevuta.View.vista_inserisci_ricevuta import VistaInserisciRicevuta
 
 
+class ContVistaInserisciRicevuta:
     cartella_controller = os.path.dirname(os.path.realpath(__file__))
     cartella_base = os.path.abspath(os.path.join(cartella_controller, os.pardir))
     cartella_data = os.path.join(cartella_base, 'Data')
 
-
-    def __init__(self, gestore_ric:GestoreRicevuta, gestore_ord:GestoreOrdiniTavolo, lista_tav:list[Tavolo]):
+    def __init__(self, gestore_ric: GestoreRicevuta, gestore_ord: GestoreOrdiniTavolo, lista_tav: list[Tavolo]):
 
         self.lista_tavoli = lista_tav
         self.view = VistaInserisciRicevuta()
@@ -39,8 +32,6 @@ class ContVistaInserisciRicevuta():
         self.view.pulsante_mostra.setEnabled(self.tavolo_selezionato is not None)
         self.view.ricerca.textChanged.connect(self.filtra_tabella)
 
-
-
     def imposta_linea_selezionata(self):
         item_selezionati = self.view.tabella.selectedItems()
         for item in item_selezionati:
@@ -48,8 +39,6 @@ class ContVistaInserisciRicevuta():
                 self.tavolo_selezionato = int(item.text())
                 break
         self.view.pulsante_mostra.setEnabled(self.tavolo_selezionato is not None)
-
-
 
     def conferma_ricevuta(self):
 
@@ -68,7 +57,9 @@ class ContVistaInserisciRicevuta():
 
         else:
 
-            num = self.gestore_ric.aggiungi_ricevuta(self.ricevuta_temp.ammontareLordo, self.ricevuta_temp.data, self.ricevuta_temp.listaProdotti, self.ricevuta_temp.nomeAcquirente, self.ricevuta_temp.ora)
+            num = self.gestore_ric.aggiungi_ricevuta(self.ricevuta_temp.ammontareLordo, self.ricevuta_temp.data,
+                                                     self.ricevuta_temp.listaProdotti,
+                                                     self.ricevuta_temp.nomeAcquirente, self.ricevuta_temp.ora)
             self.gestore_ric.ricerca_ricevuta_numero(num)
 
             for ordine in self.controller_mostra.ordini:
@@ -79,7 +70,6 @@ class ContVistaInserisciRicevuta():
             self.view.ricerca.clear()
             self.ricevuta_temp = Ricevuta()
             self.controller_mostra.ordini = []
-
 
     def mostra_tavolo_selezionato(self):
 
@@ -93,20 +83,17 @@ class ContVistaInserisciRicevuta():
         self.view.pulsante_mostra.setEnabled(self.tavolo_selezionato is not None)
         self.ricevuta_temp = self.controller_mostra.ric
 
-
-
-
     def aggiorna_tabella(self):
 
-        i=0
+        i = 0
         for tavolo in self.lista_tavoli:
 
             num_ord = len(self.gestore_ord.cerca_ordini_per_tavolo_da_pagare(tavolo.numero))
 
-            if num_ord!=0:
+            if num_ord != 0:
                 self.view.tabella.setItem(i, 0, QTableWidgetItem(str(tavolo.numero)))
                 self.view.tabella.setItem(i, 1, QTableWidgetItem(str(num_ord)))
-                i+=1
+                i += 1
 
         self.view.tabella.setRowCount(i)
 
@@ -124,6 +111,3 @@ if __name__ == '__main__':
     cont = ContVistaInserisciRicevuta(gestore)
     cont.view.show()
     sys.exit(app.exec())
-
-
-
