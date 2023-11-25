@@ -14,9 +14,7 @@ class GestoreMagazzino(object):
     def __init__(self):
 
         self.lista_materieprime = []
-        self.file_pickle_path = "lista_materieprime.pickle"
-        if os.path.isfile(self.file_pickle_path):
-            print("Ho trovato il file")
+        self.file_pickle_path = "Code/lista_materieprime.pickle"
         self.carica_da_file()
 
 
@@ -60,17 +58,20 @@ class GestoreMagazzino(object):
 
     def salva_su_file(self):
 
-        if os.path.exists(self.file_pickle_path):
-            print("Ho trovato il file")
+        try:
             with open(self.file_pickle_path, 'wb') as file:
                 pickle.dump(self.lista_materieprime, file, pickle.HIGHEST_PROTOCOL)
             file.close()
+        except FileNotFoundError as e:
+            print(e)
 
     def carica_da_file(self):
 
-        if os.path.exists(self.file_pickle_path):
+        try:
             with open(self.file_pickle_path, 'rb') as file:
                 self.lista_materieprime = pickle.load(file)
+        except FileNotFoundError:
+            print("file non trovato")
 
 
     def elimina_materiaprima(self, codice):
