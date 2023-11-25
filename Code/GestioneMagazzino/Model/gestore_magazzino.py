@@ -4,6 +4,7 @@ import pickle
 from Code.GestioneMagazzino.Model.materia_prima import MateriaPrima
 from PyQt6.QtCore import pyqtSignal
 from datetime import date
+from pathlib import Path
 
 
 class GestoreMagazzino(object):
@@ -13,13 +14,17 @@ class GestoreMagazzino(object):
     def __init__(self):
 
         self.lista_materieprime = []
-        self.file_pickle_path = 'Code/GestioneMagazzino/Data/lista_materieprime.pickle'
+        self.file_pickle_path = "lista_materieprime.pickle"
+        if os.path.isfile(self.file_pickle_path):
+            print("Ho trovato il file")
         self.carica_da_file()
 
 
     def aggiungi_materiaprima(self, materiaprima):
 
         self.lista_materieprime.append(materiaprima)
+        self.salva_su_file()
+        self.carica_da_file()
 
 
     def modifica_materiaprima(self, codice_ricerca, new_costo_al_kg, new_qta_disponibile,
@@ -33,6 +38,9 @@ class GestoreMagazzino(object):
                 x.qta_limite = new_qta_limite
                 x.qta_ordine_STD = new_qta_ordine_STD
                 x.data_scadenza = new_data_scadenza
+
+        self.salva_su_file()
+        self.carica_da_file()
 
     def estrai_per_codice(self, codice):
 
@@ -53,8 +61,9 @@ class GestoreMagazzino(object):
     def salva_su_file(self):
 
         if os.path.exists(self.file_pickle_path):
+            print("Ho trovato il file")
             with open(self.file_pickle_path, 'wb') as file:
-                pickle.dump(self.lista_materieprime, file)
+                pickle.dump(self.lista_materieprime, file, pickle.HIGHEST_PROTOCOL)
             file.close()
 
     def carica_da_file(self):
@@ -68,6 +77,8 @@ class GestoreMagazzino(object):
 
         elemento_da_eliminare = self.estrai_per_codice(codice)
         self.lista_materieprime.remove(elemento_da_eliminare)
+        self.carica_da_file()
+        self.carica_da_file()
 
     def decrementa_disponibilita(self, codice, decremento):
 
