@@ -16,6 +16,7 @@ from Code.GestioneRicevuta.Controller.cont_vista_gestione_ricevute import ContVi
 from Code.GestioneRicevuta.Controller.cont_vista_inserisci_ricevuta import ContVistaInserisciRicevuta
 from Code.GestioneRicevuta.Model.gestore_ricevuta import GestoreRicevuta
 from Code.GestioneRicevuta.Model.ricevuta import Ricevuta
+from Code.GestioneMenu.Model.gestore_menu import GestoreMenu
 from Code.GestioneSistema.Controller.cont_vista_login import ContVistaLogin
 
 class SegnaleRidimensiona():
@@ -54,6 +55,7 @@ class MainWindow(QWidget):
         self.gestore_dip = GestoreDipendenti()
         self.gestore_mag = GestoreMagazzino()
         self.gestore_ord = GestoreOrdiniTavolo()
+        self.gestore_men = GestoreMenu()
 
 
 
@@ -98,7 +100,7 @@ class MainWindow(QWidget):
 
         #fine prove
 
-        self.cont_vista_login = ContVistaLogin(self.stacked, self.gestore_ric, self.gestore_dip, self.gestore_mag, self.gestore_ord)
+        self.cont_vista_login = ContVistaLogin(self.stacked, self.gestore_ric, self.gestore_dip, self.gestore_mag, self.gestore_ord, self.gestore_men)
         self.stacked.addWidget(self.cont_vista_login.view)
         self.stacked.setCurrentWidget(self.cont_vista_login.view)
 
