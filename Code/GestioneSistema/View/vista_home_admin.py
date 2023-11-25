@@ -81,8 +81,8 @@ class VistaHomeAdmin(QWidget):
         self.puls_dip = crea_pulsante("Dipendenti", "png_icone/dipendenti.png")
         self.puls_tur = crea_pulsante("Turni", "png_icone/turni.png")
         self.puls_men = crea_pulsante("Modifica Menu", "png_icone/menu.png")
-        self.puls_pre = crea_pulsante("Prenotazioni", "png_icone/stats.png")
-        self.puls_ric = crea_pulsante("Ricevute", "png_icone/stats.png")
+        self.puls_pre = crea_pulsante("Prenotazioni", "png_icone/prenotazioni.png")
+        self.puls_ric = crea_pulsante("Ricevute", "png_icone/ricevute.png")
 
 
        # back = crea_immagine("png/back.png", 35)
