@@ -6,15 +6,17 @@ from Code.GestioneMenu.View.msg_elimina_prodotto_view import VistaMsgEliminaProd
 from Code.GestioneMenu.Controller.msg_elimina_prodotto_cont import ContMsgEliminaProdotto
 from Code.GestioneMenu.View.modifica_prodotto_view import VistaModificaProdotto
 from Code.GestioneMenu.Controller.modifica_prodotto_cont import ContModificaProdotto
-from PyQt6.QtWidgets import QTableWidgetItem
+from PyQt6.QtWidgets import QTableWidgetItem, QStackedWidget
 from PyQt6.QtCore import Qt
+
 
 class ContGestioneMenu(object):
 
-    def __init__(self, view: VistaGestioneMenu, model: GestoreMenu):
+    def __init__(self, view: VistaGestioneMenu, model: GestoreMenu, stacked: QStackedWidget):
 
         self.view = view
         self.model = model
+        stacked.addWidget(self.view)
         self.update_tabella()
         self.prodotto_selezionato = None
         self.view.search_bar.textChanged.connect(self.filtra_elementi)

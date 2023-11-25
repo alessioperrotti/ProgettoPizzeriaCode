@@ -7,7 +7,7 @@ from Code.GestioneMagazzino.Controller.msg_elimina_materiaprima_cont import Cont
 from Code.GestioneMagazzino.Model.gestore_magazzino import GestoreMagazzino
 from Code.GestioneMagazzino.View.modifica_materiaprima_view import VistaModificaMateriaPrima
 from Code.GestioneMagazzino.View.msg_elimina_materiaprima_view import VistaMsgEliminaMateriaPrima
-from PyQt6.QtWidgets import QTableWidgetItem, QMessageBox, QStackedWidget
+from PyQt6.QtWidgets import QTableWidgetItem, QStackedWidget
 from PyQt6.QtCore import Qt
 from Code.GestioneMagazzino.Controller.materia_prima_cont import ContMateriaPrima
 
