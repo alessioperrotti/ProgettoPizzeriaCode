@@ -76,13 +76,13 @@ class VistaHomeAdmin(QWidget):
         label = QLabel("ACCESSO: Admin")
         label.setFont(label_font_tit)
 
-        self.puls_stats = crea_pulsante("Statistiche", "png/stats.png")
-        self.puls_mag = crea_pulsante("Magazzino", "png/magazzino.png")
-        self.puls_dip = crea_pulsante("Dipendenti", "png/dipendenti.png")
-        self.puls_tur = crea_pulsante("Turni", "png/turni.png")
-        self.puls_men = crea_pulsante("Modifica Menu", "png/stats.png")
-        self.puls_pre = crea_pulsante("Prenotazioni", "png/stats.png")
-        self.puls_ric = crea_pulsante("Ricevute", "png/stats.png")
+        self.puls_stats = crea_pulsante("Statistiche", "png_icone/stats.png")
+        self.puls_mag = crea_pulsante("Magazzino", "png_icone/magazzino.png")
+        self.puls_dip = crea_pulsante("Dipendenti", "png_icone/dipendenti.png")
+        self.puls_tur = crea_pulsante("Turni", "png_icone/turni.png")
+        self.puls_men = crea_pulsante("Modifica Menu", "png_icone/menu.png")
+        self.puls_pre = crea_pulsante("Prenotazioni", "png_icone/stats.png")
+        self.puls_ric = crea_pulsante("Ricevute", "png_icone/stats.png")
 
 
        # back = crea_immagine("png/back.png", 35)

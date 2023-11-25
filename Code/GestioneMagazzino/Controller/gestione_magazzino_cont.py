@@ -16,7 +16,8 @@ class ContGestioneMagazzino(object):
     def __init__(self, model: GestoreMagazzino, view: VistaGestioneMagazzino, stacked:QStackedWidget):
 
         self.view = view
-        stacked.addWidget(self.view)
+        self.stacked = stacked
+        self.stacked.addWidget(self.view)
         self.model = model
         self.update_tabella()
         self.matprima_selezionata = None
@@ -29,6 +30,8 @@ class ContGestioneMagazzino(object):
         self.view.pulsante_elimina.setEnabled(self.matprima_selezionata is not None)
         self.view.pulsante_modifica.clicked.connect(self.open_modifica)
         self.view.pulsante_modifica.setEnabled(self.matprima_selezionata is not None)
+        self.view.pulsante_back.clicked.connect(
+            lambda: self.stacked.setCurrentWidget(self.stacked.widget(0)))
 
 
     def open_inserimento(self):

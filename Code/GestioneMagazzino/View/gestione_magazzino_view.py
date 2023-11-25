@@ -1,4 +1,4 @@
-import sys
+import sys, os
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import QFont, QPixmap, QIcon
 from PyQt6.QtCore import Qt
@@ -9,7 +9,10 @@ font_piccolo = QFont("Roboto", 14)
 
 def crea_pulsante_back(dimensioni, directory):
     pulsante_back = QPushButton()
-    img = QPixmap(directory)
+    cartella_principale = os.path.dirname(os.path.realpath(__file__))
+    dir = os.path.abspath(os.path.join(cartella_principale, directory))
+
+    img = QPixmap(dir)
     icon = img.scaledToWidth(dimensioni)
     icon = QIcon(icon)
     pulsante_back.setIcon(icon)
@@ -118,27 +121,15 @@ class VistaGestioneMagazzino(QWidget):
         vbox_tabella.addWidget(self.data_grid, alignment=Qt.AlignmentFlag.AlignLeft)
         vbox_tabella.addSpacerItem(QSpacerItem(60,60))
 
-        #pulsante_back = crea_pulsante_back(35, "png/back.png")
+        self.pulsante_back = crea_pulsante_back(35, "png/back.png")
 
         main_layout.addWidget(label_titolo, alignment=Qt.AlignmentFlag.AlignTop)
         hbox.addLayout(vbox_tabella)
         hbox.addLayout(vbox_pulsanti)
         main_layout.addLayout(hbox)
-        #main_layout.addWidget(pulsante_back, alignment=Qt.AlignmentFlag.AlignLeft)
+        main_layout.addWidget(self.pulsante_back)
         self.setFixedSize(756,637)
         self.setLayout(main_layout)
-
-
-    def update_tabella(self, codice, nome, qta_disponibile):
-
-        row_position = self.data_grid.rowCount()
-        self.data_grid.insertRow(row_position)
-        self.data_grid.setItem(row_position, 0, QTableWidgetItem(str(codice)))
-        self.data_grid.setItem(row_position, 1, QTableWidgetItem(nome))
-        self.data_grid.setItem(row_position, 2, QTableWidgetItem(str(qta_disponibile)))
-
-    def enter_event(self, pulsante):
-        pulsante.setStyleSheet('background color: #e3645a; ')
 
 
 if __name__ == '__main__':

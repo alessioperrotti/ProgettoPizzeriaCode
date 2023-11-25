@@ -44,8 +44,8 @@ class ContInserisciProdotto(object):
             else:
                 ingredienti = []
                 for i in range(self.view.data_grid.rowCount()):
-                    nome_ingrediente = self.view.data_grid.item(i, 0)
-                    quantita = self.view.data_grid.item(i, 1)
+                    nome_ingrediente = str(self.view.data_grid.item(i, 0))
+                    quantita = float(str(self.view.data_grid.item(i, 1)))
                     matprima = self.magazzino.estrai_per_nome(nome_ingrediente)
                     ingrediente = (matprima, quantita)
                     ingredienti.append(ingrediente)
