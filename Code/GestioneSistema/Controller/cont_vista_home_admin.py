@@ -2,7 +2,9 @@ from PyQt6.QtWidgets import QStackedWidget
 
 
 from Code.GestioneDipendenti.Model.gestore_dipendenti import GestoreDipendenti
+from Code.GestioneMagazzino.Controller.gestione_magazzino_cont import ContGestioneMagazzino
 from Code.GestioneMagazzino.Model.gestore_magazzino import GestoreMagazzino
+from Code.GestioneMagazzino.View.gestione_magazzino_view import VistaGestioneMagazzino
 from Code.GestioneOrdiniTavolo.Model.gestore_ordini_tavolo import GestoreOrdiniTavolo
 from Code.GestioneRicevuta.Controller.cont_vista_gestione_ricevute import ContVistaGestioneRicevute
 from Code.GestioneRicevuta.Model.gestore_ricevuta import GestoreRicevuta
@@ -28,9 +30,11 @@ class ContVistaHomeAdmin():
         stacked.addWidget(self.view)
         gestore_dip = GestoreDipendenti()
         self.cont_vista_dipendenti = ContGestioneDipendenti(gestore_dip,stacked)
+        self.cont_vista_magazzino= ContGestioneMagazzino(gestore_mag,VistaGestioneMagazzino(), stacked)
         # collegamento pulsanti
         self.view.puls_dip.clicked.connect(self.go_to_dipendenti)
         self.view.puls_ric.clicked.connect(self.apri_gestione_ricevute)
+        self.view.puls_mag.clicked.connect(self.apri_gestione_magazzino)
         self.cont_ric.view.pulsante_back.clicked.connect(lambda : self.stacked.setCurrentWidget(self.view))
 
 
@@ -39,6 +43,8 @@ class ContVistaHomeAdmin():
 
 
     def apri_gestione_ricevute(self):
-        print("c")
         self.stacked.setCurrentWidget(self.cont_ric.view)
+
+    def apri_gestione_magazzino(self):
+        self.stacked.setCurrentWidget(self.cont_vista_magazzino.view)
 
