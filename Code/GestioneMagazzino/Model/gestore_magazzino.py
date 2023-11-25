@@ -14,7 +14,7 @@ class GestoreMagazzino(object):
     def __init__(self):
 
         self.lista_materieprime = []
-        self.file_pickle_path = "Code/lista_materieprime.pickle"
+        self.file_pickle_path = "lista_materieprime.pickle"
         self.carica_da_file()
 
 
@@ -70,6 +70,7 @@ class GestoreMagazzino(object):
         try:
             with open(self.file_pickle_path, 'rb') as file:
                 self.lista_materieprime = pickle.load(file)
+                file.close()
         except FileNotFoundError:
             print("file non trovato")
 
