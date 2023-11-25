@@ -33,7 +33,7 @@ class VistaInserisciProdotto(QDialog):
             }
             QPushButton:hover{
                 background-color: "red";
-                font-size: 13px;
+                
             }
             QTableWidget {
                 background-color: white;
@@ -71,19 +71,25 @@ class VistaInserisciProdotto(QDialog):
         self.campo_nome = QLineEdit()
         label_codice = QLabel("Codice:")
         self.campo_codice = QLineEdit()
-        label_prezzo = QLabel("Prezzo al pubblico:")
+        label_prezzo = QLabel("Prezzo al pubblico(€):")
         self.campo_prezzo = QLineEdit()
         label_tipologia = QLabel("Tipologia:")
         self.combo_tipologia = QComboBox()
         self.combo_tipologia.addItem("Piatto")
         self.combo_tipologia.addItem("Bevanda")
 
-        widgets1 = [label_nome, self.campo_nome, label_codice, self.campo_codice,
-                    label_prezzo, self.campo_prezzo, label_tipologia, self.combo_tipologia]
+        widgets1 = [label_nome, label_codice,
+                    label_prezzo, label_tipologia]
+
+        widgets2 = [self.campo_codice, self.campo_prezzo,
+                    self.combo_tipologia, self.campo_nome]
 
         for x in widgets1:
             x.setFont(font_label)
             x.setFixedSize(216, 33)
+
+        for y in widgets2:
+            y.setFixedSize(216, 33)
 
         upper_grid.addWidget(label_nome, 1, 1)
         upper_grid.addWidget(self.campo_nome, 2, 1)
@@ -139,7 +145,7 @@ class VistaInserisciProdotto(QDialog):
 
         self.pulsante_conferma = QPushButton("Conferma Inserimento")
         self.pulsante_conferma.setFixedSize(205, 74)
-        self.pulsante_conferma.setFont(QFont("Roboto", 15, weight=350))
+        self.pulsante_conferma.setFont(QFont("Roboto", 17, weight=350))
         hbox_conferma.addWidget(self.pulsante_conferma)
 
         main_layout.addWidget(label_titolo, alignment=Qt.AlignmentFlag.AlignTop)

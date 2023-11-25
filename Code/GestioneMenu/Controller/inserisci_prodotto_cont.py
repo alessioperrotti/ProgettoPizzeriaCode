@@ -20,6 +20,7 @@ class ContInserisciProdotto(object):
         self.view = view
         self.model = model
         self.magazzino = GestoreMagazzino()
+        self.riempi_combo()
         self.matprima_selezionata = None
         self.lista_ingredienti = []
         self.view.pulsante_conferma.clicked.connect(self.conferma_inserimento)
