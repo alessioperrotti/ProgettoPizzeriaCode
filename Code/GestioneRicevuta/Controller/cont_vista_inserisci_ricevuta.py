@@ -39,9 +39,7 @@ class ContVistaInserisciRicevuta():
         self.view.pulsante_mostra.setEnabled(self.tavolo_selezionato is not None)
         self.view.ricerca.textChanged.connect(self.filtra_tabella)
 
-    def salva_su_file(self, oggetto, nome_file):
-        with open(nome_file, "wb") as file:
-            pickle.dump(oggetto, file)
+
 
     def imposta_linea_selezionata(self):
         item_selezionati = self.view.tabella.selectedItems()
@@ -72,9 +70,7 @@ class ContVistaInserisciRicevuta():
 
             num = self.gestore_ric.aggiungi_ricevuta(self.ricevuta_temp.ammontareLordo, self.ricevuta_temp.data, self.ricevuta_temp.listaProdotti, self.ricevuta_temp.nomeAcquirente, self.ricevuta_temp.ora)
             self.gestore_ric.ricerca_ricevuta_numero(num)
-           # da rivedere    print(os.path.join(self.cartella_data, 'ricevute.pickle'))
-            self.salva_su_file(self.gestore_ric.ricerca_ricevuta_numero(num), os.path.join(self.cartella_data, 'ricevute.pickle'))
-            #imposta che gli ordini sono stati pagati
+
             for ordine in self.controller_mostra.ordini:
                 ordine.pagato = True
 

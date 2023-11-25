@@ -48,24 +48,12 @@ class MainWindow(QWidget):
 
 
 
-    def carica_pickle(self):
-        try:
-            with open('lista_ricevute_salvate.pickle', 'rb') as f:
-                self.gestore_ric.lista_ricevute = pickle.load(f)
-        except FileNotFoundError:
-            pass
 
-        try:
-            self.gestore_ric.carica_da_file('codici.pickle')
-
-        except FileNotFoundError:
-            pass
     def init_ui(self):
         self.gestore_ric = GestoreRicevuta()
         self.gestore_dip = GestoreDipendenti()
         self.gestore_mag = GestoreMagazzino()
         self.gestore_ord = GestoreOrdiniTavolo()
-        self.carica_pickle()
 
 
 
@@ -83,8 +71,8 @@ class MainWindow(QWidget):
         lista_tav.append(tavolo4)
         lista_tav.append(tavolo5)
 
-        prod1 = Prodotto("pizzamarghe", 2, 15)
-        prod2 = Prodotto("pizzasals", 3, 20)
+        prod1 = Prodotto("pizzamarghe", 2, 15, "pizza", ["pomodoro", "mozzarella"])
+        prod2 = Prodotto("pizzasals", 3, 20, "pizza", ["pomodoro", "mozzarella", "salsiccia"])
 
         ord1 = OrdineTavolo(1, 1, 0, tavolo1)
         ord1.aggiungi_prodotto(prod1)

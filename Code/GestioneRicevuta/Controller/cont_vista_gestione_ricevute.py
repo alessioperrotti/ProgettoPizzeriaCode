@@ -53,7 +53,7 @@ class ContVistaGestioneRicevute():
         self.aggiorna_tabella()
         self.numero_selezionato = None
         self.view.tab.clearSelection()
-        self.sovrascrivi_pickle()
+
 
     def __init__(self, gestore_ric:GestoreRicevuta, gestore_ord:GestoreOrdiniTavolo,lista_tav:list[Tavolo], stacked_widget:QStackedWidget):
         self.numero_selezionato = None
@@ -79,15 +79,10 @@ class ContVistaGestioneRicevute():
     def inserisci_ricevuta(self):
         self.cont_inserisci.aggiorna_tabella()
         self.cont_inserisci.view.exec()
-        self.sovrascrivi_pickle()
+
         self.aggiorna_tabella()
 
 
-    def sovrascrivi_pickle(self):
-        with open('lista_ricevute_salvate.pickle', 'wb') as f:
-            pickle.dump(self.gestore_ric.lista_ricevute, f)
-        f.close()
-        self.gestore_ric.salva_su_file('codici.pickle')
 
 
     def aggiorna_tabella(self):
