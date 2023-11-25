@@ -79,7 +79,7 @@ class GestoreMagazzino(object):
 
         elemento_da_eliminare = self.estrai_per_codice(codice)
         self.lista_materieprime.remove(elemento_da_eliminare)
-        self.carica_da_file()
+        self.salva_su_file()
         self.carica_da_file()
 
     def decrementa_disponibilita(self, codice, decremento):
