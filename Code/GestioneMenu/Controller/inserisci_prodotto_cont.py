@@ -5,7 +5,6 @@ from Code.GestioneMagazzino.Model.gestore_magazzino import GestoreMagazzino
 from Code.GestioneMenu.Model.gestore_menu import GestoreMenu
 from PyQt6.QtWidgets import QMessageBox, QTableWidgetItem
 from PyQt6.QtCore import Qt
-import traceback
 
 
 class NoIngredienti(Exception):
@@ -25,6 +24,7 @@ class ContInserisciProdotto(object):
         self.matprima_selezionata = None
         self.lista_ingredienti = []
         self.view.pulsante_conferma.clicked.connect(self.conferma_inserimento)
+        self.view.combo_tipologia.currentIndexChanged.connect(self.combo_changed)
         self.view.pulsante_aggiungi.clicked.connect(self.aggiungi_alla_tabella_ingredienti)
         self.view.data_grid.itemSelectionChanged.connect(self.riga_selezionata)
         self.view.pulsante_rimuovi.setEnabled(self.matprima_selezionata is not None)
@@ -40,24 +40,29 @@ class ContInserisciProdotto(object):
             prezzo = round(float(self.view.campo_prezzo.text()), 2)
             tipo = self.view.combo_tipologia.currentText().lower()
 
-            if self.view.data_grid.rowCount() == 0:
-                raise NoIngredienti("Controllare di aver inserito gli ingredienti.")
+            # controllo se si sta inserendo un piatto
+            if self.view.combo_tipologia.currentText().lower() == 'piatto':
+                if self.view.data_grid.rowCount() == 0:
+                    raise NoIngredienti("Controllare di aver inserito gli ingredienti.")
+                else:
+                    ingredienti = []
+                    for i in range(self.view.data_grid.rowCount()):
+                        nome_ingrediente = self.view.data_grid.item(i, 0).text().lower()
+                        quantita = float(self.view.data_grid.item(i, 1).text())
+                        matprima = self.magazzino.estrai_per_nome(nome_ingrediente)
+                        ingrediente = (matprima, quantita)
+                        ingredienti.append(ingrediente)
+
+                    nuovo_prodotto = Prodotto(nome, codice, prezzo, tipo, ingredienti)
+
+            # se si sta inserendo una bevanda
             else:
-                ingredienti = []
-                for i in range(self.view.data_grid.rowCount()):
-                    nome_ingrediente = self.view.data_grid.item(i, 0).text().lower()
-                    quantita = float(self.view.data_grid.item(i, 1).text())
-                    matprima = self.magazzino.estrai_per_nome(nome_ingrediente)
-                    ingrediente = (matprima, quantita)
-                    ingredienti.append(ingrediente)
-
-                nuovo_prodotto = Prodotto(nome, codice, prezzo, tipo, ingredienti)
+                matprima = self.magazzino.estrai_per_nome(self.view.campo_nome.text())
+                ingrediente = (matprima, 1)
+                nuovo_prodotto = Prodotto(nome, codice, prezzo, tipo, ingrediente)
 
 
-        except ValueError as ve:
-            print(f"ValueError: {ve}")
-            print("Traceback:")
-            traceback.print_exc()
+        except ValueError:
 
             if not all([
                 self.view.campo_codice.text(),
@@ -99,6 +104,7 @@ class ContInserisciProdotto(object):
         nome_ingrediente = self.view.combo_ingrediente.currentText().title()
         try:
             quantita = round(float(self.view.campo_quantita.text()), 3)
+
         except ValueError:
             if not all([self.view.combo_ingrediente.currentText().lower(),
                         round(float(self.view.campo_quantita.text()), 3)]):
@@ -141,3 +147,15 @@ class ContInserisciProdotto(object):
         riga_da_eliminare = self.view.data_grid.currentRow()
         if riga_da_eliminare >= 0:
             self.view.data_grid.removeRow(riga_da_eliminare)
+
+    def combo_changed(self):
+        if self.view.combo_tipologia.currentText().lower() == 'piatto':
+            self.view.pulsante_aggiungi.setEnabled(True)
+            self.view.data_grid.setEnabled(True)
+            self.view.combo_ingrediente.setEnabled(True)
+            self.view.campo_quantita.setEnabled(True)
+        elif self.view.combo_tipologia.currentText().lower() == 'bevanda':
+            self.view.pulsante_aggiungi.setEnabled(False)
+            self.view.data_grid.setEnabled(False)
+            self.view.combo_ingrediente.setEnabled(False)
+            self.view.campo_quantita.setEnabled(False)

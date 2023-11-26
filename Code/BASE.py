@@ -19,12 +19,13 @@ from Code.GestioneRicevuta.Model.ricevuta import Ricevuta
 from Code.GestioneMenu.Model.gestore_menu import GestoreMenu
 from Code.GestioneSistema.Controller.cont_vista_login import ContVistaLogin
 
+
 class SegnaleRidimensiona():
     def __init__(self):
         self.seg = pyqtSignal()
+
+
 class MainWindow(QWidget):
-
-
     def __init__(self, app):
         super(MainWindow, self).__init__()
 
@@ -43,21 +44,12 @@ class MainWindow(QWidget):
             self.close()
             self.show()
 
-
-
-
-
-
-
-
     def init_ui(self):
         self.gestore_ric = GestoreRicevuta()
         self.gestore_dip = GestoreDipendenti()
         self.gestore_mag = GestoreMagazzino()
         self.gestore_ord = GestoreOrdiniTavolo()
         self.gestore_men = GestoreMenu()
-
-
 
         #prove
         tavolo1 = Tavolo(1, 10, None)
