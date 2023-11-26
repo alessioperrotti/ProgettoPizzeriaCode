@@ -5,6 +5,7 @@ from Code.GestioneMagazzino.Model.gestore_magazzino import GestoreMagazzino
 from Code.GestioneMenu.Model.gestore_menu import GestoreMenu
 from PyQt6.QtWidgets import QMessageBox, QTableWidgetItem
 from PyQt6.QtCore import Qt
+import traceback
 
 
 class NoIngredienti(Exception):
@@ -36,7 +37,7 @@ class ContInserisciProdotto(object):
             codice = self.view.campo_codice.text()
             if self.model.estrai_per_codice(codice) is not None:
                 raise UsedCode("Il codice inserito risulta già utilizzato.")
-            prezzo = round(float(self.view.campo_prezzo.text()))
+            prezzo = round(float(self.view.campo_prezzo.text()), 2)
             tipo = self.view.combo_tipologia.currentText().lower()
 
             if self.view.data_grid.rowCount() == 0:
@@ -44,15 +45,20 @@ class ContInserisciProdotto(object):
             else:
                 ingredienti = []
                 for i in range(self.view.data_grid.rowCount()):
-                    nome_ingrediente = str(self.view.data_grid.item(i, 0))
-                    quantita = float(str(self.view.data_grid.item(i, 1)))
+                    nome_ingrediente = self.view.data_grid.item(i, 0).text().lower()
+                    quantita = float(self.view.data_grid.item(i, 1).text())
                     matprima = self.magazzino.estrai_per_nome(nome_ingrediente)
                     ingrediente = (matprima, quantita)
                     ingredienti.append(ingrediente)
 
                 nuovo_prodotto = Prodotto(nome, codice, prezzo, tipo, ingredienti)
 
-        except ValueError:
+
+        except ValueError as ve:
+            print(f"ValueError: {ve}")
+            print("Traceback:")
+            traceback.print_exc()
+
             if not all([
                 self.view.campo_codice.text(),
                 self.view.campo_nome.text(),

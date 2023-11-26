@@ -52,7 +52,7 @@ class GestoreMagazzino(object):
 
         elemento_cercato = None
         for x in self.lista_materieprime:
-            if str(x.nome) == str(nome):
+            if str(x.nome).lower() == str(nome):
                 elemento_cercato = x
         return elemento_cercato
 

@@ -56,8 +56,8 @@ class ContGestioneMenu(object):
         selected_items = self.view.data_grid.selectedItems()
         abilita_pulsante = len(selected_items) > 0
         for item in selected_items:
-            if item.column() == 1:
-                self.matprima_selezionata = int(item.text())
+            if item.column() == 0:
+                self.prodotto_selezionato = item.text()
         self.view.pulsante_modifica.setEnabled(abilita_pulsante)
         self.view.pulsante_elimina.setEnabled(abilita_pulsante)
 

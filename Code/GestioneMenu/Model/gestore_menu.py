@@ -14,6 +14,14 @@ class GestoreMenu(object):
         self.salva_su_file()
         self.carica_da_file()
 
+    def estrai_per_nome(self, nome):
+
+        elemento_cercato = None
+        for x in self.lista_prodotti:
+            if x.nome == nome:
+                elemento_cercato = x
+        return elemento_cercato
+
     def estrai_per_codice(self, codice):
 
         elemento_cercato = None
@@ -22,9 +30,10 @@ class GestoreMenu(object):
                 elemento_cercato = x
         return elemento_cercato
 
-    def elimina_prodotto(self, codice):
 
-        elemento_da_eliminare = self.estrai_per_codice(codice)
+    def elimina_prodotto(self, nome):
+
+        elemento_da_eliminare = self.estrai_per_nome(nome)
         self.lista_prodotti.remove(elemento_da_eliminare)
         self.salva_su_file()
         self.carica_da_file()

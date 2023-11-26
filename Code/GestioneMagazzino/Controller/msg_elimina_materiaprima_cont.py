@@ -8,11 +8,9 @@ class ContMsgEliminaMateriaPrima(object):
         self.view.pulsante1.clicked.connect(self.annullato)
 
     def confermato(self):
-        print("confermato")
         self.conferma = True
         self.view.close()
 
     def annullato(self):
-        print("annullato")
         self.conferma = False
         self.view.close()

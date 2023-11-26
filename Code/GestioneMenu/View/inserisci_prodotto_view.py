@@ -71,6 +71,7 @@ class VistaInserisciProdotto(QDialog):
         self.campo_nome = QLineEdit()
         label_codice = QLabel("Codice:")
         self.campo_codice = QLineEdit()
+        self.campo_codice.setMaxLength(4)
         label_prezzo = QLabel("Prezzo al pubblico(€):")
         self.campo_prezzo = QLineEdit()
         label_tipologia = QLabel("Tipologia:")
