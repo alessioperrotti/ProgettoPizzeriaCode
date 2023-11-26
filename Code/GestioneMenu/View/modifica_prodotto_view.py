@@ -67,10 +67,10 @@ class VistaModificaProdotto(QDialog):
         linea2 = QFrame()
         linea2.setFrameShape(QFrame.Shape.HLine)
 
-        label_nome = QLabel("Nome prodotto:")
-        label_nome_val = QLabel("nome prodotto")
-        label_codice = QLabel("Codice:")
-        label_codice_val = QLabel("codice prodotto")
+        label_nome = QLabel("<b>Nome prodotto:</b>")
+        self.label_nome_val = QLabel()
+        label_codice = QLabel("<b>Codice:</b>")
+        self.label_codice_val = QLabel()
         label_prezzo = QLabel("Prezzo al pubblico:")
         self.campo_prezzo = QLineEdit()
         label_tipologia = QLabel("Tipologia:")
@@ -78,7 +78,7 @@ class VistaModificaProdotto(QDialog):
         self.combo_tipologia.addItem("Piatto")
         self.combo_tipologia.addItem("Bevanda")
 
-        widgets1 = [label_nome, label_nome_val, label_codice, label_codice_val,
+        widgets1 = [label_nome, self.label_nome_val, label_codice, self.label_codice_val,
                     label_prezzo, self.campo_prezzo, label_tipologia, self.combo_tipologia]
 
         for x in widgets1:
@@ -86,9 +86,9 @@ class VistaModificaProdotto(QDialog):
             x.setFixedSize(216, 33)
 
         upper_grid.addWidget(label_nome, 1, 1)
-        upper_grid.addWidget(label_nome_val, 2, 1)
+        upper_grid.addWidget(self.label_nome_val, 2, 1)
         upper_grid.addWidget(label_codice, 1, 2)
-        upper_grid.addWidget(label_codice_val, 2, 2)
+        upper_grid.addWidget(self.label_codice_val, 2, 2)
         upper_grid.addWidget(label_prezzo, 4, 1)
         upper_grid.addWidget(self.campo_prezzo, 5, 1)
         upper_grid.addWidget(label_tipologia, 4, 2)
@@ -110,9 +110,6 @@ class VistaModificaProdotto(QDialog):
         label_ingrediente.setFixedSize(200, 33)
         self.combo_ingrediente = QComboBox()
         self.combo_ingrediente.setFixedSize(216, 26)
-        self.combo_ingrediente.addItem("Ingrediente 1")
-        self.combo_ingrediente.addItem("Ingrediente 2")
-        self.combo_ingrediente.addItem("Ingrediente 3")
         label_quantita = QLabel("Quantità (Kg):")
         label_quantita.setFont(font_label)
         label_quantita.setFixedSize(200, 33)
@@ -121,7 +118,7 @@ class VistaModificaProdotto(QDialog):
 
         self.pulsante_aggiungi = QPushButton("Aggiungi Ingrediente")
         self.pulsante_aggiungi.setFixedSize(162, 32)
-        self.pulsante_aggiungi.setFont(QFont("Roboto", 15, weight=350))
+        #self.pulsante_aggiungi.setFont(QFont("Roboto", 15, weight=350))
 
         middle_grid.addWidget(label_ingrediente, 1, 1)
         middle_grid.addWidget(self.combo_ingrediente, 2, 1)
@@ -130,19 +127,19 @@ class VistaModificaProdotto(QDialog):
         middle_grid.addItem(QSpacerItem(30, 40), 1, 3)
         middle_grid.addWidget(self.pulsante_aggiungi, 2, 4)
 
-        self.data_grid = crea_tabella(6, 2, 461, 191)
+        self.data_grid = crea_tabella(0, 2, 461, 191)
         self.data_grid.setHorizontalHeaderLabels(["INGREDIENTE", "QUANTITÀ(Kg)"])
         self.data_grid.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         hbox_datagrid.addWidget(self.data_grid)
 
         self.pulsante_rimuovi = QPushButton("Rimuovi Ingrediente\nSelezionato")
         self.pulsante_rimuovi.setFixedSize(162, 55)
-        self.pulsante_rimuovi.setFont(QFont("Roboto", 15, weight=350))
+        #self.pulsante_rimuovi.setFont(QFont("Roboto", 15, weight=350))
         hbox_datagrid.addWidget(self.pulsante_rimuovi)
 
         self.pulsante_conferma = QPushButton("Conferma Modifica")
         self.pulsante_conferma.setFixedSize(205, 74)
-        self.pulsante_conferma.setFont(QFont("Roboto", 15, weight=350))
+        #self.pulsante_conferma.setFont(QFont("Roboto", 15, weight=350))
         hbox_conferma.addWidget(self.pulsante_conferma)
 
         main_layout.addWidget(label_titolo, alignment=Qt.AlignmentFlag.AlignTop)
