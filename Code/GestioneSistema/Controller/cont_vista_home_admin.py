@@ -43,7 +43,7 @@ class ContVistaHomeAdmin():
         self.view.puls_mag.clicked.connect(self.apri_gestione_magazzino)
         self.view.puls_men.clicked.connect(self.apri_gestione_menu)
         self.cont_ric.view.pulsante_back.clicked.connect(lambda : self.stacked.setCurrentWidget(self.view))
-
+        self.cont_vista_dipendenti.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.view))
 
     def go_to_dipendenti(self):
         self.stacked.setCurrentWidget(self.cont_vista_dipendenti.view)

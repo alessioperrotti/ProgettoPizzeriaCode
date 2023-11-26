@@ -30,7 +30,7 @@ class ContGestioneDipendenti(object):
         self.view.tab.itemSelectionChanged.connect(self.riga_selezionata)
         self.view.pulsante_elimina.clicked.connect(self.delete_dipendente)
         self.view.pulsante_modifica.clicked.connect(self.go_to_modifica)
-        self.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.stacked.widget(0)))
+        # self.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.stacked.widget(0)))
 
     def riga_selezionata(self):
         selected_items = self.view.tab.selectedItems()
