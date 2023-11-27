@@ -20,6 +20,7 @@ def crea_tabella(righe, colonne, larghezza, altezza):
     header = tabella.horizontalHeader()
     header.setSectionResizeMode(0,QHeaderView.ResizeMode.Stretch)
     header.setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)
+    header.setSectionResizeMode(2, QHeaderView.ResizeMode.Fixed)
     tabella.verticalHeader().setVisible(False)
     tabella.setFixedSize(larghezza, altezza)
     tabella.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
@@ -79,6 +80,7 @@ class VistaModificaTurno(QDialog):
         title = QLabel("<b>Modifica Turni:<\b>")
         title.setFont(label_font_tit)
         self.giorno_title = QLabel()
+        self.giorno_title.setFont(label_font_tit)
 
         linea = QFrame()
         linea.setFrameShape(QFrame.Shape.HLine)
@@ -112,13 +114,14 @@ class VistaModificaTurno(QDialog):
         self.p_agg_cuoco = crea_pulsante_img(24,"png_icone/user-add.png")
         self.p_agg_cameriere = crea_pulsante_img(24, "png_icone/user-add.png")
         #aggiungere quando inserisco i clienti
-        p_rim_cuoco = crea_pulsante_img(16, "png/check.png")
-        p_rim_cameriere = crea_pulsante_img(16, "png/check.png")
+        self.p_rim_cuoco = crea_pulsante_img(20, "png_icone/remove-user.png")
+        self.p_rim_cameriere = crea_pulsante_img(20, "png_icone/remove-user.png")
 
-        self.tab_cuoco = crea_tabella(5,3,400,116)
+        self.tab_cuoco = crea_tabella(0,3,400,116)
         self.tab_cuoco.setHorizontalHeaderLabels(["Nome Cuoco:","Turno",""])
         self.tab_cuoco.setColumnWidth(2, 10)
-        self.tab_cameriere = crea_tabella(5,3,400,116)
+
+        self.tab_cameriere = crea_tabella(0,3,400,116)
         self.tab_cameriere.setColumnWidth(2, 10)
         self.tab_cameriere.setHorizontalHeaderLabels(["Nome Cameriere:", "Turno",""])
 

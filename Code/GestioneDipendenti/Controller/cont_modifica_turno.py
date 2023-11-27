@@ -11,8 +11,10 @@ class ContModificaTurno(object):
     def __init__(self, model: GestoreDipendenti, view: VistaModificaTurno):
         self.view = view
         self.model = model
+        self.cognome_selezionato = None
+        self.turno_selezionato = None
         self.view.p_agg_cuoco.clicked.connect(self.click_aggiungi_cuoco)
-        # self.view.p_agg_cameriere.clicked.connect(self.click_aggiungi)
+        self.view.p_agg_cameriere.clicked.connect(self.click_aggiungi_cameriere)
 
     def riempi_labels(self, giorno):
         self.view.giorno_title.setText(str(giorno))
@@ -27,31 +29,41 @@ class ContModificaTurno(object):
             self.view.cameriere.addItem(cameriere.cognome)
 
     def click_aggiungi_cuoco(self):
-        cuoco_temp = self.model.estrai_cuoco_cognome(self.view.cuoco.currentText())
-        cuoco_temp.turno = self.view.turno_cuoco.currentText()
-        print(cuoco_temp.turno)
-        self.update_tabella()
-    def update_tabella(self):
-        camerieri = self.model.lista_camerieri
-        cuochi = self.model.lista_cuochi
+        self.cognome_selezionato = self.view.cuoco.currentText()
+        turno_selezionato = self.view.turno_cuoco.currentText()
+        cuoco_selezionato = self.model.estrai_cuoco_cognome(self.cognome_selezionato)
 
-        i = 0
-        # for x in camerieri:
-        #     item_nome = QTableWidgetItem(x.nome + " " + x.cognome)
-        #     item_nome.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
-        #     self.view.tab_cuoco.setItem(i, 0, item_nome)
-        #
-        #     item_turno = QTableWidgetItem(x.turno)
-        #     item_turno.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
-        #     self.view.tab_cuoco.setItem(i, 1, item_turno)
-        #     i += 1
+        if cuoco_selezionato:
+            cuoco_selezionato.turno = turno_selezionato
+            print(cuoco_selezionato.turno)
 
-        for x in cuochi:
-            item_nome = QTableWidgetItem(x.nome + " " + x.cognome)
-            item_nome.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
-            self.view.tab_cameriere.setItem(i, 0, item_nome)
+        self.update_tabella(cuoco_selezionato)
 
-            item_turno = QTableWidgetItem(x.turno)
-            item_turno.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
-            self.view.tab_cameriere.setItem(i, 1, item_turno)
-            i += 1
+    def click_aggiungi_cameriere(self):
+        self.cognome_selezionato = self.view.cameriere.currentText()
+        turno_selezionato = self.view.turno_cameriere.currentText()
+        cameriere_selezionato = self.model.estrai_cameriere_cognome(self.cognome_selezionato)
+
+        if cameriere_selezionato:
+            cameriere_selezionato.turno = turno_selezionato
+            print(cameriere_selezionato.turno)
+
+        self.update_tabella(cameriere_selezionato)
+
+    def update_tabella(self,dip_selezionato):
+        if dip_selezionato in self.model.lista_cuochi:
+            row_position = self.view.tab_cuoco.rowCount()
+            self.view.tab_cuoco.insertRow(row_position)
+
+            self.view.tab_cuoco.setItem(row_position, 0, QTableWidgetItem(dip_selezionato.nome+" "+dip_selezionato.cognome))
+            self.view.tab_cuoco.setItem(row_position, 1, QTableWidgetItem(dip_selezionato.turno))
+            self.view.tab_cuoco.setCellWidget(row_position, 2, self.view.p_rim_cuoco)
+
+        if dip_selezionato in self.model.lista_camerieri:
+            row_position = self.view.tab_cameriere.rowCount()
+            self.view.tab_cameriere.insertRow(row_position)
+
+            self.view.tab_cameriere.setItem(row_position, 0,
+                                        QTableWidgetItem(dip_selezionato.nome + " " + dip_selezionato.cognome))
+            self.view.tab_cameriere.setItem(row_position, 1, QTableWidgetItem(dip_selezionato.turno))
+            self.view.tab_cameriere.setCellWidget(row_position, 2, self.view.p_rim_cameriere)
