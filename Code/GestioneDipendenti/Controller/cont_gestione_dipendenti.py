@@ -50,12 +50,10 @@ class ContGestioneDipendenti(object):
         dialog_mostrainfo = VistaVisualizzaDipendente()
         controller_mostrainfo = ContMostraDipendente(dialog_mostrainfo, self.model)
         if self.ruolo_selezionato == "Cuoco":
-            dipendente_temp = self.model.estrai_cuoco_cognome(
-                self.cognome_selezionato)  # estrae col nome ottenuto dalla tabella
+            dipendente_temp = self.model.estrai_cuoco_cognome(self.cognome_selezionato)
             controller_mostrainfo.riempi_labels_cuoco(dipendente_temp)
         if self.ruolo_selezionato == "Cameriere":
-            dipendente_temp = self.model.estrai_cameriere_cognome(
-                self.cognome_selezionato)  # estrae col nome ottenuto dalla tabella
+            dipendente_temp = self.model.estrai_cameriere_cognome(self.cognome_selezionato)
             controller_mostrainfo.riempi_labels_cameriere(dipendente_temp)
         controller_mostrainfo.view.exec()
 

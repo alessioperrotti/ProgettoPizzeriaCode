@@ -86,7 +86,6 @@ class VistaGestioneTurniPersonale(QDialog):
         self.tabella.setVerticalHeaderLabels(["TURNO PRANZO\n12:30-15:30","TURNO CENA\n19:30-00.30"])
 
         self.pulsante = QPushButton("Modifica Turno Selezionato")
-        self.pulsante.setEnabled(False)
         self.pulsante.setFixedSize(278,77)
         self.pulsante.setFont(label_font_piccolo)
 
