@@ -46,7 +46,7 @@ def crea_pulsante_img(dimensioni, directory):
             """)
     return pulsante_img
 
-class VistaGestioneTurniPersonale(QWidget):
+class VistaTurniPersonale(QWidget):
     def __init__(self):
         super().__init__()
         self.init_ui()
@@ -136,6 +136,6 @@ app.setStyleSheet("""
         background-color: gray;
     }
 """)
-window = VistaGestioneTurniPersonale()
+window = VistaTurniPersonale()
 window.show()
 sys.exit(app.exec())

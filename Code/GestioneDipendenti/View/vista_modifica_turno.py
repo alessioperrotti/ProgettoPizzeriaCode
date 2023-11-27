@@ -4,7 +4,7 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont, QPixmap, QIcon
 from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplication, QSizePolicy, QHBoxLayout,
                              QGridLayout, QTableWidget, QHeaderView, QSpacerItem, QLineEdit, QTableWidgetItem,
-                             QScrollBar, QScrollArea, QAbstractItemView, QFrame, QComboBox)
+                             QScrollBar, QScrollArea, QAbstractItemView, QFrame, QComboBox, QDialog)
 
 # Font
 label_font = QFont("Roboto", 24)
@@ -44,16 +44,41 @@ def crea_pulsante_img(dimensioni, directory):
             """)
     return pulsante_img
 
-class VistaModificaTurno(QWidget):
+class VistaModificaTurno(QDialog):
     def __init__(self):
         super().__init__()
         self.init_ui()
-        self.show()
+        self.setStyleSheet("""
+            QPushButton{
+                background-color: "#ff776d";
+                color: "white";
+                text-align: center;
+                border-radius: 6px;
+                font-family:Roboto;
+            }
+            QPushButton:hover{
+                background-color: "red";
+                font-size: 13px;
+            }
+            QTableWidget {
+                background-color: white;
+                alternate-background-color: white;
+                selection-background-color: darkcyan;
+                border: 2px solid grey;
+            }
+            QHeaderView:section {
+                background-color: lightgray;
+                font-weight: bold;
+            }
+            QHeaderView:active {
+                background-color: gray;
+            }
+        """)
 
     def init_ui(self):
         title = QLabel("<b>Modifica Turni:<\b>")
         title.setFont(label_font_tit)
-        giorno_title = QLabel()
+        self.giorno_title = QLabel()
 
         linea = QFrame()
         linea.setFrameShape(QFrame.Shape.HLine)
@@ -63,10 +88,10 @@ class VistaModificaTurno(QWidget):
         s_cameriere = QLabel("<b>Selezione Cameriere:<\b>")
         s_cameriere.setFont(label_font_piccolo)
 
-        cuoco = QComboBox()
-        cuoco.setFixedSize(146,29)
-        cameriere = QComboBox()
-        cameriere.setFixedSize(146, 29)
+        self.cuoco = QComboBox()
+        self.cuoco.setFixedSize(146,29)
+        self.cameriere = QComboBox()
+        self.cameriere.setFixedSize(146, 29)
 
         turno_cuoco = QComboBox()
         turno_cuoco.addItem("Pranzo")
@@ -80,12 +105,12 @@ class VistaModificaTurno(QWidget):
         turno_cameriere.addItem("Pranzo & Cena")
         turno_cameriere.setFixedSize(146, 29)
 
-        pulsante = QPushButton("Conferma")
-        pulsante.setFixedSize(146,39)
+        self.pulsante = QPushButton("Conferma")
+        self.pulsante.setFixedSize(146,39)
 
         #modificare le img
-        p_agg_cuoco = crea_pulsante_img(24,"png/check.png")
-        p_agg_cameriere = crea_pulsante_img(24, "png/check.png")
+        self.p_agg_cuoco = crea_pulsante_img(24,"png_icone/user-add.png")
+        self.p_agg_cameriere = crea_pulsante_img(24, "png_icone/user-add.png")
         #aggiungere quando inserisco i clienti
         p_rim_cuoco = crea_pulsante_img(16, "png/check.png")
         p_rim_cameriere = crea_pulsante_img(16, "png/check.png")
@@ -104,20 +129,20 @@ class VistaModificaTurno(QWidget):
         griglia.setContentsMargins(10,25,10,20)
 
         griglia.addWidget(s_cuoco,0,0)
-        griglia.addWidget(cuoco,1,0)
+        griglia.addWidget(self.cuoco,1,0)
         griglia.addWidget(turno_cuoco,1,1)
-        griglia.addWidget(p_agg_cuoco,1,2)
+        griglia.addWidget(self.p_agg_cuoco,1,2)
 
         griglia.addWidget(s_cameriere,2,0)
-        griglia.addWidget(cameriere,3,0)
+        griglia.addWidget(self.cameriere,3,0)
         griglia.addWidget(turno_cameriere,3,1)
-        griglia.addWidget(p_agg_cameriere,3,2)
+        griglia.addWidget(self.p_agg_cameriere,3,2)
 
-        griglia.addWidget(pulsante,4,0,alignment=Qt.AlignmentFlag.AlignBottom)
+        griglia.addWidget(self.pulsante,4,0,alignment=Qt.AlignmentFlag.AlignBottom)
         griglia.setRowStretch(4, 1)
 
         layout_title.addWidget(title,alignment=Qt.AlignmentFlag.AlignTop)
-        layout_title.addWidget(giorno_title,alignment=Qt.AlignmentFlag.AlignTop)
+        layout_title.addWidget(self.giorno_title,alignment=Qt.AlignmentFlag.AlignTop)
         layout.addLayout(layout_title)
         layout.addWidget(linea,alignment=Qt.AlignmentFlag.AlignTop)
         layout.addLayout(griglia)
@@ -128,34 +153,8 @@ class VistaModificaTurno(QWidget):
         self.setFixedSize(420,570)
 
 
-app = QApplication(sys.argv)
-
-app.setStyleSheet("""
-    QPushButton{
-        background-color: "#ff776d";
-        color: "white";
-        text-align: center;
-        border-radius: 6px;
-        font-family:Roboto;
-    }
-    QPushButton:hover{
-        background-color: "red";
-        font-size: 13px;
-    }
-    QTableWidget {
-        background-color: white;
-        alternate-background-color: white;
-        selection-background-color: darkcyan;
-        border: 2px solid grey;
-    }
-    QHeaderView:section {
-        background-color: lightgray;
-        font-weight: bold;
-    }
-    QHeaderView:active {
-        background-color: gray;
-    }
-""")
-window = VistaModificaTurno()
-window.show()
-sys.exit(app.exec())
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    window = VistaModificaTurno()
+    window.show()
+    sys.exit(app.exec())

@@ -4,7 +4,7 @@ from PyQt6.QtCore import Qt, QTime, QTimer, QDateTime
 from PyQt6.QtGui import QFont, QPixmap, QIcon
 from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplication, QSizePolicy, QHBoxLayout,
                              QGridLayout, QTableWidget, QHeaderView, QSpacerItem, QLineEdit, QTableWidgetItem,
-                             QScrollBar, QScrollArea, QAbstractItemView, QFrame, QComboBox)
+                             QScrollBar, QScrollArea, QAbstractItemView, QFrame, QComboBox, QDialog)
 
 # Font
 label_font = QFont("Roboto", 24)
@@ -46,25 +46,51 @@ def crea_pulsante_img(dimensioni, directory):
             """)
     return pulsante_img
 
-class VistaGestioneTurniPersonale(QWidget):
+class VistaGestioneTurniPersonale(QDialog):
     def __init__(self):
         super().__init__()
         self.init_ui()
-        self.show()
+        self.setStyleSheet("""
+            QPushButton{
+                background-color: "#ff776d";
+                color: "white";
+                text-align: center;
+                border-radius: 6px;
+                font-family:Roboto;
+            }
+            QPushButton:hover{
+                background-color: "red";
+                font-size: 17px;
+            }
+            QTableWidget {
+                background-color: white;
+                alternate-background-color: white;
+                selection-background-color: darkcyan;
+                border: 2px solid grey;
+            }
+            QHeaderView:section {
+                background-color: lightgray;
+                font-weight: bold;
+            }
+            QHeaderView:active {
+                background-color: gray;
+            }
+        """)
 
     def init_ui(self):
         title = QLabel("Gestione Turni Personale")
         title.setFont(label_font_tit)
 
-        tabella = crea_tabella(2,6,870,360)
-        tabella.setHorizontalHeaderLabels(["LUNEDI","MARTEDI","MERCOLEDI","VENERDI","SABATO","DOMENICA"])
-        tabella.setVerticalHeaderLabels(["TURNO PRANZO\n12:30-15:30","TURNO CENA\n19:30-00.30"])
+        self.tabella = crea_tabella(2,6,870,360)
+        self.tabella.setHorizontalHeaderLabels(["LUNEDI","MARTEDI","MERCOLEDI","VENERDI","SABATO","DOMENICA"])
+        self.tabella.setVerticalHeaderLabels(["TURNO PRANZO\n12:30-15:30","TURNO CENA\n19:30-00.30"])
 
-        pulsante = QPushButton("Modifica Turno Selezionato")
-        pulsante.setFixedSize(278,77)
-        pulsante.setFont(label_font_piccolo)
+        self.pulsante = QPushButton("Modifica Turno Selezionato")
+        self.pulsante.setEnabled(False)
+        self.pulsante.setFixedSize(278,77)
+        self.pulsante.setFont(label_font_piccolo)
 
-        pulsante_back = crea_pulsante_img(35,"png/back.png")
+        self.pulsante_back = crea_pulsante_img(35,"png/back.png")
 
         clock = QLabel()
         img = QPixmap("png/check.png").scaled(35,35)
@@ -90,10 +116,10 @@ class VistaGestioneTurniPersonale(QWidget):
         layout_title.addWidget(clock,alignment=Qt.AlignmentFlag.AlignRight)
 
         layout.addLayout(layout_title)
-        layout.addWidget(tabella,alignment=Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(self.tabella,alignment=Qt.AlignmentFlag.AlignCenter)
         layout.addSpacing(25)
-        layout.addWidget(pulsante,alignment=Qt.AlignmentFlag.AlignCenter)
-        layout.addWidget(pulsante_back,alignment=Qt.AlignmentFlag.AlignRight)
+        layout.addWidget(self.pulsante,alignment=Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(self.pulsante_back,alignment=Qt.AlignmentFlag.AlignRight)
 
         self.setLayout(layout)
         self.setFixedSize(994,637)
@@ -111,35 +137,8 @@ class VistaGestioneTurniPersonale(QWidget):
         self.label_time.setText(f' {current_time}')
 
 
-
-app = QApplication(sys.argv)
-
-app.setStyleSheet("""
-    QPushButton{
-        background-color: "#ff776d";
-        color: "white";
-        text-align: center;
-        border-radius: 6px;
-        font-family:Roboto;
-    }
-    QPushButton:hover{
-        background-color: "red";
-        font-size: 17px;
-    }
-    QTableWidget {
-        background-color: white;
-        alternate-background-color: white;
-        selection-background-color: darkcyan;
-        border: 2px solid grey;
-    }
-    QHeaderView:section {
-        background-color: lightgray;
-        font-weight: bold;
-    }
-    QHeaderView:active {
-        background-color: gray;
-    }
-""")
-window = VistaGestioneTurniPersonale()
-window.show()
-sys.exit(app.exec())
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    window = VistaGestioneTurniPersonale()
+    window.show()
+    sys.exit(app.exec())
