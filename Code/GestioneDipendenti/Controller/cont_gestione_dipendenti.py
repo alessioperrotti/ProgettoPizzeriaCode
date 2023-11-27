@@ -118,6 +118,7 @@ class ContGestioneDipendenti(object):
             item_ruolo = QTableWidgetItem(x.ruolo)
             item_ruolo.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             self.view.tab.setItem(i, 1, item_ruolo)
+            i += 1
 
         for x in cuochi:
             # self.view.tab.setItem(i, 0, QTableWidgetItem(x.nome+" "+x.cognome))
@@ -131,3 +132,5 @@ class ContGestioneDipendenti(object):
             item_ruolo = QTableWidgetItem(x.ruolo)
             item_ruolo.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             self.view.tab.setItem(i, 1, item_ruolo)
+            i += 1
+
