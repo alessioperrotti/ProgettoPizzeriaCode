@@ -41,24 +41,31 @@ class ContGestioneTurni(object):
         cont_modifica.view.exec()
         self.update_tabella()
 
-    def update_tabella(self):#SBAGLIATA
+
+    def update_tabella(self):
         camerieri = self.model.lista_camerieri
         cuochi = self.model.lista_cuochi
         i = 0
+
         for x in cuochi:
+            item_nome = QTableWidgetItem(x.nome + " " + x.cognome)
+            item_nome.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+
             if x.turno == "Pranzo":
-                item_nome = QTableWidgetItem(x.nome + " " + x.cognome)
-                item_nome.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
-                self.view.tabella.setItem(0, i, item_nome)
+                testo_attuale = self.view.tabella.item(0, i).text() if self.view.tabella.item(0,
+                                                                                              i) is not None else ""
+                testo_combinato = testo_attuale + "\n" + item_nome.text() if testo_attuale else item_nome.text()
+                self.view.tabella.setItem(0, i, QTableWidgetItem(testo_combinato))
             elif x.turno == "Cena":
-                item_nome = QTableWidgetItem(x.nome + " " + x.cognome)
-                item_nome.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
                 self.view.tabella.setItem(1, i, item_nome)
             elif x.turno == "Pranzo & Cena":
-                item_nome = QTableWidgetItem(x.nome + " " + x.cognome)
-                item_nome.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
-                self.view.tabella.setItem(0, i, item_nome)
+                testo_attuale = self.view.tabella.item(0, i).text() if self.view.tabella.item(0,
+                                                                                              i) is not None else ""
+                testo_combinato = testo_attuale + "\n" + item_nome.text() if testo_attuale else item_nome.text()
+                self.view.tabella.setItem(0, i, QTableWidgetItem(testo_combinato))
                 self.view.tabella.setItem(1, i, item_nome)
+
+            i += 1
 
         # g_settimana=["LUNEDI","MARTEDI","MERCOLEDI","VENERDI","SABATO","DOMENICA"]
         # cont_modifica = ContModificaTurno(self.model,VistaModificaTurno())
