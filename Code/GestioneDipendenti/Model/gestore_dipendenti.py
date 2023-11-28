@@ -19,6 +19,11 @@ class GestoreDipendenti():
         self.salva_dati(self.nome_file)
         self.carica_da_file(self.nome_file)
 
+    def aggiungi_turno_cuoco(self, cuoco,turno):
+        cuoco.turno = turno
+        self.salva_dati(self.nome_file)
+        self.carica_da_file(self.nome_file)
+
     def estrai_cuoco_cognome(self, cognome):
         for cuoco in self.lista_cuochi:
             if cognome == cuoco.cognome:
@@ -55,6 +60,11 @@ class GestoreDipendenti():
     #########################################################################
     def aggiungi_cameriere(self, cameriere):
         self.lista_camerieri.append(cameriere)
+        self.salva_dati(self.nome_file)
+        self.carica_da_file(self.nome_file)
+
+    def aggiungi_turno_cameriere(self, cameriere ,turno):
+        cameriere.turno = turno
         self.salva_dati(self.nome_file)
         self.carica_da_file(self.nome_file)
 

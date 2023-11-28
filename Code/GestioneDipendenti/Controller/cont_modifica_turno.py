@@ -13,8 +13,10 @@ class ContModificaTurno(object):
         self.model = model
         self.cognome_selezionato = None
         self.turno_selezionato = None
+        self.dip_selezionato = None
         self.view.p_agg_cuoco.clicked.connect(self.click_aggiungi_cuoco)
         self.view.p_agg_cameriere.clicked.connect(self.click_aggiungi_cameriere)
+        self.view.pulsante.clicked.connect(self.click_conferma)
 
     def riempi_labels(self, giorno):
         self.view.giorno_title.setText(str(giorno))
@@ -30,40 +32,66 @@ class ContModificaTurno(object):
 
     def click_aggiungi_cuoco(self):
         self.cognome_selezionato = self.view.cuoco.currentText()
-        turno_selezionato = self.view.turno_cuoco.currentText()
+        self.turno_selezionato = self.view.turno_cuoco.currentText()
         cuoco_selezionato = self.model.estrai_cuoco_cognome(self.cognome_selezionato)
 
-        if cuoco_selezionato:
-            cuoco_selezionato.turno = turno_selezionato
-            print(cuoco_selezionato.turno)
+        # if cuoco_selezionato:
+        #     cuoco_selezionato.turno = self.turno_selezionato
+        #     print(cuoco_selezionato.turno)
 
         self.update_tabella(cuoco_selezionato)
 
     def click_aggiungi_cameriere(self):
         self.cognome_selezionato = self.view.cameriere.currentText()
-        turno_selezionato = self.view.turno_cameriere.currentText()
+        self.turno_selezionato = self.view.turno_cameriere.currentText()
         cameriere_selezionato = self.model.estrai_cameriere_cognome(self.cognome_selezionato)
 
         if cameriere_selezionato:
-            cameriere_selezionato.turno = turno_selezionato
+            cameriere_selezionato.turno = self.turno_selezionato
             print(cameriere_selezionato.turno)
 
         self.update_tabella(cameriere_selezionato)
 
-    def update_tabella(self,dip_selezionato):
-        if dip_selezionato in self.model.lista_cuochi:
+    def click_conferma(self):
+        for row in range(self.view.tab_cuoco.rowCount()):
+            nome_cognome = self.view.tab_cuoco.item(row,0).text()
+            cognome = nome_cognome.split()[1]
+            turno = self.view.tab_cuoco.item(row,1).text()
+
+            cuoco = self.model.estrai_cuoco_cognome(cognome)
+
+            self.model.aggiungi_turno_cuoco(cuoco,turno)
+
+        for row in range(self.view.tab_cameriere.rowCount()):
+            nome_cognome = self.view.tab_cameriere.item(row, 0).text()
+            cognome = nome_cognome.split()[1]
+            turno = self.view.tab_cameriere.item(row, 1).text()
+
+            cameriere = self.model.estrai_cameriere_cognome(cognome)
+
+            self.model.aggiungi_turno_cameriere(cameriere, turno)
+
+        self.view.close()
+
+
+    def update_tabella(self, dip_selezionato):
+        self.dip_selezionato = dip_selezionato
+
+        if self.dip_selezionato in self.model.lista_cuochi:
             row_position = self.view.tab_cuoco.rowCount()
             self.view.tab_cuoco.insertRow(row_position)
 
-            self.view.tab_cuoco.setItem(row_position, 0, QTableWidgetItem(dip_selezionato.nome+" "+dip_selezionato.cognome))
-            self.view.tab_cuoco.setItem(row_position, 1, QTableWidgetItem(dip_selezionato.turno))
+            self.view.tab_cuoco.setItem(row_position, 0, QTableWidgetItem(
+                self.dip_selezionato.nome + " " + self.dip_selezionato.cognome))
+            self.view.tab_cuoco.setItem(row_position, 1, QTableWidgetItem(self.turno_selezionato))
             self.view.tab_cuoco.setCellWidget(row_position, 2, self.view.p_rim_cuoco)
 
-        if dip_selezionato in self.model.lista_camerieri:
+        if self.dip_selezionato in self.model.lista_camerieri:
             row_position = self.view.tab_cameriere.rowCount()
             self.view.tab_cameriere.insertRow(row_position)
 
             self.view.tab_cameriere.setItem(row_position, 0,
-                                        QTableWidgetItem(dip_selezionato.nome + " " + dip_selezionato.cognome))
-            self.view.tab_cameriere.setItem(row_position, 1, QTableWidgetItem(dip_selezionato.turno))
+                                            QTableWidgetItem(
+                                                self.dip_selezionato.nome + " " + self.dip_selezionato.cognome))
+            self.view.tab_cameriere.setItem(row_position, 1, QTableWidgetItem(self.turno_selezionato))
             self.view.tab_cameriere.setCellWidget(row_position, 2, self.view.p_rim_cameriere)

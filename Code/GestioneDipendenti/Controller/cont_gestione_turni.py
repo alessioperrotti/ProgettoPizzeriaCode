@@ -40,22 +40,11 @@ class ContGestioneTurni(object):
         cont_modifica.view.exec()
         self.update_tabella()
 
-    def update_tabella(self):
+    def update_tabella(self):#SBAGLIATA
         camerieri = self.model.lista_camerieri
         cuochi = self.model.lista_cuochi
-
         i = 0
         for x in camerieri:
-            # self.view.tab.setItem(i, 0, QTableWidgetItem(x.nome+" "+x.cognome))
-            # self.view.tab.setItem(i, 1, QTableWidgetItem(x.ruolo))
-            # i += 1
-
-            item_nome = QTableWidgetItem(x.nome + "\n" + x.cognome)
-            item_nome.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
-            self.view.tabella.setItem(i, 0, item_nome)
-            i += 1
-
-        for x in cuochi:
             # self.view.tab.setItem(i, 0, QTableWidgetItem(x.nome+" "+x.cognome))
             # self.view.tab.setItem(i, 1, QTableWidgetItem(x.ruolo))
             # i += 1
@@ -63,4 +52,35 @@ class ContGestioneTurni(object):
             item_nome = QTableWidgetItem(x.nome + " " + x.cognome)
             item_nome.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             self.view.tabella.setItem(i, 0, item_nome)
-            i += 1
+
+        # g_settimana=["LUNEDI","MARTEDI","MERCOLEDI","VENERDI","SABATO","DOMENICA"]
+        # cont_modifica = ContModificaTurno(self.model,VistaModificaTurno())
+        #
+        # for row in range(cont_modifica.view.tab_cuoco.rowCount()):
+        #     nome_cognome_item = cont_modifica.view.tab_cuoco.item(row, 0)
+        #     turno_item = cont_modifica.view.tab_cuoco.item(row, 1)
+        #
+        #     giorno = self.giorno_selezionato
+        #
+        #     if nome_cognome_item is not None and turno_item is not None:
+        #         nome_cognome = nome_cognome_item.text()
+        #         cognome = nome_cognome.split()[1]
+        #         turno = turno_item.text()
+        #
+        #         dipendente = self.model.estrai_cuoco_cognome(cognome)
+        #
+        #         if dipendente is not None:
+        #             item_nome = QTableWidgetItem(dipendente.nome + " " + dipendente.cognome)
+        #             item_nome.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+        #
+        #             i = g_settimana.index(giorno)
+        #
+        #             if turno == "Pranzo":
+        #                 self.view.tabella.setItem(0, i, item_nome)
+        #             elif turno == "Cena":
+        #                 self.view.tabella.setItem(1, i, item_nome)
+        #             elif turno == "Pranzo & Cena":
+        #                 self.view.tabella.setItem(0, i, item_nome)
+        #                 self.view.tabella.setItem(1, i, item_nome)
+
+
