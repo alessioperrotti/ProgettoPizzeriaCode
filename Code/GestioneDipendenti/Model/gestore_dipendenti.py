@@ -24,6 +24,12 @@ class GestoreDipendenti():
         self.salva_dati(self.nome_file)
         self.carica_da_file(self.nome_file)
 
+    def rimuovi_turno_cuoco(self,cognome):
+        cuoco_selezionato = self.estrai_cuoco_cognome(cognome)
+        cuoco_selezionato.turno = None
+        self.salva_dati(self.nome_file)
+        self.carica_da_file(self.nome_file)
+
     def estrai_cuoco_cognome(self, cognome):
         for cuoco in self.lista_cuochi:
             if cognome == cuoco.cognome:
@@ -65,6 +71,12 @@ class GestoreDipendenti():
 
     def aggiungi_turno_cameriere(self, cameriere ,turno):
         cameriere.turno = turno
+        self.salva_dati(self.nome_file)
+        self.carica_da_file(self.nome_file)
+
+    def rimuovi_turno_cameriere(self,cognome):
+        cameriere_selezionato = self.estrai_cameriere_cognome(cognome)
+        cameriere_selezionato.turno = None
         self.salva_dati(self.nome_file)
         self.carica_da_file(self.nome_file)
 

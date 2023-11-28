@@ -110,6 +110,10 @@ class VistaModificaTurno(QDialog):
         self.pulsante = QPushButton("Conferma")
         self.pulsante.setFixedSize(146,39)
 
+        self.pulsante_rimuovi = QPushButton("Rimuovi")
+        self.pulsante_rimuovi.setFixedSize(146, 39)
+        self.pulsante_rimuovi.setEnabled(False)
+
         #modificare le img
         self.p_agg_cuoco = crea_pulsante_img(24,"png_icone/user-add.png")
         self.p_agg_cameriere = crea_pulsante_img(24, "png_icone/user-add.png")
@@ -117,13 +121,13 @@ class VistaModificaTurno(QDialog):
         self.p_rim_cuoco = crea_pulsante_img(20, "png_icone/remove-user.png")
         self.p_rim_cameriere = crea_pulsante_img(20, "png_icone/remove-user.png")
 
-        self.tab_cuoco = crea_tabella(0,3,400,116)
-        self.tab_cuoco.setHorizontalHeaderLabels(["Nome Cuoco:","Turno",""])
+        self.tab_cuoco = crea_tabella(0,2,400,116)
+        self.tab_cuoco.setHorizontalHeaderLabels(["Nome Cuoco:","Turno"])
         self.tab_cuoco.setColumnWidth(2, 10)
 
-        self.tab_cameriere = crea_tabella(0,3,400,116)
+        self.tab_cameriere = crea_tabella(0,2,400,116)
         self.tab_cameriere.setColumnWidth(2, 10)
-        self.tab_cameriere.setHorizontalHeaderLabels(["Nome Cameriere:", "Turno",""])
+        self.tab_cameriere.setHorizontalHeaderLabels(["Nome Cameriere:", "Turno"])
 
         layout = QVBoxLayout()
         layout_title = QHBoxLayout()
@@ -142,6 +146,8 @@ class VistaModificaTurno(QDialog):
         griglia.addWidget(self.p_agg_cameriere,3,2)
 
         griglia.addWidget(self.pulsante,4,0,alignment=Qt.AlignmentFlag.AlignBottom)
+        griglia.setRowStretch(4, 1)
+        griglia.addWidget(self.pulsante_rimuovi, 4, 1, alignment=Qt.AlignmentFlag.AlignBottom)
         griglia.setRowStretch(4, 1)
 
         layout_title.addWidget(title,alignment=Qt.AlignmentFlag.AlignTop)

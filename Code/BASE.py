@@ -99,7 +99,7 @@ class MainWindow(QWidget):
         layout = QVBoxLayout(self)
         layout.addWidget(self.stacked)
 
-        self.stacked.currentChanged.connect(self.cambio_view)
+        # self.stacked.currentChanged.connect(self.cambio_view)
 
 if __name__ == '__main__':
 

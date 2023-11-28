@@ -14,6 +14,7 @@ class ContGestioneTurni(object):
         stacked.addWidget(self.view)
         self.model = model
         self.update_tabella()
+        self.view.tabella.itemSelectionChanged.connect(self.colonna_selezionata)
         self.giorno_selezionato = None
         self.view.tabella.itemSelectionChanged.connect(self.colonna_selezionata)
         self.view.pulsante.clicked.connect(self.go_to_modifica)
@@ -44,14 +45,20 @@ class ContGestioneTurni(object):
         camerieri = self.model.lista_camerieri
         cuochi = self.model.lista_cuochi
         i = 0
-        for x in camerieri:
-            # self.view.tab.setItem(i, 0, QTableWidgetItem(x.nome+" "+x.cognome))
-            # self.view.tab.setItem(i, 1, QTableWidgetItem(x.ruolo))
-            # i += 1
-
-            item_nome = QTableWidgetItem(x.nome + " " + x.cognome)
-            item_nome.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
-            self.view.tabella.setItem(i, 0, item_nome)
+        for x in cuochi:
+            if x.turno == "Pranzo":
+                item_nome = QTableWidgetItem(x.nome + " " + x.cognome)
+                item_nome.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                self.view.tabella.setItem(0, i, item_nome)
+            elif x.turno == "Cena":
+                item_nome = QTableWidgetItem(x.nome + " " + x.cognome)
+                item_nome.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                self.view.tabella.setItem(1, i, item_nome)
+            elif x.turno == "Pranzo & Cena":
+                item_nome = QTableWidgetItem(x.nome + " " + x.cognome)
+                item_nome.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                self.view.tabella.setItem(0, i, item_nome)
+                self.view.tabella.setItem(1, i, item_nome)
 
         # g_settimana=["LUNEDI","MARTEDI","MERCOLEDI","VENERDI","SABATO","DOMENICA"]
         # cont_modifica = ContModificaTurno(self.model,VistaModificaTurno())
