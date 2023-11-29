@@ -5,7 +5,7 @@ class Cameriere(Utilizzatore):
     def __init__(self, nome, cognome, email,username,password,stipendio):
         super().__init__(nome, cognome, email,username,password)
         self.data_ingaggio = None
-        self.turno = []
+        self.turno = [None]*6
         self.stipendio = stipendio
         self.ruolo = "Cameriere"
 

@@ -27,7 +27,7 @@ class ContModificaTurno(object):
         for item in selected_items:
             if item.column() == 0:
                 nome_cognome = str(item.text())
-                self.cognome_selezionato = nome_cognome.split()[1] #Estraggo solo il cognome
+                self.cognome_selezionato = nome_cognome.split()[1]  # Estraggo solo il cognome
             elif item.column() == 1:
                 self.turno_selezionato = str(item.text())
 
@@ -39,7 +39,7 @@ class ContModificaTurno(object):
         for item in selected_items:
             if item.column() == 0:
                 nome_cognome = str(item.text())
-                self.cognome_selezionato = nome_cognome.split()[1] #Estraggo solo il cognome
+                self.cognome_selezionato = nome_cognome.split()[1]  # Estraggo solo il cognome
             elif item.column() == 1:
                 self.turno_selezionato = str(item.text())
 
@@ -80,9 +80,10 @@ class ContModificaTurno(object):
         self.update_tabella()
 
     def click_rimuovi(self):
+        giorno = self.view.giorno_title.text()
 
         if self.view.tab_cuoco.selectedItems():
-            self.model.rimuovi_turno_cuoco(self.cognome_selezionato)
+            self.model.rimuovi_turno_cuoco(self.cognome_selezionato, giorno)
 
             righe_selezionate = self.view.tab_cuoco.selectedItems()
             if righe_selezionate:
@@ -94,7 +95,7 @@ class ContModificaTurno(object):
             print("C")
 
         if self.view.tab_cameriere.selectedItems():
-            self.model.rimuovi_turno_cameriere(self.cognome_selezionato)
+            self.model.rimuovi_turno_cameriere(self.cognome_selezionato, giorno)
 
             righe_selezionate = self.view.tab_cameriere.selectedItems()
             if righe_selezionate:
@@ -106,14 +107,16 @@ class ContModificaTurno(object):
             print("S")
 
     def click_conferma(self):
+        giorno = self.view.giorno_title.text()
+
         for row in range(self.view.tab_cuoco.rowCount()):
-            nome_cognome = self.view.tab_cuoco.item(row,0).text()
+            nome_cognome = self.view.tab_cuoco.item(row, 0).text()
             cognome = nome_cognome.split()[1]
-            turno = self.view.tab_cuoco.item(row,1).text()
-            giorno = self.view.giorno_title.text()
+            turno = self.view.tab_cuoco.item(row, 1).text()
+
             cuoco = self.model.estrai_cuoco_cognome(cognome)
 
-            self.model.aggiungi_turno_cuoco(cuoco,turno,giorno)
+            self.model.aggiungi_turno_cuoco(cuoco, turno, giorno)
 
         for row in range(self.view.tab_cameriere.rowCount()):
             nome_cognome = self.view.tab_cameriere.item(row, 0).text()
@@ -122,11 +125,14 @@ class ContModificaTurno(object):
 
             cameriere = self.model.estrai_cameriere_cognome(cognome)
 
-            self.model.aggiungi_turno_cameriere(cameriere, turno,giorno)
+            self.model.aggiungi_turno_cameriere(cameriere, turno, giorno)
 
         self.view.close()
 
     def update_tabella(self):
+        lista_cuochi = self.model.lista_cuochi
+        lista_camerieri = self.model.lista_camerieri
+
         if self.dip_selezionato in self.model.lista_cuochi:
             row_position = self.view.tab_cuoco.rowCount()
             self.view.tab_cuoco.insertRow(row_position)
@@ -142,5 +148,3 @@ class ContModificaTurno(object):
                                             QTableWidgetItem(
                                                 self.dip_selezionato.nome + " " + self.dip_selezionato.cognome))
             self.view.tab_cameriere.setItem(row_position, 1, QTableWidgetItem(self.turno_selezionato))
-
-

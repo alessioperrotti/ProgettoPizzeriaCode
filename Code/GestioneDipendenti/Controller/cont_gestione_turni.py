@@ -40,36 +40,57 @@ class ContGestioneTurni(object):
         cont_modifica.view.exec()
         self.update_tabella()
 
-
     def update_tabella(self):
-        camerieri = self.model.lista_camerieri
-        cuochi = self.model.lista_cuochi
-        i = 0
+        lista_camerieri = self.model.lista_camerieri
+        lista_cuochi = self.model.lista_cuochi
 
-        for row in range(self.view.tabella.rowCount()):
-            for col in range(self.view.tabella.columnCount()):
-                item = QTableWidgetItem("vuoto")
-                self.view.tabella.setItem(row, col, item)
-                item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+        # for row in range(self.view.tabella.rowCount()):
+        # for col in range(self.view.tabella.columnCount()):
+        #     item = QTableWidgetItem("vuoto")
+        #     self.view.tabella.setItem(0, col, item)
+        #     item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        # for x in cuochi:
-        #     item_nome = QTableWidgetItem(x.nome + " " + x.cognome)
-        #     item_nome.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
-        #
-        #     if x.turno == "Pranzo":
-        #         testo_attuale = self.view.tabella.item(0, i).text() if self.view.tabella.item(0,
-        #                                                                                       i) is not None else ""
-        #         testo_combinato = testo_attuale + "\n" + item_nome.text() if testo_attuale else item_nome.text()
-        #         self.view.tabella.setItem(0, i, QTableWidgetItem(testo_combinato))
-        #     elif x.turno == "Cena":
-        #         self.view.tabella.setItem(1, i, item_nome)
-        #     elif x.turno == "Pranzo & Cena":
-        #         testo_attuale = self.view.tabella.item(0, i).text() if self.view.tabella.item(0,
-        #                                                                                       i) is not None else ""
-        #         testo_combinato = testo_attuale + "\n" + item_nome.text() if testo_attuale else item_nome.text()
-        #         self.view.tabella.setItem(0, i, QTableWidgetItem(testo_combinato))
-        #         self.view.tabella.setItem(1, i, item_nome)
-        #
-        #     i += 1
+        for cuoco in lista_cuochi:
+            for i in range(len(cuoco.turno)):
+                item_vuoto = QTableWidgetItem("vuoto")
+                item_vuoto.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                item_nome = QTableWidgetItem(cuoco.nome + " " + cuoco.cognome)
+                item_nome.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                print("indice_giorno = " + str(i) + " " + str(cuoco.nome) + " turno:" + str(cuoco.turno[i]))
+
+                if cuoco.turno[i] == "Pranzo":
+                    self.view.tabella.setItem(0, i, item_nome)
+                elif cuoco.turno[i] == "Cena":
+                    self.view.tabella.setItem(1, i, item_nome)
+                elif cuoco.turno[i] == "Pranzo & Cena":
+                    self.view.tabella.setItem(0, i, item_nome)
+                    self.view.tabella.setItem(1, i, item_nome)
+                elif cuoco.turno[i] is None:
+                    self.view.tabella.setItem(0, i, item_vuoto)
+                    self.view.tabella.setItem(1, i, item_vuoto)
+
+        for cameriere in lista_camerieri:
+            for i in range(len(cameriere.turno)):
+                item_vuoto = QTableWidgetItem("vuoto")
+                item_vuoto.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                item_nome = QTableWidgetItem(cameriere.nome + " " + cameriere.cognome)
+                item_nome.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                print("indice_giorno = " + str(i) + " " + str(cameriere.nome) + " turno:" + str(cameriere.turno[i]))
+
+                if cameriere.turno[i] == "Pranzo":
+                    self.view.tabella.setItem(0, i, item_nome)
+                elif cameriere.turno[i] == "Cena":
+                    self.view.tabella.setItem(1, i, item_nome)
+                elif cameriere.turno[i] == "Pranzo & Cena":
+                    self.view.tabella.setItem(0, i, item_nome)
+                    self.view.tabella.setItem(1, i, item_nome)
+                elif cameriere.turno[i] is None:
+                    self.view.tabella.setItem(0, i, item_vuoto)
+                    self.view.tabella.setItem(1, i, item_vuoto)
 
 
+        # itero cuochi nella lista cuochi
+        # il cuoco ha una lista di turni
+        # itero nella lista di turni
+        # il turno all'indice i devo inserirlo sulla colonna i della tabella
+        # se il turno è "pranzo" lo metto sulla prima riga, altrimenti 2 altrimenti entrambe

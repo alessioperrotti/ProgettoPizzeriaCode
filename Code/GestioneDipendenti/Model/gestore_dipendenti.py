@@ -19,15 +19,16 @@ class GestoreDipendenti():
         self.salva_dati(self.nome_file)
         self.carica_da_file(self.nome_file)
 
-    def aggiungi_turno_cuoco(self, cuoco,turno,giorno):
-        indice_giorno = self.converti_giorno_in_indice(giorno)
-        cuoco.turno[indice_giorno] = turno
+    def aggiungi_turno_cuoco(self, cuoco:Cuoco,turno,giorno):
+        indice_giorno = self.converti_giorno_indice(giorno)
+        cuoco.turno.insert(indice_giorno,turno)
         self.salva_dati(self.nome_file)
         self.carica_da_file(self.nome_file)
 
-    def rimuovi_turno_cuoco(self,cognome):
+    def rimuovi_turno_cuoco(self,cognome, giorno):
         cuoco_selezionato = self.estrai_cuoco_cognome(cognome)
-        cuoco_selezionato.turno = None
+        indice_giorno = self.converti_giorno_indice(giorno)
+        del cuoco_selezionato.turno[indice_giorno]
         self.salva_dati(self.nome_file)
         self.carica_da_file(self.nome_file)
 
@@ -70,15 +71,16 @@ class GestoreDipendenti():
         self.salva_dati(self.nome_file)
         self.carica_da_file(self.nome_file)
 
-    def aggiungi_turno_cameriere(self, cameriere ,turno,giorno):
-        indice_giorno = self.converti_giorno_in_indice(giorno)
-        cameriere.turno[indice_giorno] = turno
+    def aggiungi_turno_cameriere(self, cameriere ,turno, giorno):
+        indice_giorno = self.converti_giorno_indice(giorno)
+        cameriere.turno.insert(indice_giorno,turno)
         self.salva_dati(self.nome_file)
         self.carica_da_file(self.nome_file)
 
-    def rimuovi_turno_cameriere(self,cognome):
+    def rimuovi_turno_cameriere(self,cognome, giorno):
         cameriere_selezionato = self.estrai_cameriere_cognome(cognome)
-        cameriere_selezionato.turno = None
+        indice_giorno = self.converti_giorno_indice(giorno)
+        del cameriere_selezionato.turno[indice_giorno]
         self.salva_dati(self.nome_file)
         self.carica_da_file(self.nome_file)
 
@@ -133,11 +135,16 @@ class GestoreDipendenti():
             self.lista_cuochi = data['cuochi']
             self.lista_camerieri = data['camerieri']
 
-    def converti_giorno_in_indice(self,giorno):
-        giorni_settimana = ["lunedì", "martedì", "mercoledì", "venerdì", "sabato", "domenica"]
+    def converti_giorno_indice(self, giorno):
+        giorni_settimana = ["lunedi", "martedi", "mercoledi", "venerdi", "sabato", "domenica"]
         giorno = giorno.lower()
 
         if giorno in giorni_settimana:
+            print("giorno trovato")
+            print(giorni_settimana.index(giorno))
             return giorni_settimana.index(giorno)
+
+        else:
+            print("errore giorno")
 
 
