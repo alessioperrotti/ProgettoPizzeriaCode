@@ -155,7 +155,10 @@ class ContInserisciProdotto(object):
             self.view.combo_ingrediente.setEnabled(True)
             self.view.campo_quantita.setEnabled(True)
         elif self.view.combo_tipologia.currentText().lower() == 'bevanda':
-            self.view.pulsante_aggiungi.setEnabled(False)
-            self.view.data_grid.setEnabled(False)
-            self.view.combo_ingrediente.setEnabled(False)
-            self.view.campo_quantita.setEnabled(False)
+
+            # per far aggiungere un solo ingrediente
+            if self.view.data_grid.rowCount() == 1:
+                self.view.data_grid.setEnabled(False)
+                self.view.combo_ingrediente.setEnabled(False)
+                self.view.campo_quantita.setEnabled(False)
+                self.view.pulsante_aggiungi.setEnabled(False)
