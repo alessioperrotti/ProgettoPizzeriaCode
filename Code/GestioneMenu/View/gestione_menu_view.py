@@ -122,6 +122,7 @@ class VistaGestioneMenu(QWidget):
         hbox.addLayout(vbox_pulsanti)
         main_layout.addLayout(hbox)
         main_layout.addWidget(self.pulsante_back)
+        main_layout.setContentsMargins(30, 20, 10, 20)
         self.setFixedSize(756,637)
         self.setLayout(main_layout)
 
