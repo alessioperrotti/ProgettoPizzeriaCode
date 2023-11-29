@@ -32,14 +32,22 @@ class MainWindow(QWidget):
         self.stacked = QStackedWidget()
         self.init_ui()
 
-       # centro la finestra
-        self.setFixedSize(994, 637)
+       # centro la finestra  #va aggiunto un 22 alla larghezza e altezza rispetto alla view
+        self.setFixedSize(994+22, 637+22)
+
         self.show()
+        print(self.size())
 
     def cambio_view(self):
 
         if self.stacked.currentWidget() == self.cont_vista_login.cont_vista_login_dipendente.cont_admin.view:
-            self.setFixedSize(756, 637)
+            self.setFixedSize(756+22, 637+22)
+            self.layout().update()
+            self.close()
+            self.show()
+
+        elif self.stacked.currentWidget() == self.cont_vista_login.cont_vista_login_dipendente.cont_admin.cont_vista_turni.view:
+            self.setFixedSize(994+22,637+22)
             self.layout().update()
             self.close()
             self.show()
@@ -99,7 +107,7 @@ class MainWindow(QWidget):
         layout = QVBoxLayout(self)
         layout.addWidget(self.stacked)
 
-        # self.stacked.currentChanged.connect(self.cambio_view)
+        self.stacked.currentChanged.connect(self.cambio_view)
 
 if __name__ == '__main__':
 
