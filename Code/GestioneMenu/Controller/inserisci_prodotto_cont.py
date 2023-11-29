@@ -107,7 +107,7 @@ class ContInserisciProdotto(object):
 
         except ValueError:
             if not all([self.view.combo_ingrediente.currentText().lower(),
-                        round(float(self.view.campo_quantita.text()), 3)]):
+                        self.view.campo_quantita.text()]):
                 errore_msg = "Riempire tutti i campi dell'ingrediente."
             else:
                 errore_msg = "Controllare la quantità inserita."
