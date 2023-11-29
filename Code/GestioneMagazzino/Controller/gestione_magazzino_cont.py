@@ -30,8 +30,6 @@ class ContGestioneMagazzino(object):
         self.view.pulsante_elimina.setEnabled(self.matprima_selezionata is not None)
         self.view.pulsante_modifica.clicked.connect(self.open_modifica)
         self.view.pulsante_modifica.setEnabled(self.matprima_selezionata is not None)
-        self.view.pulsante_back.clicked.connect(
-            lambda: self.stacked.setCurrentWidget(self.stacked.widget(0)))
 
 
     def open_inserimento(self):

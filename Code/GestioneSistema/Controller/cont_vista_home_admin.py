@@ -38,6 +38,7 @@ class ContVistaHomeAdmin():
         self.cont_vista_magazzino= ContGestioneMagazzino(gestore_mag,VistaGestioneMagazzino(), stacked)
         self.cont_vista_menu = ContGestioneMenu(VistaGestioneMenu(),gestore_menu, stacked)
 
+
         # collegamento pulsanti
         self.view.puls_dip.clicked.connect(self.apri_gestione_dipendenti)
         self.view.puls_ric.clicked.connect(self.apri_gestione_ricevute)
@@ -47,6 +48,8 @@ class ContVistaHomeAdmin():
         self.cont_ric.view.pulsante_back.clicked.connect(lambda : self.stacked.setCurrentWidget(self.view))
         self.cont_vista_dipendenti.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.view))
         self.cont_vista_turni.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.view))
+        self.cont_vista_menu.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.stacked.widget(0)))
+        self.cont_vista_magazzino.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.stacked.widget(0)))
 
     def apri_gestione_dipendenti(self):
         self.stacked.setCurrentWidget(self.cont_vista_dipendenti.view)
