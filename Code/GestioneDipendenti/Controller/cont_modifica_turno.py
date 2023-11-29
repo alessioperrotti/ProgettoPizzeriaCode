@@ -14,6 +14,7 @@ class ContModificaTurno(object):
         self.cognome_selezionato = None
         self.turno_selezionato = None
         self.dip_selezionato = None
+        self.update_tabella()
         self.view.tab_cuoco.itemSelectionChanged.connect(self.riga_selezionata_cuoco)
         self.view.tab_cameriere.itemSelectionChanged.connect(self.riga_selezionata_cameriere)
         self.view.p_agg_cuoco.clicked.connect(self.click_aggiungi_cuoco)
@@ -62,10 +63,6 @@ class ContModificaTurno(object):
         self.turno_selezionato = self.view.turno_cuoco.currentText()
         self.dip_selezionato = self.model.estrai_cuoco_cognome(self.cognome_selezionato)
 
-        # if cuoco_selezionato:
-        #     cuoco_selezionato.turno = self.turno_selezionato
-        #     print(cuoco_selezionato.turno)
-
         self.update_tabella()
 
     def click_aggiungi_cameriere(self):
@@ -73,13 +70,9 @@ class ContModificaTurno(object):
         self.turno_selezionato = self.view.turno_cameriere.currentText()
         self.dip_selezionato = self.model.estrai_cameriere_cognome(self.cognome_selezionato)
 
-        # if cameriere_selezionato:
-        #     cameriere_selezionato.turno = self.turno_selezionato
-        #     print(cameriere_selezionato.turno)
-
         self.update_tabella()
 
-    def click_rimuovi(self):
+    def click_rimuovi(self):#quando clicco rimuovi prima che il tizio ha un turno crasha,giustamente
         giorno = self.view.giorno_title.text()
 
         if self.view.tab_cuoco.selectedItems():
@@ -129,22 +122,54 @@ class ContModificaTurno(object):
 
         self.view.close()
 
+    # def update_tabella(self):
+    #
+    #     for dipendente in self.model.lista_cuochi + self.model.lista_camerieri:
+    #         if dipendente in self.model.lista_cuochi:
+    #             tabella = self.view.tab_cuoco
+    #             tabella.setItem()
+    #         elif dipendente in self.model.lista_camerieri:
+    #             tabella = self.view.tab_cameriere
+    #
+    #     if self.dip_selezionato in self.model.lista_cuochi:
+    #         row_position = self.view.tab_cuoco.rowCount()
+    #         self.view.tab_cuoco.insertRow(row_position)
+    #         self.view.tab_cuoco.setItem(row_position, 0,
+    #                                     QTableWidgetItem(
+    #                                         self.dip_selezionato.nome + " " + self.dip_selezionato.cognome))
+    #         self.view.tab_cuoco.setItem(row_position, 1, QTableWidgetItem(self.turno_selezionato))
+    #
+    #     if self.dip_selezionato in self.model.lista_camerieri:
+    #         row_position = self.view.tab_cameriere.rowCount()
+    #         self.view.tab_cameriere.insertRow(row_position)
+    #         self.view.tab_cameriere.setItem(row_position, 0,
+    #                                         QTableWidgetItem(
+    #                                             self.dip_selezionato.nome + " " + self.dip_selezionato.cognome))
+    #         self.view.tab_cameriere.setItem(row_position, 1, QTableWidgetItem(self.turno_selezionato))
+
+    def aggiungi_riga_tabella(self, dipendente, turno, tabella):
+        row_position = tabella.rowCount()
+        tabella.insertRow(row_position)
+        tabella.setItem(row_position, 0, QTableWidgetItem(f"{dipendente.nome} {dipendente.cognome}"))
+        tabella.setItem(row_position, 1, QTableWidgetItem(turno))
+
     def update_tabella(self):
-        lista_cuochi = self.model.lista_cuochi
-        lista_camerieri = self.model.lista_camerieri
+        giorno = self.view.giorno_title.text()
+        indice_giorno = self.model.converti_giorno_indice(giorno)
+
+        for dipendente in self.model.lista_cuochi + self.model.lista_camerieri:
+            if dipendente in self.model.lista_cuochi:
+                tabella = self.view.tab_cuoco
+                if dipendente.turno[indice_giorno] is not None:
+                    self.aggiungi_riga_tabella(dipendente,dipendente.turno[indice_giorno],tabella)
+            elif dipendente in self.model.lista_camerieri:
+                tabella = self.view.tab_cameriere
+                if dipendente.turno[indice_giorno] is not None:
+                    self.aggiungi_riga_tabella(dipendente,dipendente.turno[indice_giorno],tabella)
 
         if self.dip_selezionato in self.model.lista_cuochi:
-            row_position = self.view.tab_cuoco.rowCount()
-            self.view.tab_cuoco.insertRow(row_position)
-            self.view.tab_cuoco.setItem(row_position, 0,
-                                        QTableWidgetItem(
-                                            self.dip_selezionato.nome + " " + self.dip_selezionato.cognome))
-            self.view.tab_cuoco.setItem(row_position, 1, QTableWidgetItem(self.turno_selezionato))
+            self.aggiungi_riga_tabella(self.dip_selezionato, self.turno_selezionato, self.view.tab_cuoco)
 
         if self.dip_selezionato in self.model.lista_camerieri:
-            row_position = self.view.tab_cameriere.rowCount()
-            self.view.tab_cameriere.insertRow(row_position)
-            self.view.tab_cameriere.setItem(row_position, 0,
-                                            QTableWidgetItem(
-                                                self.dip_selezionato.nome + " " + self.dip_selezionato.cognome))
-            self.view.tab_cameriere.setItem(row_position, 1, QTableWidgetItem(self.turno_selezionato))
+            self.aggiungi_riga_tabella(self.dip_selezionato, self.turno_selezionato, self.view.tab_cameriere)
+

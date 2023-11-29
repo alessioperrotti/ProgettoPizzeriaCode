@@ -19,7 +19,7 @@ class GestoreDipendenti():
         self.salva_dati(self.nome_file)
         self.carica_da_file(self.nome_file)
 
-    def aggiungi_turno_cuoco(self, cuoco: Cuoco, turno, giorno):
+    def aggiungi_turno_cuoco(self, cuoco, turno, giorno):
         indice_giorno = self.converti_giorno_indice(giorno)
         #cuoco.turno.insert(indice_giorno, turno)
         cuoco.turno[indice_giorno] = turno
@@ -36,7 +36,6 @@ class GestoreDipendenti():
     def estrai_cuoco_cognome(self, cognome):
         for cuoco in self.lista_cuochi:
             if cognome == cuoco.cognome:
-                print("trovato")
                 return cuoco
 
     def estrai_cuoco_username(self, username):
@@ -118,15 +117,6 @@ class GestoreDipendenti():
         self.carica_da_file(self.nome_file)
 
     #################################################################################
-    # def save_data_cuochi(self, nome_file):
-    #     with open(nome_file, 'wb') as file:
-    #         pickle.dump(self.lista_cuochi,file, pickle.HIGHEST_PROTOCOL)
-    #
-    #
-    # def save_data_camerieri(self, nome_file):
-    #     with open(nome_file, 'wb') as file:
-    #         pickle.dump(self.lista_camerieri,file, pickle.HIGHEST_PROTOCOL)
-
     def salva_dati(self, nome_file):
         with open(nome_file, 'wb') as file:
             pickle.dump({'cuochi': self.lista_cuochi, 'camerieri': self.lista_camerieri}, file)
