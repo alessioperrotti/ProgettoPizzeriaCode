@@ -27,8 +27,7 @@ class ContGestioneMenu(object):
         self.view.pulsante_elimina.clicked.connect(self.elimina_elemento)
         self.view.pulsante_modifica.setEnabled(self.prodotto_selezionato is not None)
         self.view.pulsante_modifica.clicked.connect(self.open_modifica)
-        self.view.pulsante_back.clicked.connect(
-            lambda: self.stacked.setCurrentWidget(self.stacked.widget(0)))
+
 
     def update_tabella(self):
 
