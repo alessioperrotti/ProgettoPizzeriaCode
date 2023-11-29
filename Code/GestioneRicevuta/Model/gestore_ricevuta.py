@@ -8,7 +8,7 @@ class GestoreRicevuta:
     def __init__(self):
         self.lista_ricevute = []
         self.ultimo_codice_ricevuta = 0
-        self.nome_file = "dati_ricevute.pickle"
+        self.nome_file = "lista_ricevute.pickle"
         try:
             self.carica_da_file(self.nome_file)
         except FileNotFoundError:
