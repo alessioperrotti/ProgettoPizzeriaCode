@@ -1,6 +1,7 @@
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QTableWidgetItem
 
+from Code.GestioneDipendenti.Controller.cont_gestione_turni import ContGestioneTurni
 from Code.GestioneDipendenti.Model.cameriere import Cameriere
 from Code.GestioneDipendenti.Model.cuoco import Cuoco
 from Code.GestioneDipendenti.Model.gestore_dipendenti import GestoreDipendenti
@@ -110,10 +111,10 @@ class ContModificaTurno(object):
             nome_cognome = self.view.tab_cuoco.item(row,0).text()
             cognome = nome_cognome.split()[1]
             turno = self.view.tab_cuoco.item(row,1).text()
-
+            giorno = self.view.giorno_title.text()
             cuoco = self.model.estrai_cuoco_cognome(cognome)
 
-            self.model.aggiungi_turno_cuoco(cuoco,turno)
+            self.model.aggiungi_turno_cuoco(cuoco,turno,giorno)
 
         for row in range(self.view.tab_cameriere.rowCount()):
             nome_cognome = self.view.tab_cameriere.item(row, 0).text()
@@ -122,7 +123,7 @@ class ContModificaTurno(object):
 
             cameriere = self.model.estrai_cameriere_cognome(cognome)
 
-            self.model.aggiungi_turno_cameriere(cameriere, turno)
+            self.model.aggiungi_turno_cameriere(cameriere, turno,giorno)
 
         self.view.close()
 

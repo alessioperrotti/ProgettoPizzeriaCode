@@ -5,7 +5,7 @@ class Cuoco(Utilizzatore):
     def __init__(self, nome, cognome, email,username,password,stipendio):
         super().__init__(nome, cognome, email,username,password)
         self.data_ingaggio = None
-        self.turno = None
+        self.turno = []
         self.ruolo = "Cuoco"
         self.stipendio = stipendio
 

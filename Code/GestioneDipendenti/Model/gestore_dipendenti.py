@@ -19,8 +19,9 @@ class GestoreDipendenti():
         self.salva_dati(self.nome_file)
         self.carica_da_file(self.nome_file)
 
-    def aggiungi_turno_cuoco(self, cuoco,turno):
-        cuoco.turno = turno
+    def aggiungi_turno_cuoco(self, cuoco,turno,giorno):
+        indice_giorno = self.converti_giorno_in_indice(giorno)
+        cuoco.turno[indice_giorno] = turno
         self.salva_dati(self.nome_file)
         self.carica_da_file(self.nome_file)
 
@@ -69,8 +70,9 @@ class GestoreDipendenti():
         self.salva_dati(self.nome_file)
         self.carica_da_file(self.nome_file)
 
-    def aggiungi_turno_cameriere(self, cameriere ,turno):
-        cameriere.turno = turno
+    def aggiungi_turno_cameriere(self, cameriere ,turno,giorno):
+        indice_giorno = self.converti_giorno_in_indice(giorno)
+        cameriere.turno[indice_giorno] = turno
         self.salva_dati(self.nome_file)
         self.carica_da_file(self.nome_file)
 
@@ -130,5 +132,12 @@ class GestoreDipendenti():
             data = pickle.load(file)
             self.lista_cuochi = data['cuochi']
             self.lista_camerieri = data['camerieri']
+
+    def converti_giorno_in_indice(self,giorno):
+        giorni_settimana = ["lunedì", "martedì", "mercoledì", "venerdì", "sabato", "domenica"]
+        giorno = giorno.lower()
+
+        if giorno in giorni_settimana:
+            return giorni_settimana.index(giorno)
 
 
