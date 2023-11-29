@@ -19,16 +19,17 @@ class GestoreDipendenti():
         self.salva_dati(self.nome_file)
         self.carica_da_file(self.nome_file)
 
-    def aggiungi_turno_cuoco(self, cuoco:Cuoco,turno,giorno):
+    def aggiungi_turno_cuoco(self, cuoco: Cuoco, turno, giorno):
         indice_giorno = self.converti_giorno_indice(giorno)
-        cuoco.turno.insert(indice_giorno,turno)
+        #cuoco.turno.insert(indice_giorno, turno)
+        cuoco.turno[indice_giorno] = turno
         self.salva_dati(self.nome_file)
         self.carica_da_file(self.nome_file)
 
-    def rimuovi_turno_cuoco(self,cognome, giorno):
+    def rimuovi_turno_cuoco(self, cognome, giorno):
         cuoco_selezionato = self.estrai_cuoco_cognome(cognome)
         indice_giorno = self.converti_giorno_indice(giorno)
-        del cuoco_selezionato.turno[indice_giorno]
+        cuoco_selezionato.turno[indice_giorno] = ""
         self.salva_dati(self.nome_file)
         self.carica_da_file(self.nome_file)
 
@@ -52,7 +53,7 @@ class GestoreDipendenti():
 
     def modifica_cuoco(self, cognome_ricerca, new_email, new_stipendio,
                        new_data_nascita, new_username, new_password):
-        cuoco: Cuoco = self.estrai_cuoco_cognome(cognome_ricerca)
+        cuoco = self.estrai_cuoco_cognome(cognome_ricerca)
         for x in self.lista_cuochi:
             print("c")
             if cuoco.cognome == x.cognome:
@@ -71,16 +72,17 @@ class GestoreDipendenti():
         self.salva_dati(self.nome_file)
         self.carica_da_file(self.nome_file)
 
-    def aggiungi_turno_cameriere(self, cameriere ,turno, giorno):
+    def aggiungi_turno_cameriere(self, cameriere, turno, giorno):
         indice_giorno = self.converti_giorno_indice(giorno)
-        cameriere.turno.insert(indice_giorno,turno)
+        #cameriere.turno.insert(indice_giorno, turno)
+        cameriere.turno[indice_giorno] = turno
         self.salva_dati(self.nome_file)
         self.carica_da_file(self.nome_file)
 
-    def rimuovi_turno_cameriere(self,cognome, giorno):
+    def rimuovi_turno_cameriere(self, cognome, giorno):
         cameriere_selezionato = self.estrai_cameriere_cognome(cognome)
         indice_giorno = self.converti_giorno_indice(giorno)
-        del cameriere_selezionato.turno[indice_giorno]
+        cameriere_selezionato.turno[indice_giorno] = ""
         self.salva_dati(self.nome_file)
         self.carica_da_file(self.nome_file)
 
@@ -146,5 +148,3 @@ class GestoreDipendenti():
 
         else:
             print("errore giorno")
-
-

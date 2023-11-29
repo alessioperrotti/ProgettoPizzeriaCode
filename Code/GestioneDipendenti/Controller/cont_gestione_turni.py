@@ -51,6 +51,7 @@ class ContGestioneTurni(object):
         #     item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
 
         for cuoco in lista_cuochi:
+            print(len(cuoco.turno))
             for i in range(len(cuoco.turno)):
                 item_vuoto = QTableWidgetItem("vuoto")
                 item_vuoto.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -64,12 +65,17 @@ class ContGestioneTurni(object):
                     self.view.tabella.setItem(1, i, item_nome)
                 elif cuoco.turno[i] == "Pranzo & Cena":
                     self.view.tabella.setItem(0, i, item_nome)
-                    self.view.tabella.setItem(1, i, item_nome)
-                elif cuoco.turno[i] is None:
+                    current_item_nome_cena = QTableWidgetItem(item_nome.text())
+                    current_item_nome_cena.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                    self.view.tabella.setItem(1, i, current_item_nome_cena)
+                elif cuoco.turno[i] == "":
                     self.view.tabella.setItem(0, i, item_vuoto)
-                    self.view.tabella.setItem(1, i, item_vuoto)
+                    current_item_vuoto = QTableWidgetItem(item_vuoto.text())
+                    current_item_vuoto.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                    self.view.tabella.setItem(1, i, current_item_vuoto)
 
         for cameriere in lista_camerieri:
+            print(len(cameriere.turno))
             for i in range(len(cameriere.turno)):
                 item_vuoto = QTableWidgetItem("vuoto")
                 item_vuoto.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -83,10 +89,14 @@ class ContGestioneTurni(object):
                     self.view.tabella.setItem(1, i, item_nome)
                 elif cameriere.turno[i] == "Pranzo & Cena":
                     self.view.tabella.setItem(0, i, item_nome)
-                    self.view.tabella.setItem(1, i, item_nome)
-                elif cameriere.turno[i] is None:
+                    current_item_nome_cena = QTableWidgetItem(item_nome.text())
+                    current_item_nome_cena.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                    self.view.tabella.setItem(1, i, current_item_nome_cena)
+                elif cameriere.turno[i] == "":
                     self.view.tabella.setItem(0, i, item_vuoto)
-                    self.view.tabella.setItem(1, i, item_vuoto)
+                    current_item_vuoto = QTableWidgetItem(item_vuoto.text())
+                    current_item_vuoto.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                    self.view.tabella.setItem(1, i, current_item_vuoto)
 
 
         # itero cuochi nella lista cuochi

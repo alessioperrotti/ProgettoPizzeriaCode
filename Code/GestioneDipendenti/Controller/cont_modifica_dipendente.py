@@ -62,9 +62,9 @@ class ContModificaDipendente(object):
             error_box.exec()
         else:
             if self.view.label_ruolo.text() == "Cuoco":
-                self.model.modifica_cuoco(self.cuoco.nome, new_email, new_stipendio, new_data_nascita,
+                self.model.modifica_cuoco(self.cuoco.cognome, new_email, new_stipendio, new_data_nascita,
                                           new_username, new_password)
             if self.view.label_ruolo.text() == "Cameriere":
-                self.model.modifica_cameriere(self.cameriere.nome, new_email, new_stipendio, new_data_nascita,
+                self.model.modifica_cameriere(self.cameriere.cognome, new_email, new_stipendio, new_data_nascita,
                                               new_username, new_password)
             self.view.close()
