@@ -14,7 +14,7 @@ class ContModificaTurno(object):
         self.cognome_selezionato = None
         self.turno_selezionato = None
         self.dip_selezionato = None
-        self.update_tabella()
+        self.giorno_corrente = None
         self.view.tab_cuoco.itemSelectionChanged.connect(self.riga_selezionata_cuoco)
         self.view.tab_cameriere.itemSelectionChanged.connect(self.riga_selezionata_cameriere)
         self.view.p_agg_cuoco.clicked.connect(self.click_aggiungi_cuoco)
@@ -32,6 +32,7 @@ class ContModificaTurno(object):
             elif item.column() == 1:
                 self.turno_selezionato = str(item.text())
 
+        self.view.tab_cameriere.clearSelection()
         self.view.pulsante_rimuovi.setEnabled(abilita_pulsante)
 
     def riga_selezionata_cameriere(self):
@@ -44,10 +45,13 @@ class ContModificaTurno(object):
             elif item.column() == 1:
                 self.turno_selezionato = str(item.text())
 
+        self.view.tab_cuoco.clearSelection()
         self.view.pulsante_rimuovi.setEnabled(abilita_pulsante)
 
     def riempi_labels(self, giorno):
         self.view.giorno_title.setText(str(giorno))
+        self.giorno_corrente = giorno
+        print("riempi: "+self.giorno_corrente)
         # Riempi la combobox dei cuochi con gli elementi dalla lista
         for cuoco in self.model.lista_cuochi:
             # print("x")
@@ -57,6 +61,7 @@ class ContModificaTurno(object):
         for cameriere in self.model.lista_camerieri:
             # print("y")
             self.view.cameriere.addItem(cameriere.cognome)
+        self.riempi_tabelle()
 
     def click_aggiungi_cuoco(self):
         self.cognome_selezionato = self.view.cuoco.currentText()
@@ -73,10 +78,9 @@ class ContModificaTurno(object):
         self.update_tabella()
 
     def click_rimuovi(self):#quando clicco rimuovi prima che il tizio ha un turno crasha,giustamente
-        giorno = self.view.giorno_title.text()
 
         if self.view.tab_cuoco.selectedItems():
-            self.model.rimuovi_turno_cuoco(self.cognome_selezionato, giorno)
+            self.model.rimuovi_turno_cuoco(self.cognome_selezionato, self.giorno_corrente)
 
             righe_selezionate = self.view.tab_cuoco.selectedItems()
             if righe_selezionate:
@@ -88,7 +92,7 @@ class ContModificaTurno(object):
             print("C")
 
         if self.view.tab_cameriere.selectedItems():
-            self.model.rimuovi_turno_cameriere(self.cognome_selezionato, giorno)
+            self.model.rimuovi_turno_cameriere(self.cognome_selezionato, self.giorno_corrente)
 
             righe_selezionate = self.view.tab_cameriere.selectedItems()
             if righe_selezionate:
@@ -101,6 +105,7 @@ class ContModificaTurno(object):
 
     def click_conferma(self):
         giorno = self.view.giorno_title.text()
+        print("conferma: "+giorno)
 
         for row in range(self.view.tab_cuoco.rowCount()):
             nome_cognome = self.view.tab_cuoco.item(row, 0).text()
@@ -154,18 +159,6 @@ class ContModificaTurno(object):
         tabella.setItem(row_position, 1, QTableWidgetItem(turno))
 
     def update_tabella(self):
-        giorno = self.view.giorno_title.text()
-        indice_giorno = self.model.converti_giorno_indice(giorno)
-
-        for dipendente in self.model.lista_cuochi + self.model.lista_camerieri:
-            if dipendente in self.model.lista_cuochi:
-                tabella = self.view.tab_cuoco
-                if dipendente.turno[indice_giorno] is not None:
-                    self.aggiungi_riga_tabella(dipendente,dipendente.turno[indice_giorno],tabella)
-            elif dipendente in self.model.lista_camerieri:
-                tabella = self.view.tab_cameriere
-                if dipendente.turno[indice_giorno] is not None:
-                    self.aggiungi_riga_tabella(dipendente,dipendente.turno[indice_giorno],tabella)
 
         if self.dip_selezionato in self.model.lista_cuochi:
             self.aggiungi_riga_tabella(self.dip_selezionato, self.turno_selezionato, self.view.tab_cuoco)
@@ -173,3 +166,15 @@ class ContModificaTurno(object):
         if self.dip_selezionato in self.model.lista_camerieri:
             self.aggiungi_riga_tabella(self.dip_selezionato, self.turno_selezionato, self.view.tab_cameriere)
 
+    def riempi_tabelle(self):
+        indice_giorno = self.model.converti_giorno_indice(self.giorno_corrente)
+
+        for dipendente in self.model.lista_cuochi + self.model.lista_camerieri:
+            if dipendente in self.model.lista_cuochi:
+                tabella = self.view.tab_cuoco
+                if dipendente.turno[indice_giorno] is not None:
+                    self.aggiungi_riga_tabella(dipendente, dipendente.turno[indice_giorno], tabella)
+            elif dipendente in self.model.lista_camerieri:
+                tabella = self.view.tab_cameriere
+                if dipendente.turno[indice_giorno] is not None:
+                    self.aggiungi_riga_tabella(dipendente, dipendente.turno[indice_giorno], tabella)

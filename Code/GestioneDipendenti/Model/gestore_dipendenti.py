@@ -29,7 +29,7 @@ class GestoreDipendenti():
     def rimuovi_turno_cuoco(self, cognome, giorno):
         cuoco_selezionato = self.estrai_cuoco_cognome(cognome)
         indice_giorno = self.converti_giorno_indice(giorno)
-        cuoco_selezionato.turno[indice_giorno] = ""
+        cuoco_selezionato.turno[indice_giorno] = None
         self.salva_dati(self.nome_file)
         self.carica_da_file(self.nome_file)
 
@@ -81,7 +81,7 @@ class GestoreDipendenti():
     def rimuovi_turno_cameriere(self, cognome, giorno):
         cameriere_selezionato = self.estrai_cameriere_cognome(cognome)
         indice_giorno = self.converti_giorno_indice(giorno)
-        cameriere_selezionato.turno[indice_giorno] = ""
+        cameriere_selezionato.turno[indice_giorno] = None
         self.salva_dati(self.nome_file)
         self.carica_da_file(self.nome_file)
 
@@ -128,13 +128,10 @@ class GestoreDipendenti():
             self.lista_camerieri = data['camerieri']
 
     def converti_giorno_indice(self, giorno):
-        giorni_settimana = ["lunedi", "martedi", "mercoledi", "venerdi", "sabato", "domenica"]
+        giorni_settimana = {"lunedi": 0, "martedi": 1, "mercoledi": 2, "venerdi": 3, "sabato": 4, "domenica": 5}
         giorno = giorno.lower()
 
         if giorno in giorni_settimana:
-            print("giorno trovato")
-            print(giorni_settimana.index(giorno))
-            return giorni_settimana.index(giorno)
-
+            return giorni_settimana[giorno]
         else:
-            print("errore giorno")
+            raise ValueError("Giorno non valido: {}".format(giorno))
