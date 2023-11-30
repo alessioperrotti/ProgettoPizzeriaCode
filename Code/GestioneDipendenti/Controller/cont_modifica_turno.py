@@ -1,11 +1,15 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QTableWidgetItem
+from PyQt6.QtWidgets import QTableWidgetItem, QMessageBox
 
 from Code.GestioneDipendenti.Model.cameriere import Cameriere
 from Code.GestioneDipendenti.Model.cuoco import Cuoco
 from Code.GestioneDipendenti.Model.gestore_dipendenti import GestoreDipendenti
 from Code.GestioneDipendenti.View.vista_modifica_turno import VistaModificaTurno
 
+class ShiftError(Exception):
+    def __init__(self, message):
+        self.message = message
+        super().__init__(message)
 
 class ContModificaTurno(object):
     def __init__(self, model: GestoreDipendenti, view: VistaModificaTurno):
@@ -64,20 +68,44 @@ class ContModificaTurno(object):
         self.riempi_tabelle()
 
     def click_aggiungi_cuoco(self):
-        self.cognome_selezionato = self.view.cuoco.currentText()
-        self.turno_selezionato = self.view.turno_cuoco.currentText()
-        self.dip_selezionato = self.model.estrai_cuoco_cognome(self.cognome_selezionato)
+        indice_giorno = self.model.converti_giorno_indice(self.giorno_corrente)
+        try:
+            self.cognome_selezionato = self.view.cuoco.currentText()
+            self.turno_selezionato = self.view.turno_cuoco.currentText()
+            self.dip_selezionato = self.model.estrai_cuoco_cognome(self.cognome_selezionato)
 
-        self.update_tabella()
+            if self.dip_selezionato.turno[indice_giorno] == self.turno_selezionato:
+                raise ShiftError("Il dipendente ha gia questo turno")
+
+            self.update_tabella()
+
+        except ShiftError as e:
+            error_box = QMessageBox()
+            error_box.setIcon(QMessageBox.Icon.Critical)
+            error_box.setWindowTitle("Errore di Inserimento")
+            error_box.setText(e.message)
+            error_box.exec()
 
     def click_aggiungi_cameriere(self):
-        self.cognome_selezionato = self.view.cameriere.currentText()
-        self.turno_selezionato = self.view.turno_cameriere.currentText()
-        self.dip_selezionato = self.model.estrai_cameriere_cognome(self.cognome_selezionato)
+        indice_giorno = self.model.converti_giorno_indice(self.giorno_corrente)
+        try:
+            self.cognome_selezionato = self.view.cameriere.currentText()
+            self.turno_selezionato = self.view.turno_cameriere.currentText()
+            self.dip_selezionato = self.model.estrai_cameriere_cognome(self.cognome_selezionato)
 
-        self.update_tabella()
+            if self.dip_selezionato.turno[indice_giorno] == self.turno_selezionato:
+                raise ShiftError("Il dipendente ha gia questo turno")
 
-    def click_rimuovi(self):#quando clicco rimuovi prima che il tizio ha un turno crasha,giustamente
+            self.update_tabella()
+
+        except ShiftError as e:
+            error_box = QMessageBox()
+            error_box.setIcon(QMessageBox.Icon.Critical)
+            error_box.setWindowTitle("Errore di Inserimento")
+            error_box.setText(e.message)
+            error_box.exec()
+
+    def click_rimuovi(self):
 
         if self.view.tab_cuoco.selectedItems():
             self.model.rimuovi_turno_cuoco(self.cognome_selezionato, self.giorno_corrente)
@@ -126,31 +154,6 @@ class ContModificaTurno(object):
             self.model.aggiungi_turno_cameriere(cameriere, turno, giorno)
 
         self.view.close()
-
-    # def update_tabella(self):
-    #
-    #     for dipendente in self.model.lista_cuochi + self.model.lista_camerieri:
-    #         if dipendente in self.model.lista_cuochi:
-    #             tabella = self.view.tab_cuoco
-    #             tabella.setItem()
-    #         elif dipendente in self.model.lista_camerieri:
-    #             tabella = self.view.tab_cameriere
-    #
-    #     if self.dip_selezionato in self.model.lista_cuochi:
-    #         row_position = self.view.tab_cuoco.rowCount()
-    #         self.view.tab_cuoco.insertRow(row_position)
-    #         self.view.tab_cuoco.setItem(row_position, 0,
-    #                                     QTableWidgetItem(
-    #                                         self.dip_selezionato.nome + " " + self.dip_selezionato.cognome))
-    #         self.view.tab_cuoco.setItem(row_position, 1, QTableWidgetItem(self.turno_selezionato))
-    #
-    #     if self.dip_selezionato in self.model.lista_camerieri:
-    #         row_position = self.view.tab_cameriere.rowCount()
-    #         self.view.tab_cameriere.insertRow(row_position)
-    #         self.view.tab_cameriere.setItem(row_position, 0,
-    #                                         QTableWidgetItem(
-    #                                             self.dip_selezionato.nome + " " + self.dip_selezionato.cognome))
-    #         self.view.tab_cameriere.setItem(row_position, 1, QTableWidgetItem(self.turno_selezionato))
 
     def aggiungi_riga_tabella(self, dipendente, turno, tabella):
         row_position = tabella.rowCount()
