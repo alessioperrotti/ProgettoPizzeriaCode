@@ -11,6 +11,7 @@ class Prodotto(object):
         self.ingredienti = ingredienti
 
 
+
     def aggiungi_ingrediente(self, matprima: MateriaPrima, quantita):
         ingrediente = (matprima, quantita)
         self.ingredienti.append(ingrediente)

@@ -57,10 +57,16 @@ class ContInserisciProdotto(object):
 
             # se si sta inserendo una bevanda
             else:
-                matprima = self.magazzino.estrai_per_nome(self.view.campo_nome.text())
-                ingrediente = (matprima, 1)
-                nuovo_prodotto = Prodotto(nome, codice, prezzo, tipo, ingrediente)
-
+                if self.view.data_grid.rowCount() == 0:
+                    raise NoIngredienti("Controllare di aver inserito l'ingrediente corrispondente.")
+                else:
+                    ingredienti = []
+                    nome_ingrediente = self.view.data_grid.item(0, 0).text().lower()
+                    quantita = float(self.view.data_grid.item(0, 1).text())
+                    matprima = self.magazzino.estrai_per_nome(nome_ingrediente)
+                    ingrediente = (matprima, quantita)
+                    ingredienti.append(ingrediente)
+                    nuovo_prodotto = Prodotto(nome, codice, prezzo, tipo, ingredienti)
 
         except ValueError:
 
@@ -126,6 +132,11 @@ class ContInserisciProdotto(object):
             self.view.data_grid.setItem(righe, 1, item2)
             item2.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
 
+            if self.view.combo_tipologia.currentText().lower() == 'bevanda' and self.view.data_grid.rowCount() == 1:
+                self.view.combo_ingrediente.setEnabled(False)
+                self.view.campo_quantita.setEnabled(False)
+                self.view.pulsante_aggiungi.setEnabled(False)
+
 
     def riga_selezionata(self):
 
@@ -148,17 +159,21 @@ class ContInserisciProdotto(object):
         if riga_da_eliminare >= 0:
             self.view.data_grid.removeRow(riga_da_eliminare)
 
+        if self.view.combo_tipologia.currentText().lower() == 'bevanda' and self.view.data_grid.rowCount() == 0:
+            self.view.combo_ingrediente.setEnabled(True)
+            self.view.campo_quantita.setEnabled(True)
+            self.view.pulsante_aggiungi.setEnabled(True)
+
     def combo_changed(self):
         if self.view.combo_tipologia.currentText().lower() == 'piatto':
             self.view.pulsante_aggiungi.setEnabled(True)
             self.view.data_grid.setEnabled(True)
             self.view.combo_ingrediente.setEnabled(True)
             self.view.campo_quantita.setEnabled(True)
-        elif self.view.combo_tipologia.currentText().lower() == 'bevanda':
 
+        elif self.view.combo_tipologia.currentText().lower() == 'bevanda':
             # per far aggiungere un solo ingrediente
             if self.view.data_grid.rowCount() == 1:
-                self.view.data_grid.setEnabled(False)
                 self.view.combo_ingrediente.setEnabled(False)
                 self.view.campo_quantita.setEnabled(False)
                 self.view.pulsante_aggiungi.setEnabled(False)

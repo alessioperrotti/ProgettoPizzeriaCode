@@ -21,10 +21,12 @@ class ContModificaProdotto(object):
         self.view.campo_prezzo.setPlaceholderText(str(prodotto.prezzo_al_pubblico))
         self.view.combo_tipologia.setCurrentText(prodotto.tipologia)
         ingredienti = prodotto.ingredienti
+        print(ingredienti[0][0].nome + " fuori dal for")
         for x in ingredienti:
+            print(x[0].nome + " nel for")
             righe = self.view.data_grid.rowCount()
             self.view.data_grid.setRowCount(righe+1)
-            item1 = QTableWidgetItem(str(x[0]))
+            item1 = QTableWidgetItem(str(x[0].nome))
             self.view.data_grid.setItem(righe, 0, item1)
             item1.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             item2 = QTableWidgetItem(str(x[1]))

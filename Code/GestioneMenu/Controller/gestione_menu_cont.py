@@ -79,7 +79,7 @@ class ContGestioneMenu(object):
 
     def open_modifica(self):
         dialog_modifica = VistaModificaProdotto()
-        prodotto_temp = self.model.estrai_per_codice(self.prodotto_selezionato)
+        prodotto_temp = self.model.estrai_per_nome(self.prodotto_selezionato)
         controller_modifica = ContModificaProdotto(dialog_modifica, self.model, prodotto_temp)
         controller_modifica.view.exec()
         self.update_tabella()
