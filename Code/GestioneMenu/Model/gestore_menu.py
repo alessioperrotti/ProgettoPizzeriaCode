@@ -38,6 +38,18 @@ class GestoreMenu(object):
         self.salva_su_file()
         self.carica_da_file()
 
+    def modifica_prodotto(self, nome_prod, nuovo_prezzo, nuovi_ingredienti):
+
+        prodotto_da_mod: Prodotto = self.estrai_per_nome(nome_prod)
+
+        for x in self.lista_prodotti:
+            if str(prodotto_da_mod.nome) == str(x.nome):
+                x.prezzo_al_pubblico = nuovo_prezzo
+                x.ingredienti = nuovi_ingredienti
+
+        self.salva_su_file()
+        self.carica_da_file()
+
     def carica_da_file(self):
 
         try:

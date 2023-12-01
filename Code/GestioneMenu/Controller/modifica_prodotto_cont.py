@@ -4,6 +4,7 @@ from Code.GestioneMenu.View.modifica_prodotto_view import VistaModificaProdotto
 from Code.GestioneMagazzino.Model.gestore_magazzino import GestoreMagazzino
 from PyQt6.QtWidgets import QTableWidgetItem, QMessageBox
 from PyQt6.QtCore import Qt
+from Code.GestioneMenu.Controller.inserisci_prodotto_cont import NoIngredienti
 
 class ContModificaProdotto(object):
 
@@ -11,6 +12,7 @@ class ContModificaProdotto(object):
         self.view = view
         self.model = model
         self.magazzino = GestoreMagazzino()
+        self.riempi_combo()
         self.prodotto_da_modificare = prodotto_da_modificare
         self.prodotto_selezionato = None
         self.riempi_labels(prodotto_da_modificare)
@@ -18,6 +20,7 @@ class ContModificaProdotto(object):
         self.view.data_grid.itemSelectionChanged.connect(self.riga_selezionata)
         self.view.pulsante_rimuovi.setEnabled(self.prodotto_selezionato is not None)
         self.view.pulsante_rimuovi.clicked.connect(self.elimina_dalla_tabella_ingredienti)
+        self.view.pulsante_conferma.clicked.connect(self.conferma_modifica)
 
     def riempi_labels(self, prodotto: Prodotto):
 
@@ -88,3 +91,60 @@ class ContModificaProdotto(object):
             self.view.combo_ingrediente.setEnabled(True)
             self.view.campo_quantita.setEnabled(True)
             self.view.pulsante_aggiungi.setEnabled(True)
+
+    def conferma_modifica(self):
+
+        try:
+            new_prezzo = round(float(self.view.campo_prezzo.text()), 2)
+
+            if self.view.combo_tipologia.currentText().lower() == 'piatto':
+                if self.view.data_grid.rowCount() == 0:
+                    raise NoIngredienti("Controllare di aver inserito gli ingredienti.")
+                else:
+                    nuovi_ingredienti = []
+                    for i in range(self.view.data_grid.rowCount()):
+                        nome_ingrediente = self.view.data_grid.item(i, 0).text().lower()
+                        quantita = float(self.view.data_grid.item(i, 1).text())
+                        matprima = self.magazzino.estrai_per_nome(nome_ingrediente)
+                        ingrediente = (matprima, quantita)
+                        nuovi_ingredienti.append(ingrediente)
+
+            else:
+                if self.view.data_grid.rowCount() == 0:
+                    raise NoIngredienti("Controllare di aver inserito l'ingrediente corrispondente.")
+                else:
+                    nuovi_ingredienti = []
+                    nome_ingrediente = self.view.data_grid.item(0, 0).text().lower()
+                    quantita = float(self.view.data_grid.item(0, 1).text())
+                    matprima = self.magazzino.estrai_per_nome(nome_ingrediente)
+                    ingrediente = (matprima, quantita)
+                    nuovi_ingredienti.append(ingrediente)
+
+        except ValueError:
+
+            if self.view.campo_prezzo is None:
+                errore_msg = "Controllare che tutti i campi siano riempiti."
+            else:
+                errore_msg = "Controllare che i dati siano inseriti correttamente."
+
+            error_box = QMessageBox()
+            error_box.setIcon(QMessageBox.Icon.Critical)
+            error_box.setWindowTitle("Errore di Inserimento")
+            error_box.setText(errore_msg)
+            error_box.exec()
+
+        except NoIngredienti as ni:
+            error_box = QMessageBox()
+            error_box.setIcon(QMessageBox.Icon.Critical)
+            error_box.setWindowTitle("Errore di Inserimento")
+            error_box.setText(ni.message)
+            error_box.exec()
+
+        else:
+            self.model.modifica_prodotto(self.prodotto_da_modificare.nome, new_prezzo, nuovi_ingredienti)
+            self.view.close()
+
+    def riempi_combo(self):
+
+        for x in self.magazzino.lista_materieprime:
+            self.view.combo_ingrediente.addItem(x.nome)

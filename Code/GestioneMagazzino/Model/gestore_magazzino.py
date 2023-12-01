@@ -29,6 +29,7 @@ class GestoreMagazzino(object):
                               new_qta_limite, new_qta_ordine_STD, new_data_scadenza):
 
         matprima_da_modificare: MateriaPrima = self.estrai_per_codice(codice_ricerca)
+
         for x in self.lista_materieprime:
             if int(matprima_da_modificare.codice) == int(x.codice):
                 x.costo_al_kg = new_costo_al_kg
