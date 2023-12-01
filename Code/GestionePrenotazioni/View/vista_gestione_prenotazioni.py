@@ -92,10 +92,12 @@ class VistaGestionePrenotazioni(QWidget):
 
         self.pulsante_modifica = QPushButton("Modifica\nprenotazione")
         self.pulsante_modifica.setFixedSize(147, 49)
+        self.pulsante_modifica.setEnabled(False)
         self.pulsante_inserisci = QPushButton("Inserisci\nprenotazione")
         self.pulsante_inserisci.setFixedSize(147, 49)
         self.pulsante_elimina = QPushButton("Elimina\nprenotazione")
         self.pulsante_elimina.setFixedSize(147, 49)
+        self.pulsante_elimina.setEnabled(False)
 
         # Pulsante Back
         self.pulsante_back = crea_pulsante_back(35,"png/back.png")

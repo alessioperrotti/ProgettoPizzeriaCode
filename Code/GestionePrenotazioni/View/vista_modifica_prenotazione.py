@@ -5,7 +5,7 @@ from PyQt6.QtGui import QFont, QPixmap, QIcon
 from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplication, QSizePolicy, QHBoxLayout,
                              QGridLayout, QTableWidget, QHeaderView, QSpacerItem, QLineEdit, QTableWidgetItem,
                              QScrollBar, QScrollArea, QAbstractItemView, QCheckBox, QSpinBox, QComboBox,
-                             QCalendarWidget, QFrame)
+                             QCalendarWidget, QFrame, QDialog)
 
 # Font
 label_font = QFont("Roboto", 24)
@@ -48,7 +48,7 @@ def crea_pulsante_back(dimensioni, directory):
     return pulsante_back
 
 
-class VistaModificaPrenotazione(QWidget):
+class VistaModificaPrenotazione(QDialog):
     def __init__(self):
         super().__init__()
         self.init_ui()
@@ -109,37 +109,37 @@ class VistaModificaPrenotazione(QWidget):
         griglia.addWidget(label_persone,0,2)
         griglia.addWidget(label_orario,0,3)
 
-        barra_ricerca = QLineEdit()
-        barra_ricerca.setFixedWidth(257)
-        combobox_tavolo = QComboBox()
-        combobox_tavolo.setFixedWidth(75)
-        combobox_orario = QComboBox()
-        combobox_orario.setFixedWidth(85)
-        spinbox_persone = QSpinBox()
-        spinbox_persone.setFixedWidth(40)
+        self.barra_ricerca = QLineEdit()
+        self.barra_ricerca.setFixedWidth(257)
+        self.combobox_tavolo = QComboBox()
+        self.combobox_tavolo.setFixedWidth(75)
+        self.combobox_orario = QComboBox()
+        self.combobox_orario.setFixedWidth(85)
+        self.spinbox_persone = QSpinBox()
+        self.spinbox_persone.setFixedWidth(40)
 
-        griglia.addWidget(barra_ricerca,1,0,alignment=Qt.AlignmentFlag.AlignLeft)
-        griglia.addWidget(combobox_tavolo,1,1)
-        griglia.addWidget(spinbox_persone,1,2)
-        griglia.addWidget(combobox_orario,1,3)
+        griglia.addWidget(self.barra_ricerca,1,0,alignment=Qt.AlignmentFlag.AlignLeft)
+        griglia.addWidget(self.combobox_tavolo,1,1)
+        griglia.addWidget(self.spinbox_persone,1,2)
+        griglia.addWidget(self.combobox_orario,1,3)
 
-        tabella = crea_tabella(15,3,308,322)
-        griglia.addWidget(tabella,3,1,1,3,alignment=Qt.AlignmentFlag.AlignCenter)
-        tabella.setHorizontalHeaderLabels(["ORARIO","NUMERO\nPRENOTAZIONI","POSTI\nLIBERI"])
+        self.tabella = crea_tabella(15,3,308,322)
+        griglia.addWidget(self.tabella,3,1,1,3,alignment=Qt.AlignmentFlag.AlignCenter)
+        self.tabella.setHorizontalHeaderLabels(["ORARIO","NUMERO\nPRENOTAZIONI","POSTI\nLIBERI"])
 
-        calendario = QCalendarWidget()
-        calendario.setMaximumSize(257, 332)
-        griglia.addWidget(calendario,3,0,alignment=Qt.AlignmentFlag.AlignLeft)
+        self.calendario = QCalendarWidget()
+        self.calendario.setMaximumSize(257, 332)
+        griglia.addWidget(self.calendario,3,0,alignment=Qt.AlignmentFlag.AlignLeft)
 
         griglia.addWidget(label_calendario,2,0,1,2)
         griglia.addWidget(label_tabella,2,1,1,2)
 
-        pulsante_conferma = QPushButton("Conferma\nmodifica")
-        pulsante_conferma.setFixedSize(205, 74)
+        self.pulsante_conferma = QPushButton("Conferma\nmodifica")
+        self.pulsante_conferma.setFixedSize(205, 74)
 
         layout.setSpacing(20)
         layout.addLayout(griglia)
-        layout.addWidget(pulsante_conferma,alignment=Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(self.pulsante_conferma,alignment=Qt.AlignmentFlag.AlignCenter)
 
         self.setContentsMargins(10,0,10,0)
         layout.addLayout(griglia)

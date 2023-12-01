@@ -4,7 +4,7 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont, QPixmap, QIcon
 from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplication, QSizePolicy, QHBoxLayout,
                              QGridLayout, QTableWidget, QHeaderView, QSpacerItem, QLineEdit, QTableWidgetItem,
-                             QScrollBar, QScrollArea, QAbstractItemView)
+                             QScrollBar, QScrollArea, QAbstractItemView, QDialog)
 
 # Font
 label_font = QFont("Roboto", 24)
@@ -48,57 +48,12 @@ def crea_pulsante_back(dimensioni, directory):
     return pulsante_back
 
 
-class VistaVisualizzaPrenotazioni(QWidget):
+class VistaVisualizzaPrenotazioni(QDialog):
 
     def __init__(self):
         super().__init__()
         self.init_ui()
-        self.show()
-
-    def init_ui(self):
-        self.setWindowTitle("Gestionale Pizzeria")
-        title = QLabel("Prenotazioni")
-        title.setFont(label_font_tit)
-
-        layout = QVBoxLayout()
-        layout_orizzontale = QHBoxLayout()
-        layout_pulsanti = QVBoxLayout()
-
-
-        # Pulsante Back
-        pulsante_back = crea_pulsante_back(35,"png/back.png")
-
-        # Campo di ricerca
-        search_label = QLabel('Cerca:')
-        search_label.setFont(label_font_piccolo)
-        search_edit = QLineEdit()
-        search_edit.setFixedWidth(336)
-
-        # Tabella
-        tab = crea_tabella(18, 6, 685, 402)
-        tab.setHorizontalHeaderLabels(["NOME CLIENTE","TAVOLO","ORARIO","GIORNO","POSTI","CODICE"])
-
-
-        layout.addWidget(title, alignment=Qt.AlignmentFlag.AlignTop)
-        layout.addSpacing(20)
-        layout.addWidget(search_label)
-        layout.addWidget(search_edit)
-
-        layout_orizzontale.addWidget(tab, alignment=Qt.AlignmentFlag.AlignLeft)
-        layout_orizzontale.addLayout(layout_pulsanti)
-
-        layout.addLayout(layout_orizzontale)
-        layout.addStretch()
-        layout.addWidget(pulsante_back)
-
-        layout.setContentsMargins(30, 20, 10, 20)
-        self.setFixedSize(756, 637)
-        self.setLayout(layout)
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-
-    app.setStyleSheet("""
+        self.setStyleSheet("""
         QPushButton{
             background-color: "#ff776d";
             color: "white";
@@ -124,10 +79,48 @@ if __name__ == '__main__':
             background-color: gray;
         }
     """)
+
+    def init_ui(self):
+        self.setWindowTitle("Gestionale Pizzeria")
+        title = QLabel("Prenotazioni")
+        title.setFont(label_font_tit)
+
+        layout = QVBoxLayout()
+        layout_orizzontale = QHBoxLayout()
+        layout_pulsanti = QVBoxLayout()
+
+        # Pulsante Back
+        pulsante_back = crea_pulsante_back(35, "png/back.png")
+
+        # Campo di ricerca
+        search_label = QLabel('Cerca:')
+        search_label.setFont(label_font_piccolo)
+        search_edit = QLineEdit()
+        search_edit.setFixedWidth(336)
+
+        # Tabella
+        tab = crea_tabella(18, 6, 685, 402)
+        tab.setHorizontalHeaderLabels(["NOME CLIENTE", "TAVOLO", "ORARIO", "GIORNO", "POSTI", "CODICE"])
+
+        layout.addWidget(title, alignment=Qt.AlignmentFlag.AlignTop)
+        layout.addSpacing(20)
+        layout.addWidget(search_label)
+        layout.addWidget(search_edit)
+
+        layout_orizzontale.addWidget(tab, alignment=Qt.AlignmentFlag.AlignLeft)
+        layout_orizzontale.addLayout(layout_pulsanti)
+
+        layout.addLayout(layout_orizzontale)
+        layout.addStretch()
+        layout.addWidget(pulsante_back)
+
+        layout.setContentsMargins(30, 20, 10, 20)
+        self.setFixedSize(756, 637)
+        self.setLayout(layout)
+
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
     window = VistaVisualizzaPrenotazioni()
     window.show()
     sys.exit(app.exec())
-
-
-
-
