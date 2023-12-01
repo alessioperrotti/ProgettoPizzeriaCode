@@ -142,8 +142,6 @@ class ContVistaStatistiche:
         self.view.l1.addWidget(self.view.label1)
         self.view.l1.addWidget(self.grafico1)
 
-        print(lista_asse_x)
-        print(lista_asse_y)
 
 
 

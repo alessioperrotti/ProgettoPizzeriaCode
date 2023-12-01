@@ -63,7 +63,7 @@ class VistaLoginDipendente(QWidget):
         # label2.setFont(label_font)
         frame = QFrame()
         spazio = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-        frame.setStyleSheet('.QFrame {border: 2px solid black; border-radius: 10px; padding: 10px}')
+        frame.setStyleSheet('.QFrame {border: 2px solid black; border-radius: 10px; padding: 10px; background-color: #dddddd}')
         frame.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
 
         user_label = QLabel("Username: ")
