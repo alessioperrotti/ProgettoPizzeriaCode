@@ -9,15 +9,16 @@ from Code.GestionePrenotazioni.Model.gestore_prenotazioni import GestorePrenotaz
 class MainWindow(QWidget):
     def __init__(self):
         super(MainWindow, self).__init__()
+        self.cont_prenotazioni = None
         self.stacked = QStackedWidget()
         self.init_ui()
         self.show()
 
     def init_ui(self):
-        gestore_prenotazioni = GestorePrenotazioni()
-        self.cont_gestione_prenotazioni = ContGestionePrenotazioni(gestore_prenotazioni, VistaGestionePrenotazioni())
-        self.stacked.addWidget(self.cont_gestione_prenotazioni.view)
-        self.stacked.setCurrentWidget(self.cont_gestione_prenotazioni.view)
+        gestore_pre = GestorePrenotazioni()
+        self.cont_prenotazioni = ContGestionePrenotazioni(gestore_pre, self.stacked)
+        self.stacked.addWidget(self.cont_prenotazioni.view)
+        self.stacked.setCurrentWidget(self.cont_prenotazioni.view)
 
         layout = QVBoxLayout(self)
         layout.addWidget(self.stacked)
