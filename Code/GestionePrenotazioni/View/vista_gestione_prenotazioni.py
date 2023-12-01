@@ -92,8 +92,8 @@ class VistaGestionePrenotazioni(QWidget):
 
         self.pulsante_modifica = QPushButton("Modifica\nprenotazione")
         self.pulsante_modifica.setFixedSize(147, 49)
-        self.pulsante_aggiungi = QPushButton("Aggiungi\nprenotazione")
-        self.pulsante_aggiungi.setFixedSize(147, 49)
+        self.pulsante_inserisci = QPushButton("Inserisci\nprenotazione")
+        self.pulsante_inserisci.setFixedSize(147, 49)
         self.pulsante_elimina = QPushButton("Elimina\nprenotazione")
         self.pulsante_elimina.setFixedSize(147, 49)
 
@@ -107,7 +107,7 @@ class VistaGestionePrenotazioni(QWidget):
         search_edit.setFixedWidth(336)
 
         # Tabella
-        self.tab = crea_tabella(18, 6, 481, 404)
+        self.tab = crea_tabella(0, 6, 481, 404)
         self.tab.setHorizontalHeaderLabels(["NOME CLIENTE","TAVOLO","ORARIO","GIORNO","POSTI","CODICE"])
 
 
@@ -123,7 +123,7 @@ class VistaGestionePrenotazioni(QWidget):
         layout_pulsanti.addStretch()
         layout_pulsanti.addWidget(self.pulsante_modifica, alignment=Qt.AlignmentFlag.AlignCenter)
         layout_pulsanti.addSpacing(10)
-        layout_pulsanti.addWidget(self.pulsante_aggiungi, alignment=Qt.AlignmentFlag.AlignCenter)
+        layout_pulsanti.addWidget(self.pulsante_inserisci, alignment=Qt.AlignmentFlag.AlignCenter)
         layout_pulsanti.addSpacing(10)
         layout_pulsanti.addWidget(self.pulsante_elimina, alignment=Qt.AlignmentFlag.AlignCenter)
         layout_pulsanti.addStretch()

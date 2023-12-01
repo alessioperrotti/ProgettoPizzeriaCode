@@ -5,7 +5,7 @@ from PyQt6.QtGui import QFont, QPixmap, QIcon
 from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplication, QSizePolicy, QHBoxLayout,
                              QGridLayout, QTableWidget, QHeaderView, QSpacerItem, QLineEdit, QTableWidgetItem,
                              QScrollBar, QScrollArea, QAbstractItemView, QCheckBox, QSpinBox, QComboBox,
-                             QCalendarWidget, QFrame)
+                             QCalendarWidget, QFrame, QDialog)
 
 # Font
 label_font = QFont("Roboto", 24)
@@ -48,7 +48,7 @@ def crea_pulsante_back(dimensioni, directory):
     return pulsante_back
 
 
-class VistaInserisciPrenotazione(QWidget):
+class VistaInserisciPrenotazione(QDialog):
     def __init__(self):
         super().__init__()
         self.init_ui()
