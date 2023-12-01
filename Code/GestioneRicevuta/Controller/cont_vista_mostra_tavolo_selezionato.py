@@ -27,12 +27,12 @@ class ContVistaMostraTavoloSelezionato:
 
             for prodotto in ordine.lista_prodotti:
                 listaProdotti.append(prodotto)
-        data = datetime.now().date().__str__()
+        data = datetime.now().date()
         nomeAcquirente = None
         numero = 1
-        ora_corrente = datetime.now().time()
-        ora = ora_corrente.strftime("%H:%M:%S")
-        self.ric = Ricevuta(totale, data, listaProdotti, nomeAcquirente, numero, ora)
+        ora = datetime.now().time()
+        #ora = ora_corrente.strftime("%H:%M:%S")
+        self.ric = Ricevuta(totale, data, listaProdotti, nomeAcquirente, numero, ora, self.ordini[0].tavolo)
 
         self.view.close()
 

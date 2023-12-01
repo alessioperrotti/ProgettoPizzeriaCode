@@ -14,6 +14,7 @@ from Code.GestioneMenu.Model.gestore_menu import GestoreMenu
 from Code.GestioneDipendenti.Controller.cont_gestione_dipendenti import ContGestioneDipendenti
 from Code.GestioneDipendenti.Model.gestore_dipendenti import GestoreDipendenti
 from Code.GestioneDipendenti.View.vista_gestione_dipendenti import VistaGestioneDipendenti
+from Code.GestioneSistema.Controller.cont_vista_statistiche import ContVistaStatistiche
 from Code.GestioneSistema.View.vista_home_admin import VistaHomeAdmin
 
 
@@ -37,7 +38,7 @@ class ContVistaHomeAdmin():
         self.cont_vista_turni = ContGestioneTurni(gestore_dip,stacked)
         self.cont_vista_magazzino= ContGestioneMagazzino(gestore_mag,VistaGestioneMagazzino(), stacked)
         self.cont_vista_menu = ContGestioneMenu(VistaGestioneMenu(),gestore_menu, stacked)
-
+        self.cont_vista_statistiche = ContVistaStatistiche(gestore_ric,gestore_ord, stacked)
 
         # collegamento pulsanti
         self.view.puls_dip.clicked.connect(self.apri_gestione_dipendenti)
@@ -45,11 +46,13 @@ class ContVistaHomeAdmin():
         self.view.puls_mag.clicked.connect(self.apri_gestione_magazzino)
         self.view.puls_men.clicked.connect(self.apri_gestione_menu)
         self.view.puls_tur.clicked.connect(self.apri_gestione_turni)
+        self.view.puls_stats.clicked.connect(self.apri_gestione_statistiche)
         self.cont_ric.view.pulsante_back.clicked.connect(lambda : self.stacked.setCurrentWidget(self.view))
         self.cont_vista_dipendenti.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.view))
         self.cont_vista_turni.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.view))
         self.cont_vista_menu.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.view))
         self.cont_vista_magazzino.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.view))
+        self.cont_vista_statistiche.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.view))
 
     def apri_gestione_dipendenti(self):
         self.stacked.setCurrentWidget(self.cont_vista_dipendenti.view)
@@ -57,7 +60,10 @@ class ContVistaHomeAdmin():
     def apri_gestione_turni(self):
         self.stacked.setCurrentWidget(self.cont_vista_turni.view)
 
-
+    def apri_gestione_statistiche(self):
+        self.cont_vista_statistiche.aggiorna_grafici()
+        self.cont_vista_statistiche.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.view))
+        self.stacked.setCurrentWidget(self.cont_vista_statistiche.view)
     def apri_gestione_ricevute(self):
         self.stacked.setCurrentWidget(self.cont_ric.view)
 

@@ -1,7 +1,9 @@
+import datetime
+
 
 class OrdineTavolo(object):
 
-    def __init__(self, codice, orario, prezzo_totale, tavolo):
+    def __init__(self, codice, orario:datetime, prezzo_totale, tavolo):
 
         self.codice = codice
         self.lista_prodotti = []

@@ -59,7 +59,8 @@ class ContVistaInserisciRicevuta:
 
             num = self.gestore_ric.aggiungi_ricevuta(self.ricevuta_temp.ammontareLordo, self.ricevuta_temp.data,
                                                      self.ricevuta_temp.listaProdotti,
-                                                     self.ricevuta_temp.nomeAcquirente, self.ricevuta_temp.ora)
+                                                     self.ricevuta_temp.nomeAcquirente, self.ricevuta_temp.ora,
+                                                     self.ricevuta_temp.tavolo)
             self.gestore_ric.ricerca_ricevuta_numero(num)
 
             for ordine in self.controller_mostra.ordini:

@@ -23,9 +23,11 @@ class ContVistaInfoRicevuta:
 
         self.view.lab_nom_s.setText(self.ricevuta_selezionata.nomeAcquirente)
 
-        self.view.lab_ora_s.setText(self.ricevuta_selezionata.ora)
+        self.view.lab_ora_s.setText(self.ricevuta_selezionata.ora.strftime("%H:%M:%S"))
 
-        self.view.lab_data_s.setText(self.ricevuta_selezionata.data)
+        self.view.lab_data_s.setText(self.ricevuta_selezionata.data.__str__())
+
+        self.view.lab_tav_s.setText(str(self.ricevuta_selezionata.tavolo.numero))
 
         self.imposta_lista()
 

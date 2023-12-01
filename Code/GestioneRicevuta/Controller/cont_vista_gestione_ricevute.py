@@ -38,6 +38,7 @@ class ContVistaGestioneRicevute:
 
     def __init__(self, gestore_ric: GestoreRicevuta, gestore_ord: GestoreOrdiniTavolo, lista_tav: list[Tavolo],
                  stacked_widget: QStackedWidget):
+
         self.numero_selezionato = None
         self.ricevuta_temp = Ricevuta()
         self.gestore_ord = gestore_ord

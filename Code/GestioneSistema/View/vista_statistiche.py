@@ -78,42 +78,16 @@ class VistaStatistiche(QWidget):
     def initUI(self):
         label = QLabel("<b>Statistiche<\b>")
         self.pulsante_back = self.crea_pulsante_back(35, "png/back.png")
-        label1 = QLabel("Ricavo netto mensile medio:")
-        frame1 = QFrame()
-        self.ricavo_netto = QLabel("€ 0")
-        label2 = QLabel("Prodotti piu venduti:",parent=frame1)
-        self.tabella = self.crea_tabella(4, 4, 350, 170)
+        self.label1 = QLabel("Ricavo lordo per giorno")
+        self.label2 = QLabel("Quantita prodotti venduti per giornata")
+        self.label3 = QLabel("Quantita prodotti venduti per prodotto")
+        self.label4 = QLabel("Numero clienti per giornata")
 
         self.settaFont(QFont("Roboto", 26), label)
 
-        self.settaFont(QFont("Roboto", 18), label1, label2, self.ricavo_netto)
+        self.settaFont(QFont("Roboto", 16), self.label1,self.label2,self.label3,self.label4)
         self.grid_layout = QGridLayout()
         layout = QVBoxLayout()
-        l1 = QHBoxLayout()
-        l2 = QVBoxLayout()
-
-
-        self.grafico2 = FigureCanvasQTAgg(fig)
-
-
-
-        l1.addWidget(label1)
-        l1.addWidget(frame1)
-        l1.addStretch()
-        l2.addWidget(label2)
-        l2.addWidget(self.tabella)
-
-
-
-
-        self.grid_layout.addLayout(l1,0,0)
-        self.grid_layout.addLayout(l2,1,0)
-
-
-
-
-
-
 
         layout.addWidget(label)
         layout.addStretch()
@@ -122,7 +96,7 @@ class VistaStatistiche(QWidget):
         layout.addWidget(self.pulsante_back)
 
         layout.setContentsMargins(10,10,10,10)
-        layout.setContentsMargins(40,40,40,40)
+
 
         self.setFixedSize(994, 637)
         self.setLayout(layout)

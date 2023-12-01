@@ -88,19 +88,22 @@ class VistaInfoRicevuta(QDialog):
         lab_data = QLabel("<b>Data di emissione:</b>")
         lab_ora = QLabel("<b>Orario di emissione:</b>")
         lab_lis = QLabel("<b>Lista Prodotti:</b>")
-        self.settaFont(label_font_piccolo, lab_num, lab_ora, lab_lis, lab_data, lab_amm, lab_nom)
+        lab_tav = QLabel("<b>Tavolo:</b>")
+        self.settaFont(label_font_piccolo, lab_num, lab_ora, lab_lis, lab_data, lab_amm, lab_nom,lab_tav)
         self.lab_num_s = QLabel()
         self.lab_nom_s = QLabel()
         self.lab_amm_s = QLabel()
         self.lab_data_s = QLabel()
         self.lab_ora_s = QLabel()
+        self.lab_tav_s = QLabel()
         self.settaFont(label_font_piccolo, self.lab_num_s, self.lab_nom_s, self.lab_amm_s, self.lab_data_s,
-                       self.lab_ora_s)
+                       self.lab_ora_s, self.lab_tav_s)
         l1 = QHBoxLayout()
         l2 = QHBoxLayout()
         l3 = QHBoxLayout()
         l4 = QHBoxLayout()
         l5 = QHBoxLayout()
+        l6 = QHBoxLayout()
 
         l1.addWidget(lab_num)
         l1.addWidget(self.lab_num_s)
@@ -112,6 +115,8 @@ class VistaInfoRicevuta(QDialog):
         l4.addWidget(self.lab_data_s)
         l5.addWidget(lab_ora)
         l5.addWidget(self.lab_ora_s)
+        l6.addWidget(lab_tav)
+        l6.addWidget(self.lab_tav_s)
 
         lay = QVBoxLayout()
 
@@ -121,6 +126,7 @@ class VistaInfoRicevuta(QDialog):
         layout.addLayout(l3, 2, 0)
         layout.addLayout(l4, 0, 1)
         layout.addLayout(l5, 1, 1)
+        layout.addLayout(l6, 2, 1)
         layout.setContentsMargins(20, 20, 20, 20)
         layout.setSpacing(20)
 

@@ -1,6 +1,7 @@
+
 import pickle
 import sys
-
+from datetime import datetime
 
 from PyQt6.QtCore import pyqtSignal, pyqtSlot
 from PyQt6.QtGui import QGuiApplication
@@ -47,11 +48,16 @@ class MainWindow(QWidget):
             self.show()
 
         elif self.stacked.currentWidget() == self.cont_vista_login.cont_vista_login_dipendente.cont_admin.cont_vista_turni.view:
-            self.setFixedSize(994+22,637+22)
+            self.setFixedSize(994 + 22, 637 + 22)
             self.layout().update()
             self.close()
             self.show()
 
+        elif self.stacked.currentWidget() == self.cont_vista_login.cont_vista_login_dipendente.cont_admin.cont_vista_statistiche.view:
+            self.setFixedSize(994 + 22, 637 + 22)
+            self.layout().update()
+            self.close()
+            self.show()
     def init_ui(self):
         self.gestore_ric = GestoreRicevuta()
         self.gestore_dip = GestoreDipendenti()
@@ -61,7 +67,7 @@ class MainWindow(QWidget):
 
         #prove
         tavolo1 = Tavolo(1, 10, None)
-        tavolo2 = Tavolo(2, 10, None)
+        tavolo2 = Tavolo(2, 1, None)
         tavolo3 = Tavolo(3, 10, None)
         tavolo4 = Tavolo(4, 10, None)
         tavolo5 = Tavolo(5, 10, None)
@@ -76,13 +82,14 @@ class MainWindow(QWidget):
         prod1 = Prodotto("pizzamarghe", 2, 15, "pizza", ["pomodoro", "mozzarella"])
         prod2 = Prodotto("pizzasals", 3, 20, "pizza", ["pomodoro", "mozzarella", "salsiccia"])
 
-        ord1 = OrdineTavolo(1, 1, 0, tavolo1)
+        data = datetime.now()
+        ord1 = OrdineTavolo(1,data, 0, tavolo1)
         ord1.aggiungi_prodotto(prod1)
         ord1.aggiungi_prodotto(prod2)
-        ord3 = OrdineTavolo(1, 1, 0, tavolo1)
+        ord3 = OrdineTavolo(1,data, 0, tavolo1)
         ord3.aggiungi_prodotto(prod1)
         ord3.aggiungi_prodotto(prod1)
-        ord2 = OrdineTavolo(1, 1, 0, tavolo2)
+        ord2 = OrdineTavolo(1, data, 0, tavolo2)
         ord2.aggiungi_prodotto(prod1)
         ord2.aggiungi_prodotto(prod2)
         ord2.aggiungi_prodotto(prod2)

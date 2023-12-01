@@ -14,9 +14,9 @@ class GestoreRicevuta:
         except FileNotFoundError:
             print("dati ricevute non trovati")
 
-    def aggiungi_ricevuta(self, ammontareLordo, data, listaProdotti, nomeAcquirente, ora):
+    def aggiungi_ricevuta(self, ammontareLordo, data, listaProdotti, nomeAcquirente, ora, tavolo):
         numero = self.genera_id()
-        self.lista_ricevute.append(Ricevuta(ammontareLordo, data, listaProdotti, nomeAcquirente, numero, ora))
+        self.lista_ricevute.append(Ricevuta(ammontareLordo, data, listaProdotti, nomeAcquirente, numero, ora, tavolo))
         self.salva_su_file(self.nome_file)
         return numero
 
