@@ -1,5 +1,7 @@
 from PyQt6.QtWidgets import QMessageBox, QStackedWidget
 
+from Code.GestioneDipendenti.Controller.cont_home_cameriere import ContHomeCameriere
+from Code.GestioneDipendenti.Controller.cont_home_cuoco import ContHomeCuoco
 from Code.GestioneDipendenti.Model.gestore_dipendenti import GestoreDipendenti
 from Code.GestioneMagazzino.Model.gestore_magazzino import GestoreMagazzino
 from Code.GestioneMenu.Model.gestore_menu import GestoreMenu
@@ -19,6 +21,9 @@ class ContVistaLoginDipendente():
         self.cont_admin = ContVistaHomeAdmin(stacked, gestore_ric, gestore_dip, gestore_mag, gestore_ord, gestore_menu)
         self.stacked = stacked
         stacked.addWidget(self.view)
+
+        self.cont_cameriere = ContHomeCameriere(gestore_dip, stacked)
+        self.cont_cuoco = ContHomeCuoco(gestore_dip, stacked)
         # credenziali admin
         self.user_admin = "admin"
         self.pass_admin = "admin"
@@ -31,20 +36,25 @@ class ContVistaLoginDipendente():
         self.view.user_line.setText("")
         self.view.pass_line.setText("")
 
-        lista_utilizzatori=self.gestore_dip.lista_cuochi
+        lista_utilizzatori=self.gestore_dip.lista_cuochi.copy()
         lista_utilizzatori.extend(self.gestore_dip.lista_camerieri)
+        #print(lista_utilizzatori)
+        accesso = False
 
         if (self.username == self.user_admin and self.password == self.pass_admin):
             self.apri_finestra_admin()
+            accesso = True
         else:
-            for cameriere in self.gestore_dip.lista_camerieri:
-                if (self.username == cameriere.username and self.password == cameriere.password):
-                    self.apri_finestra_cameriere()
+            for utilizzatore in lista_utilizzatori:
+                if (self.username == utilizzatore.username and self.password == utilizzatore.password):
+
+                    accesso = True
+                    if utilizzatore.ruolo == "Cameriere":
+                        self.apri_finestra_cameriere()
+                    if utilizzatore.ruolo == "Cuoco":
+                        self.apri_finestra_cuoco()
                     break
-            for cuoco in self.gestore_dip.lista_cuochi:
-                if (self.username == cuoco.username and self.password == cuoco.password):
-                    self.apri_finestra_cuoco()
-                    break
+        if accesso == False:
             self.mostra_errore()
 
 
@@ -53,9 +63,11 @@ class ContVistaLoginDipendente():
         pass
 
     def apri_finestra_cameriere(self):
+        self.stacked.setCurrentWidget(self.cont_cameriere.view)
         pass
 
     def apri_finestra_cuoco(self):
+        self.stacked.setCurrentWidget(self.cont_cuoco.view)
         pass
 
     def mostra_errore(self):
