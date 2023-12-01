@@ -56,12 +56,12 @@ class VistaTurniPersonale(QWidget):
         title = QLabel("Gestione Turni Personale")
         title.setFont(label_font_tit)
 
-        tabella = crea_tabella(2,6,870,360)
-        #tabella.setContentsMargins(0,100,0,0)
-        tabella.setHorizontalHeaderLabels(["LUNEDI","MARTEDI","MERCOLEDI","VENERDI","SABATO","DOMENICA"])
-        tabella.setVerticalHeaderLabels(["TURNO PRANZO\n12:30-15:30","TURNO CENA\n19:30-00.30"])
+        self.tabella = crea_tabella(2,6,870,360)
+        #self.tabella.setContentsMargins(0,100,0,0)
+        self.tabella.setHorizontalHeaderLabels(["LUNEDI","MARTEDI","MERCOLEDI","VENERDI","SABATO","DOMENICA"])
+        self.tabella.setVerticalHeaderLabels(["TURNO PRANZO\n12:30-15:30","TURNO CENA\n19:30-00.30"])
 
-        pulsante_back = crea_pulsante_img(35,"png/back.png")
+        self.pulsante_back = crea_pulsante_img(35,"png/back.png")
 
         clock = QLabel()
         img = QPixmap("png/check.png").scaled(35,35)
@@ -87,9 +87,9 @@ class VistaTurniPersonale(QWidget):
         layout_title.addWidget(clock,alignment=Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
 
         layout.addLayout(layout_title)
-        layout.addWidget(tabella,alignment=Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(self.tabella,alignment=Qt.AlignmentFlag.AlignCenter)
         layout.addSpacing(65)
-        layout.addWidget(pulsante_back,alignment=Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignBottom)
+        layout.addWidget(self.pulsante_back,alignment=Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignBottom)
 
         self.setLayout(layout)
         self.setFixedSize(994,637)

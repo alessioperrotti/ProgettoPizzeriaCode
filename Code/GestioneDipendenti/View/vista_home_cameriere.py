@@ -60,7 +60,7 @@ def crea_pulsante_back(dimensioni, directory):
     return pulsante_back
 
 
-class VistaHomeCuoco(QWidget):
+class VistaHomeCameriere(QWidget):
     def __init__(self):
         super().__init__()
         self.initUi()
@@ -69,10 +69,10 @@ class VistaHomeCuoco(QWidget):
         # definizione oggetti
         label = QLabel("ACCESSO: Cameriere")
         label.setFont(label_font_tit)
-        pulsante1 = crea_pulsante("Piantina", "png/piantinaTavoli.png")
-        pulsante2 = crea_pulsante("Visualizza Turni", "png/turni.png")
-        pulsante3 = crea_pulsante("Prenotazioni", "png/turni.png")  # cambiare png
-        back = crea_pulsante_back(35, "png/back.png")
+        self.p_piantina = crea_pulsante("Piantina", "png/piantinaTavoli.png")
+        self.p_turni = crea_pulsante("Visualizza Turni", "png/turni.png")
+        self.p_prenotazioni = crea_pulsante("Prenotazioni", "png/turni.png")  # cambiare png
+        self.pulsante_back = crea_pulsante_back(35, "png/back.png")
 
         # definizione layout
         layout = QVBoxLayout()
@@ -85,9 +85,9 @@ class VistaHomeCuoco(QWidget):
         layout_centrale.addLayout(griglia)
         layout_centrale.addStretch()
 
-        griglia.addWidget(pulsante1, 1, 1)
-        griglia.addWidget(pulsante2, 1, 2)
-        griglia.addWidget(pulsante3, 1, 3)
+        griglia.addWidget(self.p_piantina, 1, 1)
+        griglia.addWidget(self.p_turni, 1, 2)
+        griglia.addWidget(self.p_prenotazioni, 1, 3)
 
         layout.addSpacing(10)
         layout.addWidget(label)
@@ -96,7 +96,7 @@ class VistaHomeCuoco(QWidget):
         layout.addLayout(layout_centrale)
         layout.addSpacing(170)
 
-        layout.addWidget(back)
+        layout.addWidget(self.pulsante_back)
         layout.addSpacing(10)
 
         layout_orizzontale.addSpacing(20)
@@ -110,6 +110,6 @@ class VistaHomeCuoco(QWidget):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    vista = VistaHomeCuoco()
+    vista = VistaHomeCameriere()
     vista.show()
     sys.exit(app.exec())
