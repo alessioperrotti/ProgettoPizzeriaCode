@@ -4,7 +4,7 @@ from PyQt6.QtCore import Qt, QTime, QTimer, QDateTime
 from PyQt6.QtGui import QFont, QPixmap, QIcon
 from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplication, QSizePolicy, QHBoxLayout,
                              QGridLayout, QTableWidget, QHeaderView, QSpacerItem, QLineEdit, QTableWidgetItem,
-                             QScrollBar, QScrollArea, QAbstractItemView, QFrame, QComboBox)
+                             QScrollBar, QScrollArea, QAbstractItemView, QFrame, QComboBox, QDialog)
 
 # Font
 label_font = QFont("Roboto", 20)
@@ -46,14 +46,13 @@ def crea_pulsante_img(dimensioni, directory):
             """)
     return pulsante_img
 
-class VistaTurniPersonale(QWidget):
+class VistaTurniPersonale(QDialog):
     def __init__(self):
         super().__init__()
         self.init_ui()
-        self.show()
 
     def init_ui(self):
-        title = QLabel("Gestione Turni Personale")
+        title = QLabel("Turni Personale")
         title.setFont(label_font_tit)
 
         self.tabella = crea_tabella(2,6,870,360)

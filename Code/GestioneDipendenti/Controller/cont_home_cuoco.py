@@ -1,8 +1,10 @@
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QStackedWidget, QTableWidgetItem
 
+from Code.GestioneDipendenti.Controller.cont_turni_personale import ContTurniPersonale
 from Code.GestioneDipendenti.Model.gestore_dipendenti import GestoreDipendenti
 from Code.GestioneDipendenti.View.vista_home_cuoco import VistaHomeCuoco
+from Code.GestioneDipendenti.View.vista_turni_personale import VistaTurniPersonale
 
 
 class ContHomeCuoco(object):
@@ -16,7 +18,9 @@ class ContHomeCuoco(object):
         self.view.p_comande.clicked.connect(self.click_comande)
         #pulsante back da TurniCuoco
     def click_turni(self):
-        pass
+        cont_turni = ContTurniPersonale(self.model, self.stacked)
+        cont_turni.view = VistaTurniPersonale()
+        cont_turni.view.exec()
 
     def click_comande(self):
         pass
