@@ -16,7 +16,7 @@ class ContHomeCameriere(object):
         self.view.p_prenotazioni.clicked.connect(self.click_prenotazioni)
         self.view.p_piantina.clicked.connect(self.click_piantina)
         #pulsante back da HomeCameriere
-        
+
     def click_turni(self):
         pass
 
