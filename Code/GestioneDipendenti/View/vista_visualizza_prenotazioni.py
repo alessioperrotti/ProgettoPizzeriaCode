@@ -95,38 +95,38 @@ class VistaVisualizzaPrenotazioni(QWidget):
         self.setFixedSize(756, 637)
         self.setLayout(layout)
 
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
 
-app = QApplication(sys.argv)
-
-app.setStyleSheet("""
-    QPushButton{
-        background-color: "#ff776d";
-        color: "white";
-        text-align: center;
-        border-radius: 6px;
-        font-family:Roboto;
-    }
-    QPushButton:hover{
-        background-color: "red";
-        font-size: 13px;
-    }
-    QTableWidget {
-        background-color: white;
-        alternate-background-color: white;
-        selection-background-color: darkcyan;
-        border: 2px solid grey;
-    }
-    QHeaderView:section {
-        background-color: lightgray;
-        font-weight: bold;
-    }
-    QHeaderView:active {
-        background-color: gray;
-    }
-""")
-window = VistaVisualizzaPrenotazioni()
-window.show()
-sys.exit(app.exec())
+    app.setStyleSheet("""
+        QPushButton{
+            background-color: "#ff776d";
+            color: "white";
+            text-align: center;
+            border-radius: 6px;
+            font-family:Roboto;
+        }
+        QPushButton:hover{
+            background-color: "red";
+            font-size: 13px;
+        }
+        QTableWidget {
+            background-color: white;
+            alternate-background-color: white;
+            selection-background-color: darkcyan;
+            border: 2px solid grey;
+        }
+        QHeaderView:section {
+            background-color: lightgray;
+            font-weight: bold;
+        }
+        QHeaderView:active {
+            background-color: gray;
+        }
+    """)
+    window = VistaVisualizzaPrenotazioni()
+    window.show()
+    sys.exit(app.exec())
 
 
 
