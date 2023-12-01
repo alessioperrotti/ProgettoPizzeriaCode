@@ -14,18 +14,27 @@ def crea_pulsante(nome, directory):
     pulsante = QPushButton()
     label = QLabel(nome)
     label.setFont(label_font_piccolo)
+    label.setStyleSheet("""QLabel{color: "white"}""")
     layout = QHBoxLayout()
-    # spacer_item = QSpacerItem(20, 1, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
-    # layout.addItem(spacer_item)
     layout.addStretch()
     layout.addWidget(crea_immagine(directory, 50))
     layout.addWidget(label)
     layout.addStretch()
-    # layout.setAlignment(crea_immagine(directory, 50), Qt.AlignmentFlag.AlignLeft)
     pulsante.setLayout(layout)
     pulsante.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
-    pulsante.setStyleSheet(
-        "color:white;background-color: #ff776d; border: 2px; border-radius: 6px;")  # testo bianco senza bordo,png nero
+    pulsante.setStyleSheet("""
+        QPushButton{
+            background-color: "#ff776d";
+            color: "white";
+            text-align: center;
+            border-radius: 6px;
+            font-family:Roboto;
+        }
+        QPushButton:hover{
+            background-color: "red";
+            font-size: 13px;
+        }
+    """)
     pulsante.setFixedSize(250, 200)
     return pulsante
 
@@ -69,9 +78,9 @@ class VistaHomeCameriere(QWidget):
         # definizione oggetti
         label = QLabel("ACCESSO: Cameriere")
         label.setFont(label_font_tit)
-        self.p_piantina = crea_pulsante("Piantina", "png/piantinaTavoli.png")
-        self.p_turni = crea_pulsante("Visualizza Turni", "png/turni.png")
-        self.p_prenotazioni = crea_pulsante("Prenotazioni", "png/turni.png")  # cambiare png
+        self.p_piantina = crea_pulsante("Piantina", "png_icone/piantinaTavoli.png")
+        self.p_turni = crea_pulsante("Visualizza Turni", "png_icone/turni.png")
+        self.p_prenotazioni = crea_pulsante("Prenotazioni", "png_icone/prenotazioni.png")  # cambiare png
         self.pulsante_back = crea_pulsante_back(35, "png/back.png")
 
         # definizione layout
