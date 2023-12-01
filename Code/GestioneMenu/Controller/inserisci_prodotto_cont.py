@@ -21,13 +21,13 @@ class ContInserisciProdotto(object):
         self.model = model
         self.magazzino = GestoreMagazzino()
         self.riempi_combo()
-        self.matprima_selezionata = None
+        self.prodotto_selezionato = None
         self.lista_ingredienti = []
         self.view.pulsante_conferma.clicked.connect(self.conferma_inserimento)
         self.view.combo_tipologia.currentIndexChanged.connect(self.combo_changed)
         self.view.pulsante_aggiungi.clicked.connect(self.aggiungi_alla_tabella_ingredienti)
         self.view.data_grid.itemSelectionChanged.connect(self.riga_selezionata)
-        self.view.pulsante_rimuovi.setEnabled(self.matprima_selezionata is not None)
+        self.view.pulsante_rimuovi.setEnabled(self.prodotto_selezionato is not None)
         self.view.pulsante_rimuovi.clicked.connect(self.elimina_dalla_tabella_ingredienti)
 
     def conferma_inserimento(self):
@@ -144,7 +144,7 @@ class ContInserisciProdotto(object):
         abilita_pulsante = len(selected_items) > 0
         for item in selected_items:
             if item.column() == 0:
-                self.matprima_selezionata = item.text()
+                self.prodotto_selezionato = item.text()
         self.view.pulsante_rimuovi.setEnabled(abilita_pulsante)
 
 
