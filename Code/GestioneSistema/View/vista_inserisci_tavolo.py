@@ -23,8 +23,8 @@ def crea_pulsante(directory):
     pulsante.setMaximumWidth(80)
 
 
-    pulsante.setStyleSheet(
-        ".QPushButton {background-color: #ff1605; border: 2px solid black; border-radius: 10px; padding: 3px}")
+    # pulsante.setStyleSheet(
+    #     ".QPushButton {background-color: #ff1605; border: 2px solid black; border-radius: 10px; padding: 3px}")
     return pulsante
 
 def crea_immagine(directory, dimensione):
@@ -66,7 +66,7 @@ class VistaInserisciTavolo(QWidget):
         # Definizione oggetti
         frame = QFrame()
         frame.setFixedSize(350, 250)
-        frame.setStyleSheet(".QFrame {border: 2px solid black; border-radius: 10px; padding: 40 30 40 30 px;background-color: #fcafa9}")
+        frame.setStyleSheet(".QFrame {border: 2px solid black; border-radius: 10px; padding: 40 30 40 30 px;background-color: #dddddd}")
         label1 = QLabel("INSERISCI IL NUMERO")
         label1.setFont(label_font_piccolo)
         label2 = QLabel("DEL TAVOLO")
