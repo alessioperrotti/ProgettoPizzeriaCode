@@ -27,3 +27,5 @@ class MainWindow(QWidget):
 app = QApplication(sys.argv)
 mainWindow = MainWindow()
 sys.exit(app.exec())
+
+#78 persone

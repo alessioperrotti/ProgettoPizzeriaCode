@@ -6,8 +6,9 @@ from Code.GestionePrenotazioni.Model.prenotazione import Prenotazione
 class GestorePrenotazioni():
     def __init__(self):
         self.lista_prenotazioni = []
-        self.orari_disponibili = ["12:30", "13:00", "13:30", "14:00", "14:30", "15:00"]
-        self.tavoli_disponibili = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+        self.orari_disponibili = ["12:30", "13:00", "13:30", "14:00", "14:30", "19:00", "19:30", "20:00", "20:30",
+                                  "21:00", "21:30", "22:00", "22:30", "23:00"]
+        self.tavoli_disponibili = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
         self.ultimo_codice_prenotazione = 0
         self.nome_file = "lista_prenotazioni.pickle"
         try:
@@ -45,6 +46,18 @@ class GestorePrenotazioni():
     def genera_codice(self):
         self.ultimo_codice_prenotazione += 1
         return self.ultimo_codice_prenotazione
+
+    def ricerca_data_orario(self, data, orario):
+        count_prenotazioni = 0
+        total_persone = 0
+        for prenotazione in self.lista_prenotazioni:
+            if prenotazione.data == data and prenotazione.orario == orario:
+                print("trovato")
+                count_prenotazioni += 1
+                total_persone += prenotazione.n_persone
+                # print(count_prenotazioni)
+                # print(total_persone)
+        return count_prenotazioni, total_persone
 
     #############################################################
 

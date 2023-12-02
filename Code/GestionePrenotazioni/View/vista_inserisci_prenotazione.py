@@ -26,6 +26,7 @@ def crea_tabella(righe, colonne, larghezza, altezza):
     tabella.setFixedSize(larghezza, altezza)
     tabella.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
     tabella.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+    tabella.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
     return tabella
 
 
@@ -123,7 +124,7 @@ class VistaInserisciPrenotazione(QDialog):
         griglia.addWidget(self.spinbox_persone,1,2)
         griglia.addWidget(self.combobox_orario,1,3)
 
-        self.tabella = crea_tabella(15,3,308,322)
+        self.tabella = crea_tabella(0,3,308,322)
         griglia.addWidget(self.tabella,3,1,1,3,alignment=Qt.AlignmentFlag.AlignCenter)
         self.tabella.setHorizontalHeaderLabels(["ORARIO","NUMERO\nPRENOTAZIONI","POSTI\nLIBERI"])
 
