@@ -6,6 +6,8 @@ from Code.GestionePrenotazioni.Model.prenotazione import Prenotazione
 class GestorePrenotazioni():
     def __init__(self):
         self.lista_prenotazioni = []
+        self.orari_disponibili = ["12:30", "13:00", "13:30", "14:00", "14:30", "15:00"]
+        self.tavoli_disponibili = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
         self.ultimo_codice_prenotazione = 0
         self.nome_file = "lista_prenotazioni.pickle"
         try:
@@ -18,27 +20,26 @@ class GestorePrenotazioni():
         self.salva_dati(self.nome_file)
         self.carica_da_file(self.nome_file)
 
-    def modifica_prenotazioni(self, codice_ricerca, new_costo_al_kg, new_qta_disponibile,
-                              new_qta_limite, new_qta_ordine_STD, new_data_scadenza):
+    def modifica_prenotazioni(self, codice_ricerca, new_tavolo, new_persone,
+                              new_orario, new_data):
 
         pren_da_modificare: Prenotazione = self.ricerca_prenotazione_codice(codice_ricerca)
         for x in self.lista_prenotazioni:
             if int(pren_da_modificare.codice) == int(x.codice):
-                x.costo_al_kg = new_costo_al_kg
-                x.qta_disponibile = new_qta_disponibile
-                x.qta_limite = new_qta_limite
-                x.qta_ordine_STD = new_qta_ordine_STD
-                x.data_scadenza = new_data_scadenza
+                x.tavolo_assegnato = new_tavolo
+                x.n_persone = new_persone
+                x.orario = new_orario
+                x.data = new_data
 
-    def elimina_prenotazione(self, nome_cliente):
-        prenotazione_da_eliminare = self.ricerca_prenotazione_codice(nome_cliente)
+    def elimina_prenotazione(self, codice):
+        prenotazione_da_eliminare = self.ricerca_prenotazione_codice(codice)
         self.lista_prenotazioni.remove(prenotazione_da_eliminare)
         self.salva_dati(self.nome_file)
         self.carica_da_file(self.nome_file)
 
     def ricerca_prenotazione_codice(self, codice):
         for prenotazione in self.lista_prenotazioni:
-            if codice == prenotazione.numero:
+            if codice == prenotazione.codice:
                 return prenotazione
 
     def genera_codice(self):

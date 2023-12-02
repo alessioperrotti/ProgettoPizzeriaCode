@@ -86,7 +86,7 @@ class VistaModificaPrenotazione(QDialog):
         #label
         title = QLabel("Modifica Dati Prenotazione")
         title.setFont(label_font_tit)
-        label_ricerca = QLabel("Nome cliente:")
+        label_ricerca = QLabel("<b>Nome cliente:<\b>")
         label_tavolo = QLabel("Tavolo:")
         label_persone = QLabel("Persone:")
         label_orario = QLabel("Orario:")
@@ -109,8 +109,8 @@ class VistaModificaPrenotazione(QDialog):
         griglia.addWidget(label_persone,0,2)
         griglia.addWidget(label_orario,0,3)
 
-        self.barra_ricerca = QLineEdit()
-        self.barra_ricerca.setFixedWidth(257)
+        self.campo_nome = QLabel()
+        self.campo_nome.setFixedWidth(257)
         self.combobox_tavolo = QComboBox()
         self.combobox_tavolo.setFixedWidth(75)
         self.combobox_orario = QComboBox()
@@ -118,7 +118,7 @@ class VistaModificaPrenotazione(QDialog):
         self.spinbox_persone = QSpinBox()
         self.spinbox_persone.setFixedWidth(40)
 
-        griglia.addWidget(self.barra_ricerca,1,0,alignment=Qt.AlignmentFlag.AlignLeft)
+        griglia.addWidget(self.campo_nome, 1, 0, alignment=Qt.AlignmentFlag.AlignLeft)
         griglia.addWidget(self.combobox_tavolo,1,1)
         griglia.addWidget(self.spinbox_persone,1,2)
         griglia.addWidget(self.combobox_orario,1,3)

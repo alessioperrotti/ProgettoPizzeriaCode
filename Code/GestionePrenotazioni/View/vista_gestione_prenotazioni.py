@@ -24,6 +24,7 @@ def crea_tabella(righe, colonne, larghezza, altezza):
     header.setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
     tabella.verticalHeader().setVisible(False)
     tabella.setFixedSize(larghezza, altezza)
+    tabella.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
     tabella.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
     tabella.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
     return tabella
@@ -105,8 +106,8 @@ class VistaGestionePrenotazioni(QWidget):
         # Campo di ricerca
         search_label = QLabel('Cerca:')
         search_label.setFont(label_font_piccolo)
-        search_edit = QLineEdit()
-        search_edit.setFixedWidth(336)
+        self.search_edit = QLineEdit()
+        self.search_edit.setFixedWidth(336)
 
         # Tabella
         self.tab = crea_tabella(0, 6, 481, 404)
@@ -116,7 +117,7 @@ class VistaGestionePrenotazioni(QWidget):
         layout.addWidget(title, alignment=Qt.AlignmentFlag.AlignTop)
         layout.addSpacing(20)
         layout.addWidget(search_label)
-        layout.addWidget(search_edit)
+        layout.addWidget(self.search_edit)
 
         layout_orizzontale.addWidget(self.tab, alignment=Qt.AlignmentFlag.AlignLeft)
         layout_orizzontale.addLayout(layout_pulsanti)
