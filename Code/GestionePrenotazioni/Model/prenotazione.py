@@ -8,4 +8,10 @@ class Prenotazione(object):
         self.data = None
         # self.orario_fine = None
 
+        #ho prenotazioni a cui è associato un orario
+        #ho lista di prenotazioni
+        #ricerco tutte quelle che hanno un orario specifico
+        #conto quante prenotazioni ci sono in quell'orario
+        #faccio la somma delle persone totali
+
 
