@@ -1,6 +1,6 @@
 import sys
 from PyQt6.QtWidgets import *
-from PyQt6.QtGui import QFont
+from PyQt6.QtGui import QFont, QPixmap
 from PyQt6.QtCore import Qt
 
 class VistaMenu(QWidget):
@@ -155,26 +155,89 @@ class VistaMenu(QWidget):
 
 class BoxProdotto(QWidget):
 
-    def __init__(self, nome_prodotto):
+    def __init__(self, nome_prodotto, percorso_immagine):
         super().__init__()
         self.initUI()
         self.nome_prodotto = nome_prodotto
+        self.percorso_immagine = percorso_immagine
+        self.setStyleSheet(".QWidget {border: 1px solid black; border-radius: 3px;}")
 
     def initUI(self):
-        self.setFixedSize(147, 190)
+        self.setFixedSize(147, 204)
         main_layout = QVBoxLayout(self)
+        main_layout.setAlignment(Qt.AlignmentFlag.AlignVCenter)
         upframe = QFrame()
-        upframe.setFixedSize(145, 40)
-        upframe.setStyleSheet(".QFrame {border: 1px solid black; border-radius: 3px; background-color: #ececec")
-        self.label_nome = QLabel("Prodotto", upframe)
+        upframe.setFixedSize(147, 40)
+        upframe.setStyleSheet(".QFrame {border: 1px solid black; border-radius: 3px; background-color: #ececec;}")
+        nome_layout = QVBoxLayout(upframe)
+        nome_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.label_nome = QLabel(self.nome_prodotto, upframe)
+        self.label_nome.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_nome.setFont(QFont("Roboto", 17))
+        nome_layout.addWidget(self.label_nome)
         main_layout.addWidget(upframe)
 
+        image_label = QLabel()
+        image_label.setFixedSize(147, 124)
+        pixmap = QPixmap(self.percorso_immagine)
+        image_label.setPixmap(pixmap.scaled(88, 88, Qt.AspectRatioMode.KeepAspectRatio))
+        image_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        main_layout.addWidget(image_label)
+
+        downframe = QFrame()
+        downframe.setFixedSize(147, 40)
+        downframe.setStyleSheet(".QFrame {border: 1px solid black; border-radius: 3px; background-color: #ff776d;}")
+        downframe_layout = QHBoxLayout()
+        self.pulsante_meno = QPushButton("-")
+        self.pulsante_meno.setFixedSize(20, 20)
+        self.pulsante_meno.setStyleSheet("""
+                QPushButton {
+                    background-color: #ff776d;
+                    color: black;
+                    text-align: center;
+                    border-radius: 6px;
+                    border-color: white;
+                    font-family: Roboto;
+                }
+                QPushButton:hover {
+                    background-color: #ff776d;
+                    font-size: 20px;
+                }
+            """)
+        self.pulsante_meno.setFont(QFont("Roboto", 20))
+        self.pulsante_piu = QPushButton("+")
+        self.pulsante_piu.setFixedSize(20, 20)
+        self.pulsante_piu.setStyleSheet("""
+                QPushButton {
+                    background-color: #ff776d;
+                    color: black;
+                    text-align: center;
+                    border-radius: 6px;
+                    border-color: white;
+                    font-family: Roboto;
+                }
+                QPushButton:hover {
+                    background-color: #ff776d;
+                    font-size: 20px;
+                }
+            """)
+        self.pulsante_piu.setFont(QFont("Roboto", 20))
+        self.label_quantita = QLabel("0")
+        self.label_quantita.setFont(QFont("Roboto", 18))
+        downframe_layout.addWidget(self.pulsante_meno)
+        downframe_layout.addWidget(self.label_quantita, alignment=Qt.AlignmentFlag.AlignCenter)
+        downframe_layout.addWidget(self.pulsante_piu)
+        downframe.setLayout(downframe_layout)
+
+        main_layout.setContentsMargins(0,0,0,0)
+        main_layout.addWidget(downframe)
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    window = BoxProdotto()
+    window = BoxProdotto("bla", "bla")
+    #window = VistaMenu()
     window.show()
     sys.exit(app.exec())
 
