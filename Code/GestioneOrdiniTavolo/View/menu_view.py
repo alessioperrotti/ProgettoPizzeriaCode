@@ -91,13 +91,13 @@ class VistaMenu(QWidget):
         contenitore.setFixedSize(576, 637)
         contenitore.setLayout(vbox_centrale)
         contenitore.setContentsMargins(20, 0, 20, 0)
-        label_antipasti = QLabel("<b>Antipasti</b>")
-        label_pizze = QLabel("<b>Pizze</b>")
-        label_softdrinks = QLabel("<b>Soft Drinks</b>")
-        label_birre = QLabel("<b>Birre</b>")
+        self.label_antipasti = QLabel("<b>Antipasti</b>")
+        self.label_pizze = QLabel("<b>Pizze</b>")
+        self.label_softdrinks = QLabel("<b>Soft Drinks</b>")
+        self.label_birre = QLabel("<b>Birre</b>")
 
-        labels_categorie = [label_antipasti, label_pizze,
-                         label_softdrinks,label_birre]
+        labels_categorie = [self.label_antipasti, self.label_pizze,
+                         self.label_softdrinks,self.label_birre]
 
         for x in labels_categorie:
             x.setFixedSize(370, 37)
@@ -108,13 +108,13 @@ class VistaMenu(QWidget):
         self.grid_softdrinks = QGridLayout()
         self.grid_birre = QGridLayout()
 
-        vbox_centrale.addWidget(label_antipasti, alignment=Qt.AlignmentFlag.AlignTop)
+        vbox_centrale.addWidget(self.label_antipasti, alignment=Qt.AlignmentFlag.AlignTop)
         vbox_centrale.addLayout(self.grid_antipasti)
-        vbox_centrale.addWidget(label_pizze, alignment=Qt.AlignmentFlag.AlignTop)
+        vbox_centrale.addWidget(self.label_pizze, alignment=Qt.AlignmentFlag.AlignTop)
         vbox_centrale.addLayout(self.grid_pizze)
-        vbox_centrale.addWidget(label_softdrinks, alignment=Qt.AlignmentFlag.AlignTop)
+        vbox_centrale.addWidget(self.label_softdrinks, alignment=Qt.AlignmentFlag.AlignTop)
         vbox_centrale.addLayout(self.grid_softdrinks)
-        vbox_centrale.addWidget(label_birre, alignment=Qt.AlignmentFlag.AlignTop)
+        vbox_centrale.addWidget(self.label_birre, alignment=Qt.AlignmentFlag.AlignTop)
         vbox_centrale.addLayout(self.grid_birre)
 
         self.scroll_area.setWidget(contenitore)
@@ -161,6 +161,8 @@ class BoxProdotto(QWidget):
         self.nome_prodotto = nome_prodotto
         self.percorso_immagine = percorso_immagine
         self.setStyleSheet(".QWidget {border: 1px solid black; border-radius: 3px;}")
+        self.pulsante_meno.clicked.connect(self.decremento)
+        self.pulsante_piu.clicked.connect(self.incremento)
 
     def initUI(self):
         self.setFixedSize(147, 204)
@@ -233,11 +235,21 @@ class BoxProdotto(QWidget):
         main_layout.setContentsMargins(0,0,0,0)
         main_layout.addWidget(downframe)
 
+    def incremento(self):
+
+        qta = int(self.label_quantita.text())
+        self.label_quantita.setText(str(qta+1))
+
+    def decremento(self):
+
+        qta = int(self.label_quantita.text())
+        self.label_quantita.setText(str(qta-1))
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    window = BoxProdotto("bla", "bla")
-    #window = VistaMenu()
+    #window = BoxProdotto("bla", "bla")
+    window = VistaMenu()
     window.show()
     sys.exit(app.exec())
 

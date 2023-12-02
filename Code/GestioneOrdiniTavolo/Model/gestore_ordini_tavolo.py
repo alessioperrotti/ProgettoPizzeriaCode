@@ -7,7 +7,6 @@ class GestoreOrdiniTavolo(object):
     def __init__(self):
 
         self.lista_tavoli = []
-
         self.lista_ordini = []
 
 
