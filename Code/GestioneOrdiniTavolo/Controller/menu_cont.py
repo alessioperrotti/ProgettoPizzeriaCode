@@ -59,5 +59,5 @@ class ContMenu(object):
             box = BoxProdotto(elemento.nome, 'png/birra.png')
             self.view.grid_birre.addWidget(box, riga, colonna)
 
-    
+
 
