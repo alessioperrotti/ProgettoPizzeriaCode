@@ -6,6 +6,7 @@ from Code.GestioneDipendenti.Model.gestore_dipendenti import GestoreDipendenti
 from Code.GestioneMagazzino.Model.gestore_magazzino import GestoreMagazzino
 from Code.GestioneMenu.Model.gestore_menu import GestoreMenu
 from Code.GestioneOrdiniTavolo.Model.gestore_ordini_tavolo import GestoreOrdiniTavolo
+from Code.GestionePrenotazioni.Model.gestore_prenotazioni import GestorePrenotazioni
 from Code.GestioneRicevuta.Model.gestore_ricevuta import GestoreRicevuta
 from Code.GestioneSistema.Controller.cont_vista_home_admin import ContVistaHomeAdmin
 from Code.GestioneSistema.View.vista_login_dipendente import VistaLoginDipendente
@@ -14,11 +15,11 @@ from Code.GestioneSistema.View.vista_login_dipendente import VistaLoginDipendent
 class ContVistaLoginDipendente():
 
     def __init__(self, stacked:QStackedWidget, gestore_ric:GestoreRicevuta, gestore_dip:GestoreDipendenti,
-                 gestore_mag:GestoreMagazzino, gestore_ord:GestoreOrdiniTavolo, gestore_menu: GestoreMenu):
+                 gestore_mag:GestoreMagazzino, gestore_ord:GestoreOrdiniTavolo, gestore_menu: GestoreMenu, gestore_pre: GestorePrenotazioni):
         self.gestore_dip = gestore_dip
         self.view = VistaLoginDipendente()
         self.view.pulsante.clicked.connect(self.login)
-        self.cont_admin = ContVistaHomeAdmin(stacked, gestore_ric, gestore_dip, gestore_mag, gestore_ord, gestore_menu)
+        self.cont_admin = ContVistaHomeAdmin(stacked, gestore_ric, gestore_dip, gestore_mag, gestore_ord, gestore_menu,gestore_pre)
         self.stacked = stacked
         stacked.addWidget(self.view)
 

@@ -11,6 +11,12 @@ class OutOfDate(Exception):
         super().__init__(message)
 
 
+class OutOfSpace(Exception):
+    def __init__(self, message):
+        self.message = message
+        super().__init__(message)
+
+
 class ContInserisciPrenotazione(object):
 
     def __init__(self, model, view: VistaInserisciPrenotazione):
@@ -24,15 +30,20 @@ class ContInserisciPrenotazione(object):
         try:
             nome = self.view.campo_nome.text().title()
             n_persone = self.view.spinbox_persone.value()
-            # controllo numero massimo
             tavolo = self.view.combobox_tavolo.currentText()
-            # controllo tavolo gia utilizzato(non deve comparire)
             orario = self.view.combobox_orario.currentText()
-            # controllo orario gia utilizzato(non deve comparire)
             codice = self.model.genera_codice()
+
             self.data_selezionata = self.view.calendario.selectedDate()
             if self.data_selezionata <= QDate.currentDate():
                 raise OutOfDate("Inserisci una data valida")
+
+            for row in range(self.view.tabella.rowCount()):
+                orario_tab = self.view.tabella.item(row,0).text()
+                if orario == orario_tab:
+                    posti_disponibili = self.view.tabella.item(row, 2).text()
+                    if int(posti_disponibili) - int(n_persone) < 0:
+                        raise OutOfSpace("Non ci sono posti disponibili")
 
         except ValueError:
             if not all([
@@ -44,8 +55,10 @@ class ContInserisciPrenotazione(object):
             ]):
                 errore_msg = "Controllare che tutti i campi siano riempiti."
             else:
-                if not self.view.campo_nome.text().isalpha() or not self.view.campo_nome.text().isalpha():  # non funziona PD
-                    errore_msg = "Il nome e il cognome possono contenere solo lettere."
+                if not self.view.campo_nome.text():  # non funziona PD!
+                    errore_msg = "Il campo nome è obbligatorio."
+                elif not self.view.campo_nome.text().isalpha():
+                    errore_msg = "Il nome può contenere solo lettere."
                 else:
                     errore_msg = "Controllare che i dati siano inseriti correttamente."
 
@@ -60,6 +73,13 @@ class ContInserisciPrenotazione(object):
             error_box.setIcon(QMessageBox.Icon.Critical)
             error_box.setWindowTitle("Errore di Inserimento")
             error_box.setText(od.message)
+            error_box.exec()
+
+        except OutOfSpace as os:
+            error_box = QMessageBox()
+            error_box.setIcon(QMessageBox.Icon.Critical)
+            error_box.setWindowTitle("Errore di Inserimento")
+            error_box.setText(os.message)
             error_box.exec()
 
         else:
@@ -88,6 +108,10 @@ class ContInserisciPrenotazione(object):
         item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
         self.view.tabella.setItem(row_position, 0, item)
 
-        statistiche = self.model.ricerca_data_orario(self.data_selezionata,orario)
+        statistiche = self.model.ricerca_data_orario(self.data_selezionata, orario)
         self.view.tabella.setItem(row_position, 1, QTableWidgetItem(str(statistiche[0])))
-        self.view.tabella.setItem(row_position, 2, QTableWidgetItem(str(78-statistiche[1])))
+        self.view.tabella.setItem(row_position, 2, QTableWidgetItem(str(78 - statistiche[1])))
+
+        self.view.combobox_orario.setEnabled(True)
+        self.view.combobox_tavolo.setEnabled(True)
+        self.view.spinbox_persone.setEnabled(True)

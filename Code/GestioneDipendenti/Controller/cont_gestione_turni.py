@@ -44,13 +44,13 @@ class ContGestioneTurni(object):
         self.view.tabella.clearContents()
 
         #stampa di verifica
-        for cuoco in self.model.lista_cuochi:
-            for i in range(len(cuoco.turno)):
-                print("indice_giorno = " + str(i) + " " + str(cuoco.nome) + " turno:" + str(cuoco.turno[i])+"\n")
-
-        for cameriere in self.model.lista_camerieri:
-            for i in range(len(cameriere.turno)):
-                print("indice_giorno = " + str(i) + " " + str(cameriere.nome) + " turno:" + str(cameriere.turno[i])+"\n")
+        # for cuoco in self.model.lista_cuochi:
+        #     for i in range(len(cuoco.turno)):
+        #         print("indice_giorno = " + str(i) + " " + str(cuoco.nome) + " turno:" + str(cuoco.turno[i])+"\n")
+        #
+        # for cameriere in self.model.lista_camerieri:
+        #     for i in range(len(cameriere.turno)):
+        #         print("indice_giorno = " + str(i) + " " + str(cameriere.nome) + " turno:" + str(cameriere.turno[i])+"\n")
 
         for cuoco in self.model.lista_cuochi:
             for i in range(len(cuoco.turno)):

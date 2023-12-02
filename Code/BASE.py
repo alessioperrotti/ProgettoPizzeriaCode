@@ -13,6 +13,7 @@ from Code.GestioneMenu.Model.prodotto import Prodotto
 from Code.GestioneOrdiniTavolo.Model.gestore_ordini_tavolo import GestoreOrdiniTavolo
 from Code.GestioneOrdiniTavolo.Model.ordine_tavolo import OrdineTavolo
 from Code.GestioneOrdiniTavolo.Model.tavolo import Tavolo
+from Code.GestionePrenotazioni.Model.gestore_prenotazioni import GestorePrenotazioni
 from Code.GestioneRicevuta.Controller.cont_vista_gestione_ricevute import ContVistaGestioneRicevute
 from Code.GestioneRicevuta.Controller.cont_vista_inserisci_ricevuta import ContVistaInserisciRicevuta
 from Code.GestioneRicevuta.Model.gestore_ricevuta import GestoreRicevuta
@@ -64,6 +65,7 @@ class MainWindow(QWidget):
         self.gestore_mag = GestoreMagazzino()
         self.gestore_ord = GestoreOrdiniTavolo()
         self.gestore_men = GestoreMenu()
+        self.gestore_pre = GestorePrenotazioni()
 
         #prove
         tavolo1 = Tavolo(1, 10, None)
@@ -107,7 +109,7 @@ class MainWindow(QWidget):
 
         #fine prove
 
-        self.cont_vista_login = ContVistaLogin(self.stacked, self.gestore_ric, self.gestore_dip, self.gestore_mag, self.gestore_ord, self.gestore_men)
+        self.cont_vista_login = ContVistaLogin(self.stacked, self.gestore_ric, self.gestore_dip, self.gestore_mag, self.gestore_ord, self.gestore_men,self.gestore_pre)
         self.stacked.addWidget(self.cont_vista_login.view)
         self.stacked.setCurrentWidget(self.cont_vista_login.view)
 

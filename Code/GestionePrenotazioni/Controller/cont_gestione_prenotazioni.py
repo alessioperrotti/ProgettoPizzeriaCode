@@ -15,6 +15,8 @@ class ContGestionePrenotazioni(object):
 
     def __init__(self, model: GestorePrenotazioni, stacked: QStackedWidget):
         self.view = VistaGestionePrenotazioni()
+        self.stacked = stacked
+        stacked.addWidget(self.view)
         self.model = model
         self.update_tabella()
         self.codice_selezionato = None

@@ -6,6 +6,8 @@ from Code.GestioneMagazzino.Controller.gestione_magazzino_cont import ContGestio
 from Code.GestioneMagazzino.Model.gestore_magazzino import GestoreMagazzino
 from Code.GestioneMagazzino.View.gestione_magazzino_view import VistaGestioneMagazzino
 from Code.GestioneOrdiniTavolo.Model.gestore_ordini_tavolo import GestoreOrdiniTavolo
+from Code.GestionePrenotazioni.Controller.cont_gestione_prenotazioni import ContGestionePrenotazioni
+from Code.GestionePrenotazioni.Model.gestore_prenotazioni import GestorePrenotazioni
 from Code.GestioneRicevuta.Controller.cont_vista_gestione_ricevute import ContVistaGestioneRicevute
 from Code.GestioneRicevuta.Model.gestore_ricevuta import GestoreRicevuta
 from Code.GestioneMenu.View.gestione_menu_view import VistaGestioneMenu
@@ -21,9 +23,10 @@ from Code.GestioneSistema.View.vista_home_admin import VistaHomeAdmin
 class ContVistaHomeAdmin():
 
     def __init__(self,stacked:QStackedWidget, gestore_ric:GestoreRicevuta, gestore_dip:GestoreDipendenti,
-                 gestore_mag:GestoreMagazzino, gestore_ord:GestoreOrdiniTavolo, gestore_menu:GestoreMenu):
+                 gestore_mag:GestoreMagazzino, gestore_ord:GestoreOrdiniTavolo, gestore_menu:GestoreMenu,gestore_pre: GestorePrenotazioni):
         self.gestore_ric = gestore_ric
         self.gestore_ord = gestore_ord
+        self.gestore_pre = gestore_pre
         self.gestore_menu = gestore_menu
         self.lista_tav = self.gestore_ord.lista_tavoli
 
@@ -39,6 +42,7 @@ class ContVistaHomeAdmin():
         self.cont_vista_magazzino= ContGestioneMagazzino(gestore_mag,VistaGestioneMagazzino(), stacked)
         self.cont_vista_menu = ContGestioneMenu(VistaGestioneMenu(),gestore_menu, stacked)
         self.cont_vista_statistiche = ContVistaStatistiche(gestore_ric,gestore_ord, stacked)
+        self.cont_vista_prenotazioni = ContGestionePrenotazioni(gestore_pre,stacked)
 
         # collegamento pulsanti
         self.view.puls_dip.clicked.connect(self.apri_gestione_dipendenti)
@@ -47,18 +51,23 @@ class ContVistaHomeAdmin():
         self.view.puls_men.clicked.connect(self.apri_gestione_menu)
         self.view.puls_tur.clicked.connect(self.apri_gestione_turni)
         self.view.puls_stats.clicked.connect(self.apri_gestione_statistiche)
+        self.view.puls_pre.clicked.connect(self.apri_gestione_prenotazioni)
         self.cont_ric.view.pulsante_back.clicked.connect(lambda : self.stacked.setCurrentWidget(self.view))
         self.cont_vista_dipendenti.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.view))
         self.cont_vista_turni.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.view))
         self.cont_vista_menu.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.view))
         self.cont_vista_magazzino.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.view))
         self.cont_vista_statistiche.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.view))
+        self.cont_vista_prenotazioni.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.view))
 
     def apri_gestione_dipendenti(self):
         self.stacked.setCurrentWidget(self.cont_vista_dipendenti.view)
 
     def apri_gestione_turni(self):
         self.stacked.setCurrentWidget(self.cont_vista_turni.view)
+
+    def apri_gestione_prenotazioni(self):
+        self.stacked.setCurrentWidget(self.cont_vista_prenotazioni.view)
 
     def apri_gestione_statistiche(self):
         self.cont_vista_statistiche.aggiorna_grafici()

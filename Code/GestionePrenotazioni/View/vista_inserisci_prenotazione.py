@@ -112,12 +112,18 @@ class VistaInserisciPrenotazione(QDialog):
 
         self.campo_nome = QLineEdit()
         self.campo_nome.setFixedWidth(257)
+
         self.combobox_tavolo = QComboBox()
         self.combobox_tavolo.setFixedWidth(75)
+        self.combobox_tavolo.setEnabled(False)
+
         self.combobox_orario = QComboBox()
         self.combobox_orario.setFixedWidth(85)
+        self.combobox_orario.setEnabled(False)
+
         self.spinbox_persone = QSpinBox()
         self.spinbox_persone.setFixedWidth(40)
+        self.spinbox_persone.setEnabled(False)
 
         griglia.addWidget(self.campo_nome, 1, 0, alignment=Qt.AlignmentFlag.AlignLeft)
         griglia.addWidget(self.combobox_tavolo,1,1)

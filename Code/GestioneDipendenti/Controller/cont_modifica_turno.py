@@ -1,10 +1,13 @@
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QTableWidgetItem, QMessageBox
 
+from Code.GestioneDipendenti.Controller.cont_msg_elimina_ass import ContMsgEliminaAss
 from Code.GestioneDipendenti.Model.cameriere import Cameriere
 from Code.GestioneDipendenti.Model.cuoco import Cuoco
 from Code.GestioneDipendenti.Model.gestore_dipendenti import GestoreDipendenti
 from Code.GestioneDipendenti.View.vista_modifica_turno import VistaModificaTurno
+from Code.GestioneDipendenti.View.vista_msg_elimina_assegnamento import VistaMsgEliminaAssegnamento
+
 
 class ShiftError(Exception):
     def __init__(self, message):
@@ -106,30 +109,35 @@ class ContModificaTurno(object):
             error_box.exec()
 
     def click_rimuovi(self):
+        vista_msg = VistaMsgEliminaAssegnamento()
+        cont_msg = ContMsgEliminaAss(self.model, vista_msg)
+        cont_msg.view.exec()
+        if cont_msg.conferma:
+            cont_msg.view.close()
+            if self.view.tab_cuoco.selectedItems():
+                self.model.rimuovi_turno_cuoco(self.cognome_selezionato, self.giorno_corrente)
 
-        if self.view.tab_cuoco.selectedItems():
-            self.model.rimuovi_turno_cuoco(self.cognome_selezionato, self.giorno_corrente)
+                righe_selezionate = self.view.tab_cuoco.selectedItems()
+                if righe_selezionate:
+                    riga_da_eliminare = righe_selezionate[0].row()
+                    self.view.tab_cuoco.removeRow(riga_da_eliminare)
 
-            righe_selezionate = self.view.tab_cuoco.selectedItems()
-            if righe_selezionate:
-                riga_da_eliminare = righe_selezionate[0].row()
-                self.view.tab_cuoco.removeRow(riga_da_eliminare)
+                self.cognome_selezionato = None
+                self.view.tab_cuoco.clearSelection()
+            #print("C")
+        if cont_msg.conferma:
+            cont_msg.view.close()
+            if self.view.tab_cameriere.selectedItems():
+                self.model.rimuovi_turno_cameriere(self.cognome_selezionato, self.giorno_corrente)
 
-            self.cognome_selezionato = None
-            self.view.tab_cuoco.clearSelection()
-            print("C")
+                righe_selezionate = self.view.tab_cameriere.selectedItems()
+                if righe_selezionate:
+                    riga_da_eliminare = righe_selezionate[0].row()
+                    self.view.tab_cameriere.removeRow(riga_da_eliminare)
 
-        if self.view.tab_cameriere.selectedItems():
-            self.model.rimuovi_turno_cameriere(self.cognome_selezionato, self.giorno_corrente)
-
-            righe_selezionate = self.view.tab_cameriere.selectedItems()
-            if righe_selezionate:
-                riga_da_eliminare = righe_selezionate[0].row()
-                self.view.tab_cameriere.removeRow(riga_da_eliminare)
-
-            self.cognome_selezionato = None
-            self.view.tab_cameriere.clearSelection()
-            print("S")
+                self.cognome_selezionato = None
+                self.view.tab_cameriere.clearSelection()
+                #print("S")
 
     def click_conferma(self):
         giorno = self.view.giorno_title.text()
