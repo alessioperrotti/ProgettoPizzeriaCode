@@ -1,3 +1,4 @@
+import sys
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import QFont
 from PyQt6.QtCore import Qt
@@ -50,35 +51,46 @@ class VistaMenu(QWidget):
 
         pulsanti_filtro = [self.pulsante_antipasti, self.pulsante_pizze,
                            self.pulsante_softdrinks, self.pulsante_birre]
+
+        vbox_sinistra.addSpacerItem(QSpacerItem(180, 165))
+
         for x in pulsanti_filtro:
             x.setStyleSheet("""
-                        QPushButton{
-                            background-color: "white";
-                            color: "black";
-                            text-align: center;
-                            border-radius: 6px;
-                            border-color: "white"
-                            font-family:Roboto;
-                        }
-                        
-                        QPushButton:hover{
-                            background-color: "D3D3D3";
-                        }
-                    """)
+                QPushButton {
+                    background-color: #ececec;
+                    color: black;
+                    text-align: center;
+                    border-radius: 6px;
+                    border-color: white;
+                    font-family: Roboto;
+                }
+                QPushButton:hover {
+                    background-color: #D3D3D3;
+                    font-size: 24px;
+                }
+            """)
+
             x.setFont(QFont("Roboto", 24))
             x.setFixedSize(155, 52)
             vbox_sinistra.addWidget(x, alignment=Qt.AlignmentFlag.AlignVCenter)
 
+        vbox_sinistra.addSpacerItem(QSpacerItem(180, 175))
+
         frame1 = QFrame()
         frame1.setFrameShape(QFrame.Shape.VLine)
 
+        frame2 = QFrame()
+        frame2.setFrameShape(QFrame.Shape.VLine)
+
         self.scroll_area = QScrollArea()
         self.scroll_area.setWidgetResizable(True)
+        self.scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
+        self.scroll_area.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
 
         contenitore = QWidget()
         contenitore.setFixedSize(576, 637)
         contenitore.setLayout(vbox_centrale)
-        contenitore.setContentsMargins(20, 10, 20, 0)
+        contenitore.setContentsMargins(20, 0, 20, 0)
         label_antipasti = QLabel("<b>Antipasti</b>")
         label_pizze = QLabel("<b>Pizze</b>")
         label_softdrinks = QLabel("<b>Soft Drinks</b>")
@@ -107,7 +119,18 @@ class VistaMenu(QWidget):
 
         self.scroll_area.setWidget(contenitore)
 
-        
+        label_recap = QLabel("<b>Recap Ordine</b>")
+        label_recap.setFixedSize(225, 37)
+        label_recap.setFont(QFont("Roboto", 28))
+
+        vbox_destra.addWidget(label_recap)
+
+        #rettangolo_recap = QWidget()
+        #rettangolo_recap.setFixedSize(194, 335)
+        self.lista_recap = QListWidget()
+        self.lista_recap.setFixedSize(194, 335)
+
+        vbox_destra.addWidget(self.lista_recap)
 
         self.pulsante_confermaordine = QPushButton("Conferma Ordine")
         self.pulsante_visualizzaconto = QPushButton("Visualizza Conto")
@@ -118,4 +141,21 @@ class VistaMenu(QWidget):
         for x in pulsanti_dx:
             x.setFixedSize(194, 48)
             vbox_destra.addWidget(x)
+
+
+        main_layout.addLayout(vbox_sinistra)
+        main_layout.addWidget(frame1)
+        main_layout.addWidget(self.scroll_area)
+        main_layout.addWidget(frame2)
+        main_layout.addLayout(vbox_destra)
+
+        self.setLayout(main_layout)
+        self.setFixedSize(994, 637)
+
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    window = VistaMenu()
+    window.show()
+    sys.exit(app.exec())
 
