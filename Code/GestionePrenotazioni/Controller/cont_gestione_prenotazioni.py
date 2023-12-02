@@ -2,9 +2,13 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QTableWidgetItem, QStackedWidget
 
 from Code.GestionePrenotazioni.Controller.cont_inserisci_prenotazione import ContInserisciPrenotazione
+from Code.GestionePrenotazioni.Controller.cont_modifica_prenotazione import ContModificaPrenotazione
+from Code.GestionePrenotazioni.Controller.cont_msg_elimina_pre import ContMsgEliminaPre
 from Code.GestionePrenotazioni.Model.gestore_prenotazioni import GestorePrenotazioni
 from Code.GestionePrenotazioni.View.vista_gestione_prenotazioni import VistaGestionePrenotazioni
 from Code.GestionePrenotazioni.View.vista_inserisci_prenotazione import VistaInserisciPrenotazione
+from Code.GestionePrenotazioni.View.vista_modifica_prenotazione import VistaModificaPrenotazione
+from Code.GestionePrenotazioni.View.vista_msg_elimina_prenotazione import VistaMsgEliminaPrenotazione
 
 
 class ContGestionePrenotazioni(object):
@@ -16,6 +20,7 @@ class ContGestionePrenotazioni(object):
         self.codice_selezionato = None
         self.nome_selezionato = None
         self.view.tab.itemSelectionChanged.connect(self.riga_selezionata)
+        self.view.search_edit.textChanged.connect(self.filtra_elementi)
         self.view.pulsante_inserisci.clicked.connect(self.click_inserisci)
         self.view.pulsante_modifica.clicked.connect(self.click_modifica)
         self.view.pulsante_elimina.clicked.connect(self.click_elimina)
@@ -29,7 +34,7 @@ class ContGestionePrenotazioni(object):
                 # nome_cognome = str(item.text())
                 # self.cognome_selezionato = nome_cognome.split()[1]  # Estraggo solo il cognome
             elif item.column() == 5:
-                self.codice_selezionato = str(item.text())
+                self.codice_selezionato = int(item.text())
 
         self.view.pulsante_elimina.setEnabled(abilita_pulsante)
         self.view.pulsante_modifica.setEnabled(abilita_pulsante)
@@ -42,10 +47,23 @@ class ContGestionePrenotazioni(object):
         self.update_tabella()
 
     def click_modifica(self):
-        pass
+        dialog_modifica = VistaModificaPrenotazione()
+        prenotazione_temp = self.model.ricerca_prenotazione_codice(self.codice_selezionato)
+        cont_modifica = ContModificaPrenotazione(dialog_modifica, self.model, prenotazione_temp)
+        cont_modifica.view.exec()
+        self.update_tabella()
 
     def click_elimina(self):
-        pass
+        vista_msg = VistaMsgEliminaPrenotazione()
+        cont_msg = ContMsgEliminaPre(self.model, vista_msg)
+        cont_msg.view.exec()
+        if cont_msg.conferma:
+            cont_msg.view.close()
+            self.model.elimina_prenotazione(self.codice_selezionato)
+
+            self.update_tabella()
+            self.codice_selezionato = None
+            self.view.tab.clearSelection()
 
     def update_tabella(self):
         self.view.tab.setRowCount(len(self.model.lista_prenotazioni))
@@ -77,5 +95,11 @@ class ContGestionePrenotazioni(object):
             item_codice.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             self.view.tab.setItem(i, 5, item_codice)
             i += 1
+
+    def filtra_elementi(self):
+        testo_ricerca = self.view.search_edit.text().lower()
+        for row in range(self.view.tab.rowCount()):
+            nome_prenotazione = self.view.tab.item(row, 0).text().lower()
+            self.view.tab.setRowHidden(row, testo_ricerca not in nome_prenotazione)
 
 
