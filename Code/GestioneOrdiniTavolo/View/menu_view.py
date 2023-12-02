@@ -108,13 +108,13 @@ class VistaMenu(QWidget):
         self.grid_softdrinks = QGridLayout()
         self.grid_birre = QGridLayout()
 
-        vbox_centrale.addWidget(label_antipasti)
+        vbox_centrale.addWidget(label_antipasti, alignment=Qt.AlignmentFlag.AlignTop)
         vbox_centrale.addLayout(self.grid_antipasti)
-        vbox_centrale.addWidget(label_pizze)
+        vbox_centrale.addWidget(label_pizze, alignment=Qt.AlignmentFlag.AlignTop)
         vbox_centrale.addLayout(self.grid_pizze)
-        vbox_centrale.addWidget(label_softdrinks)
+        vbox_centrale.addWidget(label_softdrinks, alignment=Qt.AlignmentFlag.AlignTop)
         vbox_centrale.addLayout(self.grid_softdrinks)
-        vbox_centrale.addWidget(label_birre)
+        vbox_centrale.addWidget(label_birre, alignment=Qt.AlignmentFlag.AlignTop)
         vbox_centrale.addLayout(self.grid_birre)
 
         self.scroll_area.setWidget(contenitore)
@@ -153,9 +153,28 @@ class VistaMenu(QWidget):
         self.setFixedSize(994, 637)
 
 
+class BoxProdotto(QWidget):
+
+    def __init__(self, nome_prodotto):
+        super().__init__()
+        self.initUI()
+        self.nome_prodotto = nome_prodotto
+
+    def initUI(self):
+        self.setFixedSize(147, 190)
+        main_layout = QVBoxLayout(self)
+        upframe = QFrame()
+        upframe.setFixedSize(145, 40)
+        upframe.setStyleSheet(".QFrame {border: 1px solid black; border-radius: 3px; background-color: #ececec")
+        self.label_nome = QLabel("Prodotto", upframe)
+        self.label_nome.setFont(QFont("Roboto", 17))
+        main_layout.addWidget(upframe)
+
+
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    window = VistaMenu()
+    window = BoxProdotto()
     window.show()
     sys.exit(app.exec())
 

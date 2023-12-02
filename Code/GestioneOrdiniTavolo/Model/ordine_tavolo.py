@@ -11,6 +11,7 @@ class OrdineTavolo(object):
         self.prezzo_totale = prezzo_totale
         self.tavolo = tavolo
         self.pagato = False
+        self.completato = False
 
     def aggiungi_prodotto(self, prodotto):
 
