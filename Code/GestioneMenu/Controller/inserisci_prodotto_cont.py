@@ -41,7 +41,8 @@ class ContInserisciProdotto(object):
             tipo = self.view.combo_tipologia.currentText().lower()
 
             # controllo se si sta inserendo un piatto
-            if self.view.combo_tipologia.currentText().lower() == 'piatto':
+            if self.view.combo_tipologia.currentText().lower() == 'pizza'\
+                    or self.view.combo_tipologia.currentText().lower() == 'antipasto':
                 if self.view.data_grid.rowCount() == 0:
                     raise NoIngredienti("Controllare di aver inserito gli ingredienti.")
                 else:
@@ -132,7 +133,8 @@ class ContInserisciProdotto(object):
             self.view.data_grid.setItem(righe, 1, item2)
             item2.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
 
-            if self.view.combo_tipologia.currentText().lower() == 'bevanda' and self.view.data_grid.rowCount() == 1:
+            if (self.view.combo_tipologia.currentText().lower() == 'soft drink'
+                    or self.view.combo_tipologia.currentText().lower() == 'birra') and self.view.data_grid.rowCount() == 1:
                 self.view.combo_ingrediente.setEnabled(False)
                 self.view.campo_quantita.setEnabled(False)
                 self.view.pulsante_aggiungi.setEnabled(False)
@@ -159,19 +161,22 @@ class ContInserisciProdotto(object):
         if riga_da_eliminare >= 0:
             self.view.data_grid.removeRow(riga_da_eliminare)
 
-        if self.view.combo_tipologia.currentText().lower() == 'bevanda' and self.view.data_grid.rowCount() == 0:
+        if (self.view.combo_tipologia.currentText().lower() == 'soft drink'
+            or self.view.combo_tipologia.currentText().lower() == 'birra') and self.view.data_grid.rowCount() == 0:
             self.view.combo_ingrediente.setEnabled(True)
             self.view.campo_quantita.setEnabled(True)
             self.view.pulsante_aggiungi.setEnabled(True)
 
     def combo_changed(self):
-        if self.view.combo_tipologia.currentText().lower() == 'piatto':
+        if self.view.combo_tipologia.currentText().lower() == 'pizza'\
+                or self.view.combo_tipologia.currentText().lower() == 'antipasto':
             self.view.pulsante_aggiungi.setEnabled(True)
             self.view.data_grid.setEnabled(True)
             self.view.combo_ingrediente.setEnabled(True)
             self.view.campo_quantita.setEnabled(True)
 
-        elif self.view.combo_tipologia.currentText().lower() == 'bevanda':
+        elif self.view.combo_tipologia.currentText().lower() == 'soft drink'\
+                or self.view.combo_tipologia.currentText().lower() == 'birra':
             # per far aggiungere un solo ingrediente
             if self.view.data_grid.rowCount() == 1:
                 self.view.combo_ingrediente.setEnabled(False)

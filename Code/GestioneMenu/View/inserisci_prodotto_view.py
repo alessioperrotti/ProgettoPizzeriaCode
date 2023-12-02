@@ -76,8 +76,10 @@ class VistaInserisciProdotto(QDialog):
         self.campo_prezzo = QLineEdit()
         label_tipologia = QLabel("Tipologia:")
         self.combo_tipologia = QComboBox()
-        self.combo_tipologia.addItem("Piatto")
-        self.combo_tipologia.addItem("Bevanda")
+        self.combo_tipologia.addItem("Antipasto")
+        self.combo_tipologia.addItem("Pizza")
+        self.combo_tipologia.addItem("Soft Drink")
+        self.combo_tipologia.addItem("Birra")
 
         widgets1 = [label_nome, label_codice,
                     label_prezzo, label_tipologia]

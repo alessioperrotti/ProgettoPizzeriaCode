@@ -25,9 +25,10 @@ class ContModificaProdotto(object):
     def riempi_labels(self, prodotto: Prodotto):
 
         self.view.label_nome_val.setText(str(prodotto.nome))
-        self.view.label_codice_val.setText(str(prodotto.codice))
+        codice_a_4_cifre = "{:04d}".format(int(prodotto.codice))
+        self.view.label_codice_val.setText(codice_a_4_cifre)
         self.view.campo_prezzo.setPlaceholderText(str(prodotto.prezzo_al_pubblico))
-        self.view.combo_tipologia.setCurrentText(prodotto.tipologia)
+        self.view.combo_tipologia.setCurrentText(str(prodotto.tipologia).title())
         self.view.combo_tipologia.setEnabled(False)
         ingredienti = prodotto.ingredienti
         for x in ingredienti:
@@ -67,7 +68,8 @@ class ContModificaProdotto(object):
             self.view.data_grid.setItem(righe, 1, item2)
             item2.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
 
-            if self.prodotto_da_modificare.tipologia.lower() == 'bevanda' and self.view.data_grid.rowCount() == 1:
+            if (self.prodotto_da_modificare.tipologia.lower() == 'soft drink'
+                    or self.prodotto_da_modificare.tipologia.lower() == 'birra') and self.view.data_grid.rowCount() == 1:
                 self.view.combo_ingrediente.setEnabled(False)
                 self.view.campo_quantita.setEnabled(False)
                 self.view.pulsante_aggiungi.setEnabled(False)
@@ -87,7 +89,8 @@ class ContModificaProdotto(object):
         if riga_da_eliminare >= 0:
             self.view.data_grid.removeRow(riga_da_eliminare)
 
-        if self.view.combo_tipologia.currentText().lower() == 'bevanda' and self.view.data_grid.rowCount() == 0:
+        if (self.view.combo_tipologia.currentText().lower() == 'soft drink'
+                or self.view.combo_tipologia.currentText().lower() == 'birra') and self.view.data_grid.rowCount() == 0:
             self.view.combo_ingrediente.setEnabled(True)
             self.view.campo_quantita.setEnabled(True)
             self.view.pulsante_aggiungi.setEnabled(True)
@@ -97,7 +100,8 @@ class ContModificaProdotto(object):
         try:
             new_prezzo = round(float(self.view.campo_prezzo.text()), 2)
 
-            if self.view.combo_tipologia.currentText().lower() == 'piatto':
+            if self.view.combo_tipologia.currentText().lower() == 'antipasto'\
+                    or self.view.combo_tipologia.currentText().lower() == 'pizza':
                 if self.view.data_grid.rowCount() == 0:
                     raise NoIngredienti("Controllare di aver inserito gli ingredienti.")
                 else:
