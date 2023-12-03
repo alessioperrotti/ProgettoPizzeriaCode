@@ -1,6 +1,6 @@
 from Code.GestioneOrdiniTavolo.Model.ordine_tavolo import OrdineTavolo
 from Code.GestioneOrdiniTavolo.Model.tavolo import Tavolo
-
+from Code.GestioneOrdiniTavolo.Model.ordine_tavolo import OrdineTavolo
 
 class GestoreOrdiniTavolo(object):
 
@@ -8,7 +8,16 @@ class GestoreOrdiniTavolo(object):
 
         self.lista_tavoli = []
         self.lista_ordini = []
+        self.ultimo_codice_ordine = 0
 
+    def genera_id(self):
+        self.ultimo_codice_ordine += 1
+        return self.ultimo_codice_ordine
+
+    def aggiungi_ordine(self, ordine: OrdineTavolo):
+
+        ordine.codice = self.genera_id()
+        self.lista_ordini.append(ordine)
 
     def conferma_ordine(self, ordine):
 

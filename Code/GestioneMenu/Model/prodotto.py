@@ -1,5 +1,6 @@
 from Code.GestioneMagazzino.Model.materia_prima import MateriaPrima
 
+
 class Prodotto(object):
 
     def __init__(self, nome, codice, prezzo_al_pubblico, tipologia, ingredienti):
@@ -12,11 +13,3 @@ class Prodotto(object):
 
 
 
-    def aggiungi_ingrediente(self, matprima: MateriaPrima, quantita):
-        ingrediente = (matprima, quantita)
-        self.ingredienti.append(ingrediente)
-
-
-    def aggiungi_ingrediente(self, ingrediente):
-
-        self.ingredienti.append(ingrediente)
