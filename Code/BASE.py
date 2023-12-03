@@ -67,47 +67,6 @@ class MainWindow(QWidget):
         self.gestore_men = GestoreMenu()
         self.gestore_pre = GestorePrenotazioni()
 
-        #prove
-        tavolo1 = Tavolo(1, 10, None)
-        tavolo2 = Tavolo(2, 1, None)
-        tavolo3 = Tavolo(3, 10, None)
-        tavolo4 = Tavolo(4, 10, None)
-        tavolo5 = Tavolo(5, 10, None)
-
-        lista_tav = self.gestore_ord.lista_tavoli
-        lista_tav.append(tavolo1)
-        lista_tav.append(tavolo2)
-        lista_tav.append(tavolo3)
-        lista_tav.append(tavolo4)
-        lista_tav.append(tavolo5)
-
-        prod1 = Prodotto("pizzamarghe", 2, 15, "pizza", ["pomodoro", "mozzarella"])
-        prod2 = Prodotto("pizzasals", 3, 20, "pizza", ["pomodoro", "mozzarella", "salsiccia"])
-
-        ord1 = OrdineTavolo(1, 0, tavolo1)
-        ord1.aggiungi_prodotto(prod1)
-        ord1.aggiungi_prodotto(prod2)
-        ord3 = OrdineTavolo(1, 0, tavolo1)
-        ord3.aggiungi_prodotto(prod1)
-        ord3.aggiungi_prodotto(prod1)
-        ord2 = OrdineTavolo(1,  0, tavolo2)
-        ord2.aggiungi_prodotto(prod1)
-        ord2.aggiungi_prodotto(prod2)
-        ord2.aggiungi_prodotto(prod2)
-
-        self.gestore_ord.conferma_ordine(ord1)
-        self.gestore_ord.conferma_ordine(ord2)
-        self.gestore_ord.conferma_ordine(ord3)
-        self.gestore_ord.conferma_ordine(ord3)
-        self.gestore_ord.conferma_ordine(ord3)
-        self.gestore_ord.conferma_ordine(ord3)
-        self.gestore_ord.conferma_ordine(ord3)
-        self.gestore_ord.conferma_ordine(ord3)
-        self.gestore_ord.conferma_ordine(ord3)
-        self.gestore_ord.conferma_ordine(ord3)
-
-        #fine prove
-
         self.cont_vista_login = ContVistaLogin(self.stacked, self.gestore_ric, self.gestore_dip, self.gestore_mag, self.gestore_ord, self.gestore_men,self.gestore_pre)
         self.stacked.addWidget(self.cont_vista_login.view)
         self.stacked.setCurrentWidget(self.cont_vista_login.view)

@@ -1,6 +1,7 @@
 from Code.GestioneOrdiniTavolo.View.menu_view import VistaMenu, BoxProdotto
 from Code.GestioneMenu.Model.gestore_menu import GestoreMenu
 from Code.GestioneOrdiniTavolo.Model.gestore_ordini_tavolo import GestoreOrdiniTavolo
+from Code.GestioneOrdiniTavolo.Model.ordine_tavolo import OrdineTavolo
 
 class ContMenu(object):
 
@@ -96,8 +97,16 @@ class ContMenu(object):
 
     def conferma_ordine(self):
 
+        ordine = OrdineTavolo(self.tavolo)
+
         for box in self.lista_box:
-            pass
+            nome_prod = box.nome_prodotto
+            prod = self.gestore_menu.estrai_per_nome(nome_prod)
+
+            for i in range(0, int(box.label_quantita.text())):
+                ordine.aggiungi_prodotto(prod)
+
+        self.model.aggiungi_ordine(ordine)
 
         pass
 

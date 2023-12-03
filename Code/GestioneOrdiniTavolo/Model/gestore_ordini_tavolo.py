@@ -1,6 +1,7 @@
 from Code.GestioneOrdiniTavolo.Model.ordine_tavolo import OrdineTavolo
 from Code.GestioneOrdiniTavolo.Model.tavolo import Tavolo
 from Code.GestioneOrdiniTavolo.Model.ordine_tavolo import OrdineTavolo
+import pickle
 
 class GestoreOrdiniTavolo(object):
 
@@ -9,6 +10,8 @@ class GestoreOrdiniTavolo(object):
         self.lista_tavoli = []
         self.lista_ordini = []
         self.ultimo_codice_ordine = 0
+        self.file_pickle_path = "lista_ordini.pickle"
+        self.carica_da_file()
 
     def setup_tavoli(self):
 
@@ -31,18 +34,62 @@ class GestoreOrdiniTavolo(object):
         tavolo1 = Tavolo(17, 2)
 
     def genera_id(self):
+
         self.ultimo_codice_ordine += 1
+        self.salva_su_file()
         return self.ultimo_codice_ordine
 
     def aggiungi_ordine(self, ordine: OrdineTavolo):
 
         ordine.codice = self.genera_id()
         self.lista_ordini.append(ordine)
+        self.salva_su_file()
+        self.carica_da_file()
 
-    def conferma_ordine(self, ordine):
+    def conferma_ordine(self, ordine: OrdineTavolo):
 
-        self.lista_ordini.append(ordine)
+        ordine_da_confermare: OrdineTavolo = self.estrai_ordine_per_codice(ordine.codice)
+        for x in self.lista_ordini:
+            if int(x.codice) == int(ordine.codice):
+                
 
+
+
+    def salva_su_file(self):
+
+        dati = {
+
+            'cod': self.ultimo_codice_ordine,
+            'ordini': self.lista_ordini
+
+        }
+
+        try:
+            with open(self.file_pickle_path, 'wb') as file:
+                pickle.dump(dati, file, pickle.HIGHEST_PROTOCOL)
+            file.close()
+        except FileNotFoundError as e:
+            print(e)
+
+    def carica_da_file(self):
+
+        try:
+            with open(self.file_pickle_path, 'rb') as file:
+                dati = pickle.load(file)
+
+            file.close()
+            self.ultimo_codice_ordine = dati['cod']
+            self.lista_ordini = dati['ordini']
+        except FileNotFoundError as e:
+            print(e)
+
+    def estrai_ordine_per_codice(self, codice):
+
+        elemento_cercato = None
+        for x in self.lista_ordini:
+            if int(x.codice) == int(codice):
+                elemento_cercato = x
+        return elemento_cercato
 
     def get_info_ordinitavolo(self):
         pass
