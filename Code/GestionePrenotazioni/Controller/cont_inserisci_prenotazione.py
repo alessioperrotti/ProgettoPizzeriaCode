@@ -34,16 +34,16 @@ class ContInserisciPrenotazione(object):
         self.view.calendario.selectionChanged.connect(self.riempi_tabella)
         self.view.combobox_orario.currentIndexChanged.connect(self.riempi_labels_tavolo)
 
-    def conferma_inserimento(self):
+    def conferma_inserimento(self):  # sistema tavolo
         try:
             nome = self.view.campo_nome.text().title()
 
             n_persone = self.view.spinbox_persone.value()
             tavolo = self.view.combobox_tavolo.currentText()
-            # for t in self.model.lista_tavoli:
-            #     if t.numero == tavolo:
-            #         if n_persone > t.posti_disponibili:
-            #             raise ChangeTable("Scegli un tavolo più grande")
+            for t in self.model.lista_tavoli:
+                if str(t.numero) == tavolo:
+                    if n_persone > t.posti_disponibili:
+                        raise ChangeTable("Scegli un tavolo più grande")
 
             self.orario_selezionato = self.view.combobox_orario.currentText()
             codice = self.model.genera_codice()
@@ -111,14 +111,14 @@ class ContInserisciPrenotazione(object):
 
             self.view.close()
 
-#devono riempirsi quando clicco sulla data
+    # devono riempirsi quando clicco sulla data
     def riempi_labels_orario(self):
         self.view.combobox_orario.addItems(self.model.orari_disponibili)
-        #self.view.combobox_tavolo.addItems(self.model.tavoli_disponibili)
+        # self.view.combobox_tavolo.addItems(self.model.tavoli_disponibili)
         # for tavolo in self.model.lista_tavoli:
         #     self.view.combobox_tavolo.addItem(str(tavolo.numero))
 
-    def riempi_labels_tavolo(self):
+    def riempi_labels_tavolo(self):  # devo sistemare prenotazione.tavolo
         self.orario_selezionato = self.view.combobox_orario.currentText()
         tavoli_gia_selezionati = set()
 
@@ -129,7 +129,8 @@ class ContInserisciPrenotazione(object):
         for tavolo in self.model.lista_tavoli:
             if tavolo.numero not in tavoli_gia_selezionati and tavolo.stato != "prenotato":
                 self.view.combobox_tavolo.addItem(str(tavolo.numero))
-    #il tavolo diventa libero quando il cliente va via(termina servizio)
+
+    # il tavolo diventa libero quando il cliente va via(termina servizio)
 
     def rimuovi_tavolo_selezionato(self, numero_tavolo):
         tav_da_rimuovere = self.view.combobox_tavolo.findText(str(numero_tavolo))
