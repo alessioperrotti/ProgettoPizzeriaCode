@@ -48,10 +48,9 @@ class GestoreOrdiniTavolo(object):
 
     def conferma_ordine(self, ordine: OrdineTavolo):
 
-        ordine_da_confermare: OrdineTavolo = self.estrai_ordine_per_codice(ordine.codice)
         for x in self.lista_ordini:
             if int(x.codice) == int(ordine.codice):
-                
+                x.confermato = True
 
 
 
