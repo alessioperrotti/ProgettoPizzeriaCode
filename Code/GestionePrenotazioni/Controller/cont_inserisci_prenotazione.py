@@ -32,7 +32,7 @@ class ContInserisciPrenotazione(object):
         self.orario_selezionato = None
         self.view.pulsante_conferma.clicked.connect(self.conferma_inserimento)
         self.view.calendario.selectionChanged.connect(self.riempi_tabella)
-        self.view.combobox_orario.selectionChanged.connect(self.riempi_labels_tavolo)
+        self.view.combobox_orario.currentIndexChanged.connect(self.riempi_labels_tavolo)
 
     def conferma_inserimento(self):
         try:

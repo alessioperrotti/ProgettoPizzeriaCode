@@ -21,10 +21,10 @@ class GestorePrenotazioni():
         except FileNotFoundError:
             print("dati dipendenti non trovati")
 
-        def stampa_lista_tavoli(self):
-            print(self.lista_tavoli)
-            for tavolo in self.lista_tavoli:
-                print("numeroT: " + str(tavolo.numero) + "posti: " + str(tavolo.posti_disponibili))
+    def stampa_lista_tavoli(self):
+        print(self.lista_tavoli)
+        for tavolo in self.lista_tavoli:
+            print("numeroT: " + str(tavolo.numero) + "posti: " + str(tavolo.posti_disponibili))
 
     def aggiungi_prenotazione(self, prenotazione):
         self.lista_prenotazioni.append(prenotazione)
