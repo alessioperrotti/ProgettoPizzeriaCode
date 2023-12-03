@@ -1,13 +1,13 @@
-import datetime
+from _datetime import datetime
 
 
 class OrdineTavolo(object):
 
-    def __init__(self, codice, orario:datetime, prezzo_totale, tavolo):
+    def __init__(self, tavolo):
 
         self.codice = codice
         self.lista_prodotti = []
-        self.orario = orario
+        self.orario = datetime.now().time()
         self.prezzo_totale = prezzo_totale
         self.tavolo = tavolo
         self.pagato = False

@@ -158,7 +158,7 @@ class BoxProdotto(QWidget):
     def __init__(self, nome_prodotto, percorso_immagine):
         super().__init__()
         self.initUI()
-        self.nome_prodotto = nome_prodotto
+        self.nome_prodotto = str(nome_prodotto).title()
         self.percorso_immagine = percorso_immagine
         self.setStyleSheet(".QWidget {border: 1px solid black; border-radius: 3px;}")
         self.pulsante_meno.clicked.connect(self.decremento)
