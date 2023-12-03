@@ -1,9 +1,9 @@
 
 import pickle
 import sys
-from datetime import datetime
+from datetime import datetime, time
 
-from PyQt6.QtCore import pyqtSignal, pyqtSlot
+from PyQt6.QtCore import pyqtSignal, pyqtSlot, QTimer
 from PyQt6.QtGui import QGuiApplication
 from PyQt6.QtWidgets import QApplication, QWidget, QStackedWidget, QPushButton, QVBoxLayout
 
@@ -20,11 +20,7 @@ from Code.GestioneRicevuta.Model.gestore_ricevuta import GestoreRicevuta
 from Code.GestioneRicevuta.Model.ricevuta import Ricevuta
 from Code.GestioneMenu.Model.gestore_menu import GestoreMenu
 from Code.GestioneSistema.Controller.cont_vista_login import ContVistaLogin
-
-
-class SegnaleRidimensiona():
-    def __init__(self):
-        self.seg = pyqtSignal()
+from Code.GestioneSistema.Model.gestore_backup import GestoreBackup
 
 
 class MainWindow(QWidget):
@@ -34,11 +30,13 @@ class MainWindow(QWidget):
         self.stacked = QStackedWidget()
         self.init_ui()
 
+
+
        # centro la finestra  #va aggiunto un 22 alla larghezza e altezza rispetto alla view
         self.setFixedSize(994+22, 637+22)
 
         self.show()
-        print(self.size())
+
 
     def cambio_view(self):
 
@@ -60,14 +58,18 @@ class MainWindow(QWidget):
             self.close()
             self.show()
     def init_ui(self):
+        ora_desiderata = datetime.combine(datetime.today(), time(3, 00))
         self.gestore_ric = GestoreRicevuta()
         self.gestore_dip = GestoreDipendenti()
         self.gestore_mag = GestoreMagazzino()
         self.gestore_ord = GestoreOrdiniTavolo()
         self.gestore_men = GestoreMenu()
         self.gestore_pre = GestorePrenotazioni()
+        self.gestore_backup = GestoreBackup('backup', ora_desiderata, self.gestore_pre, self.gestore_dip,
+                                            self.gestore_ric, self.gestore_mag,self.gestore_ord,self.gestore_men,)
 
-        self.cont_vista_login = ContVistaLogin(self.stacked, self.gestore_ric, self.gestore_dip, self.gestore_mag, self.gestore_ord, self.gestore_men,self.gestore_pre)
+        self.cont_vista_login = ContVistaLogin(self.stacked, self.gestore_ric, self.gestore_dip, self.gestore_mag,
+                                               self.gestore_ord, self.gestore_men,self.gestore_pre)
         self.stacked.addWidget(self.cont_vista_login.view)
         self.stacked.setCurrentWidget(self.cont_vista_login.view)
 
@@ -76,7 +78,20 @@ class MainWindow(QWidget):
 
         self.stacked.currentChanged.connect(self.cambio_view)
 
-        
+        #istanzio timer per il backup
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.verifica_backup)
+        self.timer.start(60000) #verifica ogni minuto
+
+    def verifica_backup(self):
+        #print("verifica backup")
+        orario_backup = self.gestore_backup.orario_backup
+        orario_attuale = datetime.now()
+        if orario_attuale.hour == orario_backup.hour and orario_attuale.minute == orario_backup.minute:
+            self.gestore_backup.effettua_backup()
+            print("backup effettuato")
+
+
 
 if __name__ == '__main__':
 
