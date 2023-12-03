@@ -8,12 +8,14 @@ class GestoreOrdiniTavolo(object):
     def __init__(self):
 
         self.lista_tavoli = []
+        self.setup_tavoli()
         self.lista_ordini = []
         self.ultimo_codice_ordine = 0
         self.file_pickle_path = "lista_ordini.pickle"
         self.carica_da_file()
 
     def setup_tavoli(self):
+
 
         tavolo1 = Tavolo(1, 8)
         tavolo2 = Tavolo(2, 8)
@@ -26,12 +28,33 @@ class GestoreOrdiniTavolo(object):
         tavolo9 = Tavolo(9, 4)
         tavolo10 = Tavolo(10, 4)
         tavolo11 = Tavolo(11, 4)
-        tavolo1 = Tavolo(12, 2)
-        tavolo1 = Tavolo(13, 2)
-        tavolo1 = Tavolo(14, 2)
-        tavolo1 = Tavolo(15, 2)
-        tavolo1 = Tavolo(16, 2)
-        tavolo1 = Tavolo(17, 2)
+        tavolo12 = Tavolo(12, 2)
+        tavolo13 = Tavolo(13, 2)
+        tavolo14 = Tavolo(14, 2)
+        tavolo15 = Tavolo(15, 2)
+        tavolo16 = Tavolo(16, 2)
+        tavolo17 = Tavolo(17, 2)
+
+
+        self.lista_tavoli.append(tavolo1)
+        self.lista_tavoli.append(tavolo2)
+        self.lista_tavoli.append(tavolo3)
+        self.lista_tavoli.append(tavolo4)
+        self.lista_tavoli.append(tavolo5)
+        self.lista_tavoli.append(tavolo6)
+        self.lista_tavoli.append(tavolo7)
+        self.lista_tavoli.append(tavolo8)
+        self.lista_tavoli.append(tavolo9)
+        self.lista_tavoli.append(tavolo10)
+        self.lista_tavoli.append(tavolo11)
+        self.lista_tavoli.append(tavolo12)
+        self.lista_tavoli.append(tavolo13)
+        self.lista_tavoli.append(tavolo14)
+        self.lista_tavoli.append(tavolo15)
+        self.lista_tavoli.append(tavolo16)
+        self.lista_tavoli.append(tavolo17)
+
+
 
     def genera_id(self):
 

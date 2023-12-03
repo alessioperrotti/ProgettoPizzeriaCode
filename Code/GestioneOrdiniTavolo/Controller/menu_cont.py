@@ -1,3 +1,5 @@
+from PyQt6.QtWidgets import QStackedWidget
+
 from Code.GestioneOrdiniTavolo.View.menu_view import VistaMenu, BoxProdotto
 from Code.GestioneMenu.Model.gestore_menu import GestoreMenu
 from Code.GestioneOrdiniTavolo.Model.gestore_ordini_tavolo import GestoreOrdiniTavolo
@@ -5,7 +7,7 @@ from Code.GestioneOrdiniTavolo.Model.ordine_tavolo import OrdineTavolo
 
 class ContMenu(object):
 
-    def __init__(self, view: VistaMenu, model: GestoreOrdiniTavolo, numtavolo):
+    def __init__(self, view: VistaMenu, model: GestoreOrdiniTavolo, numtavolo, stacked: QStackedWidget):
 
         self.view = view
         self.model = model
@@ -13,6 +15,8 @@ class ContMenu(object):
         self.gestore_menu = GestoreMenu()
         self.riempi_menu()
         self.ordine_corrente = OrdineTavolo(numtavolo)
+        stacked.addWidget(self.view)
+
 
         for box in self.lista_box:
             box.pulsante_piu.clicked.connect(lambda checked, current_box=box: self.aggiungi_alla_lista(current_box))

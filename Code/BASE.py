@@ -76,6 +76,8 @@ class MainWindow(QWidget):
 
         self.stacked.currentChanged.connect(self.cambio_view)
 
+        
+
 if __name__ == '__main__':
 
     app = QApplication(sys.argv)
