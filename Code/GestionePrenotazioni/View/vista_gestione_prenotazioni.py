@@ -104,10 +104,11 @@ class VistaGestionePrenotazioni(QWidget):
         self.pulsante_back = crea_pulsante_back(35,"png/back.png")
 
         # Campo di ricerca
-        search_label = QLabel('Cerca:')
-        search_label.setFont(label_font_piccolo)
+        # search_label = QLabel()
         self.search_edit = QLineEdit()
-        self.search_edit.setFixedWidth(336)
+        self.search_edit.setPlaceholderText("Cerca per nome")
+        self.search_edit.setFixedSize(336, 29)
+        self.search_edit.setStyleSheet("QLineEdit { border: 2px solid grey; }")
 
         # Tabella
         self.tab = crea_tabella(0, 6, 481, 404)
@@ -116,11 +117,12 @@ class VistaGestionePrenotazioni(QWidget):
 
         layout.addWidget(title, alignment=Qt.AlignmentFlag.AlignTop)
         layout.addSpacing(20)
-        layout.addWidget(search_label)
+        # layout.addWidget(search_label)
         layout.addWidget(self.search_edit)
 
-        layout_orizzontale.addWidget(self.tab, alignment=Qt.AlignmentFlag.AlignLeft)
+        layout_orizzontale.addWidget(self.tab, alignment=Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
         layout_orizzontale.addLayout(layout_pulsanti)
+        layout_orizzontale.setContentsMargins(0,5,0,0)
 
         # Sistemo i Pulsanti
         layout_pulsanti.addStretch()

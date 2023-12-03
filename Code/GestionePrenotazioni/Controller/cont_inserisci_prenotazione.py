@@ -17,6 +17,12 @@ class OutOfSpace(Exception):
         super().__init__(message)
 
 
+class ChangeTable(Exception):
+    def __init__(self, message):
+        self.message = message
+        super().__init__(message)
+
+
 class ContInserisciPrenotazione(object):
 
     def __init__(self, model, view: VistaInserisciPrenotazione):
@@ -29,8 +35,14 @@ class ContInserisciPrenotazione(object):
     def conferma_inserimento(self):
         try:
             nome = self.view.campo_nome.text().title()
+
             n_persone = self.view.spinbox_persone.value()
             tavolo = self.view.combobox_tavolo.currentText()
+            # for t in self.model.lista_tavoli:
+            #     if t.numero == tavolo:
+            #         if n_persone > t.posti_disponibili:
+            #             raise ChangeTable("Scegli un tavolo più grande")
+
             orario = self.view.combobox_orario.currentText()
             codice = self.model.genera_codice()
 
@@ -39,7 +51,7 @@ class ContInserisciPrenotazione(object):
                 raise OutOfDate("Inserisci una data valida")
 
             for row in range(self.view.tabella.rowCount()):
-                orario_tab = self.view.tabella.item(row,0).text()
+                orario_tab = self.view.tabella.item(row, 0).text()
                 if orario == orario_tab:
                     posti_disponibili = self.view.tabella.item(row, 2).text()
                     if int(posti_disponibili) - int(n_persone) < 0:
@@ -82,6 +94,13 @@ class ContInserisciPrenotazione(object):
             error_box.setText(os.message)
             error_box.exec()
 
+        except ChangeTable as ct:
+            error_box = QMessageBox()
+            error_box.setIcon(QMessageBox.Icon.Critical)
+            error_box.setWindowTitle("Errore di Inserimento")
+            error_box.setText(ct.message)
+            error_box.exec()
+
         else:
             nuova_prenotazione = Prenotazione(codice, nome, tavolo, n_persone, orario)
             nuova_prenotazione.data = self.data_selezionata
@@ -90,9 +109,28 @@ class ContInserisciPrenotazione(object):
 
             self.view.close()
 
+#devono riempirsi quando clicco sulla data
     def riempi_labels(self):
         self.view.combobox_orario.addItems(self.model.orari_disponibili)
         self.view.combobox_tavolo.addItems(self.model.tavoli_disponibili)
+        # for tavolo in self.model.lista_tavoli:
+        #     self.view.combobox_tavolo.addItem(str(tavolo.numero))
+
+    def riempi_labels2(self,data,orario):
+        self.view.combobox_orario.addItems(self.model.orari_disponibili)
+
+        tavoli_gia_selezionati = set()
+        for prenotazione in self.model.lista_prenotazioni:
+            if prenotazione.data == data and prenotazione.orario == orario:
+                tavoli_gia_selezionati.add(prenotazione.tavolo_assegnato)
+                for tavolo in self.model.lista_tavoli:
+                    if tavolo.numero not in tavoli_gia_selezionati and tavolo.stato != "prenotato":
+                        self.view.combobox_tavolo.addItem(str(tavolo.numero))
+
+    def rimuovi_tavolo_selezionato(self, numero_tavolo):
+        tav_da_rimuovere = self.view.combobox_tavolo.findText(str(numero_tavolo))
+        if tav_da_rimuovere != -1:
+            self.view.combobox_tavolo.removeItem(tav_da_rimuovere)
 
     def riempi_tabella(self):
         self.view.tabella.setRowCount(0)
@@ -115,3 +153,6 @@ class ContInserisciPrenotazione(object):
         self.view.combobox_orario.setEnabled(True)
         self.view.combobox_tavolo.setEnabled(True)
         self.view.spinbox_persone.setEnabled(True)
+
+#se lo stato del tavolo è prenotato
+#rimuovo

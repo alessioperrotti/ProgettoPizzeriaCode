@@ -111,19 +111,25 @@ class VistaModificaPrenotazione(QDialog):
 
         self.campo_nome = QLabel()
         self.campo_nome.setFixedWidth(257)
+
         self.combobox_tavolo = QComboBox()
         self.combobox_tavolo.setFixedWidth(75)
+        self.combobox_tavolo.setEnabled(False
+                                        )
         self.combobox_orario = QComboBox()
         self.combobox_orario.setFixedWidth(85)
+        self.combobox_orario.setEnabled(False)
+
         self.spinbox_persone = QSpinBox()
         self.spinbox_persone.setFixedWidth(40)
+        self.spinbox_persone.setEnabled(False)
 
         griglia.addWidget(self.campo_nome, 1, 0, alignment=Qt.AlignmentFlag.AlignLeft)
         griglia.addWidget(self.combobox_tavolo,1,1)
         griglia.addWidget(self.spinbox_persone,1,2)
         griglia.addWidget(self.combobox_orario,1,3)
 
-        self.tabella = crea_tabella(15,3,308,322)
+        self.tabella = crea_tabella(0,3,308,322)
         griglia.addWidget(self.tabella,3,1,1,3,alignment=Qt.AlignmentFlag.AlignCenter)
         self.tabella.setHorizontalHeaderLabels(["ORARIO","NUMERO\nPRENOTAZIONI","POSTI\nLIBERI"])
 

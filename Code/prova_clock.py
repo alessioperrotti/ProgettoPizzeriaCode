@@ -1,61 +1,74 @@
-from PyQt6.QtWidgets import QApplication, QWidget
-from PyQt6.QtGui import QPainter, QPen, QColor
-from PyQt6.QtCore import Qt, QTimer, QDateTime
+from PyQt6.QtGui import QPainter, QPen
+from PyQt6.QtCore import QPointF, QTimer, QTime
+from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QGraphicsScene, QGraphicsView, QGraphicsEllipseItem, QGraphicsLineItem
+import math
 
 class AnalogClock(QWidget):
     def __init__(self):
         super().__init__()
 
-        self.timer = QTimer(self)
-        self.timer.timeout.connect(self.update)
-        self.timer.start(1000)  # Aggiorna l'orologio ogni 1000 millisecondi (1 secondo)
-
-        self.setWindowTitle('Analog Clock')
+        self.setWindowTitle("Analog Clock")
         self.setGeometry(100, 100, 400, 400)
 
-    def paintEvent(self, event):
-        painter = QPainter(self)
-        painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+        layout = QVBoxLayout(self)
 
-        side = min(self.width(), self.height())
-        painter.setViewport((self.width() - side) // 2, (self.height() - side) // 2, side, side)
-        painter.setWindow(-50, -50, 100, 100)
+        # Creazione della scena e della vista grafica
+        scene = QGraphicsScene(self)
+        view = QGraphicsView(scene)
 
-        self.drawClock(painter)
+        layout.addWidget(view)
 
-    def drawClock(self, painter):
-        # Disegna la cornice dell'orologio
-        pen = QPen()
-        pen.setWidth(2)
-        painter.setPen(pen)
-        painter.drawEllipse(-45, -45, 90, 90)
+        # Aggiunta del rendering anti-aliasing
+        view.setRenderHint(QPainter.RenderHint.Antialiasing)
 
-        # Disegna le lancette dell'orologio
-        now = QDateTime.currentDateTime()
-        hour = now.time().hour()
-        minute = now.time().minute()
-        second = now.time().second()
+        # Creazione dell'orologio analogico
+        self.center = QPointF(200, 200)
+        self.hour_hand = QGraphicsLineItem()
+        self.minute_hand = QGraphicsLineItem()
+        self.second_hand = QGraphicsLineItem()
 
-        # Lancetta delle ore
-        pen.setWidth(4)
-        painter.setPen(pen)
-        hour_angle = 30 * (hour % 12 + minute / 60)
-        painter.drawLine(0, 0, 20 * Qt.cos(hour_angle), 20 * Qt.sin(hour_angle))
+        scene.addItem(QGraphicsEllipseItem(self.center.x() - 100, self.center.y() - 100, 200, 200))
 
-        # Lancetta dei minuti
-        pen.setWidth(2)
-        painter.setPen(pen)
-        minute_angle = 6 * minute
-        painter.drawLine(0, 0, 30 * Qt.cos(minute_angle), 30 * Qt.sin(minute_angle))
+        scene.addItem(self.hour_hand)
+        scene.addItem(self.minute_hand)
+        scene.addItem(self.second_hand)
 
-        # Lancetta dei secondi
-        pen.setColor(QColor(255, 0, 0))  # Colore rosso per la lancetta dei secondi
-        pen.setWidth(1)
-        painter.setPen(pen)
-        second_angle = 6 * second
-        painter.drawLine(0, 0, 35 * Qt.cos(second_angle), 35 * Qt.sin(second_angle))
+        # Aggiornamento dell'orologio
+        timer = QTimer(self)
+        timer.timeout.connect(self.update_clock)
+        timer.start(1000)  # Ogni 1000 millisecondi (1 secondo)
 
-if __name__ == '__main__':
+    def update_clock(self):
+        current_time = QTime.currentTime()
+
+        hours = current_time.hour()
+        minutes = current_time.minute()
+        seconds = current_time.second()
+
+        # Aggiorna gli angoli delle lancette
+        hour_angle = math.radians(30 * (hours % 12) + 0.5 * minutes - 90)
+        minute_angle = math.radians(6 * minutes + 0.1 * seconds - 90)
+        second_angle = math.radians(6 * seconds - 90)
+
+        # Calcola le coordinate delle estremità delle lancette
+        hour_x = 40 * math.cos(hour_angle)
+        hour_y = 40 * math.sin(hour_angle)
+
+        minute_x = 60 * math.cos(minute_angle)
+        minute_y = 60 * math.sin(minute_angle)
+
+        second_x = 80 * math.cos(second_angle)
+        second_y = 80 * math.sin(second_angle)
+
+        # Imposta le coordinate delle lancette
+        self.hour_hand.setLine(self.center.x(), self.center.y(), self.center.x() + hour_x, self.center.y() + hour_y)
+        self.minute_hand.setLine(self.center.x(), self.center.y(), self.center.x() + minute_x,
+                                 self.center.y() + minute_y)
+        self.second_hand.setLine(self.center.x(), self.center.y(), self.center.x() + second_x,
+                                 self.center.y() + second_y)
+
+
+if __name__ == "__main__":
     app = QApplication([])
     clock = AnalogClock()
     clock.show()
