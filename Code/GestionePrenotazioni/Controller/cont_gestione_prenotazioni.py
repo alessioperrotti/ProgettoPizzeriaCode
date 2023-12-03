@@ -46,7 +46,7 @@ class ContGestionePrenotazioni(object):
     def click_inserisci(self):
         dialog_inserisci = VistaInserisciPrenotazione()
         cont_inserisci = ContInserisciPrenotazione(self.model, dialog_inserisci)
-        cont_inserisci.riempi_labels()
+        cont_inserisci.riempi_labels_orario()
         cont_inserisci.view.exec()
         self.update_tabella()
 

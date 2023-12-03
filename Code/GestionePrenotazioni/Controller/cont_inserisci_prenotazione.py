@@ -29,8 +29,10 @@ class ContInserisciPrenotazione(object):
         self.view = view
         self.model = model
         self.data_selezionata = None
+        self.orario_selezionato = None
         self.view.pulsante_conferma.clicked.connect(self.conferma_inserimento)
         self.view.calendario.selectionChanged.connect(self.riempi_tabella)
+        self.view.combobox_orario.selectionChanged.connect(self.riempi_labels_tavolo)
 
     def conferma_inserimento(self):
         try:
@@ -43,7 +45,7 @@ class ContInserisciPrenotazione(object):
             #         if n_persone > t.posti_disponibili:
             #             raise ChangeTable("Scegli un tavolo più grande")
 
-            orario = self.view.combobox_orario.currentText()
+            self.orario_selezionato = self.view.combobox_orario.currentText()
             codice = self.model.genera_codice()
 
             self.data_selezionata = self.view.calendario.selectedDate()
@@ -52,7 +54,7 @@ class ContInserisciPrenotazione(object):
 
             for row in range(self.view.tabella.rowCount()):
                 orario_tab = self.view.tabella.item(row, 0).text()
-                if orario == orario_tab:
+                if self.orario_selezionato == orario_tab:
                     posti_disponibili = self.view.tabella.item(row, 2).text()
                     if int(posti_disponibili) - int(n_persone) < 0:
                         raise OutOfSpace("Non ci sono posti disponibili")
@@ -102,7 +104,7 @@ class ContInserisciPrenotazione(object):
             error_box.exec()
 
         else:
-            nuova_prenotazione = Prenotazione(codice, nome, tavolo, n_persone, orario)
+            nuova_prenotazione = Prenotazione(codice, nome, tavolo, n_persone, self.orario_selezionato)
             nuova_prenotazione.data = self.data_selezionata
             # nuova_prenotazione.orario_fine = bohh
             self.model.aggiungi_prenotazione(nuova_prenotazione)
@@ -110,22 +112,24 @@ class ContInserisciPrenotazione(object):
             self.view.close()
 
 #devono riempirsi quando clicco sulla data
-    def riempi_labels(self):
+    def riempi_labels_orario(self):
         self.view.combobox_orario.addItems(self.model.orari_disponibili)
-        self.view.combobox_tavolo.addItems(self.model.tavoli_disponibili)
+        #self.view.combobox_tavolo.addItems(self.model.tavoli_disponibili)
         # for tavolo in self.model.lista_tavoli:
         #     self.view.combobox_tavolo.addItem(str(tavolo.numero))
 
-    def riempi_labels2(self,data,orario):
-        self.view.combobox_orario.addItems(self.model.orari_disponibili)
-
+    def riempi_labels_tavolo(self):
+        self.orario_selezionato = self.view.combobox_orario.currentText()
         tavoli_gia_selezionati = set()
+
         for prenotazione in self.model.lista_prenotazioni:
-            if prenotazione.data == data and prenotazione.orario == orario:
+            if prenotazione.data == self.data_selezionata and prenotazione.orario == self.orario_selezionato:
                 tavoli_gia_selezionati.add(prenotazione.tavolo_assegnato)
-                for tavolo in self.model.lista_tavoli:
-                    if tavolo.numero not in tavoli_gia_selezionati and tavolo.stato != "prenotato":
-                        self.view.combobox_tavolo.addItem(str(tavolo.numero))
+
+        for tavolo in self.model.lista_tavoli:
+            if tavolo.numero not in tavoli_gia_selezionati and tavolo.stato != "prenotato":
+                self.view.combobox_tavolo.addItem(str(tavolo.numero))
+    #il tavolo diventa libero quando il cliente va via(termina servizio)
 
     def rimuovi_tavolo_selezionato(self, numero_tavolo):
         tav_da_rimuovere = self.view.combobox_tavolo.findText(str(numero_tavolo))
@@ -153,6 +157,3 @@ class ContInserisciPrenotazione(object):
         self.view.combobox_orario.setEnabled(True)
         self.view.combobox_tavolo.setEnabled(True)
         self.view.spinbox_persone.setEnabled(True)
-
-#se lo stato del tavolo è prenotato
-#rimuovo
