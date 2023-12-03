@@ -10,6 +10,26 @@ class GestoreOrdiniTavolo(object):
         self.lista_ordini = []
         self.ultimo_codice_ordine = 0
 
+    def setup_tavoli(self):
+
+        tavolo1 = Tavolo(1, 8)
+        tavolo2 = Tavolo(2, 8)
+        tavolo3 = Tavolo(3, 8)
+        tavolo4 = Tavolo(4, 8)
+        tavolo5 = Tavolo(5, 6)
+        tavolo6 = Tavolo(6, 6)
+        tavolo7 = Tavolo(7, 6)
+        tavolo8 = Tavolo(8, 4)
+        tavolo9 = Tavolo(9, 4)
+        tavolo10 = Tavolo(10, 4)
+        tavolo11 = Tavolo(11, 4)
+        tavolo1 = Tavolo(12, 2)
+        tavolo1 = Tavolo(13, 2)
+        tavolo1 = Tavolo(14, 2)
+        tavolo1 = Tavolo(15, 2)
+        tavolo1 = Tavolo(16, 2)
+        tavolo1 = Tavolo(17, 2)
+
     def genera_id(self):
         self.ultimo_codice_ordine += 1
         return self.ultimo_codice_ordine
