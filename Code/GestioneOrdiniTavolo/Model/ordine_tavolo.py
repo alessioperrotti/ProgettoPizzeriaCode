@@ -1,4 +1,5 @@
 from _datetime import datetime
+from Code.GestioneMenu.Model.prodotto import Prodotto
 
 
 class OrdineTavolo(object):
@@ -14,7 +15,12 @@ class OrdineTavolo(object):
         self.completato = False
         self.confermato = False
 
-    def aggiungi_prodotto(self, prodotto):
+    def aggiungi_prodotto(self, prodotto: Prodotto):
 
         self.lista_prodotti.append(prodotto)
         self.prezzo_totale += prodotto.prezzo_al_pubblico
+
+    def rimuovi_prodotto(self, prodotto: Prodotto):
+
+        self.lista_prodotti.remove(prodotto)
+        self.prezzo_totale -= prodotto.prezzo_al_pubblico

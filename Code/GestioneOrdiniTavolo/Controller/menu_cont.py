@@ -12,6 +12,7 @@ class ContMenu(object):
         self.tavolo = numtavolo
         self.gestore_menu = GestoreMenu()
         self.riempi_menu()
+        self.ordine_corrente = OrdineTavolo(numtavolo)
 
         for box in self.lista_box:
             box.pulsante_piu.clicked.connect(lambda checked, current_box=box: self.aggiungi_alla_lista(current_box))
@@ -84,6 +85,8 @@ class ContMenu(object):
                 prezzo = str(x.prezzo_al_pubblico)
                 self.view.lista_recap.addItem(nome + "....€" + prezzo)
                 break
+        prodotto = self.gestore_menu.estrai_per_nome(nome)
+        self.ordine_corrente.aggiungi_prodotto(prodotto)
 
 
     def rimuovi_dalla_lista(self, box: BoxProdotto):
@@ -94,19 +97,17 @@ class ContMenu(object):
             if nome.lower() == str(item.text().split(".")[0]):
                 self.view.lista_recap.removeItemWidget(item)
                 break
+        prodotto = self.gestore_menu.estrai_per_nome(nome)
+        self.ordine_corrente.rimuovi_prodotto(prodotto)
 
     def conferma_ordine(self):
 
-        ordine = OrdineTavolo(self.tavolo)
+        self.model.aggiungi_ordine(self.ordine_corrente)
+        self.model.conferma_ordine(self.ordine_corrente)
+        self.ordine_corrente = None
+        self.view.lista_recap.clear()
 
         for box in self.lista_box:
-            nome_prod = box.nome_prodotto
-            prod = self.gestore_menu.estrai_per_nome(nome_prod)
+            box.label_quantita.setText("0")
 
-            for i in range(0, int(box.label_quantita.text())):
-                ordine.aggiungi_prodotto(prod)
-
-        self.model.aggiungi_ordine(ordine)
-
-        pass
 
