@@ -135,3 +135,17 @@ class GestoreDipendenti():
             return giorni_settimana[giorno]
         else:
             raise ValueError("Giorno non valido: {}".format(giorno))
+
+    ####################################################################################
+
+    def accesso_dipendente(self, username, password):
+        accesso = False
+        lista_utilizzatori = self.lista_cuochi.copy()
+        lista_utilizzatori.extend(self.lista_camerieri)
+        for utilizzatore in lista_utilizzatori:
+            if (username == utilizzatore.username and password == utilizzatore.password):
+                accesso = True
+                return accesso, utilizzatore.ruolo
+
+        return accesso, None
+

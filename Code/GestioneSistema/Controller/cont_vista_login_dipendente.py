@@ -37,26 +37,17 @@ class ContVistaLoginDipendente():
         self.view.user_line.setText("")
         self.view.pass_line.setText("")
 
-        lista_utilizzatori=self.gestore_dip.lista_cuochi.copy()
-        lista_utilizzatori.extend(self.gestore_dip.lista_camerieri)
-        #print(lista_utilizzatori)
-        accesso = False
-
         if (self.username == self.user_admin and self.password == self.pass_admin):
             self.apri_finestra_admin()
-            accesso = True
         else:
-            for utilizzatore in lista_utilizzatori:
-                if (self.username == utilizzatore.username and self.password == utilizzatore.password):
-
-                    accesso = True
-                    if utilizzatore.ruolo == "Cameriere":
+            accesso, ruolo = self.gestore_dip.accesso_dipendente(self.username, self.password)
+            if(accesso == True):
+                    if ruolo == "Cameriere":
                         self.apri_finestra_cameriere()
-                    if utilizzatore.ruolo == "Cuoco":
+                    if ruolo == "Cuoco":
                         self.apri_finestra_cuoco()
-                    break
-        if accesso == False:
-            self.mostra_errore()
+            else:
+                self.mostra_errore()
 
 
     def apri_finestra_admin(self):
