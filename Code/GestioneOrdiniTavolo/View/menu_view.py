@@ -88,8 +88,9 @@ class VistaMenu(QWidget):
         self.scroll_area.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
 
         contenitore = QWidget()
-        contenitore.setFixedSize(576, 637)
+        contenitore.setMinimumSize(576, 0)
         contenitore.setLayout(vbox_centrale)
+        contenitore.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         contenitore.setContentsMargins(20, 0, 20, 0)
         self.label_antipasti = QLabel("<b>Antipasti</b>")
         self.label_pizze = QLabel("<b>Pizze</b>")
@@ -104,18 +105,26 @@ class VistaMenu(QWidget):
             x.setFont(QFont("Roboto", 28))
 
         self.grid_antipasti = QGridLayout()
+        self.grid_antipasti.setAlignment(Qt.AlignmentFlag.AlignLeft)
         self.grid_pizze = QGridLayout()
+        self.grid_pizze.setAlignment(Qt.AlignmentFlag.AlignLeft)
         self.grid_softdrinks = QGridLayout()
+        self.grid_softdrinks.setAlignment(Qt.AlignmentFlag.AlignLeft)
         self.grid_birre = QGridLayout()
+        self.grid_birre.setAlignment(Qt.AlignmentFlag.AlignLeft)
 
         vbox_centrale.addWidget(self.label_antipasti, alignment=Qt.AlignmentFlag.AlignTop)
         vbox_centrale.addLayout(self.grid_antipasti)
+        vbox_centrale.addSpacerItem(QSpacerItem(576, 60))
         vbox_centrale.addWidget(self.label_pizze, alignment=Qt.AlignmentFlag.AlignTop)
         vbox_centrale.addLayout(self.grid_pizze)
+        vbox_centrale.addSpacerItem(QSpacerItem(576, 60))
         vbox_centrale.addWidget(self.label_softdrinks, alignment=Qt.AlignmentFlag.AlignTop)
         vbox_centrale.addLayout(self.grid_softdrinks)
+        vbox_centrale.addSpacerItem(QSpacerItem(576, 60))
         vbox_centrale.addWidget(self.label_birre, alignment=Qt.AlignmentFlag.AlignTop)
         vbox_centrale.addLayout(self.grid_birre)
+        vbox_centrale.addSpacerItem(QSpacerItem(576, 60))
 
         self.scroll_area.setWidget(contenitore)
 
@@ -157,10 +166,10 @@ class BoxProdotto(QWidget):
 
     def __init__(self, nome_prodotto, percorso_immagine):
         super().__init__()
-        self.initUI()
-        self.nome_prodotto = str(nome_prodotto).title()
+        self.nome_prodotto = nome_prodotto
         self.percorso_immagine = percorso_immagine
-        self.setStyleSheet(".QWidget {border: 1px solid black; border-radius: 3px;}")
+        self.setStyleSheet(".BoxProdotto {border: 1px solid black; border-radius: 3px;}")
+        self.initUI()
         self.pulsante_meno.clicked.connect(self.decremento)
         self.pulsante_piu.clicked.connect(self.incremento)
 
@@ -175,7 +184,7 @@ class BoxProdotto(QWidget):
         nome_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_nome = QLabel(self.nome_prodotto, upframe)
         self.label_nome.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.label_nome.setFont(QFont("Roboto", 17))
+        self.label_nome.setFont(QFont("Roboto", 12))
         nome_layout.addWidget(self.label_nome)
         main_layout.addWidget(upframe)
 
