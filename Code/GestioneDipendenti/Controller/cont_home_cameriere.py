@@ -12,16 +12,16 @@ class ContHomeCameriere(object):
         self.view = VistaHomeCameriere()
         stacked.addWidget(self.view)
         self.model = model
-        self.cont_turni_personale = ContTurniPersonale(self.model,stacked)
+        self.cont_turni_personale = ContTurniPersonale(self.model)
 
         self.view.p_turni.clicked.connect(self.click_turni)
         self.view.p_prenotazioni.clicked.connect(self.click_prenotazioni)
         self.view.p_piantina.clicked.connect(self.click_piantina)
-        #self.cont_turni_personale.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.view))
+        self.cont_turni_personale.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.view))
         # pulsante back da HomeCameriere
 
     def click_turni(self):
-        cont_turni = ContTurniPersonale(self.model, self.stacked)
+        cont_turni = ContTurniPersonale(self.model)
         cont_turni.view = VistaTurniPersonale()
         cont_turni.view.exec()
 

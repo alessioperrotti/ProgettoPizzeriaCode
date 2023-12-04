@@ -27,7 +27,6 @@ class ContGestionePrenotazioni(object):
         self.view.pulsante_modifica.clicked.connect(self.click_modifica)
         self.view.pulsante_elimina.clicked.connect(self.click_elimina)
 
-        self.model.stampa_lista_tavoli()
 
     def riga_selezionata(self):
         selected_items = self.view.tab.selectedItems()
@@ -78,7 +77,7 @@ class ContGestionePrenotazioni(object):
             item_nome.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             self.view.tab.setItem(i, 0, item_nome)
 
-            item_tav = QTableWidgetItem(x.tavolo_assegnato)
+            item_tav = QTableWidgetItem(str(x.tavolo_assegnato.numero))
             item_tav.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             self.view.tab.setItem(i, 1, item_tav)
 

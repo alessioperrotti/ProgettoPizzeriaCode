@@ -22,11 +22,12 @@ def crea_tabella(righe, colonne, larghezza, altezza):
     header_h.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
     header_v = tabella.verticalHeader()
     header_v.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
-    #tabella.verticalHeader().setVisible(False)
+    # tabella.verticalHeader().setVisible(False)
     tabella.setFixedSize(larghezza, altezza)
     tabella.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectColumns)
     tabella.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
     return tabella
+
 
 def crea_pulsante_img(dimensioni, directory):
     pulsante_img = QPushButton()
@@ -45,6 +46,7 @@ def crea_pulsante_img(dimensioni, directory):
             }
             """)
     return pulsante_img
+
 
 class VistaTurniPersonale(QDialog):
     def __init__(self):
@@ -81,15 +83,15 @@ class VistaTurniPersonale(QDialog):
         title = QLabel("Turni Personale")
         title.setFont(label_font_tit)
 
-        self.tabella = crea_tabella(2,6,870,360)
-        #self.tabella.setContentsMargins(0,100,0,0)
-        self.tabella.setHorizontalHeaderLabels(["LUNEDI","MARTEDI","MERCOLEDI","VENERDI","SABATO","DOMENICA"])
-        self.tabella.setVerticalHeaderLabels(["TURNO PRANZO\n12:30-15:30","TURNO CENA\n19:30-00.30"])
+        self.tabella = crea_tabella(2, 6, 870, 360)
+        # self.tabella.setContentsMargins(0,100,0,0)
+        self.tabella.setHorizontalHeaderLabels(["LUNEDI", "MARTEDI", "MERCOLEDI", "VENERDI", "SABATO", "DOMENICA"])
+        self.tabella.setVerticalHeaderLabels(["TURNO PRANZO\n12:30-15:30", "TURNO CENA\n19:30-00.30"])
 
-        self.pulsante_back = crea_pulsante_img(35,"png/back.png")
+        self.pulsante_back = crea_pulsante_img(35, "png/back.png")
 
         clock = QLabel()
-        img = QPixmap("png/check.png").scaled(35,35)
+        img = QPixmap("png/check.png").scaled(35, 35)
         clock.setPixmap(img)
 
         self.label_date = QLabel(self)
@@ -105,21 +107,20 @@ class VistaTurniPersonale(QDialog):
         layout = QVBoxLayout()
         layout_title = QHBoxLayout()
 
-        layout_title.addWidget(title,alignment=Qt.AlignmentFlag.AlignTop)
+        layout_title.addWidget(title, alignment=Qt.AlignmentFlag.AlignTop)
         layout_title.addStretch()
-        layout_title.addWidget(self.label_date,alignment=Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
-        layout_title.addWidget(self.label_time,alignment=Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
-        layout_title.addWidget(clock,alignment=Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+        layout_title.addWidget(self.label_date, alignment=Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+        layout_title.addWidget(self.label_time, alignment=Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+        layout_title.addWidget(clock, alignment=Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
 
         layout.addLayout(layout_title)
-        layout.addWidget(self.tabella,alignment=Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(self.tabella, alignment=Qt.AlignmentFlag.AlignCenter)
         layout.addSpacing(65)
-        layout.addWidget(self.pulsante_back,alignment=Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignBottom)
+        layout.addWidget(self.pulsante_back, alignment=Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignBottom)
 
         self.setLayout(layout)
-        self.setFixedSize(994,637)
-        self.setContentsMargins(20,20,20,10)
-
+        self.setFixedSize(994, 637)
+        self.setContentsMargins(20, 20, 20, 10)
 
     def update_datetime(self):
         # Ottieni la data e l'orario corrente
