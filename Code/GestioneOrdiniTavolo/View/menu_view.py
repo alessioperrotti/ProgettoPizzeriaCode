@@ -168,7 +168,9 @@ class BoxProdotto(QWidget):
         super().__init__()
         self.nome_prodotto = nome_prodotto
         self.percorso_immagine = percorso_immagine
-        self.setStyleSheet(".BoxProdotto {border: 1px solid black; border-radius: 3px;}")
+        self.setObjectName("BoxProdotto")
+        #self.setStyleSheet(".BoxProdotto {border: 1px solid black; border-radius: 3px;}")
+        #self.setStyleSheet("border: 1px solid black;")
         self.initUI()
         self.pulsante_meno.clicked.connect(self.decremento)
         self.pulsante_piu.clicked.connect(self.incremento)
@@ -176,7 +178,7 @@ class BoxProdotto(QWidget):
     def initUI(self):
         self.setFixedSize(147, 204)
         main_layout = QVBoxLayout(self)
-        main_layout.setAlignment(Qt.AlignmentFlag.AlignVCenter)
+        main_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
         upframe = QFrame()
         upframe.setFixedSize(147, 40)
         upframe.setStyleSheet(".QFrame {border: 1px solid black; border-radius: 3px; background-color: #ececec;}")
@@ -191,10 +193,10 @@ class BoxProdotto(QWidget):
         image_label = QLabel()
         image_label.setFixedSize(147, 124)
         pixmap = QPixmap(self.percorso_immagine)
-        image_label.setPixmap(pixmap.scaled(88, 88, Qt.AspectRatioMode.KeepAspectRatio))
+        image_label.setPixmap(pixmap.scaled(80, 80, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
         image_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        main_layout.addWidget(image_label)
+        main_layout.addWidget(image_label, Qt.AlignmentFlag.AlignCenter)
 
         downframe = QFrame()
         downframe.setFixedSize(147, 40)

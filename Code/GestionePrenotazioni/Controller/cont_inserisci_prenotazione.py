@@ -33,17 +33,20 @@ class ContInserisciPrenotazione(object):
         self.view.pulsante_conferma.clicked.connect(self.conferma_inserimento)
         self.view.calendario.selectionChanged.connect(self.riempi_tabella)
         self.view.combobox_orario.currentIndexChanged.connect(self.riempi_labels_tavolo)
+        self.view.calendario.selectionChanged.connect(self.riempi_labels_tavolo)
 
-    def conferma_inserimento(self):  # sistema tavolo
+    def conferma_inserimento(self):
         try:
             nome = self.view.campo_nome.text().title()
-
+            if nome == "":
+                raise ValueError
             n_persone = self.view.spinbox_persone.value()
-            tavolo = self.view.combobox_tavolo.currentText()
-            for t in self.model.lista_tavoli:
-                if str(t.numero) == tavolo:
-                    if n_persone > t.posti_disponibili:
-                        raise ChangeTable("Scegli un tavolo più grande")
+            if n_persone <= 0:
+                raise ValueError
+            n_tavolo = self.view.combobox_tavolo.currentText()
+            tavolo = self.model.ricerca_tavolo(n_tavolo)
+            if n_persone > tavolo.posti_disponibili:
+                raise ChangeTable("Scegli un tavolo più grande")
 
             self.orario_selezionato = self.view.combobox_orario.currentText()
             codice = self.model.genera_codice()
@@ -60,21 +63,11 @@ class ContInserisciPrenotazione(object):
                         raise OutOfSpace("Non ci sono posti disponibili")
 
         except ValueError:
-            if not all([
-                self.view.campo_nome.text(),  # non funziona PD
-                self.view.spinbox_persone.value(),
-                self.view.combobox_orario.currentText(),
-                self.view.combobox_tavolo.currentText(),
-                self.view.calendario.selectedDate(),
-            ]):
-                errore_msg = "Controllare che tutti i campi siano riempiti."
-            else:
-                if not self.view.campo_nome.text():  # non funziona PD!
-                    errore_msg = "Il campo nome è obbligatorio."
-                elif not self.view.campo_nome.text().isalpha():
-                    errore_msg = "Il nome può contenere solo lettere."
-                else:
-                    errore_msg = "Controllare che i dati siano inseriti correttamente."
+            errore_msg = "Controllare che i dati siano inseriti correttamente."
+            if self.view.campo_nome.text() == "":
+                errore_msg = "Il campo nome è obbligatorio."
+            elif not self.view.campo_nome.text().isalpha():
+                errore_msg = "Il nome può contenere solo lettere."
 
             error_box = QMessageBox()
             error_box.setIcon(QMessageBox.Icon.Critical)
@@ -106,6 +99,7 @@ class ContInserisciPrenotazione(object):
         else:
             nuova_prenotazione = Prenotazione(codice, nome, tavolo, n_persone, self.orario_selezionato)
             nuova_prenotazione.data = self.data_selezionata
+            # tavolo.stato = "prenotato"
             # nuova_prenotazione.orario_fine = bohh
             self.model.aggiungi_prenotazione(nuova_prenotazione)
 
@@ -118,16 +112,18 @@ class ContInserisciPrenotazione(object):
         # for tavolo in self.model.lista_tavoli:
         #     self.view.combobox_tavolo.addItem(str(tavolo.numero))
 
-    def riempi_labels_tavolo(self):  # devo sistemare prenotazione.tavolo
+    def riempi_labels_tavolo(self):
         self.orario_selezionato = self.view.combobox_orario.currentText()
         tavoli_gia_selezionati = set()
 
         for prenotazione in self.model.lista_prenotazioni:
             if prenotazione.data == self.data_selezionata and prenotazione.orario == self.orario_selezionato:
-                tavoli_gia_selezionati.add(prenotazione.tavolo_assegnato)
+                tavoli_gia_selezionati.add(prenotazione.tavolo_assegnato.numero)
+
+        self.view.combobox_tavolo.clear()
 
         for tavolo in self.model.lista_tavoli:
-            if tavolo.numero not in tavoli_gia_selezionati and tavolo.stato != "prenotato":
+            if tavolo.numero not in tavoli_gia_selezionati:
                 self.view.combobox_tavolo.addItem(str(tavolo.numero))
 
     # il tavolo diventa libero quando il cliente va via(termina servizio)
@@ -153,7 +149,7 @@ class ContInserisciPrenotazione(object):
 
         statistiche = self.model.ricerca_data_orario(self.data_selezionata, orario)
         self.view.tabella.setItem(row_position, 1, QTableWidgetItem(str(statistiche[0])))
-        self.view.tabella.setItem(row_position, 2, QTableWidgetItem(str(78 - statistiche[1])))
+        self.view.tabella.setItem(row_position, 2, QTableWidgetItem(str(80 - statistiche[1])))
 
         self.view.combobox_orario.setEnabled(True)
         self.view.combobox_tavolo.setEnabled(True)
