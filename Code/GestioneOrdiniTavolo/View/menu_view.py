@@ -190,13 +190,18 @@ class BoxProdotto(QWidget):
         nome_layout.addWidget(self.label_nome)
         main_layout.addWidget(upframe)
 
+
+        frame_immagine = QFrame()
+        frame_immagine.setStyleSheet(".QFrame {border: 1px solid black; border-radius: 3px;}")
+        layout_immagine = QVBoxLayout(frame_immagine)
+
         image_label = QLabel()
         image_label.setFixedSize(147, 124)
         pixmap = QPixmap(self.percorso_immagine)
         image_label.setPixmap(pixmap.scaled(80, 80, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
         image_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        main_layout.addWidget(image_label, Qt.AlignmentFlag.AlignCenter)
+        layout_immagine.addWidget(image_label, Qt.AlignmentFlag.AlignCenter)
+        main_layout.addWidget(frame_immagine, Qt.AlignmentFlag.AlignCenter)
 
         downframe = QFrame()
         downframe.setFixedSize(147, 40)
