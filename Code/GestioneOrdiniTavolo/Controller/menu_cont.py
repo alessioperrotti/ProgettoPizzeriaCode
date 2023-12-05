@@ -1,8 +1,11 @@
-from PyQt6.QtWidgets import QStackedWidget
+from PyQt6.QtWidgets import QStackedWidget, QMessageBox
 from Code.GestioneOrdiniTavolo.View.menu_view import VistaMenu, BoxProdotto
 from Code.GestioneMenu.Model.gestore_menu import GestoreMenu
 from Code.GestioneOrdiniTavolo.Model.gestore_ordini_tavolo import GestoreOrdiniTavolo
 from Code.GestioneOrdiniTavolo.Model.ordine_tavolo import OrdineTavolo
+from Code.GestioneOrdiniTavolo.View.visualizza_conto_view import VistaVisualizzaConto
+from Code.GestioneOrdiniTavolo.Controller.visualizza_conto_cont import ContVisualizzaConto
+
 
 class ContMenu(object):
 
@@ -16,9 +19,9 @@ class ContMenu(object):
         self.ordine_corrente = OrdineTavolo(numtavolo)
         stacked.addWidget(self.view)
 
-
         for box in self.lista_box:
             box.pulsante_piu.clicked.connect(lambda checked, current_box=box: self.aggiungi_alla_lista(current_box))
+            box.pulsante_meno.setEnabled(False)
             box.pulsante_meno.clicked.connect(lambda checked, current_box=box: self.rimuovi_dalla_lista(current_box))
 
         self.view.pulsante_antipasti.clicked.connect(lambda: self.scroll_to_section("antipasti"))
@@ -26,8 +29,10 @@ class ContMenu(object):
         self.view.pulsante_softdrinks.clicked.connect(lambda: self.scroll_to_section("softdrinks"))
         self.view.pulsante_birre.clicked.connect(lambda: self.scroll_to_section("birre"))
 
-
+        self.view.pulsante_confermaordine.setEnabled(False)
         self.view.pulsante_confermaordine.clicked.connect(self.conferma_ordine)
+        self.view.pulsante_visualizzaconto.setEnabled(len(self.ordine_corrente.lista_prodotti))
+        self.view.pulsante_visualizzaconto.clicked.connect(self.open_visualizzaconto)
 
     def riempi_menu(self):
 
@@ -84,6 +89,7 @@ class ContMenu(object):
                 prezzo = str(x.prezzo_al_pubblico)
                 self.view.lista_recap.addItem(nome + "....€" + prezzo)
                 self.view.pulsante_confermaordine.setEnabled(self.view.lista_recap.count() != 0)
+                box.pulsante_meno.setEnabled(True)
                 break
         prodotto = self.gestore_menu.estrai_per_nome(nome)
         self.ordine_corrente.aggiungi_prodotto(prodotto)
@@ -95,9 +101,9 @@ class ContMenu(object):
         for i in range(self.view.lista_recap.count()):
             item = self.view.lista_recap.item(i)
             if nome.title() == str(item.text().split(".")[0]):
-                print("entro qui")
                 self.view.lista_recap.takeItem(i)
                 self.view.pulsante_confermaordine.setEnabled(self.view.lista_recap.count() != 0)
+                box.pulsante_meno.setEnabled(int(box.label_quantita.text()) != 0)
                 break
         prodotto = self.gestore_menu.estrai_per_nome(nome)
         self.ordine_corrente.rimuovi_prodotto(prodotto)
@@ -105,10 +111,21 @@ class ContMenu(object):
     def conferma_ordine(self):
 
         self.model.aggiungi_ordine(self.ordine_corrente)
-        self.model.conferma_ordine(self.ordine_corrente)
-        self.ordine_corrente = None
+        self.model.salva_su_file()
+        self.model.carica_da_file()
+        #self.model.conferma_ordine(self.ordine_corrente)
+        self.tavolo.stato = "in attesa"
+        self.ordine_corrente.lista_prodotti = []
+
+        message = QMessageBox()
+        #message.setIcon(QMessageBox.Icon.Information)
+        message.setWindowTitle("<b>Grazie!</b>")
+        message.setText("Il tuo ordine è in fase di\npreparazione e ti verrà consegnato\nal più presto.")
+        message.exec()
+
         self.view.lista_recap.clear()
         self.view.pulsante_confermaordine.setEnabled(False)
+        self.view.pulsante_visualizzaconto.setEnabled(True)
 
         for box in self.lista_box:
             box.label_quantita.setText("0")
@@ -117,8 +134,8 @@ class ContMenu(object):
 
         if tipo == "antipasti":
 
-            last_item = self.view.grid_antipasti.itemAtPosition(self.view.grid_antipasti.rowCount()-1,
-                                                                self.view.grid_antipasti.columnCount()-1)
+            last_item = self.view.grid_antipasti.itemAtPosition(self.view.grid_antipasti.rowCount() - 1,
+                                                                self.view.grid_antipasti.columnCount() - 1)
 
             self.view.scroll_area.ensureWidgetVisible(last_item.widget())
 
@@ -137,4 +154,10 @@ class ContMenu(object):
         elif tipo == "birre":
             last_item = self.view.grid_birre.itemAtPosition(self.view.grid_birre.rowCount() - 1,
                                                                 self.view.grid_birre.columnCount() - 1)
+
             self.view.scroll_area.ensureWidgetVisible(last_item.widget())
+
+    def open_visualizzaconto(self):
+        dialog_visualizzaconto = VistaVisualizzaConto()
+        controller_visualizzaconto = ContVisualizzaConto(dialog_visualizzaconto, self.model, self.tavolo.numero)
+        controller_visualizzaconto.view.exec()

@@ -26,7 +26,7 @@ def crea_tabella(righe, colonne, larghezza, altezza):
     return tabella
 
 
-class VistaMostraTavoloSelezionato(QDialog):
+class VistaVisualizzaConto(QDialog):
 
     def __init__(self):
         super().__init__()
@@ -62,7 +62,7 @@ class VistaMostraTavoloSelezionato(QDialog):
     def init_ui(self):
         self.setWindowTitle("Gestionale Pizzeria")
 
-        self.title = QLabel("<b>Conto Tavolo n°</b>")
+        self.title = QLabel()
         self.title.setFont(QFont("Roboto", 18))
         frame1 = QFrame()
         frame1.setFrameShape(QFrame.Shape.HLine)
@@ -82,7 +82,7 @@ class VistaMostraTavoloSelezionato(QDialog):
         frame2.setFrameShape(QFrame.Shape.HLine)
 
         layout_totale = QHBoxLayout()
-        label_totale = QLabel("<b>TOTALE:</b>..........................................................")
+        label_totale = QLabel("<b>TOTALE:</b> ........................................................€")
         label_totale.setFont(QFont("Roboto", 18))
         label_totale.setFixedSize(249, 22)
         self.label_totale_val = QLabel()
@@ -102,6 +102,6 @@ class VistaMostraTavoloSelezionato(QDialog):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    window = VistaMostraTavoloSelezionato()
+    window = VistaVisualizzaConto()
     window.show()
     sys.exit(app.exec())

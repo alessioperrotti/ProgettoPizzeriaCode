@@ -19,11 +19,11 @@ class ContVistaInserisciTavolo():
         self.stacked = stacked
 
         self.view = VistaInserisciTavolo()
-        self.cont_menu = ContMenu(VistaMenu(),gestore_ord,None, stacked)
         stacked.addWidget(self.view)
+        self.tavolo = None
         self.gestore_ord = gestore_ord
         self.view.pulsante.clicked.connect(self.inserisci_tavolo)
-        self.tavolo = None
+        self.cont_menu = ContMenu(VistaMenu(),gestore_ord,self.tavolo, stacked)
 
     def inserisci_tavolo(self):
         n_tavolo = self.view.campo.text()

@@ -134,8 +134,6 @@ class VistaMenu(QWidget):
 
         vbox_destra.addWidget(label_recap)
 
-        #rettangolo_recap = QWidget()
-        #rettangolo_recap.setFixedSize(194, 335)
         self.lista_recap = QListWidget()
         self.lista_recap.setFixedSize(194, 335)
 
@@ -169,8 +167,6 @@ class BoxProdotto(QWidget):
         self.nome_prodotto = nome_prodotto
         self.percorso_immagine = percorso_immagine
         self.setObjectName("BoxProdotto")
-        #self.setStyleSheet(".BoxProdotto {border: 1px solid black; border-radius: 3px;}")
-        #self.setStyleSheet("border: 1px solid black;")
         self.initUI()
         self.pulsante_meno.clicked.connect(self.decremento)
         self.pulsante_piu.clicked.connect(self.incremento)
@@ -192,18 +188,15 @@ class BoxProdotto(QWidget):
 
 
         frame_immagine = QFrame()
-        #frame_immagine.setFixedSize(147, 124)
         frame_immagine.setStyleSheet(".QFrame {border: 1px solid black; border-radius: 0px; background-color: #FFFFFF}")
         layout_immagine = QVBoxLayout(frame_immagine)
 
         image_label = QLabel()
-        #image_label.setFixedSize(147, 124)
         pixmap = QPixmap(self.percorso_immagine)
         image_label.setPixmap(pixmap.scaled(75, 75, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
         image_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout_immagine.addWidget(image_label, Qt.AlignmentFlag.AlignCenter)
         layout_immagine.setContentsMargins(0, 0, 0, 0)
-        #main_layout.addWidget(frame_immagine, Qt.AlignmentFlag.AlignCenter)
         main_layout.setSpacing(0)
         layout_immagine.setSpacing(0)
         main_layout.addWidget(frame_immagine)
@@ -264,7 +257,8 @@ class BoxProdotto(QWidget):
     def decremento(self):
 
         qta = int(self.label_quantita.text())
-        self.label_quantita.setText(str(qta-1))
+        if qta > 0:
+            self.label_quantita.setText(str(qta-1))
 
 
 if __name__ == '__main__':

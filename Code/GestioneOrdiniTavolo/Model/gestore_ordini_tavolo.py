@@ -7,9 +7,9 @@ class GestoreOrdiniTavolo(object):
 
     def __init__(self):
 
-        self.lista_tavoli = []
+        self.lista_tavoli: list[Tavolo] = []
         self.setup_tavoli()
-        self.lista_ordini = []
+        self.lista_ordini: list[OrdineTavolo] = []
         self.ultimo_codice_ordine = 0
         self.file_pickle_path = "lista_ordini.pickle"
         self.carica_da_file()
@@ -63,10 +63,13 @@ class GestoreOrdiniTavolo(object):
     def aggiungi_ordine(self, ordine: OrdineTavolo):
 
         ordine.codice = self.genera_id()
+        print("entro qui")
         self.lista_ordini.append(ordine)
+        print(str(ordine.codice))
         self.salva_su_file()
         self.carica_da_file()
 
+    # probabilmente da togliere
     def conferma_ordine(self, ordine: OrdineTavolo):
 
         for x in self.lista_ordini:
@@ -80,8 +83,7 @@ class GestoreOrdiniTavolo(object):
         dati = {
 
             'cod': self.ultimo_codice_ordine,
-            'ordini': self.lista_ordini
-
+            'ordini': self.lista_ordini,
         }
 
         try:
