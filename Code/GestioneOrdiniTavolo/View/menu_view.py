@@ -191,7 +191,7 @@ class BoxProdotto(QWidget):
         image_label = QLabel()
         image_label.setFixedSize(147, 124)
         pixmap = QPixmap(self.percorso_immagine)
-        image_label.setPixmap(pixmap.scaled(88, 88, Qt.AspectRatioMode.KeepAspectRatio))
+        image_label.setPixmap(pixmap.scaled(80, 80, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
         image_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         main_layout.addWidget(image_label)

@@ -43,7 +43,7 @@ def crea_immagine(directory, dimensione):
 
 
     pixmap = QPixmap(dir)
-    scaled_pixmap = pixmap.scaled(dimensione, dimensione, aspectRatioMode=Qt.AspectRatioMode.KeepAspectRatio)
+    scaled_pixmap = pixmap.scaled(dimensione, dimensione, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
     label_foto.setPixmap(scaled_pixmap)
     return label_foto
 
