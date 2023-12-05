@@ -181,7 +181,7 @@ class BoxProdotto(QWidget):
         main_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
         upframe = QFrame()
         upframe.setFixedSize(147, 40)
-        upframe.setStyleSheet(".QFrame {border: 1px solid black; border-radius: 3px; background-color: #ececec;}")
+        upframe.setStyleSheet(".QFrame {border: 1px solid black; border-radius: 3px; background-color: #FFFFFF;}")
         nome_layout = QVBoxLayout(upframe)
         nome_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_nome = QLabel(self.nome_prodotto, upframe)
@@ -192,16 +192,21 @@ class BoxProdotto(QWidget):
 
 
         frame_immagine = QFrame()
-        frame_immagine.setStyleSheet(".QFrame {border: 1px solid black; border-radius: 3px;}")
+        #frame_immagine.setFixedSize(147, 124)
+        frame_immagine.setStyleSheet(".QFrame {border: 1px solid black; border-radius: 0px; background-color: #FFFFFF}")
         layout_immagine = QVBoxLayout(frame_immagine)
 
         image_label = QLabel()
-        image_label.setFixedSize(147, 124)
+        #image_label.setFixedSize(147, 124)
         pixmap = QPixmap(self.percorso_immagine)
-        image_label.setPixmap(pixmap.scaled(80, 80, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
+        image_label.setPixmap(pixmap.scaled(75, 75, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
         image_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout_immagine.addWidget(image_label, Qt.AlignmentFlag.AlignCenter)
-        main_layout.addWidget(frame_immagine, Qt.AlignmentFlag.AlignCenter)
+        layout_immagine.setContentsMargins(0, 0, 0, 0)
+        #main_layout.addWidget(frame_immagine, Qt.AlignmentFlag.AlignCenter)
+        main_layout.setSpacing(0)
+        layout_immagine.setSpacing(0)
+        main_layout.addWidget(frame_immagine)
 
         downframe = QFrame()
         downframe.setFixedSize(147, 40)
@@ -248,7 +253,7 @@ class BoxProdotto(QWidget):
         downframe_layout.addWidget(self.pulsante_piu)
         downframe.setLayout(downframe_layout)
 
-        main_layout.setContentsMargins(0,0,0,0)
+        main_layout.setContentsMargins(0, 0, 0, 0)
         main_layout.addWidget(downframe)
 
     def incremento(self):

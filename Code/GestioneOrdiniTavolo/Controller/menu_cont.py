@@ -1,5 +1,4 @@
-from PyQt6.QtWidgets import QStackedWidget, QFrame, QHBoxLayout
-from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QStackedWidget
 from Code.GestioneOrdiniTavolo.View.menu_view import VistaMenu, BoxProdotto
 from Code.GestioneMenu.Model.gestore_menu import GestoreMenu
 from Code.GestioneOrdiniTavolo.Model.gestore_ordini_tavolo import GestoreOrdiniTavolo
@@ -27,7 +26,7 @@ class ContMenu(object):
         self.view.pulsante_softdrinks.clicked.connect(lambda: self.scroll_to_section("softdrinks"))
         self.view.pulsante_birre.clicked.connect(lambda: self.scroll_to_section("birre"))
 
-        self.view.pulsante_confermaordine.setEnabled(self.view.lista_recap.count() != 0)
+
         self.view.pulsante_confermaordine.clicked.connect(self.conferma_ordine)
 
     def riempi_menu(self):
@@ -84,6 +83,7 @@ class ContMenu(object):
             if str(x.nome).lower() == nome.lower():
                 prezzo = str(x.prezzo_al_pubblico)
                 self.view.lista_recap.addItem(nome + "....€" + prezzo)
+                self.view.pulsante_confermaordine.setEnabled(self.view.lista_recap.count() != 0)
                 break
         prodotto = self.gestore_menu.estrai_per_nome(nome)
         self.ordine_corrente.aggiungi_prodotto(prodotto)
@@ -97,6 +97,7 @@ class ContMenu(object):
             if nome.title() == str(item.text().split(".")[0]):
                 print("entro qui")
                 self.view.lista_recap.takeItem(i)
+                self.view.pulsante_confermaordine.setEnabled(self.view.lista_recap.count() != 0)
                 break
         prodotto = self.gestore_menu.estrai_per_nome(nome)
         self.ordine_corrente.rimuovi_prodotto(prodotto)
@@ -107,6 +108,7 @@ class ContMenu(object):
         self.model.conferma_ordine(self.ordine_corrente)
         self.ordine_corrente = None
         self.view.lista_recap.clear()
+        self.view.pulsante_confermaordine.setEnabled(False)
 
         for box in self.lista_box:
             box.label_quantita.setText("0")
