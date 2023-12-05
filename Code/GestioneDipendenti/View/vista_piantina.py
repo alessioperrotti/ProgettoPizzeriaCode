@@ -13,6 +13,7 @@ label_font_piccolo = QFont("Roboto", 16)
 header_font = QFont("Roboto", 10)
 header_font.setBold(True)
 
+
 def crea_etichetta(testo, colore_pulsante):
     layout_h = QHBoxLayout()
 
@@ -33,6 +34,7 @@ def crea_etichetta(testo, colore_pulsante):
 
     return layout_h
 
+
 def crea_pulsante_back(dimensioni, directory):
     pulsante_back = QPushButton()
     img = QPixmap(directory)
@@ -52,15 +54,14 @@ def crea_pulsante_back(dimensioni, directory):
     return pulsante_back
 
 
-def on_tavolo_clicked(nome):
-    print(f"Tavolo {nome} cliccato!")
-
-
 class VistaPiantina(QDialog):
 
     def __init__(self):
         super().__init__()
+        self.nome_tavoli_map = {}
+        self.nome_tavoli = []
         self.init_ui()
+        self.n_tavolo = None
         self.setStyleSheet("""
             QPushButton{
                 background-color: "#ff776d";
@@ -79,22 +80,11 @@ class VistaPiantina(QDialog):
         title = QLabel("Piantina")
         title.setFont(label_font_tit)
 
-        # label_liberi = QLabel("LIBERI")
-        # label_liberi.setFont(label_font)
-        # label_prenotati = QLabel("PRENOTATI")
-        # label_prenotati.setFont(label_font)
-        # label_occupati = QLabel("OCCUPATI")
-        # label_occupati.setFont(label_font)
-        # label_inattesa = QLabel("IN ATTESA")
-        # label_inattesa.setFont(label_font)
-        # label_serviti = QLabel("SERVITI")
-        # label_serviti.setFont(label_font)
-
-        label_liberi = crea_etichetta("LIBERI","grey")
-        label_prenotati = crea_etichetta("PRENOTATI","#007fff")
-        label_occupati = crea_etichetta("OCCUPATI","red")
-        label_inattesa = crea_etichetta("IN ATTESA","orange")
-        label_serviti = crea_etichetta("SERVITI","yellow")
+        label_liberi = crea_etichetta("LIBERI", "grey")
+        label_prenotati = crea_etichetta("PRENOTATI", "#007fff")
+        label_occupati = crea_etichetta("OCCUPATI", "red")
+        label_inattesa = crea_etichetta("IN ATTESA", "orange")
+        label_serviti = crea_etichetta("SERVITI", "yellow")
 
         linea_v = QFrame()
         linea_v.setFrameShape(QFrame.Shape.VLine)
@@ -102,6 +92,7 @@ class VistaPiantina(QDialog):
 
         self.pulsante_back = crea_pulsante_back(35, "png/back.png")
         self.pulsante_consegna = QPushButton("Consegna")
+        self.pulsante_consegna.setEnabled(False)
         self.pulsante_consegna.setFont(label_font_piccolo)
         self.pulsante_consegna.setFixedSize(190, 65)
 
@@ -123,7 +114,7 @@ class VistaPiantina(QDialog):
         layout_title = QHBoxLayout()
         layout_h = QHBoxLayout()
         layout_griglia = QGridLayout()
-        layout_griglia.setSpacing(10)
+        layout_griglia.setSpacing(30)
         layout_v_dx = QVBoxLayout()
 
         layout.addLayout(layout_title)
@@ -134,6 +125,7 @@ class VistaPiantina(QDialog):
         layout_title.addWidget(clock, alignment=Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
 
         layout_h.addLayout(layout_griglia)
+        layout_h.addSpacing(130)
         layout_h.addWidget(linea_v, alignment=Qt.AlignmentFlag.AlignHCenter)
         layout_h.addLayout(layout_v_dx)
 
@@ -144,7 +136,7 @@ class VistaPiantina(QDialog):
         layout_v_dx.addLayout(label_inattesa)
         layout_v_dx.addLayout(label_serviti)
         layout_v_dx.addSpacing(15)
-        layout_v_dx.addWidget(self.pulsante_consegna)
+        layout_v_dx.addWidget(self.pulsante_consegna, alignment=Qt.AlignmentFlag.AlignCenter)
         layout_v_dx.addSpacing(200)
         layout_v_dx.addWidget(self.pulsante_back, alignment=Qt.AlignmentFlag.AlignRight)
 
@@ -161,31 +153,29 @@ class VistaPiantina(QDialog):
                 else:
                     size = (70, 70)
 
-                if tavolo_numero <= 18:
+                if tavolo_numero <= 16:
                     tavolo_button = QPushButton(f"{tavolo_numero}")
-                    tavolo_button.clicked.connect(lambda checked, nome=tavolo_button.text(): on_tavolo_clicked(nome))
-                    layout_griglia.addWidget(tavolo_button, row, col, alignment=Qt.AlignmentFlag.AlignCenter)
+                    layout_griglia.addWidget(tavolo_button, col, row, alignment=Qt.AlignmentFlag.AlignCenter)
+                    tavolo_button.setCheckable(True)
+                    self.nome_tavoli_map[tavolo_numero] = tavolo_button
+                    tavolo_button.clicked.connect(
+                        lambda checked, n_tavolo=tavolo_button.text(): self.on_tavolo_clicked(n_tavolo))
                     tavolo_button.setFixedSize(*size)
-                    tavolo_button.setStyleSheet("""
-                                                QPushButton{
-                                                background-color: "grey";
-                                                color: "black";
-                                                text-align: center;
-                                                border-radius: 6px;
-                                                border: 3px solid lightgrey;
-                                                font-family:Roboto;
-                                                }
-                                                QPushButton:hover{
-                                                font-size: 15px;
-                                                font-weight: bold;}""")
+                    self.nome_tavoli.append(tavolo_button)
 
         layout.addLayout(layout_h)
         layout.addStretch()
-        linea_v.raise_()
 
         self.setLayout(layout)
         self.setFixedSize(994, 637)
-        self.setContentsMargins(20, 0, 10, 10)
+        self.setContentsMargins(20, 0, 15, 10)
+
+    def on_tavolo_clicked(self, nome):
+        print(nome)
+        self.n_tavolo = nome
+        for button in self.nome_tavoli:
+            if button.text() != nome:
+                button.setChecked(False)
 
     def update_datetime(self):
         # Ottieni la data e l'orario corrente

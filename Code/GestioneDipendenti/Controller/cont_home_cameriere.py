@@ -1,13 +1,16 @@
 from PyQt6.QtWidgets import QStackedWidget
 
+from Code.GestioneDipendenti.Controller.cont_piantina import ContPiantina
 from Code.GestioneDipendenti.Controller.cont_turni_personale import ContTurniPersonale
 from Code.GestioneDipendenti.Model.gestore_dipendenti import GestoreDipendenti
 from Code.GestioneDipendenti.View.vista_home_cameriere import VistaHomeCameriere
+from Code.GestioneDipendenti.View.vista_piantina import VistaPiantina
 from Code.GestioneDipendenti.View.vista_turni_personale import VistaTurniPersonale
+from Code.GestionePrenotazioni.Model.gestore_prenotazioni import GestorePrenotazioni
 
 
 class ContHomeCameriere(object):
-    def __init__(self, model: GestoreDipendenti, stacked: QStackedWidget):
+    def __init__(self, model, stacked: QStackedWidget):
         self.stacked = stacked
         self.view = VistaHomeCameriere()
         stacked.addWidget(self.view)
@@ -21,7 +24,7 @@ class ContHomeCameriere(object):
         # pulsante back da HomeCameriere
 
     def click_turni(self):
-        cont_turni = ContTurniPersonale(self.model)
+        cont_turni = ContTurniPersonale(GestoreDipendenti())
         cont_turni.view = VistaTurniPersonale()
         cont_turni.view.exec()
 
@@ -33,4 +36,5 @@ class ContHomeCameriere(object):
         # cont_prenotazioni.view.exec()
 
     def click_piantina(self):
-        pass
+        cont_piantina = ContPiantina(GestorePrenotazioni(),VistaPiantina())
+        cont_piantina.view.exec()
