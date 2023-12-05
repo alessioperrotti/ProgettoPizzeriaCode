@@ -86,7 +86,7 @@ class GestorePrenotazioni():
         dati = {
             'cod': self.ultimo_codice_prenotazione,
             'lista': self.lista_prenotazioni,
-            'tavoli': self.lista_tavoli
+            'tavoli':self.lista_tavoli
         }
         with open(nome_file, 'wb') as file:
             pickle.dump(dati, file)
