@@ -103,9 +103,10 @@ class ContMenu(object):
 
         nome = box.label_nome.text().title()
         for i in range(self.view.lista_recap.count()):
-            item = self.view.lista_recap.itemAt(i)
-            if nome.lower() == str(item.text().split(".")[0]):
-                self.view.lista_recap.removeItemWidget(item)
+            item = self.view.lista_recap.item(i)
+            if nome.title() == str(item.text().split(".")[0]):
+                print("entro qui")
+                self.view.lista_recap.takeItem(i)
                 break
         prodotto = self.gestore_menu.estrai_per_nome(nome)
         self.ordine_corrente.rimuovi_prodotto(prodotto)
