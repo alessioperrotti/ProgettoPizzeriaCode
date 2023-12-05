@@ -22,6 +22,7 @@ class ContHomeCuoco(object):
     def click_turni(self):
         cont_turni = ContTurniPersonale(self.model)
         cont_turni.view = VistaTurniPersonale()
+        cont_turni.update_tabella()
         cont_turni.view.exec()
 
     def click_comande(self):

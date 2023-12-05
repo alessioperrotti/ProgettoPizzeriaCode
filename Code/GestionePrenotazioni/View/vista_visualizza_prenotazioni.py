@@ -24,6 +24,7 @@ def crea_tabella(righe, colonne, larghezza, altezza):
     header.setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
     tabella.verticalHeader().setVisible(False)
     tabella.setFixedSize(larghezza, altezza)
+    tabella.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
     tabella.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
     tabella.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
     return tabella
@@ -90,29 +91,29 @@ class VistaVisualizzaPrenotazioni(QDialog):
         layout_pulsanti = QVBoxLayout()
 
         # Pulsante Back
-        pulsante_back = crea_pulsante_back(35, "png/back.png")
+        self.pulsante_back = crea_pulsante_back(35, "png/back.png")
 
         # Campo di ricerca
         search_label = QLabel('Cerca:')
         search_label.setFont(label_font_piccolo)
-        search_edit = QLineEdit()
-        search_edit.setFixedWidth(336)
+        self.search_edit = QLineEdit()
+        self.search_edit.setFixedWidth(336)
 
         # Tabella
-        tab = crea_tabella(18, 6, 685, 402)
-        tab.setHorizontalHeaderLabels(["NOME CLIENTE", "TAVOLO", "ORARIO", "GIORNO", "POSTI", "CODICE"])
+        self.tab = crea_tabella(0, 6, 685, 402)
+        self.tab.setHorizontalHeaderLabels(["NOME CLIENTE", "TAVOLO", "ORARIO", "GIORNO", "POSTI", "CODICE"])
 
         layout.addWidget(title, alignment=Qt.AlignmentFlag.AlignTop)
         layout.addSpacing(20)
         layout.addWidget(search_label)
-        layout.addWidget(search_edit)
+        layout.addWidget(self.search_edit)
 
-        layout_orizzontale.addWidget(tab, alignment=Qt.AlignmentFlag.AlignLeft)
+        layout_orizzontale.addWidget(self.tab, alignment=Qt.AlignmentFlag.AlignLeft)
         layout_orizzontale.addLayout(layout_pulsanti)
 
         layout.addLayout(layout_orizzontale)
         layout.addStretch()
-        layout.addWidget(pulsante_back)
+        layout.addWidget(self.pulsante_back)
 
         layout.setContentsMargins(30, 20, 10, 20)
         self.setFixedSize(756, 637)

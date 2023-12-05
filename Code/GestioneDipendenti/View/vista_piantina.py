@@ -176,6 +176,7 @@ class VistaPiantina(QDialog):
         for button in self.nome_tavoli:
             if button.text() != nome:
                 button.setChecked(False)
+        self.pulsante_consegna.setEnabled(True)
 
     def update_datetime(self):
         # Ottieni la data e l'orario corrente

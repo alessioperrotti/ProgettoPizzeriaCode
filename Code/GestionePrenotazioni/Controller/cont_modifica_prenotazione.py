@@ -76,7 +76,7 @@ class ContModificaPrenotazione(object):
 
         statistiche = self.model.ricerca_data_orario(self.new_data_selezionata, orario)
         self.view.tabella.setItem(row_position, 1, QTableWidgetItem(str(statistiche[0])))
-        self.view.tabella.setItem(row_position, 2, QTableWidgetItem(str(78 - statistiche[1])))
+        self.view.tabella.setItem(row_position, 2, QTableWidgetItem(str(80 - statistiche[1])))
 
         self.view.combobox_orario.setEnabled(True)
         self.view.combobox_tavolo.setEnabled(True)

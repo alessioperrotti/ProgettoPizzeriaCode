@@ -15,10 +15,12 @@ class ContPiantina(object):
 
     def cambia_colore(self):
         self.tavolo_selezionato = self.model.ricerca_tavolo(self.view.n_tavolo)
-        self.tavolo_selezionato.stato = "servito"
+        self.tavolo_selezionato.cambia_stato("servito")
 
-        print("tavolo: "+str(self.tavolo_selezionato.numero)+" posti: "+str(self.tavolo_selezionato.posti_disponibili))
-        print(self.tavolo_selezionato.stato)
+        self.model.salva_dati("lista_prenotazioni.pickle")
+        # print("tavolo: "+str(self.tavolo_selezionato.numero)+" posti: "+str(self.tavolo_selezionato.posti_disponibili))
+        # print(self.tavolo_selezionato.stato)
+
 
     def update_tabella(self):
         for tavolo in self.model.lista_tavoli:
