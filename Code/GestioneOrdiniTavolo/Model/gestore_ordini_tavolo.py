@@ -24,16 +24,15 @@ class GestoreOrdiniTavolo(object):
         tavolo5 = Tavolo(5, 6)
         tavolo6 = Tavolo(6, 6)
         tavolo7 = Tavolo(7, 6)
-        tavolo8 = Tavolo(8, 4)
+        tavolo8 = Tavolo(8, 6)
         tavolo9 = Tavolo(9, 4)
         tavolo10 = Tavolo(10, 4)
         tavolo11 = Tavolo(11, 4)
-        tavolo12 = Tavolo(12, 2)
+        tavolo12 = Tavolo(12, 4)
         tavolo13 = Tavolo(13, 2)
         tavolo14 = Tavolo(14, 2)
         tavolo15 = Tavolo(15, 2)
         tavolo16 = Tavolo(16, 2)
-        tavolo17 = Tavolo(17, 2)
 
 
         self.lista_tavoli.append(tavolo1)
@@ -52,7 +51,6 @@ class GestoreOrdiniTavolo(object):
         self.lista_tavoli.append(tavolo14)
         self.lista_tavoli.append(tavolo15)
         self.lista_tavoli.append(tavolo16)
-        self.lista_tavoli.append(tavolo17)
 
 
 
