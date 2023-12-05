@@ -1,4 +1,5 @@
 from PyQt6.QtWidgets import QStackedWidget, QFrame, QHBoxLayout
+from PyQt6.QtCore import Qt
 from Code.GestioneOrdiniTavolo.View.menu_view import VistaMenu, BoxProdotto
 from Code.GestioneMenu.Model.gestore_menu import GestoreMenu
 from Code.GestioneOrdiniTavolo.Model.gestore_ordini_tavolo import GestoreOrdiniTavolo
@@ -21,14 +22,10 @@ class ContMenu(object):
             box.pulsante_piu.clicked.connect(lambda checked, current_box=box: self.aggiungi_alla_lista(current_box))
             box.pulsante_meno.clicked.connect(lambda checked, current_box=box: self.rimuovi_dalla_lista(current_box))
 
-        self.view.pulsante_antipasti.clicked.connect(
-            lambda: self.view.scroll_area.ensureVisible(self.view.label_antipasti))
-        self.view.pulsante_pizze.clicked.connect(
-            lambda: self.view.scroll_area.ensureVisible(self.view.label_pizze))
-        self.view.pulsante_softdrinks.clicked.connect(
-            lambda: self.view.scroll_area.ensureVisible(self.view.label_softdrinks))
-        self.view.pulsante_birre.clicked.connect(
-            lambda: self.view.scroll_area.ensureVisible(self.view.label_birre))
+        self.view.pulsante_antipasti.clicked.connect(lambda: self.scroll_to_section("antipasti"))
+        self.view.pulsante_pizze.clicked.connect(lambda: self.scroll_to_section("pizze"))
+        self.view.pulsante_softdrinks.clicked.connect(lambda: self.scroll_to_section("softdrinks"))
+        self.view.pulsante_birre.clicked.connect(lambda: self.scroll_to_section("birre"))
 
         self.view.pulsante_confermaordine.setEnabled(self.view.lista_recap.count() != 0)
         self.view.pulsante_confermaordine.clicked.connect(self.conferma_ordine)
@@ -121,4 +118,28 @@ class ContMenu(object):
         for box in self.lista_box:
             box.label_quantita.setText("0")
 
+    def scroll_to_section(self, tipo: str):
 
+        if tipo == "antipasti":
+
+            last_item = self.view.grid_antipasti.itemAtPosition(self.view.grid_antipasti.rowCount()-1,
+                                                                self.view.grid_antipasti.columnCount()-1)
+
+            self.view.scroll_area.ensureWidgetVisible(last_item.widget())
+
+        elif tipo == "pizze":
+            last_item = self.view.grid_pizze.itemAtPosition(self.view.grid_pizze.rowCount() - 1,
+                                                                self.view.grid_pizze.columnCount() - 1)
+
+            self.view.scroll_area.ensureWidgetVisible(last_item.widget())
+
+        elif tipo == "softdrinks":
+            last_item = self.view.grid_softdrinks.itemAtPosition(self.view.grid_softdrinks.rowCount() - 1,
+                                                                self.view.grid_softdrinks.columnCount() - 1)
+
+            self.view.scroll_area.ensureWidgetVisible(last_item.widget())
+
+        elif tipo == "birre":
+            last_item = self.view.grid_birre.itemAtPosition(self.view.grid_birre.rowCount() - 1,
+                                                                self.view.grid_birre.columnCount() - 1)
+            self.view.scroll_area.ensureWidgetVisible(last_item.widget())
