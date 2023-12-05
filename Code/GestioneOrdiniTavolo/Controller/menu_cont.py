@@ -51,15 +51,8 @@ class ContMenu(object):
         for indice, elemento in enumerate(lista_antipasti):
             riga = indice // 3
             colonna = indice % 3
-            box_layout = QHBoxLayout()
-            frame = QFrame()
-            frame.setFixedSize(147,204)
-            frame.setStyleSheet(".border: 1px solid black; border-radius: 5px; padding: 5px")
             box = BoxProdotto(elemento.nome, 'png/antipasto.png')
-            box_layout.addWidget(box)
-            frame.setLayout(box_layout)
             self.view.grid_antipasti.addWidget(box, riga, colonna)
-
             self.lista_box.append(box)
 
         for indice, elemento in enumerate(lista_pizze):
