@@ -166,7 +166,6 @@ class BoxProdotto(QWidget):
         super().__init__()
         self.nome_prodotto = nome_prodotto
         self.percorso_immagine = percorso_immagine
-        self.setObjectName("BoxProdotto")
         self.initUI()
         self.pulsante_meno.clicked.connect(self.decremento)
         self.pulsante_piu.clicked.connect(self.incremento)

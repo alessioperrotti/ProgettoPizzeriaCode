@@ -34,7 +34,7 @@ class ContVisualizzaConto(object):
 
             self.totale += ordine.prezzo_totale
             tit = QLabel("<b>Ordine</b> " + str(i+1))
-            self.view.layoutOrdini.addWidget(tit)
+            self.view.layout_ordini.addWidget(tit)
             layout = QHBoxLayout()
             layout.addSpacing(20)
             layoutprodotti = QVBoxLayout()
@@ -47,12 +47,12 @@ class ContVisualizzaConto(object):
 
                 layoutprodotti.addWidget(label)
                 layoutprodotti.addSpacing(2)
-                self.view.layoutOrdini.addLayout(layout)
+                self.view.layout_ordini.addLayout(layout)
 
             layoutprodotti.addSpacing(10)
             i += 1
 
-        self.view.layoutOrdini.addStretch()
+        self.view.layout_ordini.addStretch()
         self.view.label_totale_val.setText("€ " + str(self.totale) + " (coperto incluso)")
         self.view.label_totale_val.setFont(QFont("Roboto", 18))
 
