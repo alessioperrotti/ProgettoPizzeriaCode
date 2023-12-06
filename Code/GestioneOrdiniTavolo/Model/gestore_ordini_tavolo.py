@@ -125,3 +125,7 @@ class GestoreOrdiniTavolo(object):
                 lista_ordini_cercata.append(x)
 
         return lista_ordini_cercata
+
+    def get_info_ordini_tavolo(self):
+        lista_ordini = self.lista_ordini.copy()
+        return lista_ordini

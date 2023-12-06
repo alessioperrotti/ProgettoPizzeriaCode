@@ -98,7 +98,9 @@ class GestoreMagazzino(object):
                     return False
 
 
-
+    def get_info_materie_prime(self):
+        lista_materie_prime = self.lista_materieprime.copy()
+        return lista_materie_prime
     def incrementa_disponibilita(self, codice, incremento):
 
         for x in self.lista_materieprime:

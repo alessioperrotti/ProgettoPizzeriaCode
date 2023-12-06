@@ -99,3 +99,7 @@ class GestorePrenotazioni():
         self.ultimo_codice_prenotazione = dati['cod']
         self.lista_prenotazioni = dati['lista']
         self.lista_tavoli = dati['tavoli']
+
+    def get_info_prenotazioni(self):
+        lista_prenotazioni = self.lista_prenotazioni.copy()
+        return lista_prenotazioni
