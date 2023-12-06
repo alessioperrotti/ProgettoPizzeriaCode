@@ -52,7 +52,7 @@ class ContInserisciPrenotazione(object):
             codice = self.model.genera_codice()
 
             self.data_selezionata = self.view.calendario.selectedDate()
-            if self.data_selezionata <= QDate.currentDate():
+            if self.data_selezionata < QDate.currentDate():
                 raise OutOfDate("Inserisci una data valida")
 
             for row in range(self.view.tabella.rowCount()):

@@ -3,7 +3,7 @@ import os
 import sys
 
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QFont, QPixmap
+from PyQt6.QtGui import QFont, QPixmap, QIcon
 from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplication, QSizePolicy, QHBoxLayout,
                              QGridLayout, QTableWidget, QHeaderView)
 
@@ -11,6 +11,24 @@ label_font = QFont("Roboto", 24)
 label_font_tit = QFont("Roboto", 32, weight=50)
 label_font_piccolo = QFont("Roboto", 14)
 
+
+def crea_pulsante_back(dimensioni, directory):
+    pulsante_back = QPushButton()
+    img = QPixmap(directory)
+    icon = img.scaledToWidth(dimensioni)
+    icon = QIcon(icon)
+    pulsante_back.setIcon(icon)
+    pulsante_back.setIconSize(img.size())
+    pulsante_back.setFixedSize(dimensioni, dimensioni)
+    pulsante_back.setStyleSheet("""
+            QPushButton{
+                background-color: rgba(0,0,0,0);
+            }
+            QPushButton:hover{
+                background-color: "lightgray";
+            }
+            """)
+    return pulsante_back
 
 def crea_pulsante(nome, directory):
     pulsante = QPushButton()
@@ -84,6 +102,7 @@ class VistaHomeAdmin(QWidget):
         self.puls_pre = crea_pulsante("Prenotazioni", "png_icone/prenotazioni.png")
         self.puls_ric = crea_pulsante("Ricevute", "png_icone/ricevute.png")
 
+        self.pulsante_back = crea_pulsante_back(35, "png/back.png")
 
        # back = crea_immagine("png/back.png", 35)
 
@@ -112,16 +131,16 @@ class VistaHomeAdmin(QWidget):
         layout.addWidget(label)
         layout.addStretch()
         layout.addLayout(layout_centrale)
-        layout.addSpacing(10)
-   
-        layout.addSpacing(10)
+        layout.addSpacing(30)
+        layout.addWidget(self.pulsante_back,alignment=Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignBottom)
+
 
         layout_orizzontale.addSpacing(20)
         layout_orizzontale.addLayout(layout)
         layout_orizzontale.addSpacing(20)
 
         self.setFixedSize(756, 637)
-        self.setContentsMargins(0,0,0,50)
+        self.setContentsMargins(0,0,0,15)
         self.setLayout(layout_orizzontale)
 
 

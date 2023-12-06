@@ -31,7 +31,7 @@ class ContVistaLoginDipendente():
 
         self.cont_cuoco.view.pulsante_back.clicked.connect(lambda : self.stacked.setCurrentWidget(self.view))
         self.cont_cameriere.view.pulsante_back.clicked.connect(lambda : self.stacked.setCurrentWidget(self.view))
-
+        self.cont_admin.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.view))
 
 
     def login(self):

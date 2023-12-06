@@ -27,6 +27,7 @@ class ContGestionePrenotazioni(object):
         self.view.pulsante_modifica.clicked.connect(self.click_modifica)
         self.view.pulsante_elimina.clicked.connect(self.click_elimina)
 
+        self.model.stampa_lista_tavoli()
 
     def riga_selezionata(self):
         selected_items = self.view.tab.selectedItems()

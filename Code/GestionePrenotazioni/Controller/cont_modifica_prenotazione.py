@@ -94,7 +94,7 @@ class ContModificaPrenotazione(object):
 
             new_orario = self.view.combobox_orario.currentText()
             self.new_data_selezionata = self.view.calendario.selectedDate()
-            if self.new_data_selezionata <= QDate.currentDate():
+            if self.new_data_selezionata < QDate.currentDate():
                 raise OutOfDate("Inserisci una data valida")
 
             for row in range(self.view.tabella.rowCount()):

@@ -107,7 +107,7 @@ class VistaPiantina(QDialog):
         timer.start(1000)
 
         clock = QLabel()
-        img = QPixmap("png/check.png").scaled(35, 35)
+        img = QPixmap("png/clock.png").scaled(35, 35)
         clock.setPixmap(img)
 
         layout = QVBoxLayout()

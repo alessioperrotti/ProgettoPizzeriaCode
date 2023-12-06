@@ -95,8 +95,7 @@ class GestoreOrdiniTavolo(object):
 
         try:
             with open(self.file_tavoli_path, 'wb') as file:
-                pickle.dump(self.lista_tavoli, file, pickle.HIGHEST_PROTOCOL)
-            file.close()
+                pickle.dump(self.lista_tavoli, file)
         except FileNotFoundError as e:
             print(e)
 
@@ -112,7 +111,7 @@ class GestoreOrdiniTavolo(object):
 
             with open(self.file_tavoli_path, 'rb') as file2:
                 self.lista_tavoli = pickle.load(file2)
-                file2.close()
+            file2.close()
 
         except FileNotFoundError as e:
             print(e)

@@ -57,6 +57,12 @@ class MainWindow(QWidget):
             self.layout().update()
             self.close()
             self.show()
+
+        elif self.stacked.currentWidget() == self.cont_vista_login.cont_vista_login_dipendente.view:
+            self.setFixedSize(994 + 22, 637 + 22)
+            self.layout().update()
+            self.close()
+            self.show()
     def init_ui(self):
         ora_desiderata = datetime.combine(datetime.today(), time(3, 00))
         self.gestore_ric = GestoreRicevuta()

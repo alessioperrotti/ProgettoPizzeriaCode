@@ -14,12 +14,15 @@ class ContPiantina(object):
         self.view.pulsante_consegna.clicked.connect(self.cambia_colore)
         self.view.pulsante_consegna.clicked.connect(self.update_tabella)
         self.update_tabella()
+        self.model.gestore_ordini_tavolo.carica_da_file()
 
     def cambia_colore(self):
         self.tavolo_selezionato = self.model.ricerca_tavolo(self.view.n_tavolo)
         self.tavolo_selezionato.cambia_stato("servito")
 
-        self.model.salva_dati("lista_prenotazioni.pickle")
+        self.model.salva_tavoli()
+        self.model.carica_tavoli()
+
         # print("tavolo: "+str(self.tavolo_selezionato.numero)+" posti: "+str(self.tavolo_selezionato.posti_disponibili))
         # print(self.tavolo_selezionato.stato)
 

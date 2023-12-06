@@ -43,6 +43,7 @@ class ContHomeCameriere(object):
 
     def click_piantina(self):
         self.stacked.setCurrentWidget(self.cont_piantina.view)
+        self.cont_piantina.update_tabella()
 
     # def click_prenotazioni(self):
     #     cont_prenotazioni = ContVisualizzaPrenotazioni(GestorePrenotazioni())

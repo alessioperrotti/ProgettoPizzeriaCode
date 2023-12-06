@@ -91,7 +91,7 @@ class VistaTurniPersonale(QDialog):
         self.pulsante_back = crea_pulsante_img(35, "png/back.png")
 
         clock = QLabel()
-        img = QPixmap("png/check.png").scaled(35, 35)
+        img = QPixmap("png/clock.png").scaled(35, 35)
         clock.setPixmap(img)
 
         self.label_date = QLabel(self)
