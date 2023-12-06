@@ -19,11 +19,15 @@ class ContVisualizzaConto(object):
     def riempi_vista(self):
 
         self.view.title.setText("<b>Conto Tavolo n°</b>" + str(self.numtavolo))
+        coperti = 0
 
         for x in self.model.lista_ordini:
             if x.tavolo.numero == self.numtavolo:
+                coperti = int(x.tavolo.posti_disponibili)
                 if not x.pagato:
                     self.ordini.append(x)
+
+        self.totale += coperti*2
 
         i = 0
         for ordine in self.ordini:
@@ -49,7 +53,7 @@ class ContVisualizzaConto(object):
             i += 1
 
         self.view.layoutOrdini.addStretch()
-        self.view.label_totale_val.setText("€ " + str(self.totale))
+        self.view.label_totale_val.setText("€ " + str(self.totale) + " (coperto incluso)")
         self.view.label_totale_val.setFont(QFont("Roboto", 18))
 
 

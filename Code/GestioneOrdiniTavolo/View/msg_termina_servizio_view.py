@@ -28,7 +28,7 @@ def crea_pulsante(nome):
     return pulsante
 
 
-class VistaMsgEliminaProdotto(QDialog):
+class VistaMsgTerminaServizio(QDialog):
     def __init__(self):
         super().__init__()
         self.initUI()
@@ -63,6 +63,6 @@ class VistaMsgEliminaProdotto(QDialog):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    vista = VistaMsgEliminaProdotto()
+    vista = VistaMsgTerminaServizio()
     vista.show()
     sys.exit(app.exec())

@@ -7,6 +7,8 @@ from Code.GestioneOrdiniTavolo.View.visualizza_conto_view import VistaVisualizza
 from Code.GestioneOrdiniTavolo.Controller.visualizza_conto_cont import ContVisualizzaConto
 from Code.GestioneOrdiniTavolo.Model.tavolo import Tavolo
 from Code.GestioneMagazzino.Model.gestore_magazzino import GestoreMagazzino
+from Code.GestioneOrdiniTavolo.View.msg_termina_servizio_view import VistaMsgTerminaServizio
+from Code.GestioneOrdiniTavolo.Controller.msg_termina_servizio_cont import ContMsgTerminaServizio
 
 
 class ContMenu(object):
@@ -36,6 +38,7 @@ class ContMenu(object):
         self.view.pulsante_confermaordine.clicked.connect(self.conferma_ordine)
         self.view.pulsante_visualizzaconto.setEnabled(len(self.ordine_corrente.lista_prodotti))
         self.view.pulsante_visualizzaconto.clicked.connect(self.open_visualizzaconto)
+        self.view.pulsante_terminaservizio.clicked.connect(self.termina_servizio)
 
     def riempi_menu(self):
 
@@ -177,3 +180,11 @@ class ContMenu(object):
         dialog_visualizzaconto = VistaVisualizzaConto()
         controller_visualizzaconto = ContVisualizzaConto(dialog_visualizzaconto, self.model, self.tavolo.numero)
         controller_visualizzaconto.view.exec()
+
+    def termina_servizio(self):
+
+        dialog_conferma_elimina = VistaMsgTerminaServizio()
+        controller_conferma = ContMsgTerminaServizio(dialog_conferma_elimina)
+        controller_conferma.view.exec()
+        if controller_conferma.conferma:
+            self.tavolo.stato = "libero"

@@ -82,7 +82,7 @@ class VistaVisualizzaConto(QDialog):
         frame2.setFrameShape(QFrame.Shape.HLine)
 
         layout_totale = QHBoxLayout()
-        label_totale = QLabel("<b>TOTALE:</b> ........................................................€")
+        label_totale = QLabel("<b>TOTALE:</b> ................................")
         label_totale.setFont(QFont("Roboto", 18))
         label_totale.setFixedSize(249, 22)
         self.label_totale_val = QLabel()

@@ -2,18 +2,14 @@
 import os
 import pickle
 from Code.GestioneMagazzino.Model.materia_prima import MateriaPrima
-from PyQt6.QtCore import pyqtSignal
-from datetime import date
-from pathlib import Path
-
+from Code.GestioneMagazzino.Model.ordine_ristorante import OrdineRistorante
+from _datetime import datetime, timedelta
 
 class GestoreMagazzino(object):
 
-    elemento_inserito = pyqtSignal(int, str, float, float, float, float, date)
-
     def __init__(self):
 
-        self.lista_materieprime = []
+        self.lista_materieprime: list[MateriaPrima] = []
         self.file_pickle_path = "lista_materieprime.pickle"
         self.carica_da_file()
 
@@ -87,9 +83,7 @@ class GestoreMagazzino(object):
 
         for x in self.lista_materieprime:
             if int(x.codice) == int(codice):
-                print("matrpima trovata")
                 if x.qta_disponibile >= decremento:
-                    print("decremento effettuato")
                     x.qta_disponibile = round((x.qta_disponibile - decremento), 3)
                     self.salva_su_file()
                     self.carica_da_file()
@@ -97,14 +91,23 @@ class GestoreMagazzino(object):
                 else:
                     return False
 
+    def controlla_magazzino(self):
 
+        self.carica_da_file()
+        domani = datetime.now().date() + timedelta(days=1)
+        ordine_rist = OrdineRistorante()
+
+        for matprima in self.lista_materieprime:
+            if (matprima.data_scadenza <= domani) or (matprima.qta_disponibile <= matprima.qta_limite):
+                ordine_rist.aggiungi_all_ordine(matprima)
+                self.incrementa_disponibilita(matprima.codice, matprima.qta_ordine_STD)
 
     def incrementa_disponibilita(self, codice, incremento):
 
         for x in self.lista_materieprime:
-            if x.codice == codice:
-                x.qta_disponibile += incremento
+            if int(x.codice) == int(codice):
+                x.qta_disponibile = round((x.qta_disponibile + incremento), 3)
 
     def get_info_materieprime(self):
-        pass
+        return self.lista_materieprime
 
