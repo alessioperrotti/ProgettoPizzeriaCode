@@ -1,10 +1,11 @@
 from _datetime import datetime
 from Code.GestioneMenu.Model.prodotto import Prodotto
+from Code.GestioneOrdiniTavolo.Model.tavolo import Tavolo
 
 
 class OrdineTavolo(object):
 
-    def __init__(self, tavolo):
+    def __init__(self, tavolo: Tavolo):
 
         self.codice = None
         self.lista_prodotti = []

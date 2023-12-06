@@ -63,9 +63,7 @@ class GestoreOrdiniTavolo(object):
     def aggiungi_ordine(self, ordine: OrdineTavolo):
 
         ordine.codice = self.genera_id()
-        print("entro qui")
         self.lista_ordini.append(ordine)
-        print(str(ordine.codice))
         self.salva_su_file()
         self.carica_da_file()
 
@@ -103,6 +101,8 @@ class GestoreOrdiniTavolo(object):
             self.ultimo_codice_ordine = dati['cod']
             self.lista_ordini = dati['ordini']
         except FileNotFoundError as e:
+            print(e)
+        except EOFError as e:
             print(e)
 
     def estrai_ordine_per_codice(self, codice):

@@ -5,18 +5,20 @@ from Code.GestioneOrdiniTavolo.Model.gestore_ordini_tavolo import GestoreOrdiniT
 from Code.GestioneOrdiniTavolo.Model.ordine_tavolo import OrdineTavolo
 from Code.GestioneOrdiniTavolo.View.visualizza_conto_view import VistaVisualizzaConto
 from Code.GestioneOrdiniTavolo.Controller.visualizza_conto_cont import ContVisualizzaConto
+from Code.GestioneOrdiniTavolo.Model.tavolo import Tavolo
 
 
 class ContMenu(object):
 
-    def __init__(self, view: VistaMenu, model: GestoreOrdiniTavolo, numtavolo, stacked: QStackedWidget):
+    def __init__(self, view: VistaMenu, model: GestoreOrdiniTavolo, tavolo: Tavolo, stacked: QStackedWidget):
 
         self.view = view
         self.model = model
-        self.tavolo = numtavolo
+        self.tavolo = tavolo
         self.gestore_menu = GestoreMenu()
         self.riempi_menu()
-        self.ordine_corrente = OrdineTavolo(numtavolo)
+        self.ordine_corrente = OrdineTavolo(self.tavolo)
+        #print(self.tavolo + "nel costruttore di cont")
         stacked.addWidget(self.view)
 
         for box in self.lista_box:
@@ -118,7 +120,7 @@ class ContMenu(object):
         self.ordine_corrente.lista_prodotti = []
 
         message = QMessageBox()
-        #message.setIcon(QMessageBox.Icon.Information)
+        message.setIcon(QMessageBox.Icon.NoIcon)
         message.setWindowTitle("<b>Grazie!</b>")
         message.setText("Il tuo ordine è in fase di\npreparazione e ti verrà consegnato\nal più presto.")
         message.exec()
@@ -158,6 +160,7 @@ class ContMenu(object):
             self.view.scroll_area.ensureWidgetVisible(last_item.widget())
 
     def open_visualizzaconto(self):
+
         dialog_visualizzaconto = VistaVisualizzaConto()
         controller_visualizzaconto = ContVisualizzaConto(dialog_visualizzaconto, self.model, self.tavolo.numero)
         controller_visualizzaconto.view.exec()

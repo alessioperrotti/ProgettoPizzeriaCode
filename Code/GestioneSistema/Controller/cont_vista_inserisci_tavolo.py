@@ -7,6 +7,7 @@ from Code.GestioneOrdiniTavolo.Model.gestore_ordini_tavolo import GestoreOrdiniT
 from Code.GestioneOrdiniTavolo.View.menu_view import VistaMenu
 from Code.GestioneRicevuta.Model.gestore_ricevuta import GestoreRicevuta
 from Code.GestioneSistema.View.vista_inserisci_tavolo import VistaInserisciTavolo
+from Code.GestioneOrdiniTavolo.Model.tavolo import Tavolo
 
 
 class GestoreTavolo:
@@ -20,23 +21,20 @@ class ContVistaInserisciTavolo():
 
         self.view = VistaInserisciTavolo()
         stacked.addWidget(self.view)
-        self.tavolo = None
         self.gestore_ord = gestore_ord
         self.view.pulsante.clicked.connect(self.inserisci_tavolo)
-        self.cont_menu = ContMenu(VistaMenu(),gestore_ord,self.tavolo, stacked)
 
     def inserisci_tavolo(self):
-        n_tavolo = self.view.campo.text()
+        n_tavolo = int(self.view.campo.text())
         self.view.campo.setText("")
         tavolo_trovato = False
         for tavolo in self.gestore_ord.lista_tavoli:
-            if str(tavolo.numero) == n_tavolo:
+            if int(tavolo.numero) == n_tavolo:
                 self.tavolo = tavolo
-                self.cont_menu.tavolo = tavolo
                 tavolo_trovato = True
+                self.cont_menu = ContMenu(VistaMenu(), self.gestore_ord, self.tavolo, self.stacked)
                 self.stacked.setCurrentWidget(self.cont_menu.view)
-                #e qui si imposta nello stacked il cont_vista_menu.view
-                return
+                break
         if not tavolo_trovato:
             error_box = QMessageBox()
             error_box.setIcon(QMessageBox.Icon.Critical)

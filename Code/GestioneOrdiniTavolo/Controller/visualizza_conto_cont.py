@@ -2,6 +2,7 @@ from Code.GestioneOrdiniTavolo.View.visualizza_conto_view import VistaVisualizza
 from Code.GestioneOrdiniTavolo.Model.gestore_ordini_tavolo import GestoreOrdiniTavolo
 from Code.GestioneOrdiniTavolo.Model.ordine_tavolo import OrdineTavolo
 from PyQt6.QtWidgets import QLabel, QHBoxLayout, QVBoxLayout, QSizePolicy
+from PyQt6.QtGui import QFont
 
 class ContVisualizzaConto(object):
 
@@ -20,7 +21,7 @@ class ContVisualizzaConto(object):
         self.view.title.setText("<b>Conto Tavolo n°</b>" + str(self.numtavolo))
 
         for x in self.model.lista_ordini:
-            if x.tavolo == self.numtavolo:
+            if x.tavolo.numero == self.numtavolo:
                 if not x.pagato:
                     self.ordini.append(x)
 
@@ -28,7 +29,7 @@ class ContVisualizzaConto(object):
         for ordine in self.ordini:
 
             self.totale += ordine.prezzo_totale
-            tit = QLabel("Ordine " + str(i))
+            tit = QLabel("<b>Ordine</b> " + str(i+1))
             self.view.layoutOrdini.addWidget(tit)
             layout = QHBoxLayout()
             layout.addSpacing(20)
@@ -37,7 +38,7 @@ class ContVisualizzaConto(object):
             layoutprodotti.addSpacing(2)
 
             for prodotto in ordine.lista_prodotti:
-                label = QLabel(f'<font color="black">&#8226;</font> ' + prodotto.nome)
+                label = QLabel(f'<font color="black">&#8226;</font> ' + prodotto.nome + "  €" + str(prodotto.prezzo_al_pubblico))
                 label.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
 
                 layoutprodotti.addWidget(label)
@@ -48,6 +49,7 @@ class ContVisualizzaConto(object):
             i += 1
 
         self.view.layoutOrdini.addStretch()
-        self.view.label_totale_val.setText(str(self.totale))
+        self.view.label_totale_val.setText("€ " + str(self.totale))
+        self.view.label_totale_val.setFont(QFont("Roboto", 18))
 
 
