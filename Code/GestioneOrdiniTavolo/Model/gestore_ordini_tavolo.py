@@ -1,4 +1,3 @@
-from Code.GestioneOrdiniTavolo.Model.ordine_tavolo import OrdineTavolo
 from Code.GestioneOrdiniTavolo.Model.tavolo import Tavolo
 from Code.GestioneOrdiniTavolo.Model.ordine_tavolo import OrdineTavolo
 import pickle
@@ -11,7 +10,8 @@ class GestoreOrdiniTavolo(object):
         self.setup_tavoli()
         self.lista_ordini: list[OrdineTavolo] = []
         self.ultimo_codice_ordine = 0
-        self.file_pickle_path = "lista_ordini.pickle"
+        self.file_ordini_path = "lista_ordini.pickle"
+        self.file_tavoli_path = "lista_tavoli.pickle"
         self.carica_da_file()
 
     def setup_tavoli(self):
@@ -57,14 +57,14 @@ class GestoreOrdiniTavolo(object):
     def genera_id(self):
 
         self.ultimo_codice_ordine += 1
-        self.salva_su_file()
+        self.salva_ordini_su_file()
         return self.ultimo_codice_ordine
 
     def aggiungi_ordine(self, ordine: OrdineTavolo):
 
         ordine.codice = self.genera_id()
         self.lista_ordini.append(ordine)
-        self.salva_su_file()
+        self.salva_ordini_su_file()
         self.carica_da_file()
 
     # probabilmente da togliere
@@ -76,7 +76,7 @@ class GestoreOrdiniTavolo(object):
 
 
 
-    def salva_su_file(self):
+    def salva_ordini_su_file(self):
 
         dati = {
 
@@ -85,8 +85,17 @@ class GestoreOrdiniTavolo(object):
         }
 
         try:
-            with open(self.file_pickle_path, 'wb') as file:
+            with open(self.file_ordini_path, 'wb') as file:
                 pickle.dump(dati, file, pickle.HIGHEST_PROTOCOL)
+            file.close()
+        except FileNotFoundError as e:
+            print(e)
+
+    def salva_tavoli_su_file(self):
+
+        try:
+            with open(self.file_tavoli_path, 'wb') as file:
+                pickle.dump(self.lista_tavoli, file, pickle.HIGHEST_PROTOCOL)
             file.close()
         except FileNotFoundError as e:
             print(e)
@@ -94,12 +103,17 @@ class GestoreOrdiniTavolo(object):
     def carica_da_file(self):
 
         try:
-            with open(self.file_pickle_path, 'rb') as file:
-                dati = pickle.load(file)
+            with open(self.file_ordini_path, 'rb') as file1:
+                dati = pickle.load(file1)
 
-            file.close()
+            file1.close()
             self.ultimo_codice_ordine = dati['cod']
             self.lista_ordini = dati['ordini']
+
+            with open(self.file_tavoli_path, 'rb') as file2:
+                self.lista_tavoli = pickle.load(file2)
+                file2.close()
+
         except FileNotFoundError as e:
             print(e)
         except EOFError as e:

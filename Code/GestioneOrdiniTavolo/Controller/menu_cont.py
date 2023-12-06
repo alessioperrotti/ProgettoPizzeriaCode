@@ -117,7 +117,7 @@ class ContMenu(object):
     def conferma_ordine(self):
 
         self.model.aggiungi_ordine(self.ordine_corrente)
-        self.model.salva_su_file()
+        self.model.salva_ordini_su_file()
         self.model.carica_da_file()
 
         for prodotto in self.ordine_corrente.lista_prodotti:
@@ -133,6 +133,7 @@ class ContMenu(object):
                     error.exec()
 
         self.tavolo.stato = "in attesa"
+        self.model.salva_tavoli_su_file()
         self.ordine_corrente.lista_prodotti = []
 
         message = QMessageBox()
@@ -188,3 +189,4 @@ class ContMenu(object):
         controller_conferma.view.exec()
         if controller_conferma.conferma:
             self.tavolo.stato = "libero"
+            self.model.salva_tavoli_su_file()
