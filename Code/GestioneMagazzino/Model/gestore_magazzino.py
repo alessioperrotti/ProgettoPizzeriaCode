@@ -100,16 +100,19 @@ class GestoreMagazzino(object):
         for matprima in self.lista_materieprime:
             if (matprima.data_scadenza <= domani) or (matprima.qta_disponibile <= matprima.qta_limite):
                 ordine_rist.aggiungi_all_ordine(matprima)
-                self.incrementa_disponibilita(matprima.codice, matprima.qta_ordine_STD)
+
+        self.incrementa_disponibilita(ordine_rist)
 
     def get_info_materie_prime(self):
         lista_materie_prime = self.lista_materieprime.copy()
         return lista_materie_prime
-    
-    def incrementa_disponibilita(self, codice, incremento):
 
-        for x in self.lista_materieprime:
-            if int(x.codice) == int(codice):
-                x.qta_disponibile = round((x.qta_disponibile + incremento), 3)
+    def incrementa_disponibilita(self, ordine_rist: OrdineRistorante):
+
+        for matprima in ordine_rist.lista_prodotti:
+            incremento = matprima.qta_ordine_STD
+            for x in self.lista_materieprime:
+                if int(x.codice) == int(matprima.codice):
+                    x.qta_disponibile = round((x.qta_disponibile + incremento), 3)
 
 
