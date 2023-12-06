@@ -3,7 +3,7 @@ import os
 import pickle
 from Code.GestioneMagazzino.Model.materia_prima import MateriaPrima
 from Code.GestioneMagazzino.Model.ordine_ristorante import OrdineRistorante
-from _datetime import datetime, timedelta
+from _datetime import datetime, timedelta, time
 
 class GestoreMagazzino(object):
 
@@ -12,6 +12,7 @@ class GestoreMagazzino(object):
         self.lista_materieprime: list[MateriaPrima] = []
         self.file_pickle_path = "lista_materieprime.pickle"
         self.carica_da_file()
+        self.orario_check = datetime.combine(datetime.today(), time(2, 00))
 
 
     def aggiungi_materiaprima(self, materiaprima):

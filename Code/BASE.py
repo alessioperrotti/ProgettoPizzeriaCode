@@ -80,16 +80,19 @@ class MainWindow(QWidget):
 
         #istanzio timer per il backup
         self.timer = QTimer(self)
-        self.timer.timeout.connect(self.verifica_backup)
+        self.timer.timeout.connect(self.verifica_operazioni)
         self.timer.start(60000) #verifica ogni minuto
 
-    def verifica_backup(self):
+    def verifica_operazioni(self):
         #print("verifica backup")
         orario_backup = self.gestore_backup.orario_backup
+        orario_rifornimento = self.gestore_mag.orario_check
         orario_attuale = datetime.now()
         if orario_attuale.hour == orario_backup.hour and orario_attuale.minute == orario_backup.minute:
             self.gestore_backup.effettua_backup()
             print("backup effettuato")
+        if orario_attuale.hour == orario_rifornimento.hour and orario_attuale.minute == orario_rifornimento.minute:
+            self.gestore_mag.controlla_magazzino()
 
 
 
