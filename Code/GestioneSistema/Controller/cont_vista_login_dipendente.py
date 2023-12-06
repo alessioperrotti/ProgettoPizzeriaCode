@@ -29,6 +29,11 @@ class ContVistaLoginDipendente():
         self.user_admin = "admin"
         self.pass_admin = "admin"
 
+        self.cont_cuoco.view.pulsante_back.clicked.connect(lambda : self.stacked.setCurrentWidget(self.view))
+        self.cont_cameriere.view.pulsante_back.clicked.connect(lambda : self.stacked.setCurrentWidget(self.view))
+
+
+
     def login(self):
         #prendo i dati inseriti dall'utente
         self.username = self.view.user_line.text()

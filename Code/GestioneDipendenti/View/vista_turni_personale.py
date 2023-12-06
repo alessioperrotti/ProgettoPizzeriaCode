@@ -116,7 +116,7 @@ class VistaTurniPersonale(QDialog):
         layout.addLayout(layout_title)
         layout.addWidget(self.tabella, alignment=Qt.AlignmentFlag.AlignCenter)
         layout.addSpacing(65)
-        layout.addWidget(self.pulsante_back, alignment=Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignBottom)
+        layout.addWidget(self.pulsante_back, alignment=Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignBottom)
 
         self.setLayout(layout)
         self.setFixedSize(994, 637)

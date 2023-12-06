@@ -103,15 +103,14 @@ class VistaHomeCuoco(QWidget):
         layout.addLayout(layout_centrale)
         layout.addSpacing(170)
 
-        layout.addWidget(self.pulsante_back)
-        layout.addSpacing(10)
+        layout.addWidget(self.pulsante_back, alignment=Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignBottom)
 
-        layout_orizzontale.addSpacing(20)
         layout_orizzontale.addLayout(layout)
         layout_orizzontale.addSpacing(20)
 
         self.setFixedSize(994, 637)
         self.setLayout(layout_orizzontale)
+        self.setContentsMargins(20, 20, 20, 10)
         self.show()
 
 

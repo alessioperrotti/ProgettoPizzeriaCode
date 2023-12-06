@@ -7,10 +7,12 @@ from Code.GestioneDipendenti.View.vista_turni_personale import VistaTurniPersona
 
 
 class ContTurniPersonale(object):
-    def __init__(self, model: GestoreDipendenti):
+    def __init__(self, model: GestoreDipendenti, stacked: QStackedWidget):
         self.view = VistaTurniPersonale()
         self.model = model
         self.update_tabella()
+        self.stacked = stacked
+        stacked.addWidget(self.view)
 
     # def update_tabella(self):
     #     cont_gestione_turni = ContGestioneTurni(self.model, self.stacked)

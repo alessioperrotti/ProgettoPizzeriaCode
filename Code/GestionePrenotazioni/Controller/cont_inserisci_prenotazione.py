@@ -66,7 +66,7 @@ class ContInserisciPrenotazione(object):
             errore_msg = "Controllare che i dati siano inseriti correttamente."
             if self.view.campo_nome.text() == "":
                 errore_msg = "Il campo nome è obbligatorio."
-            elif not self.view.campo_nome.text().isalpha():
+            if not self.view.campo_nome.text().isalpha():
                 errore_msg = "Il nome può contenere solo lettere."
 
             error_box = QMessageBox()
