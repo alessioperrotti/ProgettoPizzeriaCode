@@ -109,10 +109,11 @@ class GestoreMagazzino(object):
 
     def incrementa_disponibilita(self, ordine_rist: OrdineRistorante):
 
-        for matprima in ordine_rist.lista_prodotti:
-            incremento = matprima.qta_ordine_STD
-            for x in self.lista_materieprime:
-                if int(x.codice) == int(matprima.codice):
-                    x.qta_disponibile = round((x.qta_disponibile + incremento), 3)
+        if len(ordine_rist.lista_prodotti) != 0:
+            for matprima in ordine_rist.lista_prodotti:
+                incremento = matprima.qta_ordine_STD
+                for x in self.lista_materieprime:
+                    if int(x.codice) == int(matprima.codice):
+                        x.qta_disponibile = round((x.qta_disponibile + incremento), 3)
 
 
