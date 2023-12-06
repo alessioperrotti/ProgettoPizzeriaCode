@@ -1,5 +1,5 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QTableWidgetItem
+from PyQt6.QtWidgets import QTableWidgetItem, QStackedWidget
 
 from Code.GestionePrenotazioni.Model.gestore_prenotazioni import GestorePrenotazioni
 from Code.GestionePrenotazioni.View.vista_visualizza_prenotazioni import VistaVisualizzaPrenotazioni
@@ -7,9 +7,11 @@ from Code.GestionePrenotazioni.View.vista_visualizza_prenotazioni import VistaVi
 
 class ContVisualizzaPrenotazioni(object):
 
-    def __init__(self, model: GestorePrenotazioni):
+    def __init__(self, model: GestorePrenotazioni, stacked: QStackedWidget):
         self.view = VistaVisualizzaPrenotazioni()
         self.model = model
+        self.stacked = stacked
+        stacked.addWidget(self.view)
         self.update_tabella()
         self.view.search_edit.textChanged.connect(self.filtra_elementi)
 

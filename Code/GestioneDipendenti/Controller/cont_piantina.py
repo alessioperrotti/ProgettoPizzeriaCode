@@ -1,12 +1,14 @@
-from PyQt6.QtWidgets import QPushButton, QWidget
+from PyQt6.QtWidgets import QPushButton, QWidget, QStackedWidget
 
 from Code.GestioneDipendenti.View.vista_piantina import VistaPiantina
 from Code.GestionePrenotazioni.Model.gestore_prenotazioni import GestorePrenotazioni
 
 
 class ContPiantina(object):
-    def __init__(self, model: GestorePrenotazioni, view: VistaPiantina):
-        self.view = view
+    def __init__(self, model: GestorePrenotazioni, stacked: QStackedWidget):
+        self.stacked = stacked
+        self.view = VistaPiantina()
+        stacked.addWidget(self.view)
         self.model = model
         self.tavolo_selezionato = None
         self.view.pulsante_consegna.clicked.connect(self.cambia_colore)
