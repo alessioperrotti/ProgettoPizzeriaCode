@@ -8,7 +8,7 @@ class OrdineTavolo(object):
     def __init__(self, tavolo: Tavolo):
 
         self.codice = None
-        self.lista_prodotti = []
+        self.lista_prodotti: list[Prodotto] = []
         self.orario = datetime.now().time()
         self.prezzo_totale = 0
         self.tavolo = tavolo

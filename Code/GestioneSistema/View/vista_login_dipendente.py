@@ -73,6 +73,7 @@ class VistaLoginDipendente(QWidget):
 
         self.user_line = QLineEdit()
         self.pass_line = QLineEdit()
+        self.pass_line.setEchoMode(QLineEdit.EchoMode.Password)
         self.user_line.setStyleSheet("border: 2px solid black; border-radius: 4px;")
         self.pass_line.setStyleSheet("border: 2px solid black; border-radius: 4px;")
 

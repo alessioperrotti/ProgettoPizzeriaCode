@@ -6,6 +6,7 @@ from Code.GestioneOrdiniTavolo.Model.ordine_tavolo import OrdineTavolo
 from Code.GestioneOrdiniTavolo.View.visualizza_conto_view import VistaVisualizzaConto
 from Code.GestioneOrdiniTavolo.Controller.visualizza_conto_cont import ContVisualizzaConto
 from Code.GestioneOrdiniTavolo.Model.tavolo import Tavolo
+from Code.GestioneMagazzino.Model.gestore_magazzino import GestoreMagazzino
 
 
 class ContMenu(object):
@@ -16,9 +17,9 @@ class ContMenu(object):
         self.model = model
         self.tavolo = tavolo
         self.gestore_menu = GestoreMenu()
+        self.magazzino = GestoreMagazzino()
         self.riempi_menu()
         self.ordine_corrente = OrdineTavolo(self.tavolo)
-        #print(self.tavolo + "nel costruttore di cont")
         stacked.addWidget(self.view)
 
         for box in self.lista_box:
@@ -115,7 +116,19 @@ class ContMenu(object):
         self.model.aggiungi_ordine(self.ordine_corrente)
         self.model.salva_su_file()
         self.model.carica_da_file()
-        #self.model.conferma_ordine(self.ordine_corrente)
+
+        for prodotto in self.ordine_corrente.lista_prodotti:
+            for ingrediente in prodotto.ingredienti:
+                print(str(ingrediente))
+                codice_mp = ingrediente[0].codice
+                quantità = ingrediente[1]
+                disp = self.magazzino.decrementa_disponibilita(codice_mp, quantità)
+                if not disp:
+                    error = QMessageBox()
+                    error.setIcon(QMessageBox.Icon.Critical)
+                    error.setText("Purtroppo non è possibile confermare l'ordine\nperchè siamo a corto di " + str(ingrediente[0].nome))
+                    error.exec()
+
         self.tavolo.stato = "in attesa"
         self.ordine_corrente.lista_prodotti = []
 

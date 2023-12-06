@@ -9,7 +9,7 @@ class Prodotto(object):
         self.codice = codice
         self.prezzo_al_pubblico = prezzo_al_pubblico
         self.tipologia = tipologia
-        self.ingredienti = ingredienti
+        self.ingredienti = ingredienti          # lista di tuple (MateriaPrima, quantità: int)
 
 
 

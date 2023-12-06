@@ -86,8 +86,18 @@ class GestoreMagazzino(object):
     def decrementa_disponibilita(self, codice, decremento):
 
         for x in self.lista_materieprime:
-            if x.codice == codice:
-                x.qta_disponibile -= decremento
+            if int(x.codice) == int(codice):
+                print("matrpima trovata")
+                if x.qta_disponibile >= decremento:
+                    print("decremento effettuato")
+                    x.qta_disponibile = round((x.qta_disponibile - decremento), 3)
+                    self.salva_su_file()
+                    self.carica_da_file()
+                    return True
+                else:
+                    return False
+
+
 
     def incrementa_disponibilita(self, codice, incremento):
 
