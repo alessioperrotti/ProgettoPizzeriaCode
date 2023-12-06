@@ -116,6 +116,11 @@ class GestoreDipendenti():
         self.salva_dati(self.nome_file)
         self.carica_da_file(self.nome_file)
 
+    def get_info_dipendenti(self):
+
+        lista_dipendenti = self.lista_camerieri.copy()
+        lista_dipendenti.extend(self.lista_cuochi)
+        return lista_dipendenti
     #################################################################################
     def salva_dati(self, nome_file):
         with open(nome_file, 'wb') as file:

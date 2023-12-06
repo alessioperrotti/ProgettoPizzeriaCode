@@ -25,35 +25,21 @@ class GestoreBackup():
     def effettua_backup(self):
         with open(self.nome_file, 'wb') as file:
             pickle.dump({
-                'dipendenti': self.get_info_dipendenti,
-                'ricevute': self.get_info_ricevute,
-                'prodotti': self.get_info_prodotti,
-                'ordini_tavolo': self.get_info_ordini_tavolo,
-                'prenotazioni': self.get_info_prenotazioni,
-                'materie_prime': self.get_info_materie_prime
+                'dipendenti': self.gestore_dip.get_info_dipendenti,
+                'ricevute': self.gestore_ric.get_info_ricevute,
+                'prodotti': self.gestore_menu.get_info_prodotti,
+                'ordini_tavolo': self.gestore_ord.get_info_ordini_tavolo,
+                'prenotazioni': self.gestore_pre.get_info_prenotazioni,
+                'materie_prime': self.gestore_mag.get_info_materie_prime
                 }, file)
 
         pass
 
-    def get_info_dipendenti(self):
 
-        lista_dipendenti = self.gestore_dip.lista_camerieri.copy()
-        lista_dipendenti.extend(self.gestore_dip.lista_cuochi)
-        return lista_dipendenti
-    def get_info_ricevute(self):
-        lista_ricevute = self.gestore_ric.lista_ricevute.copy()
-        return lista_ricevute
-    def get_info_prodotti(self):
-        lista_prodotti = self.gestore_menu.lista_prodotti.copy()
-        return lista_prodotti
-    def get_info_ordini_tavolo(self):
-        lista_ordini = self.gestore_ord.lista_ordini.copy()
-        return lista_ordini
-    def get_info_prenotazioni(self):
-        lista_prenotazioni = self.gestore_pre.lista_prenotazioni.copy()
-        return lista_prenotazioni
 
-    def get_info_materie_prime(self):
-        lista_materie_prime = self.gestore_mag.lista_materieprime.copy()
-        return lista_materie_prime
+
+
+
+
+
 

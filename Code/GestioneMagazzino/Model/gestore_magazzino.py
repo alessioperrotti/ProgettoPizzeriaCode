@@ -102,12 +102,14 @@ class GestoreMagazzino(object):
                 ordine_rist.aggiungi_all_ordine(matprima)
                 self.incrementa_disponibilita(matprima.codice, matprima.qta_ordine_STD)
 
+    def get_info_materie_prime(self):
+        lista_materie_prime = self.lista_materieprime.copy()
+        return lista_materie_prime
+    
     def incrementa_disponibilita(self, codice, incremento):
 
         for x in self.lista_materieprime:
             if int(x.codice) == int(codice):
                 x.qta_disponibile = round((x.qta_disponibile + incremento), 3)
 
-    def get_info_materieprime(self):
-        return self.lista_materieprime
 

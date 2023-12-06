@@ -69,3 +69,7 @@ class GestoreMenu(object):
             file.close()
         except FileNotFoundError as e:
             print(e)
+
+    def get_info_prodotti(self):
+        lista_prodotti = self.lista_prodotti.copy()
+        return lista_prodotti

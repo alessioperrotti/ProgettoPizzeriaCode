@@ -20,6 +20,10 @@ class GestoreRicevuta:
         self.salva_su_file(self.nome_file)
         return numero
 
+    def get_info_ricevute(self):
+        lista_ricevute = self.lista_ricevute.copy()
+        return lista_ricevute
+
     def ricerca_ricevuta_nome(self, nomeAcquirente):
         list = []
         for ricevuta in self.lista_ricevute:
