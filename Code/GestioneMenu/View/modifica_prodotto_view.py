@@ -54,7 +54,6 @@ class VistaModificaProdotto(QDialog):
     def initUI(self):
 
         main_layout = QVBoxLayout(self)
-        #vbox = QVBoxLayout()
         hbox_datagrid = QHBoxLayout()
         hbox_conferma = QHBoxLayout()
         upper_grid = QGridLayout()
@@ -136,12 +135,10 @@ class VistaModificaProdotto(QDialog):
 
         self.pulsante_rimuovi = QPushButton("Rimuovi Ingrediente\nSelezionato")
         self.pulsante_rimuovi.setFixedSize(162, 55)
-        #self.pulsante_rimuovi.setFont(QFont("Roboto", 15, weight=350))
         hbox_datagrid.addWidget(self.pulsante_rimuovi)
 
         self.pulsante_conferma = QPushButton("Conferma Modifica")
         self.pulsante_conferma.setFixedSize(205, 74)
-        #self.pulsante_conferma.setFont(QFont("Roboto", 15, weight=350))
         hbox_conferma.addWidget(self.pulsante_conferma)
 
         main_layout.addWidget(label_titolo, alignment=Qt.AlignmentFlag.AlignTop)

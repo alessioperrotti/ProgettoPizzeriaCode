@@ -54,7 +54,6 @@ class VistaInserisciProdotto(QDialog):
     def initUI(self):
 
         main_layout = QVBoxLayout(self)
-        #vbox = QVBoxLayout()
         hbox_datagrid = QHBoxLayout()
         hbox_conferma = QHBoxLayout()
         upper_grid = QGridLayout()
