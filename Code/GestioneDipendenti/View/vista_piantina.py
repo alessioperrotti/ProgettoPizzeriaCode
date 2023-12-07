@@ -88,7 +88,9 @@ class VistaPiantina(QDialog):
 
         linea_v = QFrame()
         linea_v.setFrameShape(QFrame.Shape.VLine)
+        linea_v.setLineWidth(2)
         linea_v.setFixedHeight(637)
+        linea_v.setStyleSheet("color: gray;")
 
         self.pulsante_back = crea_pulsante_back(35, "png/back.png")
         self.pulsante_consegna = QPushButton("Consegna")

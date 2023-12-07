@@ -6,19 +6,7 @@ from Code.GestionePrenotazioni.Model.prenotazione import Prenotazione
 from Code.GestionePrenotazioni.View.vista_modifica_prenotazione import VistaModificaPrenotazione
 
 
-class OutOfDate(Exception):
-    def __init__(self, message):
-        self.message = message
-        super().__init__(message)
-
-
-class OutOfSpace(Exception):
-    def __init__(self, message):
-        self.message = message
-        super().__init__(message)
-
-
-class ChangeTable(Exception):
+class AlertBox(Exception):
     def __init__(self, message):
         self.message = message
         super().__init__(message)
@@ -86,51 +74,29 @@ class ContModificaPrenotazione(object):
         try:
             new_persone = self.view.spinbox_persone.value()
             if new_persone <= 0:
-                raise ValueError
+                raise AlertBox("Inserisci un numero di persone valido")
             n_tavolo = self.view.combobox_tavolo.currentText()
             new_tavolo = self.model.ricerca_tavolo(n_tavolo)
             if new_persone > new_tavolo.posti_disponibili:
-                raise ChangeTable("Scegli un tavolo più grande")
+                raise AlertBox("Scegli un tavolo più grande")
 
             new_orario = self.view.combobox_orario.currentText()
             self.new_data_selezionata = self.view.calendario.selectedDate()
             if self.new_data_selezionata < QDate.currentDate():
-                raise OutOfDate("Inserisci una data valida")
+                raise AlertBox("Inserisci una data valida")
 
             for row in range(self.view.tabella.rowCount()):
                 orario_tab = self.view.tabella.item(row, 0).text()
                 if self.new_orario_selezionato == orario_tab:
                     posti_disponibili = self.view.tabella.item(row, 2).text()
                     if int(posti_disponibili) - int(new_persone) < 0:
-                        raise OutOfSpace("Non ci sono posti disponibili")
+                        raise AlertBox("Non ci sono posti disponibili")
 
-        except ValueError:
-            errore_msg = "Controllare che i dati siano inseriti correttamente."
+        except AlertBox as ab:
             error_box = QMessageBox()
             error_box.setIcon(QMessageBox.Icon.Critical)
             error_box.setWindowTitle("Errore di Inserimento")
-            error_box.setText(errore_msg)
-            error_box.exec()
-
-        except OutOfDate as od:
-            error_box = QMessageBox()
-            error_box.setIcon(QMessageBox.Icon.Critical)
-            error_box.setWindowTitle("Errore di Inserimento")
-            error_box.setText(od.message)
-            error_box.exec()
-
-        except OutOfSpace as os:
-            error_box = QMessageBox()
-            error_box.setIcon(QMessageBox.Icon.Critical)
-            error_box.setWindowTitle("Errore di Inserimento")
-            error_box.setText(os.message)
-            error_box.exec()
-
-        except ChangeTable as ct:
-            error_box = QMessageBox()
-            error_box.setIcon(QMessageBox.Icon.Critical)
-            error_box.setWindowTitle("Errore di Inserimento")
-            error_box.setText(ct.message)
+            error_box.setText(ab.message)
             error_box.exec()
 
         else:
