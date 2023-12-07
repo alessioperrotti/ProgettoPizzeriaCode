@@ -29,12 +29,7 @@ class MainWindow(QWidget):
 
         self.stacked = QStackedWidget()
         self.init_ui()
-
-
-
-       # centro la finestra  #va aggiunto un 22 alla larghezza e altezza rispetto alla view
         self.setFixedSize(994+22, 637+22)
-
         self.show()
 
 
@@ -90,7 +85,6 @@ class MainWindow(QWidget):
         self.timer.start(60000) #verifica ogni minuto
 
     def verifica_operazioni(self):
-        #print("verifica backup")
         orario_backup = self.gestore_backup.orario_backup
         orario_rifornimento = self.gestore_mag.orario_check
         orario_attuale = datetime.now()
