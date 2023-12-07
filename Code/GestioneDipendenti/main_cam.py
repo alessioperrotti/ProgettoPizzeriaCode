@@ -2,7 +2,7 @@ import sys
 
 from PyQt6.QtWidgets import QWidget, QStackedWidget, QVBoxLayout, QApplication
 
-from Code.GestioneDipendenti.Controller.cont_home_cameriere import ContHomeCameriere
+from Code.GestioneSistema.Controller.cont_home_cameriere import ContHomeCameriere
 from Code.GestioneDipendenti.Model.gestore_dipendenti import GestoreDipendenti
 
 

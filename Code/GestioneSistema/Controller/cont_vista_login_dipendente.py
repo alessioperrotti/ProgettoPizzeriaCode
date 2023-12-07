@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import QMessageBox, QStackedWidget
 
-from Code.GestioneDipendenti.Controller.cont_home_cameriere import ContHomeCameriere
-from Code.GestioneDipendenti.Controller.cont_home_cuoco import ContHomeCuoco
+from Code.GestioneSistema.Controller.cont_home_cameriere import ContHomeCameriere
+from Code.GestioneSistema.Controller.cont_home_cuoco import ContHomeCuoco
 from Code.GestioneDipendenti.Model.gestore_dipendenti import GestoreDipendenti
 from Code.GestioneMagazzino.Model.gestore_magazzino import GestoreMagazzino
 from Code.GestioneMenu.Model.gestore_menu import GestoreMenu

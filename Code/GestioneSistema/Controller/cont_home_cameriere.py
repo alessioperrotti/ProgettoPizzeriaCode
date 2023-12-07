@@ -3,12 +3,9 @@ from PyQt6.QtWidgets import QStackedWidget
 from Code.GestioneDipendenti.Controller.cont_piantina import ContPiantina
 from Code.GestioneDipendenti.Controller.cont_turni_personale import ContTurniPersonale
 from Code.GestioneDipendenti.Model.gestore_dipendenti import GestoreDipendenti
-from Code.GestioneDipendenti.View.vista_home_cameriere import VistaHomeCameriere
-from Code.GestioneDipendenti.View.vista_piantina import VistaPiantina
-from Code.GestioneDipendenti.View.vista_turni_personale import VistaTurniPersonale
+from Code.GestioneSistema.View.vista_home_cameriere import VistaHomeCameriere
 from Code.GestionePrenotazioni.Controller.cont_visualizza_prenotazioni import ContVisualizzaPrenotazioni
 from Code.GestionePrenotazioni.Model.gestore_prenotazioni import GestorePrenotazioni
-from Code.GestionePrenotazioni.View.vista_visualizza_prenotazioni import VistaVisualizzaPrenotazioni
 
 
 class ContHomeCameriere(object):

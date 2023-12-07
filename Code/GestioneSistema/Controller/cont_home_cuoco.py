@@ -1,10 +1,8 @@
-from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QStackedWidget, QTableWidgetItem
+from PyQt6.QtWidgets import QStackedWidget
 
 from Code.GestioneDipendenti.Controller.cont_turni_personale import ContTurniPersonale
 from Code.GestioneDipendenti.Model.gestore_dipendenti import GestoreDipendenti
-from Code.GestioneDipendenti.View.vista_home_cuoco import VistaHomeCuoco
-from Code.GestioneDipendenti.View.vista_turni_personale import VistaTurniPersonale
+from Code.GestioneSistema.View.vista_home_cuoco import VistaHomeCuoco
 
 
 class ContHomeCuoco(object):
