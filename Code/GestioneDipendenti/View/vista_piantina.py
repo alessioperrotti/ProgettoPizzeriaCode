@@ -127,7 +127,7 @@ class VistaPiantina(QDialog):
         layout_title.addWidget(clock, alignment=Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
 
         layout_h.addLayout(layout_griglia)
-        layout_h.addSpacing(130)
+        layout_h.addSpacing(110)
         layout_h.addWidget(linea_v, alignment=Qt.AlignmentFlag.AlignHCenter)
         layout_h.addLayout(layout_v_dx)
 
@@ -147,13 +147,13 @@ class VistaPiantina(QDialog):
                 tavolo_numero = row * 4 + col + 1
 
                 if tavolo_numero <= 4:
-                    size = (170, 70)
+                    size = (180, 80)
                 elif tavolo_numero <= 8:
-                    size = (125, 70)
+                    size = (135, 80)
                 elif tavolo_numero <= 12:
-                    size = (100, 70)
+                    size = (110, 80)
                 else:
-                    size = (70, 70)
+                    size = (80, 80)
 
                 if tavolo_numero <= 16:
                     tavolo_button = QPushButton(f"{tavolo_numero}")
