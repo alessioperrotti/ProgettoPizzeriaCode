@@ -119,6 +119,8 @@ class ContMenu(object):
         self.model.aggiungi_ordine(self.ordine_corrente)
         self.model.salva_ordini_su_file()
         self.model.carica_da_file()
+        self.tavolo.stato = "in attesa"
+        self.model.salva_tavoli_su_file()
 
         for prodotto in self.ordine_corrente.lista_prodotti:
             for ingrediente in prodotto.ingredienti:
@@ -132,8 +134,6 @@ class ContMenu(object):
                     error.setText("Purtroppo non è possibile confermare l'ordine\nperchè siamo a corto di " + str(ingrediente[0].nome))
                     error.exec()
 
-        self.tavolo.stato = "in attesa"
-        self.model.salva_tavoli_su_file()
         self.ordine_corrente.lista_prodotti = []
 
         message = QMessageBox()
