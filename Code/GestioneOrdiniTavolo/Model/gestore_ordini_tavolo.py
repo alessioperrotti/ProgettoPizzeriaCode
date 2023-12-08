@@ -67,14 +67,11 @@ class GestoreOrdiniTavolo(object):
         self.salva_ordini_su_file()
         self.carica_da_file()
 
-    # probabilmente da togliere
     def conferma_ordine(self, ordine: OrdineTavolo):
 
         for x in self.lista_ordini:
             if int(x.codice) == int(ordine.codice):
                 x.confermato = True
-
-
 
     def salva_ordini_su_file(self):
 
@@ -125,10 +122,6 @@ class GestoreOrdiniTavolo(object):
             if int(x.codice) == int(codice):
                 elemento_cercato = x
         return elemento_cercato
-
-    def get_info_ordinitavolo(self):
-        pass
-
 
     def cerca_ordini_per_tavolo_da_pagare(self, numero_tavolo):
 

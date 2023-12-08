@@ -1,11 +1,11 @@
 from Code.GestioneMenu.Model.prodotto import Prodotto
-from PyQt6.QtCore import pyqtSignal
 import pickle
+
 
 class GestoreMenu(object):
 
     def __init__(self):
-        self.lista_prodotti = []
+        self.lista_prodotti: list[Prodotto] = []
         self.file_pickle_path = "lista_prodotti.pickle"
         self.carica_da_file()
 
