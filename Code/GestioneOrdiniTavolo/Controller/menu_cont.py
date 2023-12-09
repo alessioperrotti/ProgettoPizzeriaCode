@@ -119,8 +119,8 @@ class ContMenu(object):
         self.model.aggiungi_ordine(self.ordine_corrente)
         self.model.salva_ordini_su_file()
         self.model.carica_da_file()
-        self.tavolo.stato = "in attesa"
-        self.model.salva_tavoli_su_file()
+        self.tavolo.cambia_stato("in attesa")
+        self.model.salva_ordini_su_file()
 
         for prodotto in self.ordine_corrente.lista_prodotti:
             for ingrediente in prodotto.ingredienti:
@@ -188,5 +188,5 @@ class ContMenu(object):
         controller_conferma = ContMsgTerminaServizio(dialog_conferma_elimina)
         controller_conferma.view.exec()
         if controller_conferma.conferma:
-            self.tavolo.stato = "libero"
-            self.model.salva_tavoli_su_file()
+            self.tavolo.cambia_stato("libero")
+            self.model.salva_ordini_su_file()

@@ -78,13 +78,19 @@ class GestoreOrdiniTavolo(object):
         dati = {
 
             'cod': self.ultimo_codice_ordine,
-            'ordini': self.lista_ordini,
+            'ordini': self.lista_ordini
+        }
+        dati_tavoli = {
+            'tavoli': self.lista_tavoli
         }
 
         try:
             with open(self.file_ordini_path, 'wb') as file:
                 pickle.dump(dati, file, pickle.HIGHEST_PROTOCOL)
             file.close()
+            with open(self.file_tavoli_path, 'wb') as file_tavoli:
+                pickle.dump(dati_tavoli, file_tavoli)
+            file_tavoli.close()
         except FileNotFoundError as e:
             print(e)
 
@@ -102,13 +108,16 @@ class GestoreOrdiniTavolo(object):
             with open(self.file_ordini_path, 'rb') as file1:
                 dati = pickle.load(file1)
 
-            file1.close()
+            with open(self.file_tavoli_path, 'rb') as file_tavoli:
+                dati_tavoli = pickle.load(file_tavoli)
+
             self.ultimo_codice_ordine = dati['cod']
             self.lista_ordini = dati['ordini']
+            self.lista_tavoli = dati_tavoli['tavoli']
 
-            with open(self.file_tavoli_path, 'rb') as file2:
-                self.lista_tavoli = pickle.load(file2)
-            file2.close()
+            # with open(self.file_tavoli_path, 'rb') as file2:
+            #     self.lista_tavoli = pickle.load(file2)
+            # file2.close()
 
         except FileNotFoundError as e:
             print(e)

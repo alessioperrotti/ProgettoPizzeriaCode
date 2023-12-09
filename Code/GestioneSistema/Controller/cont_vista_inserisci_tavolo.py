@@ -31,6 +31,8 @@ class ContVistaInserisciTavolo():
         for tavolo in self.gestore_ord.lista_tavoli:
             if int(tavolo.numero) == n_tavolo:
                 self.tavolo = tavolo
+                tavolo.cambia_stato("occupato")
+                self.gestore_ord.salva_ordini_su_file()
                 tavolo_trovato = True
                 self.cont_menu = ContMenu(VistaMenu(), self.gestore_ord, self.tavolo, self.stacked)
                 self.stacked.setCurrentWidget(self.cont_menu.view)

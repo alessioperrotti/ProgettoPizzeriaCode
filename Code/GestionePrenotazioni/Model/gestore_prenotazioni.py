@@ -106,30 +106,23 @@ class GestorePrenotazioni():
         }
 
         with open(nome_file_prenotazioni, 'wb') as file_prenotazioni:
-            pickle.dump(dati_prenotazioni, file_prenotazioni, pickle.HIGHEST_PROTOCOL)
+            pickle.dump(dati_prenotazioni, file_prenotazioni)
+        file_prenotazioni.close()
 
         with open(nome_file_tavoli, 'wb') as file_tavoli:
-            pickle.dump(dati_tavoli, file_tavoli, pickle.HIGHEST_PROTOCOL)
+            pickle.dump(dati_tavoli, file_tavoli)
+        file_tavoli.close()
 
     def carica_da_file(self, nome_file_prenotazioni, nome_file_tavoli):
+        with open(nome_file_prenotazioni, 'rb') as file_prenotazioni:
+            dati_prenotazioni = pickle.load(file_prenotazioni)
 
-        try:
-            with open(nome_file_prenotazioni, 'rb') as file_prenotazioni:
-                dati_prenotazioni = pickle.load(file_prenotazioni)
+        with open(nome_file_tavoli, 'rb') as file_tavoli:
+            dati_tavoli = pickle.load(file_tavoli)
 
-            with open(nome_file_tavoli, 'rb') as file_tavoli:
-                dati_tavoli = pickle.load(file_tavoli)
-
-        except EOFError as e:
-            print(e)
-
-        except FileNotFoundError as e:
-            print(e)
-
-        else:
-            self.ultimo_codice_prenotazione = dati_prenotazioni['cod']
-            self.lista_prenotazioni = dati_prenotazioni['lista']
-            self.lista_tavoli = dati_tavoli['tavoli']
+        self.ultimo_codice_prenotazione = dati_prenotazioni['cod']
+        self.lista_prenotazioni = dati_prenotazioni['lista']
+        self.lista_tavoli = dati_tavoli['tavoli']
 
     # def salva_tavoli(self):
     #     with open ("lista_tavoli.pickle", "wb") as file:
