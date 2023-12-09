@@ -20,10 +20,10 @@ class ContPiantina(object):
         self.tavolo_selezionato = self.model.ricerca_tavolo(self.view.n_tavolo)
         self.tavolo_selezionato.cambia_stato("servito")
 
-        for prenotazione in self.model.lista_prenotazioni:
-            if int(prenotazione.tavolo_assegnato.numero) == int(self.view.n_tavolo):
-                print("c")
-                prenotazione.tavolo_assegnato.cambia_stato("servito")
+        # for prenotazione in self.model.lista_prenotazioni:
+        #     if int(prenotazione.tavolo_assegnato.numero) == int(self.view.n_tavolo):
+        #         print("c")
+        #         prenotazione.tavolo_assegnato.cambia_stato("servito")
 
         self.model.salva_dati("lista_prenotazioni.pickle", "lista_tavoli.pickle")
 
@@ -47,8 +47,10 @@ class ContPiantina(object):
                     tavolo_prenotato = True
                     break
 
-            if tavolo_button is not None:
-                if tavolo_prenotato:
+            # if tavolo_button is not None:
+            #     if tavolo_prenotato:
+
+                if stato_tavolo == "prenotato":
                     tavolo_button.setStyleSheet("""
                                                 QPushButton{
                                                     background-color: "#007fff";

@@ -95,9 +95,7 @@ class MainWindow(QWidget):
             self.gestore_mag.controlla_magazzino()
 
 
-
 if __name__ == '__main__':
-
     app = QApplication(sys.argv)
     mainWindow = MainWindow(app)
 
