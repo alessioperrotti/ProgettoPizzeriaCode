@@ -20,9 +20,12 @@ class ContPiantina(object):
         self.tavolo_selezionato = self.model.ricerca_tavolo(self.view.n_tavolo)
         self.tavolo_selezionato.cambia_stato("servito")
 
+        for prenotazione in self.model.lista_prenotazioni:
+            if int(prenotazione.tavolo_assegnato.numero) == int(self.view.n_tavolo):
+                print("c")
+                prenotazione.tavolo_assegnato.cambia_stato("servito")
+
         self.model.salva_dati("lista_prenotazioni.pickle", "lista_tavoli.pickle")
-        # self.model.salva_tavoli()
-        # self.model.carica_tavoli()
 
         # print("tavolo: "+str(self.tavolo_selezionato.numero)+" posti: "+str(self.tavolo_selezionato.posti_disponibili))
         # print(self.tavolo_selezionato.stato)
@@ -38,14 +41,14 @@ class ContPiantina(object):
 
             tavolo_prenotato = False
             for prenotazione in self.model.lista_prenotazioni:
-                if int(prenotazione.tavolo_assegnato.numero) == int(numero_tavolo) and prenotazione.data.toPyDate() == data_corrente:
+                if (int(prenotazione.tavolo_assegnato.numero) == int(numero_tavolo) and prenotazione.data.toPyDate() == data_corrente
+                        and prenotazione.tavolo_assegnato.stato == "prenotato"):
                     # print("stessa data")
                     tavolo_prenotato = True
                     break
 
             if tavolo_button is not None:
                 if tavolo_prenotato:
-                    # stato_tavolo == "prenotato":
                     tavolo_button.setStyleSheet("""
                                                 QPushButton{
                                                     background-color: "#007fff";
@@ -89,7 +92,7 @@ class ContPiantina(object):
                                 border: 3px solid lightgrey;
                                 font-family: Roboto;
                             }QPushButton:checked{
-                                                    background-color: "lightred";
+                                                    background-color: "#f75e25";
                                                     color: "black";
                                                 }
                             QPushButton:hover{
@@ -106,7 +109,7 @@ class ContPiantina(object):
                                 border: 3px solid lightgrey;
                                 font-family: Roboto;
                             }QPushButton:checked{
-                                                    background-color: "lightorange";
+                                                    background-color: "#fb6f4c";
                                                     color: "black";
                                                 }
                             QPushButton:hover{

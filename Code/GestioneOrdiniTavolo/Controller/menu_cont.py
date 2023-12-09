@@ -124,7 +124,7 @@ class ContMenu(object):
 
         for prodotto in self.ordine_corrente.lista_prodotti:
             for ingrediente in prodotto.ingredienti:
-                print(str(ingrediente))
+                # print(str(ingrediente))
                 codice_mp = ingrediente[0].codice
                 quantità = ingrediente[1]
                 disp = self.magazzino.decrementa_disponibilita(codice_mp, quantità)
