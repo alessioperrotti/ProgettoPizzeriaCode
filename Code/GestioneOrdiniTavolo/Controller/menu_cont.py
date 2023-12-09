@@ -117,10 +117,13 @@ class ContMenu(object):
     def conferma_ordine(self):
 
         self.model.aggiungi_ordine(self.ordine_corrente)
+        # self.model.salva_ordini_su_file()
+        # self.model.carica_da_file()
+        for tavolo in self.model.lista_tavoli:
+            if int(tavolo.numero) == self.tavolo.numero:
+                tavolo.cambia_stato("in attesa")
         self.model.salva_ordini_su_file()
         self.model.carica_da_file()
-        self.tavolo.cambia_stato("in attesa")
-        self.model.salva_ordini_su_file()
 
         for prodotto in self.ordine_corrente.lista_prodotti:
             for ingrediente in prodotto.ingredienti:
@@ -138,7 +141,7 @@ class ContMenu(object):
 
         message = QMessageBox()
         message.setIcon(QMessageBox.Icon.NoIcon)
-        message.setWindowTitle("<b>Grazie!</b>")
+        message.setWindowTitle("<b>Grazie!<\b>")
         message.setText("Il tuo ordine è in fase di\npreparazione e ti verrà consegnato\nal più presto.")
         message.exec()
 
