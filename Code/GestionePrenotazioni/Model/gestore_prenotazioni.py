@@ -18,7 +18,7 @@ class GestorePrenotazioni():
         self.nome_file_tavoli = "lista_tavoli.pickle"
         try:
             self.carica_da_file(self.nome_file_prenotazioni, self.nome_file_tavoli)
-            # self.carica_tavoli()
+            # self.gestore_ordini_tavolo.carica_da_file()
         except FileNotFoundError:
             print("dati prenotazioni non trovati")
 
