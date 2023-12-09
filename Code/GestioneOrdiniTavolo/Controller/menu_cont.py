@@ -116,14 +116,7 @@ class ContMenu(object):
 
     def conferma_ordine(self):
 
-        self.model.aggiungi_ordine(self.ordine_corrente)
-        # self.model.salva_ordini_su_file()
-        # self.model.carica_da_file()
-        for tavolo in self.model.lista_tavoli:
-            if int(tavolo.numero) == self.tavolo.numero:
-                tavolo.cambia_stato("in attesa")
-        self.model.salva_ordini_su_file()
-        self.model.carica_da_file()
+        disp = True
 
         for prodotto in self.ordine_corrente.lista_prodotti:
             for ingrediente in prodotto.ingredienti:
@@ -134,23 +127,33 @@ class ContMenu(object):
                 if not disp:
                     error = QMessageBox()
                     error.setIcon(QMessageBox.Icon.Critical)
-                    error.setText("Purtroppo non è possibile confermare l'ordine\nperchè siamo a corto di " + str(ingrediente[0].nome))
+                    error.setText("Purtroppo non è possibile confermare l'ordine\nperchè siamo a corto di " + str(ingrediente[0].nome).lower())
                     error.exec()
+                    break
+            if not disp:
+                break
 
-        self.ordine_corrente.lista_prodotti = []
+        if disp:
+            self.model.aggiungi_ordine(self.ordine_corrente)
+            for tavolo in self.model.lista_tavoli:
+                if int(tavolo.numero) == self.tavolo.numero:
+                    tavolo.cambia_stato("in attesa")
+            self.model.salva_ordini_su_file()
+            self.model.carica_da_file()
+            self.ordine_corrente.lista_prodotti = []
 
-        message = QMessageBox()
-        message.setIcon(QMessageBox.Icon.NoIcon)
-        message.setWindowTitle("<b>Grazie!<\b>")
-        message.setText("Il tuo ordine è in fase di\npreparazione e ti verrà consegnato\nal più presto.")
-        message.exec()
+            message = QMessageBox()
+            message.setIcon(QMessageBox.Icon.NoIcon)
+            message.setWindowTitle("<b>Grazie!<\b>")
+            message.setText("Il tuo ordine è in fase di\npreparazione e ti verrà consegnato\nal più presto.")
+            message.exec()
 
-        self.view.lista_recap.clear()
-        self.view.pulsante_confermaordine.setEnabled(False)
-        self.view.pulsante_visualizzaconto.setEnabled(True)
+            self.view.lista_recap.clear()
+            self.view.pulsante_confermaordine.setEnabled(False)
+            self.view.pulsante_visualizzaconto.setEnabled(True)
 
-        for box in self.lista_box:
-            box.label_quantita.setText("0")
+            for box in self.lista_box:
+                box.label_quantita.setText("0")
 
     def scroll_to_section(self, tipo: str):
 
