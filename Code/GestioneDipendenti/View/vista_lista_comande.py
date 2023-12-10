@@ -39,7 +39,6 @@ class VistaListaComande(QDialog):
     def __init__(self):
         super().__init__()
 
-        self.scroll_area = None
         self.label_time = None
         self.label_date = None
         self.init_ui()
@@ -79,6 +78,7 @@ class VistaListaComande(QDialog):
         self.giorno_ora.setText(f' {current_date} {current_time}')
 
 
+
     def crea_pulsante_back(dimensioni, directory):
         pulsante_back = QPushButton()
         img = QPixmap(directory)
@@ -99,26 +99,45 @@ class VistaListaComande(QDialog):
 
     def init_ui(self):
         titolo = QLabel("Lista Comande:")
+        titolo.setFont(label_font_tit)
         self.giorno_ora = QLabel()
+        self.giorno_ora.setFont(label_font_tit)
 
-        layout = QVBoxLayout()
+        self.layout = QVBoxLayout()
         layout1 = QHBoxLayout()
-        self.layout_scroll = QHBoxLayout()
-
-
-        self.grid = QGridLayout()
-        self.indietro = crea_pulsante_back(35, "png/back.png")
-        self.layout_scroll.addLayout(self.grid)
-        self.layout_scroll.addStretch()
-        self.layout_scroll.addWidget(self.indietro, alignment=Qt.AlignmentFlag.AlignBottom)
-
-        layout.addLayout(layout1)
-        layout.addLayout(self.scroll_area)
-
-
         layout1.addWidget(titolo)
         layout1.addStretch()
         layout1.addWidget(self.giorno_ora)
+        self.lay_orizz = QHBoxLayout()
+        self.scroll_area = QScrollArea()
+        self.grid = QGridLayout()
+        #self.grid.addWidget(QLabel("c"), 0 ,0)
+        self.indietro = crea_pulsante_back(35, "png/back.png")
+        self.contenitore  = QWidget()
+        self.contenitore.setLayout(self.grid)
+
+        self.scroll_area.setWidget(self.contenitore)
+        self.scroll_area.setWidgetResizable(True)
+
+        self.layout_scroll_area = QVBoxLayout()
+        self.layout_scroll_area.addWidget(self.scroll_area)
+        self.lay_orizz.addLayout(self.layout_scroll_area)
+        self.lay_orizz.addSpacing(10)
+        self.lay_orizz.addWidget(self.indietro, alignment=Qt.AlignmentFlag.AlignBottom)
+
+
+
+        self.layout.addLayout(layout1)
+        self.layout.addSpacing(20)
+        self.layout.addLayout(self.lay_orizz)
+
+
+
+
+
+
+
+
 
        # layout1.addWidget(self.orologio)
 
@@ -126,9 +145,9 @@ class VistaListaComande(QDialog):
         timer.timeout.connect(self.update_datetime)
         timer.start(1000)
 
-        self.setContentsMargins(10, 0, 10, 0)
+        self.setContentsMargins(15, 10, 15,10)
         self.setFixedSize(994, 637)
-        self.setLayout(layout)
+        self.setLayout(self.layout)
 
 
 

@@ -1,21 +1,40 @@
-import pyqtgraph as pg
-from PyQt5 import QtWidgets
+from PyQt6.QtWidgets import QApplication, QWidget, QHBoxLayout, QFrame
+from PyQt6.QtGui import QColor
 
-
-class MainWindow(QtWidgets.QMainWindow):
+class CustomFrame(QWidget):
     def __init__(self):
         super().__init__()
 
-        # Temperature vs time plot
-        self.plot_graph = pg.PlotWidget()
-        self.setCentralWidget(self.plot_graph)
-        self.plot_graph.setBackground("w")
-        time = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        temperature = [30, 32, 34, 32, 33, 31, 29, 32, 35, 45]
-        self.plot_graph.plot(time, temperature)
+        # Creazione del frame principale
+        main_frame = QFrame(self)
+        main_layout = QHBoxLayout(main_frame)
 
+        # Creazione delle tre parti con colori diversi
+        left_part = QFrame(main_frame)
+        left_part.setStyleSheet("background-color: lightblue;")
 
-app = QtWidgets.QApplication([])
-main = MainWindow()
-main.show()
-app.exec()
+        center_part = QFrame(main_frame)
+        center_part.setStyleSheet("background-color: white;")
+
+        right_part = QFrame(main_frame)
+        right_part.setStyleSheet("background-color: lightcoral;")
+
+        # Aggiunta delle parti al layout principale
+        main_layout.addWidget(left_part)
+        main_layout.addWidget(center_part)
+        main_layout.addWidget(right_part)
+
+        # Impostazione del layout principale per il frame
+        main_frame.setLayout(main_layout)
+
+        # Impostazione del layout principale per il widget
+        layout = QHBoxLayout(self)
+        layout.addWidget(main_frame)
+        self.setLayout(layout)
+
+if __name__ == "__main__":
+    import sys
+    app = QApplication(sys.argv)
+    frame = CustomFrame()
+    frame.show()
+    sys.exit(app.exec())

@@ -64,6 +64,7 @@ class VistaInfoRicevuta(QDialog):
 
         frame3 = QFrame()
         frame3.setStyleSheet(".border: 1px solid black; border-radius: 5px; padding: 5px")
+
         frame3.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
 
         self.scroll_area = QScrollArea()

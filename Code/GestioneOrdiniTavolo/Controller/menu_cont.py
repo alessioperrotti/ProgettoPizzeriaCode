@@ -62,6 +62,7 @@ class ContMenu(object):
             riga = indice // 3
             colonna = indice % 3
             box = BoxProdotto(elemento.nome, 'png/antipasto.png')
+
             self.view.grid_antipasti.addWidget(box, riga, colonna)
             self.lista_box.append(box)
 

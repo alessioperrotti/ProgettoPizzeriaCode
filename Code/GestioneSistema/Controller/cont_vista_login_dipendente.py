@@ -24,7 +24,7 @@ class ContVistaLoginDipendente():
         stacked.addWidget(self.view)
 
         self.cont_cameriere = ContHomeCameriere(gestore_dip, stacked)
-        self.cont_cuoco = ContHomeCuoco(gestore_dip, stacked)
+        self.cont_cuoco = ContHomeCuoco(gestore_dip, stacked, gestore_ord)
         # credenziali admin
         self.user_admin = "admin"
         self.pass_admin = "admin"

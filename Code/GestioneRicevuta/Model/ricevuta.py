@@ -1,9 +1,9 @@
 class Ricevuta:
-    def __init__(self, ammontareLordo=None, data=None, listaProdotti=None, nomeAcquirente=None, numero=None, ora=None, tavolo=None):
+    def __init__(self, ammontare_lordo=None, data=None, lista_prodotti=None, nome_acquirente=None, numero=None, ora=None, tavolo=None):
         self.ora = ora
         self.numero = numero
-        self.nomeAcquirente = nomeAcquirente
-        self.listaProdotti = listaProdotti
+        self.nomeAcquirente = nome_acquirente
+        self.listaProdotti = lista_prodotti
         self.data = data
-        self.ammontareLordo = ammontareLordo
+        self.ammontareLordo = ammontare_lordo
         self.tavolo = tavolo
