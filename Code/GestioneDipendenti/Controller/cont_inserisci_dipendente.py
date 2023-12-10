@@ -22,11 +22,6 @@ class UsedUsername(Exception):
         self.message = message
         super().__init__(message)
 
-# class NameAlert(Exception):
-#     def __init__(self, message):
-#         self.message = message
-#         super().__init__(message)
-
 
 class ContInserisciDipendente(object):
     def __init__(self, model, view: VistaInserisciDipendente):
@@ -91,12 +86,6 @@ class ContInserisciDipendente(object):
             error_box.setText(od.message)
             error_box.exec()
 
-        # except NameAlert as na:
-        #     error_box = QMessageBox()
-        #     error_box.setIcon(QMessageBox.Icon.Critical)
-        #     error_box.setWindowTitle("Errore di Inserimento")
-        #     error_box.setText(na.message)
-        #     error_box.exec()
 
         else:
             if ruolo == "Cuoco":

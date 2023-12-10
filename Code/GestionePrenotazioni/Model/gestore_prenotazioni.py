@@ -33,8 +33,6 @@ class GestorePrenotazioni():
 
         self.salva_dati(self.nome_file_prenotazioni,self.nome_file_tavoli)
         self.carica_da_file(self.nome_file_prenotazioni,self.nome_file_tavoli)
-        # self.salva_tavoli()
-        # self.carica_tavoli()
 
     def modifica_prenotazioni(self, codice_ricerca, new_tavolo, new_persone,
                               new_orario, new_data):
@@ -52,8 +50,6 @@ class GestorePrenotazioni():
 
         self.salva_dati(self.nome_file_prenotazioni, self.nome_file_tavoli)
         self.carica_da_file(self.nome_file_prenotazioni, self.nome_file_tavoli)
-        # self.salva_tavoli()
-        # self.carica_tavoli()
 
     def elimina_prenotazione(self, codice):
         prenotazione_da_eliminare = self.ricerca_prenotazione_codice(codice)
@@ -123,14 +119,6 @@ class GestorePrenotazioni():
         self.ultimo_codice_prenotazione = dati_prenotazioni['cod']
         self.lista_prenotazioni = dati_prenotazioni['lista']
         self.lista_tavoli = dati_tavoli['tavoli']
-
-    # def salva_tavoli(self):
-    #     with open ("lista_tavoli.pickle", "wb") as file:
-    #         pickle.dump(self.lista_tavoli, file)
-    #
-    # def carica_tavoli(self):
-    #     with open ("lista_tavoli.pickle", "rb") as file:
-    #         self.lista_tavoli = pickle.load(file)
 
     def get_info_prenotazioni(self):
         lista_prenotazioni = self.lista_prenotazioni.copy()

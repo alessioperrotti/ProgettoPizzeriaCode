@@ -59,12 +59,11 @@ class ContModificaTurno(object):
         self.view.giorno_title.setText(str(giorno))
         self.giorno_corrente = giorno
         print("riempi: "+self.giorno_corrente)
-        # Riempi la combobox dei cuochi con gli elementi dalla lista
+
         for cuoco in self.model.lista_cuochi:
             # print("x")
             self.view.cuoco.addItem(cuoco.cognome)
 
-        # Riempi la combobox dei camerieri con gli elementi dalla lista
         for cameriere in self.model.lista_camerieri:
             # print("y")
             self.view.cameriere.addItem(cameriere.cognome)

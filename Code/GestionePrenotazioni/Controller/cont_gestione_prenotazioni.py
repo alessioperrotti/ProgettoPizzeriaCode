@@ -36,7 +36,7 @@ class ContGestionePrenotazioni(object):
             if item.column() == 0:
                 self.nome_selezionato = str(item.text())
                 # nome_cognome = str(item.text())
-                # self.cognome_selezionato = nome_cognome.split()[1]  # Estraggo solo il cognome
+                # self.cognome_selezionato = nome_cognome.split()[1]
             elif item.column() == 5:
                 self.codice_selezionato = int(item.text())
 

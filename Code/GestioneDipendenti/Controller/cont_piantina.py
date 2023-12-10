@@ -27,9 +27,6 @@ class ContPiantina(object):
 
         self.model.salva_dati("lista_prenotazioni.pickle", "lista_tavoli.pickle")
 
-        # print("tavolo: "+str(self.tavolo_selezionato.numero)+" posti: "+str(self.tavolo_selezionato.posti_disponibili))
-        # print(self.tavolo_selezionato.stato)
-
     def update_tabella(self):
         data_corrente = datetime.now().date()
         # print(data_corrente)

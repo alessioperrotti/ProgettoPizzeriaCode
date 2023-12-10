@@ -104,10 +104,6 @@ class ContGestioneDipendenti(object):
 
         i = 0
         for x in camerieri:
-            # self.view.tab.setItem(i, 0, QTableWidgetItem(x.nome+" "+x.cognome))
-            # self.view.tab.setItem(i, 1, QTableWidgetItem(x.ruolo))
-            # i += 1
-
             item_nome = QTableWidgetItem(x.nome + " " + x.cognome)
             item_nome.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             self.view.tab.setItem(i, 0, item_nome)
@@ -118,10 +114,6 @@ class ContGestioneDipendenti(object):
             i += 1
 
         for x in cuochi:
-            # self.view.tab.setItem(i, 0, QTableWidgetItem(x.nome+" "+x.cognome))
-            # self.view.tab.setItem(i, 1, QTableWidgetItem(x.ruolo))
-            # i += 1
-
             item_nome = QTableWidgetItem(x.nome + " " + x.cognome)
             item_nome.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             self.view.tab.setItem(i, 0, item_nome)

@@ -14,16 +14,6 @@ class ContTurniPersonale(object):
         self.stacked = stacked
         stacked.addWidget(self.view)
 
-    # def update_tabella(self):
-    #     cont_gestione_turni = ContGestioneTurni(self.model, self.stacked)
-    #     tab1 = cont_gestione_turni.view.tabella
-    #     for row in range(tab1.rowCount()):
-    #         for col in range(tab1.columnCount()):
-    #             item = tab1.item(row, col)
-    #             if item is not None:
-    #                 new_item = QTableWidgetItem(item.text())
-    #                 self.view.tabella.setItem(row, col, new_item)
-
     def update_tabella(self):
         for cuoco in self.model.lista_cuochi:
             for i in range(len(cuoco.turno)):
