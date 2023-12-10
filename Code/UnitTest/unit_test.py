@@ -1,82 +1,66 @@
-import pickle
 import unittest
-from datetime import date, timedelta
-from PyQt6.QtWidgets import QApplication
 
-from Code.GestioneDipendenti.Controller.cont_inserisci_dipendente import ContInserisciDipendente, UsedUsername, \
-    OutOfDate
-from Code.GestioneDipendenti.View.vista_inserisci_dipendente import VistaInserisciDipendente
+from Code.GestioneMagazzino.Model.materia_prima import MateriaPrima
+from Code.GestioneMenu.Model.prodotto import Prodotto
+from Code.GestioneMenu.Model.gestore_menu import GestoreMenu
 
 
-class TestContInserisciDipendente(unittest.TestCase):
+class TestGestoreMenu(unittest.TestCase):
+
     def setUp(self):
-        # Creare una vista e un'applicazione fittizia per i test
-        self.app = QApplication([])
-        self.view = VistaInserisciDipendente()
-        self.controller = ContInserisciDipendente(None, self.view)
+        # Creazione di una materia prima di esempio
+        self.materia_prima_di_esempio = MateriaPrima(
+            codice="MP1",
+            nome="Ingrediente di Esempio",
+            costo_al_kg=4.0,
+            qta_disponibile=150,
+            qta_limite=300,
+            qta_ordine_STD=50,
+            data_scadenza="2023-12-31"
+        )
 
-    def test_confirm_close_valid_data(self):
-        # Simulare dati validi e testare se il metodo funziona correttamente
-        self.view.edit_nome.setText("Nome")
-        self.view.edit_cognome.setText("Cognome")
-        self.view.edit_ruolo.setCurrentText("Cuoco")
-        self.view.edit_email.setText("email@example.com")
-        self.view.edit_stipendio.setText("1000.00")
-        self.view.calendario.setSelectedDate(date.today())
-        self.view.edit_username.setText("nuovo_username")
-        self.view.edit_password.setText("password123")
+        # Creazione di un prodotto di esempio che utilizza la materia prima
+        self.prodotto_di_esempio = Prodotto(
+            nome="Prodotto di Esempio",
+            codice=123,
+            prezzo_al_pubblico=10.99,
+            tipologia="Tipologia di Esempio",
+            ingredienti=[
+                (self.materia_prima_di_esempio, 100),
+            ]
+        )
+        self.gestore_menu = GestoreMenu()
 
-        try:
-            self.controller.confirm_close()
-        except Exception as e:
-            self.assertFalse(True, f"Eccezione sollevata: {e}")
+    def test_calcola_costo_unitario(self):
+        costo_unitario_calcolato = self.prodotto_di_esempio.calcola_costo_unitario()
+        self.assertEqual(costo_unitario_calcolato, 400.0)
 
-        # Aggiungi ulteriori asserzioni se necessario
+    def test_aggiungi_prodotto(self):
+        self.gestore_menu.aggiungi_prodotto(self.prodotto_di_esempio)
+        prodotto_recuperato = self.gestore_menu.estrai_per_nome("Prodotto di Esempio")
+        self.assertIsNotNone(prodotto_recuperato)
+        self.assertEqual(prodotto_recuperato.nome, "Prodotto di Esempio")
 
-    def test_confirm_close_invalid_data(self):
-        # Simulare dati invalidi e testare se il metodo gestisce correttamente le eccezioni
-        self.view.edit_nome.setText("")  # Nome vuoto per causare un'eccezione
-        self.view.edit_cognome.setText("Cognome")
-        # Aggiungi altri dati secondo necessità
+    def test_estrai_per_nome_trovato(self):
+        self.gestore_menu.aggiungi_prodotto(self.prodotto_di_esempio)
+        prodotto_trovato = self.gestore_menu.estrai_per_nome("Prodotto di Esempio")
 
-        with self.assertRaises(ValueError):  # Assicurarsi che un'eccezione sia sollevata
-            self.controller.confirm_close()
+        self.assertIsNotNone(prodotto_trovato)
+        self.assertEqual(prodotto_trovato.nome, self.prodotto_di_esempio.nome)
+        self.assertEqual(prodotto_trovato.codice, self.prodotto_di_esempio.codice)
+        self.assertEqual(prodotto_trovato.prezzo_al_pubblico, self.prodotto_di_esempio.prezzo_al_pubblico)
 
-        # Aggiungi ulteriori asserzioni se necessario
+    def test_estrai_per_nome_non_trovato(self):
+        # Test quando il prodotto con il nome specificato NON è presente nella lista
+        prodotto_non_trovato = self.gestore_menu.estrai_per_nome("ProdottoNonEsistente")
+        self.assertIsNone(prodotto_non_trovato)
 
-    def test_confirm_close_used_username(self):
-        # Simulare un caso in cui l'username è già utilizzato e verificare se l'eccezione viene gestita correttamente
-        self.view.edit_nome.setText("Nome")
-        self.view.edit_cognome.setText("Cognome")
-        self.view.edit_ruolo.setCurrentText("Cuoco")
-        self.view.edit_email.setText("email@example.com")
-        self.view.edit_stipendio.setText("1000.00")
-        self.view.calendario.setSelectedDate(date.today())
-        self.view.edit_username.setText("filippoS")  # Simula un'username già esistente nel modello
-        self.view.edit_password.setText("filippo")
-
-        with self.assertRaises(UsedUsername):  # Assicurarsi che l'eccezione specifica venga sollevata
-            self.controller.confirm_close()
-
-        # Aggiungi ulteriori asserzioni se necessario
-
-    def test_confirm_close_out_of_date(self):
-        # Simulare un caso in cui la data di nascita è futura e verificare se l'eccezione viene gestita correttamente
-        self.view.edit_nome.setText("Nome")
-        self.view.edit_cognome.setText("Cognome")
-        self.view.edit_ruolo.setCurrentText("Cuoco")
-        self.view.edit_email.setText("email@example.com")
-        self.view.edit_stipendio.setText("1000.00")
-        self.view.calendario.setSelectedDate(date.today() + timedelta(days=1))  # Data futura
-        self.view.edit_username.setText("nuovo_username")
-        self.view.edit_password.setText("password123")
-
-        with self.assertRaises(OutOfDate):  # Assicurarsi che l'eccezione specifica venga sollevata
-            self.controller.confirm_close()
-
-    def tearDown(self):
-        # Pulisci le risorse dopo ogni test se necessario
-        self.app.quit()
+    def test_modifica_prodotto(self):
+        self.gestore_menu.aggiungi_prodotto(self.prodotto_di_esempio)
+        self.gestore_menu.modifica_prodotto("Prodotto di Esempio", 15.99, ["Nuovo Ingrediente1", "Nuovo Ingrediente2"])
+        prodotto_modificato = self.gestore_menu.estrai_per_nome("Prodotto di Esempio")
+        self.assertEqual(prodotto_modificato.prezzo_al_pubblico, 15.99)
+        self.assertEqual(prodotto_modificato.ingredienti, ["Nuovo Ingrediente1", "Nuovo Ingrediente2"])
 
 
 if __name__ == '__main__':
