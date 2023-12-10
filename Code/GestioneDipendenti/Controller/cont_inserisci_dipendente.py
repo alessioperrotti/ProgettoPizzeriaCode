@@ -22,6 +22,11 @@ class UsedUsername(Exception):
         self.message = message
         super().__init__(message)
 
+class PassTooShort(Exception):
+    def __init__(self, message):
+        self.message = message
+        super().__init__(message)
+
 
 class ContInserisciDipendente(object):
     def __init__(self, model, view: VistaInserisciDipendente):
@@ -48,6 +53,8 @@ class ContInserisciDipendente(object):
             if self.model.estrai_cameriere_username(username) is not None:
                 raise UsedUsername("L'username inserito risulta già utilizzato.")
             password = self.view.edit_password.text()
+            if len(password) < 6:
+                raise PassTooShort("La password deve essere lunga almeno 6 caratteri.")
 
         except ValueError:
             if not all([
@@ -84,6 +91,13 @@ class ContInserisciDipendente(object):
             error_box.setIcon(QMessageBox.Icon.Critical)
             error_box.setWindowTitle("Errore di Inserimento")
             error_box.setText(od.message)
+            error_box.exec()
+
+        except PassTooShort as pts:
+            error_box = QMessageBox()
+            error_box.setIcon(QMessageBox.Icon.Critical)
+            error_box.setWindowTitle("Errore di Inserimento")
+            error_box.setText(pts.message)
             error_box.exec()
 
 

@@ -7,6 +7,10 @@ from Code.GestioneDipendenti.Model.cuoco import Cuoco
 from Code.GestioneDipendenti.Model.gestore_dipendenti import GestoreDipendenti
 from Code.GestioneDipendenti.View.vista_modifica_dipendente import VistaModificaDipendente
 
+class PassTooShort(Exception):
+    def __init__(self, message):
+        self.message = message
+        super().__init__(message)
 
 class ContModificaDipendente(object):
     def __init__(self, model, view: VistaModificaDipendente):
@@ -42,6 +46,8 @@ class ContModificaDipendente(object):
             new_data_nascita = self.view.calendario.selectedDate()
             new_username = str(self.view.edit_username.text())
             new_password = str(self.view.edit_password.text())
+            if len(new_password) < 6:
+                raise PassTooShort("La password deve essere lunga almeno 6 caratteri.")
 
         except ValueError:
             if not all([
@@ -60,6 +66,14 @@ class ContModificaDipendente(object):
             error_box.setWindowTitle("Errore di Inserimento")
             error_box.setText(errore_msg)
             error_box.exec()
+
+        except PassTooShort as pts:
+            error_box = QMessageBox()
+            error_box.setIcon(QMessageBox.Icon.Critical)
+            error_box.setWindowTitle("Errore di Inserimento")
+            error_box.setText(pts.message)
+            error_box.exec()
+
         else:
             if self.view.label_ruolo.text() == "Cuoco":
                 self.model.modifica_cuoco(self.cuoco.cognome, new_email, new_stipendio, new_data_nascita,
