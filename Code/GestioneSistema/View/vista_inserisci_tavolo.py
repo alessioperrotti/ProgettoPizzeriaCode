@@ -42,7 +42,7 @@ def crea_immagine(directory, dimensione):
 class VistaInserisciTavolo(QWidget):
     def __init__(self):
         super().__init__()
-        self.initUI()
+        self.init_ui()
         self.setStyleSheet("""
             QPushButton{
                 background-color: "#ff776d";
@@ -62,15 +62,15 @@ class VistaInserisciTavolo(QWidget):
             }
         """)
 
-    def initUI(self):
+    def init_ui(self):
         # Definizione oggetti
         frame = QFrame()
         frame.setFixedSize(350, 250)
         frame.setStyleSheet(".QFrame {border: 2px solid black; border-radius: 10px; padding: 40 30 40 30 px;background-color: #dddddd}")
-        label1 = QLabel("INSERISCI IL NUMERO")
-        label1.setFont(label_font_piccolo)
-        label2 = QLabel("DEL TAVOLO")
-        label2.setFont(label_font_piccolo)
+        self.label1 = QLabel("INSERISCI IL NUMERO")
+        self.label1.setFont(label_font_piccolo)
+        self.label2 = QLabel("DEL TAVOLO")
+        self.label2.setFont(label_font_piccolo)
 
         self.campo = QLineEdit()
         self.campo.setStyleSheet("Border: 1px solid black; border-radius: 2px")
@@ -94,8 +94,8 @@ class VistaInserisciTavolo(QWidget):
         layout_orizz.addWidget(self.campo)
         layout_orizz.addWidget(self.pulsante)
 
-        layout.addWidget(label1, alignment=Qt.AlignmentFlag.AlignCenter)
-        layout.addWidget(label2,alignment=Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(self.label1, alignment=Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(self.label2,alignment=Qt.AlignmentFlag.AlignCenter)
         layout.addSpacing(10)
 
         layout.addLayout(layout_orizz)

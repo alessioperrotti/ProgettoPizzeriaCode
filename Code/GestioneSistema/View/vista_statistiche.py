@@ -10,7 +10,7 @@ from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
 class VistaStatistiche(QWidget):
     def __init__(self):
         super().__init__()
-        self.initUI()
+        self.init_ui()
         self.setStyleSheet("""
                   QPushButton{
                       background-color: "#ff776d";
@@ -75,7 +75,7 @@ class VistaStatistiche(QWidget):
         tabella.setFixedSize(larghezza, altezza)
         return tabella
 
-    def initUI(self):
+    def init_ui(self):
         label = QLabel("<b>Statistiche<\b>")
         self.pulsante_back = self.crea_pulsante_back(35, "png/back.png")
         self.label1 = QLabel("Ricavo lordo per giorno")

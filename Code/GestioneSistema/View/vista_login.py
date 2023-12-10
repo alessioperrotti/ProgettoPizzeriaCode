@@ -23,7 +23,7 @@ def crea_pulsante(nome):
 class VistaLogin(QWidget):
     def __init__(self):
         super().__init__()
-        self.initUI()
+        self.init_ui()
 
         self.setStyleSheet("""
            QPushButton{
@@ -52,11 +52,11 @@ class VistaLogin(QWidget):
            }
        """)
 
-    def initUI(self):
+    def init_ui(self):
         # Definizione oggetti
 
-        label = QLabel("Benvenuti!")
-        label.setFont(label_font_tit)
+        self.label = QLabel("Benvenuti!")
+        self.label.setFont(label_font_tit)
         spazio_verticale = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
         spazio_tra_pulsanti = QSpacerItem(20, 20)
         self.pulsante_admin = crea_pulsante("Accedi al sistema")
@@ -68,7 +68,7 @@ class VistaLogin(QWidget):
         layout = QVBoxLayout()
         # Inserimento Item nel Layout
         layout.addItem(spazio_verticale)
-        layout.addWidget(label, alignment=Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(self.label, alignment=Qt.AlignmentFlag.AlignCenter)
 
         layout.addSpacerItem(spazio_tra_pulsanti)
         layout.addWidget(self.pulsante_admin, alignment=Qt.AlignmentFlag.AlignCenter)

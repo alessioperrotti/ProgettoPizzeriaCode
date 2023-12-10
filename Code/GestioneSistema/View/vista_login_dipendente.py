@@ -52,24 +52,24 @@ class VistaLoginDipendente(QWidget):
             }
         """)
 
-        self.initUI()
+        self.init_ui()
 
-    def initUI(self):
+    def init_ui(self):
         # Definizione oggetti
-        label1 = QLabel("Login")
-        label1.setFont(label_font_tit)
-        label2 = QLabel("inserisci le <b>credenziali</b> per accedere al sistema")
-        label2.setFont(label_font_piccolo)
-        # label2.setFont(label_font)
+        self.label1 = QLabel("Login")
+        self.label1.setFont(label_font_tit)
+        self.label2 = QLabel("inserisci le <b>credenziali</b> per accedere al sistema")
+        self.label2.setFont(label_font_piccolo)
+        # self.label2.setFont(label_font)
         frame = QFrame()
         spazio = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
         frame.setStyleSheet('.QFrame {border: 2px solid black; border-radius: 10px; padding: 10px; background-color: #dddddd}')
         frame.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
 
-        user_label = QLabel("Username: ")
-        user_label.setFont(label_font_piccolo)
-        pass_label = QLabel("Password: ")
-        pass_label.setFont(label_font_piccolo)
+        self.user_label = QLabel("Username: ")
+        self.user_label.setFont(label_font_piccolo)
+        self.pass_label = QLabel("Password: ")
+        self.pass_label.setFont(label_font_piccolo)
 
         self.user_line = QLineEdit()
         self.pass_line = QLineEdit()
@@ -91,19 +91,19 @@ class VistaLoginDipendente(QWidget):
         insert_layout = QGridLayout()
 
         # Inserimento Oggetti Layout
-        insert_layout.addWidget(user_label, 1, 1)
+        insert_layout.addWidget(self.user_label, 1, 1)
         insert_layout.addWidget(self.user_line, 1, 2)
-        insert_layout.addWidget(pass_label, 2, 1)
+        insert_layout.addWidget(self.pass_label, 2, 1)
         insert_layout.addWidget(self.pass_line, 2, 2)
         insert_layout.addWidget(self.pulsante, 3, 2)
 
-        login_layout.addWidget(label1)
+        login_layout.addWidget(self.label1)
         login_layout.addWidget(label_foto)
         login_layout.addStretch()
 
         frame_layout.addLayout(login_layout)
         frame_layout.addSpacerItem(QSpacerItem(1, 10))
-        frame_layout.addWidget(label2)
+        frame_layout.addWidget(self.label2)
         frame_layout.addSpacerItem(QSpacerItem(1, 10))
         frame_layout.addLayout(insert_layout)
         frame.setLayout(frame_layout)

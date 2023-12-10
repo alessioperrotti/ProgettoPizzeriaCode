@@ -72,9 +72,9 @@ def crea_pulsante_back(dimensioni, directory):
 class VistaHomeCuoco(QWidget):
     def __init__(self):
         super().__init__()
-        self.initUi()
+        self.init_ui()
 
-    def initUi(self):
+    def init_ui(self):
         # definizione oggetti
         label = QLabel("ACCESSO: Cuoco")
         label.setFont(label_font_tit)
