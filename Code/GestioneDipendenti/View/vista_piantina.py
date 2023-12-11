@@ -173,7 +173,6 @@ class VistaPiantina(QDialog):
         self.setContentsMargins(20, 0, 15, 10)
 
     def on_tavolo_clicked(self, nome):
-        print(nome)
         self.n_tavolo = nome
         for button in self.nome_tavoli:
             if button.text() != nome:
