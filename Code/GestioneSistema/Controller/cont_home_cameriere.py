@@ -26,11 +26,6 @@ class ContHomeCameriere(object):
         self.cont_prenotazioni.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.view))
         self.cont_turni.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.view))
 
-    # def click_turni(self):
-    #     cont_turni = ContTurniPersonale(GestoreDipendenti())
-    #     cont_turni.view = VistaTurniPersonale()
-    #     cont_turni.update_tabella()
-    #     cont_turni.view.exec()
 
     def click_turni(self):
         self.stacked.setCurrentWidget(self.cont_turni.view)
@@ -42,13 +37,4 @@ class ContHomeCameriere(object):
         self.stacked.setCurrentWidget(self.cont_piantina.view)
         self.cont_piantina.update_tabella()
 
-    # def click_prenotazioni(self):
-    #     cont_prenotazioni = ContVisualizzaPrenotazioni(GestorePrenotazioni())
-    #     cont_prenotazioni.view = VistaVisualizzaPrenotazioni()
-    #     cont_prenotazioni.update_tabella()
-    #     cont_prenotazioni.view.search_edit.textChanged.connect(cont_prenotazioni.filtra_elementi)
-    #     cont_prenotazioni.view.exec()
-    #
-    # def click_piantina(self):
-    #     cont_piantina = ContPiantina(GestorePrenotazioni(),VistaPiantina())
-    #     cont_piantina.view.exec()
+

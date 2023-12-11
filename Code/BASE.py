@@ -90,7 +90,6 @@ class MainWindow(QWidget):
         orario_attuale = datetime.now()
         if orario_attuale.hour == orario_backup.hour and orario_attuale.minute == orario_backup.minute:
             self.gestore_backup.effettua_backup()
-            print("backup effettuato")
         if orario_attuale.hour == orario_rifornimento.hour and orario_attuale.minute == orario_rifornimento.minute:
             self.gestore_mag.controlla_magazzino()
 

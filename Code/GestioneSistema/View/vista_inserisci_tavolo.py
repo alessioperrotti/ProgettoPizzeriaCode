@@ -23,8 +23,6 @@ def crea_pulsante(directory):
     pulsante.setMaximumWidth(80)
 
 
-    # pulsante.setStyleSheet(
-    #     ".QPushButton {background-color: #ff1605; border: 2px solid black; border-radius: 10px; padding: 3px}")
     return pulsante
 
 def crea_immagine(directory, dimensione):

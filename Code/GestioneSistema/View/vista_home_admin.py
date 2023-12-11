@@ -42,13 +42,7 @@ def crea_pulsante(nome, directory):
     layout.addStretch()
     pulsante.setLayout(layout)
     pulsante.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
-    # pulsante.setStyleSheet("""
-    #     QPushButton {
-    #         color : "white"
-    #         background-color: #ff776d;
-    #         border-radius: 6px;
-    #         }
-    #    """)
+
     pulsante.setFixedSize(230, 100)
     return pulsante
 
@@ -104,7 +98,7 @@ class VistaHomeAdmin(QWidget):
 
         self.pulsante_back = crea_pulsante_back(35, "png/back.png")
 
-       # back = crea_immagine("png/back.png", 35)
+
 
         # definizione layout
         layout = QVBoxLayout()

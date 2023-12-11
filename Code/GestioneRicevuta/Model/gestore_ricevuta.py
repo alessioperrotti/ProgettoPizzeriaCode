@@ -12,7 +12,7 @@ class GestoreRicevuta:
         try:
             self.carica_da_file(self.nome_file)
         except FileNotFoundError:
-            print("dati ricevute non trovati")
+            pass
 
     def aggiungi_ricevuta(self, ammontareLordo, data, listaProdotti, nomeAcquirente, ora, tavolo):
         numero = self.genera_id()

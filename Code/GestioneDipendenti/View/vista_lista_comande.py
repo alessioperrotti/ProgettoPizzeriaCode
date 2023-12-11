@@ -111,7 +111,6 @@ class VistaListaComande(QDialog):
         self.lay_orizz = QHBoxLayout()
         self.scroll_area = QScrollArea()
         self.grid = QGridLayout()
-        #self.grid.addWidget(QLabel("c"), 0 ,0)
         self.pulsante_back = crea_pulsante_back(35, "png/back.png")
         self.contenitore  = QWidget()
         self.contenitore.setLayout(self.grid)
@@ -139,7 +138,6 @@ class VistaListaComande(QDialog):
 
 
 
-       # layout1.addWidget(self.orologio)
 
         timer = QTimer(self)
         timer.timeout.connect(self.update_datetime)

@@ -21,11 +21,7 @@ class ContHomeCuoco(object):
         self.cont_turni.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.view))
         self.cont_comande.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.view))
 
-    # def click_turni(self):
-    #     cont_turni = ContTurniPersonale(self.model)
-    #     cont_turni.view = VistaTurniPersonale()
-    #     cont_turni.update_tabella()
-    #     cont_turni.view.exec()
+
 
     def click_turni(self):
         self.stacked.setCurrentWidget(self.cont_turni.view)
