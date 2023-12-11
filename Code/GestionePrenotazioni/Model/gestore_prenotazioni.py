@@ -70,7 +70,6 @@ class GestorePrenotazioni():
     def ricerca_tavolo(self, n_tavolo):
         for tavolo in self.lista_tavoli:
             if int(n_tavolo) == tavolo.numero:
-                print("tav trovato")
                 return tavolo
 
     def genera_codice(self):
@@ -82,11 +81,8 @@ class GestorePrenotazioni():
         total_persone = 0
         for prenotazione in self.lista_prenotazioni:
             if prenotazione.data == data and prenotazione.orario == orario:
-                print("trovato")
                 count_prenotazioni += 1
                 total_persone += prenotazione.n_persone
-                # print(count_prenotazioni)
-                # print(total_persone)
         return count_prenotazioni, total_persone
 
     #############################################################
