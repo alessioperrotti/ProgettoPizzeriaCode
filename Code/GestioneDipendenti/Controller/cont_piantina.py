@@ -14,7 +14,6 @@ class ContPiantina(object):
         self.view.pulsante_consegna.clicked.connect(self.cambia_colore)
         self.view.pulsante_consegna.clicked.connect(self.update_tabella)
         self.update_tabella()
-        # self.model.gestore_ordini_tavolo.carica_da_file()
 
     def cambia_colore(self):
         self.tavolo_selezionato = self.model.ricerca_tavolo(self.view.n_tavolo)
@@ -29,7 +28,6 @@ class ContPiantina(object):
 
     def update_tabella(self):
         data_corrente = datetime.now().date()
-        # print(data_corrente)
 
         for tavolo in self.model.lista_tavoli:
             numero_tavolo = tavolo.numero

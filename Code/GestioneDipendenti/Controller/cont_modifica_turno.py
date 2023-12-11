@@ -61,11 +61,9 @@ class ContModificaTurno(object):
 
 
         for cuoco in self.model.lista_cuochi:
-            # print("x")
             self.view.cuoco.addItem(cuoco.cognome)
 
         for cameriere in self.model.lista_camerieri:
-            # print("y")
             self.view.cameriere.addItem(cameriere.cognome)
         self.riempi_tabelle()
 
@@ -123,7 +121,6 @@ class ContModificaTurno(object):
 
                 self.cognome_selezionato = None
                 self.view.tab_cuoco.clearSelection()
-            #print("C")
         if cont_msg.conferma:
             cont_msg.view.close()
             if self.view.tab_cameriere.selectedItems():
@@ -136,11 +133,9 @@ class ContModificaTurno(object):
 
                 self.cognome_selezionato = None
                 self.view.tab_cameriere.clearSelection()
-                #print("S")
 
     def click_conferma(self):
         giorno = self.view.giorno_title.text()
-        print("conferma: "+giorno)
 
         for row in range(self.view.tab_cuoco.rowCount()):
             nome_cognome = self.view.tab_cuoco.item(row, 0).text()

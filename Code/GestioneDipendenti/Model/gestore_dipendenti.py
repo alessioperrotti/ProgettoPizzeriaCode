@@ -41,7 +41,6 @@ class GestoreDipendenti():
     def estrai_cuoco_username(self, username):
         for cuoco in self.lista_cuochi:
             if username == cuoco.username:
-                print("trovato")
                 return cuoco
 
     def elimina_cuoco(self, cognome):
@@ -54,7 +53,6 @@ class GestoreDipendenti():
                        new_data_nascita, new_username, new_password):
         cuoco = self.estrai_cuoco_cognome(cognome_ricerca)
         for x in self.lista_cuochi:
-            print("c")
             if cuoco.cognome == x.cognome:
                 x.email = new_email
                 x.stipendio = new_stipendio
