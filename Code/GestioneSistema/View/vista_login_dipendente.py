@@ -16,7 +16,7 @@ def Pulsante(nome):
     pulsante = QPushButton(nome)
     pulsante.setFont(label_font)
     pulsante.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
-    #pulsante.setStyleSheet("background-color: #ff776d; border: 2px solid black; border-radius: 10px; padding: 10px")
+
     return pulsante
 
 
@@ -60,7 +60,7 @@ class VistaLoginDipendente(QWidget):
         self.label1.setFont(label_font_tit)
         self.label2 = QLabel("inserisci le <b>credenziali</b> per accedere al sistema")
         self.label2.setFont(label_font_piccolo)
-        # self.label2.setFont(label_font)
+
         frame = QFrame()
         spazio = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
         frame.setStyleSheet('.QFrame {border: 2px solid black; border-radius: 10px; padding: 10px; background-color: #dddddd}')

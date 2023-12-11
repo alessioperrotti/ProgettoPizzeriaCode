@@ -21,7 +21,6 @@ class ContVistaStatistiche:
         self.stacked.removeWidget(self.view)
         self.view = VistaStatistiche()
         self.stacked.addWidget(self.view)
-        # self.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.stacked.widget(0)))
 
         # grafico 2, numero di prodotti venduti per giorno
         fig, ax = plt.subplots(figsize=(5, 2), layout='constrained')

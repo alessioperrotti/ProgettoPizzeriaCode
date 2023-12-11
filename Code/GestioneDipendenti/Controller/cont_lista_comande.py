@@ -13,9 +13,7 @@ class ContListaComande():
         self.gestore_ord = gestore_ord
         stacked_widget.addWidget(self.view)
         self.ordine_da_evadere = None
-        # self.timer = QTimer(self.view)
-        # self.timer.timeout.connect(self.aggiorna_lista)
-        # self.timer.start(1000)
+
 
     def aggiorna_lista(self):
         griglia = QGridLayout()
@@ -69,13 +67,13 @@ class RiquadroOrdine(QWidget):
         frame2 = QFrame()
         frame3 = QFrame()
 
-        # self.frame.setFrameShape(QFrame.Shape.Box)
-        #self.frame.setStyleSheet(".QFrame {border: 1px solid black; border-radius: 3px; background-color: #FFFFFF;}")
+
         frame1.setStyleSheet(".QFrame {border: 0.5px solid black; border-radius: 1px; background-color: #ff776d;}")
         frame2.setStyleSheet(".QFrame {border: 0.5px solid black; border-radius: 1px; background-color: #FFFFFF;}")
         frame3.setStyleSheet(".QFrame {border: 0.5px solid black; border-radius: 1px; background-color: #ff776d;}")
 
-        #frame3.setStyleSheet(".border: 1px solid black; border-radius: 5px; padding: 5px")
+
+
 
         layout_frame = QVBoxLayout()
         layout_frame.addWidget(frame1)
@@ -88,7 +86,6 @@ class RiquadroOrdine(QWidget):
         frame1.setFixedWidth(240)
         frame1.setFixedHeight(50)
         frame2.setFixedWidth(240)
-        #frame2.setMinimumHeight(160)
         frame2.setSizePolicy(QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.MinimumExpanding)
         frame3.setFixedWidth(240)
 

@@ -115,9 +115,7 @@ class VistaInserisciRicevuta(QDialog):
         layout_tasti.addSpacerItem(QSpacerItem(30, 30))
         layout_tasti.addWidget(self.pulsante_conferma)
         layout_tasti.addSpacerItem(QSpacerItem(30, 30))
-        #layout_tasti.addStretch()
-        # layout_tasti.addWidget(pulsante3)
-        # layout_tasti.addSpacerItem(QSpacerItem(140, 1))
+
 
         layout.addWidget(label_titolo, alignment=Qt.AlignmentFlag.AlignTop)
         layout.addWidget(frame1, alignment=Qt.AlignmentFlag.AlignTop)

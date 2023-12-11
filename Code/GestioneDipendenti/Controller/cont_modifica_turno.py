@@ -58,7 +58,7 @@ class ContModificaTurno(object):
     def riempi_labels(self, giorno):
         self.view.giorno_title.setText(str(giorno))
         self.giorno_corrente = giorno
-        print("riempi: "+self.giorno_corrente)
+
 
         for cuoco in self.model.lista_cuochi:
             # print("x")

@@ -30,7 +30,6 @@ class ContVistaInserisciTavolo():
         tavolo_trovato = False
         for tavolo in self.gestore_ord.lista_tavoli:
             if int(tavolo.numero) == n_tavolo:
-                # self.tavolo = tavolo
                 tavolo.cambia_stato("occupato")
                 self.gestore_ord.salva_ordini_su_file()
                 tavolo_trovato = True

@@ -16,7 +16,7 @@ def crea_pulsante(nome):
     pulsante = QPushButton(nome)
     pulsante.setFont(label_font)
     pulsante.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
-    #pulsante.setStyleSheet("background-color: #ff776d; border: 2px solid black; border-radius: 10px; padding: 10px")
+
     return pulsante
 
 

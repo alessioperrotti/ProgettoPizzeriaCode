@@ -29,7 +29,6 @@ class ContGestioneTurni(object):
         if colonne_selezionate:
             indice_colonna_selezionata = colonne_selezionate[0]
             self.giorno_selezionato = self.view.tabella.horizontalHeaderItem(indice_colonna_selezionata).text()
-            print(self.giorno_selezionato)
 
         self.view.pulsante.setEnabled(abilita_pulsante)
 
