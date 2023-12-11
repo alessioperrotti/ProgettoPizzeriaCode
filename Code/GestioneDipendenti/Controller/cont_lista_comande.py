@@ -34,11 +34,15 @@ class ContListaComande():
 
         #per ogni ordine creo un riquadro
         contatore = 0
+        if lista_ordini == []:
+            self.view.scroll_area.setWidget(nuovo_cont)
+
         for ordine in lista_ordini:
+
             riga = contatore // 3
             colonna = contatore % 3
-            print(ordine.tavolo.numero)
-            riquadro = RiquadroOrdine(ordine)
+
+            riquadro = RiquadroOrdine(ordine, self.aggiorna_lista)
             griglia.addWidget(riquadro,riga,colonna)
 
 
@@ -46,13 +50,15 @@ class ContListaComande():
             self.view.scroll_area.setWidget(nuovo_cont)
             contatore += 1
 
+        self.gestore_ord.salva_ordini_su_file()
+
 
 
 
 
 class RiquadroOrdine(QWidget):
-    def __init__(self,ordine: OrdineTavolo):
-
+    def __init__(self,ordine: OrdineTavolo, update_lista):
+        self.update = update_lista
         self.ordine = ordine
         super().__init__()
         self.init_ui()
@@ -65,7 +71,7 @@ class RiquadroOrdine(QWidget):
 
         # self.frame.setFrameShape(QFrame.Shape.Box)
         #self.frame.setStyleSheet(".QFrame {border: 1px solid black; border-radius: 3px; background-color: #FFFFFF;}")
-        frame1.setStyleSheet(".QFrame {border: 0.5px solid black; border-radius: 1px; background-color: #FFFFFF;}")
+        frame1.setStyleSheet(".QFrame {border: 0.5px solid black; border-radius: 1px; background-color: #ff776d;}")
         frame2.setStyleSheet(".QFrame {border: 0.5px solid black; border-radius: 1px; background-color: #FFFFFF;}")
         frame3.setStyleSheet(".QFrame {border: 0.5px solid black; border-radius: 1px; background-color: #ff776d;}")
 
@@ -123,7 +129,7 @@ class RiquadroOrdine(QWidget):
 
     def evadi_ordine(self):
         self.ordine.pronto = True
-
+        self.update()
 
 
 

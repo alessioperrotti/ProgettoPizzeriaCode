@@ -112,7 +112,7 @@ class VistaListaComande(QDialog):
         self.scroll_area = QScrollArea()
         self.grid = QGridLayout()
         #self.grid.addWidget(QLabel("c"), 0 ,0)
-        self.indietro = crea_pulsante_back(35, "png/back.png")
+        self.pulsante_back = crea_pulsante_back(35, "png/back.png")
         self.contenitore  = QWidget()
         self.contenitore.setLayout(self.grid)
 
@@ -123,7 +123,7 @@ class VistaListaComande(QDialog):
         self.layout_scroll_area.addWidget(self.scroll_area)
         self.lay_orizz.addLayout(self.layout_scroll_area)
         self.lay_orizz.addSpacing(10)
-        self.lay_orizz.addWidget(self.indietro, alignment=Qt.AlignmentFlag.AlignBottom)
+        self.lay_orizz.addWidget(self.pulsante_back, alignment=Qt.AlignmentFlag.AlignBottom)
 
 
 

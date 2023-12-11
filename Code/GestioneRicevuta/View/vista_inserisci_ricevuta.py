@@ -71,12 +71,14 @@ class VistaInserisciRicevuta(QDialog):
         self.pulsante_mostra.setFont(label_font_piccolo)
         self.pulsante_mostra.setFixedHeight(70)
 
+
         label_nome = QLabel("Nome acquirente")
         label_nome.setFont(label_font_piccolo)
 
         self.ins_nome = QLineEdit()
         self.ins_nome.setFont(label_font_piccolo)
         self.ins_nome.setFixedWidth(340)
+
         self.ins_nome.setStyleSheet("border: 1px solid black; padding: 3px")
 
         self.pulsante_conferma = Pulsante("Conferma inserimento")
@@ -84,6 +86,8 @@ class VistaInserisciRicevuta(QDialog):
         self.pulsante_conferma.setFont(label_font_piccolo)
         pulsante3.setFont(label_font_piccolo)
         self.pulsante_conferma.setFixedHeight(70)
+        #self.pulsante_conferma.setFixedWidth(155)
+
         pulsante3.setFixedHeight(70)
 
         # Definizione layout
@@ -98,10 +102,22 @@ class VistaInserisciRicevuta(QDialog):
         layout_tabella_e_tavolo.addWidget(self.pulsante_mostra)
         layout_tabella_e_tavolo.addSpacerItem(QSpacerItem(30, 30))
 
-        layout_tasti.addSpacerItem(QSpacerItem(140, 1))
+        layout_nome = QVBoxLayout()
+        layout_nome.addStretch()
+        layout_nome.addWidget(label_nome)
+        layout_nome.addSpacing(10)
+        layout_nome.addWidget(self.ins_nome)
+        layout_nome.addStretch()
+
+
+
+        layout_tasti.addLayout(layout_nome)
+        layout_tasti.addSpacerItem(QSpacerItem(30, 30))
         layout_tasti.addWidget(self.pulsante_conferma)
-        layout_tasti.addWidget(pulsante3)
-        layout_tasti.addSpacerItem(QSpacerItem(140, 1))
+        layout_tasti.addSpacerItem(QSpacerItem(30, 30))
+        #layout_tasti.addStretch()
+        # layout_tasti.addWidget(pulsante3)
+        # layout_tasti.addSpacerItem(QSpacerItem(140, 1))
 
         layout.addWidget(label_titolo, alignment=Qt.AlignmentFlag.AlignTop)
         layout.addWidget(frame1, alignment=Qt.AlignmentFlag.AlignTop)
@@ -109,10 +125,6 @@ class VistaInserisciRicevuta(QDialog):
         layout.addSpacing(10)
         layout.addLayout(layout_tabella_e_tavolo)
         layout.addSpacerItem(QSpacerItem(1, 1, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding))
-        layout.addWidget(label_nome)
-        layout.addSpacing(10)
-        layout.addWidget(self.ins_nome)
-        layout.addSpacing(20)
         layout.addLayout(layout_tasti)
         layout.addSpacing(20)
 
