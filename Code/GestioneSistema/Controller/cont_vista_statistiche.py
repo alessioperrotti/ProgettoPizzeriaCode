@@ -91,15 +91,16 @@ class ContVistaStatistiche:
         fig, ax = plt.subplots(figsize=(5, 2), layout='constrained')
         lista_asse_x = []
         lista_asse_y = []
+        ax.xaxis.set_tick_params(labelsize='small')
 
         # per ogni prodotto ci sono due liste, una con i nomi e una con le quantita
 
         for ricevuta in self.gestore_ric.lista_ricevute:
             for prodotto in ricevuta.listaProdotti:
-                if prodotto.nome in lista_asse_x:
-                    lista_asse_y[lista_asse_x.index(prodotto.nome)] += 1
+                if prodotto.codice.__str__() in lista_asse_x:
+                    lista_asse_y[lista_asse_x.index(prodotto.codice.__str__())] += 1
                 else:
-                    lista_asse_x.append(prodotto.nome)
+                    lista_asse_x.append(prodotto.codice.__str__())
                     lista_asse_y.append(1)
 
 
@@ -112,6 +113,8 @@ class ContVistaStatistiche:
 
         #grafico 1, fatturato per giorno
         fig, ax = plt.subplots(figsize=(5, 2), layout='constrained')
+
+
         lista_asse_x = []
         lista_asse_y = []
 
