@@ -1,0 +1,1 @@
+Per usare il software runnare il file BASE.py. L'interfaccia è stata pensata nell'ottica in cui un cliente ed un amministratore hanno dispositivi separati, dunque una volta usato il software nelle vesti di uno dei due ruoli non è possibile usarlo accedendo come l'altro senza riavviarlo. 
