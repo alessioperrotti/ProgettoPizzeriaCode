@@ -6,7 +6,7 @@ class GestoreMenu(object):
 
     def __init__(self):
         self.lista_prodotti: list[Prodotto] = []
-        self.file_pickle_path = "listaProdotti.pickle"
+        self.file_pickle_path = "lista_prodotti.pickle"
         self.carica_da_file()
 
     def aggiungi_prodotto(self, prodotto):
