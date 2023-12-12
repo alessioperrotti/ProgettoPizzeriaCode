@@ -17,10 +17,11 @@ class OutOfDate(Exception):
         super().__init__(message)
 
 
-class UsedUsername(Exception):
+class AlertBox(Exception):
     def __init__(self, message):
         self.message = message
         super().__init__(message)
+
 
 class PassTooShort(Exception):
     def __init__(self, message):
@@ -39,8 +40,8 @@ class ContInserisciDipendente(object):
         try:
             nome = self.view.edit_nome.text().title()
             cognome = self.view.edit_cognome.text().title()
-            # if not nome.isalpha() or not cognome.isalpha():
-            #     raise NameAlert("Il nome e il cognome possono contenere solo lettere.")
+            if not nome.isalpha() or not cognome.isalpha():
+                raise AlertBox("Il nome e il cognome possono contenere solo lettere.")
             ruolo = self.view.edit_ruolo.currentText()
             email = self.view.edit_email.text()
             stipendio = round(float(self.view.edit_stipendio.text()), 2)
@@ -49,12 +50,12 @@ class ContInserisciDipendente(object):
                 raise OutOfDate("Il Bro deve ancora nascere")
             username = self.view.edit_username.text()
             if self.model.estrai_cuoco_username(username) is not None:
-                raise UsedUsername("L'username inserito risulta già utilizzato.")
+                raise AlertBox("L'username inserito risulta già utilizzato.")
             if self.model.estrai_cameriere_username(username) is not None:
-                raise UsedUsername("L'username inserito risulta già utilizzato.")
+                raise AlertBox("L'username inserito risulta già utilizzato.")
             password = self.view.edit_password.text()
             if len(password) < 6:
-                raise PassTooShort("La password deve essere lunga almeno 6 caratteri.")
+                raise AlertBox("La password deve essere lunga almeno 6 caratteri.")
 
         except ValueError:
             if not all([
@@ -68,10 +69,7 @@ class ContInserisciDipendente(object):
             ]):
                 errore_msg = "Controllare che tutti i campi siano riempiti."
             else:
-                if not self.view.edit_nome.text().isalpha() or not self.view.edit_cognome.text().isalpha():
-                    errore_msg = "Il nome e il cognome possono contenere solo lettere."
-                else:
-                    errore_msg = "Controllare che i dati siano inseriti correttamente."
+                errore_msg = "Controllare che i dati siano inseriti correttamente."
 
             error_box = QMessageBox()
             error_box.setIcon(QMessageBox.Icon.Critical)
@@ -79,7 +77,7 @@ class ContInserisciDipendente(object):
             error_box.setText(errore_msg)
             error_box.exec()
 
-        except UsedUsername as uc:
+        except AlertBox as uc:
             error_box = QMessageBox()
             error_box.setIcon(QMessageBox.Icon.Critical)
             error_box.setWindowTitle("Errore di Inserimento")
@@ -92,14 +90,6 @@ class ContInserisciDipendente(object):
             error_box.setWindowTitle("Errore di Inserimento")
             error_box.setText(od.message)
             error_box.exec()
-
-        except PassTooShort as pts:
-            error_box = QMessageBox()
-            error_box.setIcon(QMessageBox.Icon.Critical)
-            error_box.setWindowTitle("Errore di Inserimento")
-            error_box.setText(pts.message)
-            error_box.exec()
-
 
         else:
             if ruolo == "Cuoco":

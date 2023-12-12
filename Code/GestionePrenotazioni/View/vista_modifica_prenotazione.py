@@ -142,6 +142,7 @@ class VistaModificaPrenotazione(QDialog):
 
         self.pulsante_conferma = QPushButton("Conferma\nmodifica")
         self.pulsante_conferma.setFixedSize(205, 74)
+        self.pulsante_conferma.setEnabled(False)
 
         layout.setSpacing(20)
         layout.addLayout(griglia)

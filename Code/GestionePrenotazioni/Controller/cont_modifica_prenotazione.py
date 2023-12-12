@@ -69,6 +69,7 @@ class ContModificaPrenotazione(object):
         self.view.combobox_orario.setEnabled(True)
         self.view.combobox_tavolo.setEnabled(True)
         self.view.spinbox_persone.setEnabled(True)
+        self.view.pulsante_conferma.setEnabled(True)
 
     def conferma_modifica(self):
         try:

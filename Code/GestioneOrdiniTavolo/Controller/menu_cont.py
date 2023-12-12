@@ -159,27 +159,22 @@ class ContMenu(object):
     def scroll_to_section(self, tipo: str):
 
         if tipo == "antipasti":
-
-            last_item = self.view.grid_antipasti.itemAtPosition(self.view.grid_antipasti.rowCount() - 1,
-                                                                self.view.grid_antipasti.columnCount() - 1)
+            last_item = self.view.grid_antipasti.itemAtPosition(0, 0)
 
             self.view.scroll_area.ensureWidgetVisible(last_item.widget())
 
         elif tipo == "pizze":
-            last_item = self.view.grid_pizze.itemAtPosition(self.view.grid_pizze.rowCount() - 1,
-                                                                self.view.grid_pizze.columnCount() - 1)
+            last_item = self.view.grid_pizze.itemAtPosition(0, 0)
 
             self.view.scroll_area.ensureWidgetVisible(last_item.widget())
 
         elif tipo == "softdrinks":
-            last_item = self.view.grid_softdrinks.itemAtPosition(self.view.grid_softdrinks.rowCount() - 1,
-                                                                self.view.grid_softdrinks.columnCount() - 1)
+            last_item = self.view.grid_softdrinks.itemAtPosition(0, 0)
 
             self.view.scroll_area.ensureWidgetVisible(last_item.widget())
 
         elif tipo == "birre":
-            last_item = self.view.grid_birre.itemAtPosition(self.view.grid_birre.rowCount() - 1,
-                                                                self.view.grid_birre.columnCount() - 1)
+            last_item = self.view.grid_birre.itemAtPosition(0, 0)
 
             self.view.scroll_area.ensureWidgetVisible(last_item.widget())
 
