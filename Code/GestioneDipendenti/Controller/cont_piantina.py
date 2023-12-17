@@ -17,7 +17,8 @@ class ContPiantina(object):
 
     def cambia_colore(self):
         self.tavolo_selezionato = self.model.ricerca_tavolo(self.view.n_tavolo)
-        self.tavolo_selezionato.cambia_stato("servito")
+        if self.tavolo_selezionato.stato == "in attesa":
+            self.tavolo_selezionato.cambia_stato("servito")
 
         # for prenotazione in self.model.lista_prenotazioni:
         #     if int(prenotazione.tavolo_assegnato.numero) == int(self.view.n_tavolo):
