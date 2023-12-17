@@ -2,7 +2,6 @@ import os
 import sys
 
 from PyQt6.QtWidgets import QApplication, QTableWidgetItem, QMessageBox
-
 from Code.GestioneOrdiniTavolo.Model.gestore_ordini_tavolo import GestoreOrdiniTavolo
 from Code.GestioneOrdiniTavolo.Model.tavolo import Tavolo
 from Code.GestioneRicevuta.Controller.cont_vista_mostra_tavolo_selezionato import ContVistaMostraTavoloSelezionato
@@ -65,6 +64,8 @@ class ContVistaInserisciRicevuta:
 
             for ordine in self.controller_mostra.ordini:
                 ordine.pagato = True
+
+            self.gestore_ord.salva_ordini_su_file()
 
             self.view.close()
             self.view.ins_nome.clear()
