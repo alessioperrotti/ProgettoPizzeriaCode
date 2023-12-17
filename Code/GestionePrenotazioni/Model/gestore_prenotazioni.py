@@ -57,7 +57,6 @@ class GestorePrenotazioni():
         tavolo.cambia_stato("libero")
 
         self.lista_prenotazioni.remove(prenotazione_da_eliminare)
-        self.stampa_lista_tavoli()
 
         self.salva_dati(self.nome_file_prenotazioni, self.nome_file_tavoli)
         self.carica_da_file(self.nome_file_prenotazioni, self.nome_file_tavoli)
