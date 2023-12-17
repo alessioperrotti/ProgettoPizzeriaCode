@@ -3,7 +3,7 @@
 import sys
 
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QFont, QPixmap, QIcon
+from PyQt6.QtGui import QFont, QPixmap
 from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplication, QSpacerItem,
                              QSizePolicy, QHBoxLayout, QFrame, QLineEdit, QGridLayout)
 
@@ -19,23 +19,6 @@ def Pulsante(nome):
 
     return pulsante
 
-def crea_pulsante_back(dimensioni, directory):
-    pulsante_back = QPushButton()
-    img = QPixmap(directory)
-    icon = img.scaledToWidth(dimensioni)
-    icon = QIcon(icon)
-    pulsante_back.setIcon(icon)
-    pulsante_back.setIconSize(img.size())
-    pulsante_back.setFixedSize(dimensioni, dimensioni)
-    pulsante_back.setStyleSheet("""
-            QPushButton{
-                background-color: rgba(0,0,0,0);
-            }
-            QPushButton:hover{
-                background-color: "lightgray";
-            }
-            """)
-    return pulsante_back
 
 class VistaLoginDipendente(QWidget):
     def __init__(self):
@@ -93,7 +76,7 @@ class VistaLoginDipendente(QWidget):
         self.pass_line.setEchoMode(QLineEdit.EchoMode.Password)
         self.user_line.setStyleSheet("border: 2px solid black; border-radius: 4px;")
         self.pass_line.setStyleSheet("border: 2px solid black; border-radius: 4px;")
-        self.pulsante_back = crea_pulsante_back(35, "png/back.png")
+
         self.pulsante= Pulsante("Login")
         (self.pulsante.setFont(label_font_piccolo))
         label_foto = QLabel()
@@ -128,10 +111,7 @@ class VistaLoginDipendente(QWidget):
         layout.addSpacerItem(spazio)
         layout.addWidget(frame, alignment=Qt.AlignmentFlag.AlignCenter)
         layout.addSpacerItem(spazio)
-        layout.addWidget(self.pulsante_back, alignment=Qt.AlignmentFlag.AlignLeft)
-        layout.addSpacing(20)
 
-        layout.setContentsMargins(20,20,20,10)
         self.setFixedSize(994, 637)
         self.setLayout(layout)
 
@@ -140,9 +120,7 @@ class VistaLoginDipendente(QWidget):
 def main():
     app = QApplication(sys.argv)
     ex = VistaLoginDipendente()
-    ex.show()
     sys.exit(app.exec())
-
 
 
 if __name__ == '__main__':
