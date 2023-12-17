@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import QStackedWidget, QVBoxLayout, QGridLayout
 from matplotlib import pyplot as plt
-from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
+from matplotlib.backends.backend_qtagg import (FigureCanvasQTAgg)
 
 from Code.GestioneOrdiniTavolo.Model.gestore_ordini_tavolo import GestoreOrdiniTavolo
 from Code.GestioneRicevuta.Model.gestore_ricevuta import GestoreRicevuta

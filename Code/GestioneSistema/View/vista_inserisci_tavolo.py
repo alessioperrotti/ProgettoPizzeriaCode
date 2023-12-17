@@ -3,13 +3,31 @@ import os
 import sys
 
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QFont, QPixmap
+from PyQt6.QtGui import QFont, QPixmap, QIcon
 from PyQt6.QtWidgets import (QWidget, QLabel, QPushButton, QVBoxLayout, QApplication, QSpacerItem,
                              QSizePolicy, QFrame, QHBoxLayout, QLineEdit)
 
 label_font = QFont("Roboto", 24)
 label_font_tit = QFont("Roboto", 40, weight=50)
 label_font_piccolo = QFont("Roboto", 14)
+
+def crea_pulsante_back(dimensioni, directory):
+    pulsante_back = QPushButton()
+    img = QPixmap(directory)
+    icon = img.scaledToWidth(dimensioni)
+    icon = QIcon(icon)
+    pulsante_back.setIcon(icon)
+    pulsante_back.setIconSize(img.size())
+    pulsante_back.setFixedSize(dimensioni, dimensioni)
+    pulsante_back.setStyleSheet("""
+            QPushButton{
+                background-color: rgba(0,0,0,0);
+            }
+            QPushButton:hover{
+                background-color: "lightgray";
+            }
+            """)
+    return pulsante_back
 
 
 def crea_pulsante(directory):
@@ -79,7 +97,7 @@ class VistaInserisciTavolo(QWidget):
         self.pulsante = crea_pulsante("png/check.png")
 
 
-
+        self.pulsante_back = crea_pulsante_back(35, "png/back.png")
 
 
 
@@ -99,9 +117,13 @@ class VistaInserisciTavolo(QWidget):
         layout.addLayout(layout_orizz)
 
         frame.setLayout(layout)
-
+        layout_princ.addSpacing(20)
+        layout_princ.addStretch()
         layout_princ.addWidget(frame, alignment=Qt.AlignmentFlag.AlignCenter)
-
+        layout_princ.addStretch()
+        layout_princ.addWidget(self.pulsante_back, alignment=Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignBottom)
+        layout_princ.addSpacing(20)
+        layout_princ.setContentsMargins(20,20,20,10)
 
         self.setFixedSize(994, 637)
         self.setLayout(layout_princ)

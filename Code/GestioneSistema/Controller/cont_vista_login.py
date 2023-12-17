@@ -19,7 +19,8 @@ class ContVistaLogin():
         self.stacked = stacked
         self.view.pulsante_cliente.clicked.connect(self.apri_inserisci_tavolo)
         self.view.pulsante_admin.clicked.connect(self.apri_login_dipendente)
-
+        self.cont_vista_login_dipendente.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.view))
+        self.cont_vista_tavolo.view.pulsante_back.clicked.connect(lambda: self.stacked.setCurrentWidget(self.view))
 
     def apri_inserisci_tavolo(self):
         self.stacked.setCurrentWidget(self.cont_vista_tavolo.view)
