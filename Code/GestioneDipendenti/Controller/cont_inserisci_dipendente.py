@@ -38,6 +38,16 @@ class ContInserisciDipendente(object):
     def confirm_close(self):
         current_date = datetime.now().date()
         try:
+            if not all([
+                self.view.edit_nome.text(),
+                self.view.edit_cognome.text(),
+                self.view.edit_email.text(),
+                self.view.edit_stipendio.text(),
+                self.view.calendario.selectedDate(),
+                self.view.edit_username.text(),
+                self.view.edit_password.text()
+            ]):
+                raise AlertBox("Controllare che tutti i campi siano riempiti.")
             nome = self.view.edit_nome.text().title()
             cognome = self.view.edit_cognome.text().title()
             if not nome.isalpha() or not cognome.isalpha():
@@ -58,19 +68,7 @@ class ContInserisciDipendente(object):
                 raise AlertBox("La password deve essere lunga almeno 6 caratteri.")
 
         except ValueError:
-            if not all([
-                self.view.edit_nome.text(),
-                self.view.edit_cognome.text(),
-                self.view.edit_email.text(),
-                self.view.edit_stipendio.text(),
-                self.view.calendario.selectedDate(),
-                self.view.edit_username.text(),
-                self.view.edit_password.text(),
-            ]):
-                errore_msg = "Controllare che tutti i campi siano riempiti."
-            else:
-                errore_msg = "Controllare che i dati siano inseriti correttamente."
-
+            errore_msg = "Controllare che i dati siano inseriti correttamente."
             error_box = QMessageBox()
             error_box.setIcon(QMessageBox.Icon.Critical)
             error_box.setWindowTitle("Errore di Inserimento")
