@@ -27,6 +27,10 @@ class ContVistaMostraTavoloSelezionato:
 
             for prodotto in ordine.lista_prodotti:
                 listaProdotti.append(prodotto)
+
+        coperto = 2*self.ordini[0].tavolo.posti_disponibili
+        totale += coperto
+        
         data = datetime.now().date()
         nomeAcquirente = None
         numero = 1
