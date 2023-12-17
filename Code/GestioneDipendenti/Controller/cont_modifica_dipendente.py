@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from PyQt6.QtCore import QDate
 from PyQt6.QtWidgets import QMessageBox
 
 from Code.GestioneDipendenti.Model.cameriere import Cameriere
@@ -7,7 +8,7 @@ from Code.GestioneDipendenti.Model.cuoco import Cuoco
 from Code.GestioneDipendenti.Model.gestore_dipendenti import GestoreDipendenti
 from Code.GestioneDipendenti.View.vista_modifica_dipendente import VistaModificaDipendente
 
-class PassTooShort(Exception):
+class AlertBox(Exception):
     def __init__(self, message):
         self.message = message
         super().__init__(message)
@@ -41,15 +42,6 @@ class ContModificaDipendente(object):
     def confirm_close(self):
 
         try:
-            new_email = str(self.view.edit_email.text())
-            new_stipendio = round(float(self.view.edit_stipendio.text()),2)
-            new_data_nascita = self.view.calendario.selectedDate()
-            new_username = str(self.view.edit_username.text())
-            new_password = str(self.view.edit_password.text())
-            if len(new_password) < 6:
-                raise PassTooShort("La password deve essere lunga almeno 6 caratteri.")
-
-        except ValueError:
             if not all([
                 self.view.edit_email.text(),
                 self.view.edit_stipendio.text(),
@@ -57,17 +49,26 @@ class ContModificaDipendente(object):
                 self.view.edit_username.text(),
                 self.view.edit_password.text()
             ]):
-                errore_msg = "Controllare che tutti i campi siano riempiti."
-            else:
-                errore_msg = "Controllare che i dati siano inseriti correttamente."
+                raise AlertBox("Controllare che tutti i campi siano riempiti.")
+            new_email = str(self.view.edit_email.text())
+            new_stipendio = round(float(self.view.edit_stipendio.text()), 2)
+            new_data_nascita = self.view.calendario.selectedDate()
+            if new_data_nascita >= QDate.currentDate():
+                raise AlertBox("Il Bro deve ancora nascere")
+            new_username = str(self.view.edit_username.text())
+            new_password = str(self.view.edit_password.text())
+            if len(new_password) < 6:
+                raise AlertBox("La password deve essere lunga almeno 6 caratteri.")
 
+        except ValueError:
+            errore_msg = "Controllare che i dati siano inseriti correttamente."
             error_box = QMessageBox()
             error_box.setIcon(QMessageBox.Icon.Critical)
             error_box.setWindowTitle("Errore di Inserimento")
             error_box.setText(errore_msg)
             error_box.exec()
 
-        except PassTooShort as pts:
+        except AlertBox as pts:
             error_box = QMessageBox()
             error_box.setIcon(QMessageBox.Icon.Critical)
             error_box.setWindowTitle("Errore di Inserimento")
